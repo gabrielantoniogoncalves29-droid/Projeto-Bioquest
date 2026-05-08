@@ -28,11 +28,11 @@ showAlerts.value = !showAlerts.value;
     </div>
 
     <nav class="nav">
-      <router-link to="/">Início</router-link>
-      <router-link to="/questoes">Questões</router-link>
-      <router-link to="/estatisticas">Estatísticas</router-link>
-      <router-link to="/">Sobre o projeto</router-link>
-      <router-link to="/">Ajuda</router-link>
+      <router-link to="/"><span class="material-icons">home</span>Início</router-link>
+      <router-link to="/questoes"><span class="material-icons">format_list_bulleted</span>Questões</router-link>
+      <router-link to="/estatisticas"><span class="material-icons">leaderboard</span>Estatísticas</router-link>
+      <router-link to="/"><span class="material-icons">info</span>Sobre o projeto</router-link>
+      <router-link to="/"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
     <div class="user">
     <button @click="Alerts"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
@@ -186,5 +186,10 @@ width:150px;
 
 #user_box p{
 margin-left: 10px;
+}
+
+.material-icons{
+  vertical-align: middle;
+  transform: scale(0.75);
 }
 </style>
