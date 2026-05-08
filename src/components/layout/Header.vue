@@ -2,19 +2,17 @@
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
 
 let nome = "Gabriel";
-const open = ref(false);
 
-function mostrarMenu()
-{
-open.value = !open.value;
-}
+const aberta = ref(null);
 
-const showAlerts = ref(false);
-
-function Alerts()
-{
-showAlerts.value = !showAlerts.value;
-}
+function toggle(id){
+    if(aberta.value === id){
+      aberta.value = null
+    }
+    else{
+      aberta.value = id
+    }
+  }
 
 </script>
 
@@ -35,20 +33,20 @@ showAlerts.value = !showAlerts.value;
       <router-link to="/"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
     <div class="user">
-    <button @click="Alerts"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
-    <div v-show="showAlerts" class="alerts"> 
+    <button @click="toggle(1)"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
+    <div v-if="aberta === 1" class="alerts"> 
       <div>
       <a href="#">Notificação 1</a>
       <a href="#">Notificação 2</a>
       </div>
     </div>
-    <div @click="mostrarMenu" id="user_box">
+    <div @click="toggle(2)" id="user_box">
     <img class="avatar" width="10px" height="auto" src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" >
     <p>Olá, {{nome}}</p>
-    <img v-show="open" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_up_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
-    <img v-show="!open" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_down_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
+    <img v-show="aberta === 2" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_up_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
+    <img v-show="aberta !== 2" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_down_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
     </div>
-    <div v-show="open" class="dropdown"> 
+    <div v-if="aberta === 2" class="dropdown"> 
       <a href="#">Perfil</a>
       <a href="#">Configurações</a>
       <a href="#">Sair</a>
@@ -132,6 +130,7 @@ display: flex;
 flex-direction: column;
 min-width: 150px;
 box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+z-index: 2;
 }
 
 .alerts a{
