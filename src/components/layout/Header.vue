@@ -5,7 +5,7 @@ let nome = "Gabriel";
 
 const aberta = ref(null);
 
-function toggle(id){
+function barra(id){
     if(aberta.value === id){
       aberta.value = null
     }
@@ -33,14 +33,14 @@ function toggle(id){
       <router-link to="/"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
     <div class="user">
-    <button @click="toggle(1)"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
+    <button @click="barra(1)"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
     <div v-if="aberta === 1" class="alerts"> 
       <div>
       <a href="#">Notificação 1</a>
       <a href="#">Notificação 2</a>
       </div>
     </div>
-    <div @click="toggle(2)" id="user_box">
+    <div @click="barra(2)" id="user_box">
     <img class="avatar" width="10px" height="auto" src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" >
     <p>Olá, {{nome}}</p>
     <img v-show="aberta === 2" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_up_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
