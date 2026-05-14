@@ -7,7 +7,7 @@
         </div>
 
         <div class="right">
-          <a href="#">Sobre o projeto</a>
+          <router-link to="/sobre">Sobre o projeto</router-link>
           <a href="#">Contato</a>
           <a href="#">Termos de uso</a>
           <a href="#">Política de privacidade</a>
@@ -18,7 +18,6 @@
 </template>
 
 <style scoped>
-
 .footer {
   background: rgba(21, 85, 70, 0.855);
   color: white;

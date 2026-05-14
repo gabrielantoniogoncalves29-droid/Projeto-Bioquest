@@ -2,7 +2,8 @@ import {createRouter , createWebHistory} from 'vue-router';
 import Home from '@/pages/Home.vue'
 import Questoes from '@/pages/Questoes.vue';
 import Estatisticas from '@/pages/Estatisticas.vue';
-
+import Ajuda from '@/pages/Ajuda.vue';
+import Sobre from '@/pages/Sobre.vue';
 const routes = [
 {
     path: '/',
@@ -18,6 +19,16 @@ const routes = [
     path: '/estatisticas',
     name: 'Estatisticas',
     component: Estatisticas
+},
+{
+    path: '/ajuda',
+    name: 'Ajuda',
+    component: Ajuda
+},
+{
+    path: '/sobre',
+    name: 'Sobre',
+    component: Sobre
 }
 ]
 

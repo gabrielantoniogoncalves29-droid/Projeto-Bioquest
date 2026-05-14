@@ -16,8 +16,6 @@ function barra(id){
 function selecionar(opcao){
     opcaoSelecionada.value = opcao
     aberta.value = null
-
-    console.log(opcao)
 }
 
 </script>

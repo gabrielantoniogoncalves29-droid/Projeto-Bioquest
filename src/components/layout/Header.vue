@@ -29,8 +29,8 @@ function barra(id){
       <router-link to="/"><span class="material-icons">home</span>Início</router-link>
       <router-link to="/questoes"><span class="material-icons">format_list_bulleted</span>Questões</router-link>
       <router-link to="/estatisticas"><span class="material-icons">leaderboard</span>Estatísticas</router-link>
-      <router-link to="/"><span class="material-icons">info</span>Sobre o projeto</router-link>
-      <router-link to="/"><span class="material-icons">help</span>Ajuda</router-link>
+      <router-link to="/sobre"><span class="material-icons">info</span>Sobre o projeto</router-link>
+      <router-link to="/ajuda"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
     <div class="user">
     <button @click="barra(1)"> <img src="@/components/icons/image.png" alt="Notificações" /></button>

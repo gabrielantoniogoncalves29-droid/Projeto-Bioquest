@@ -1,17 +1,19 @@
 <template> 
   <div class="sidebar" :class="{ collapsed }">
     
-    <button class="toggle-btn" @click="collapsed = !collapsed">
-      {{ collapsed ? '⮞' : '⮜' }}
-    </button>
+<button class="toggle-btn" @click="toggleSidebar">
+  {{ collapsed ? '⮞' : '⮜' }}
+</button>
 
     <div v-if="!collapsed" class="content">
 
       <div class="header">
         <span>Filtros</span>
+
         <button class="clear">Limpar</button>
       </div>
 
+<div class="scroll-area">
       <div class="group">
         <div class="group-header" @click="open.ano = !open.ano">
           Ano da prova <span>{{ open.ano ? '▾' : '▸' }}</span>
@@ -47,7 +49,7 @@
           <label><input type="checkbox"> Avançado</label>
         </div>
       </div>
-
+</div>
     </div>
   </div>
 </template>
@@ -56,7 +58,26 @@
 import { ref } from 'vue'
 
 const collapsed = ref(false)
+/////////////
 
+const props = defineProps({
+  width: Number
+})
+
+const emit = defineEmits([
+  'update:width'
+])
+
+function toggleSidebar() {
+
+  collapsed.value = !collapsed.value
+
+  emit(
+    'update:width',
+    collapsed.value ? 60 : 280
+  )
+}
+//////////////////////
 const open = ref({
   ano: true,
   eixo: true,
@@ -74,7 +95,6 @@ const open = ref({
   transition: 0.2s;
   position: relative;
   border-radius: 8px;
-  max-height: 600px;
 }
 
 .sidebar.collapsed {
@@ -139,4 +159,31 @@ label {
   background: #f0f0f0;
   cursor: pointer;
 }
+
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px 16px 16px;
+}
+
+.scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  background: #d2ddd8;
+
+  border-radius: 999px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #b8c7c1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 </style>
