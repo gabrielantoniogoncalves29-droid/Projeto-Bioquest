@@ -1,5 +1,5 @@
 <template> 
-  <div class="sidebar" :class="{ collapsed }">
+<div class="filtro-container" :class="{ collapsed }">
     
 <button class="toggle-btn" @click="toggleSidebar">
   {{ collapsed ? '⮞' : '⮜' }}
@@ -58,7 +58,6 @@
 import { ref } from 'vue'
 
 const collapsed = ref(false)
-/////////////
 
 const props = defineProps({
   width: Number
@@ -77,7 +76,7 @@ function toggleSidebar() {
     collapsed.value ? 60 : 280
   )
 }
-//////////////////////
+
 const open = ref({
   ano: true,
   eixo: true,
@@ -86,20 +85,21 @@ const open = ref({
 </script>
 
 <style scoped>
-.sidebar {
-  width: 260px;
-  height: 100vh;
-  background: white;
-  border-right: 2px solid #ddd;
-  border-top: 2px solid #ddd;
-  transition: 0.2s;
-  position: relative;
-  border-radius: 8px;
-}
+.filtro-container {
+  width: 100%;
+  height: 100%;
 
-.sidebar.collapsed {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  overflow: hidden;
+}
+.filtro-container.collapsed {
   width: 55px;
 }
+
 
 .header {
   display: flex;
@@ -172,7 +172,6 @@ label {
 
 .scroll-area::-webkit-scrollbar-thumb {
   background: #d2ddd8;
-
   border-radius: 999px;
 }
 
