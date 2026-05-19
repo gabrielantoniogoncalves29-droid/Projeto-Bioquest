@@ -28,9 +28,21 @@
 
     </div>
 
-    <button class="btn">
-      Resolver
-    </button>
+<div class="actions">
+
+  <button class="btn">
+    Resolver
+  </button>
+
+  <button class="details-btn">
+    Ver detalhes
+
+    <span class="arrow">
+         ❯
+    </span>
+  </button>
+
+</div>
 
   </div>
 
@@ -84,7 +96,7 @@
 h3 {
   font-size: 17px;
   line-height: 1.5;
-  color: #1f2937;
+  color: #404245;
   margin-bottom: 16px;
 }
 
@@ -112,19 +124,52 @@ h3 {
 }
 
 .btn {
-  height: 46px;
-  padding: 0 22px;
-  border: none;
-  border-radius: 14px;
-  background: #1f6f5c;
-  color: white;
+  color: #1f6f5c;
+  height: 44px;
+  padding: 0 26px;
+  border: 2px solid #1f6f5c;
+  border-radius: 10px;
+  background: #ffffff;
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .btn:hover {
-  background: #185546;
+  background: #1f6f5c;
+  color: #ffffff;
 }
 
+
+.actions{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.details-btn{
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #515357;
+  cursor: pointer;
+}
+
+.details-btn span{
+margin-left: 6px;
+}
+
+.details-btn:hover{
+  color: #1f6f5c;
+}
+
+.arrow{
+  font-size: 13px;
+}
 </style>

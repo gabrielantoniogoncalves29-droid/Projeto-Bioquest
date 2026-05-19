@@ -8,6 +8,6 @@ import Rodape from '../components/layout/Rodape.vue';
 <template>
   <Header></Header>
   <Banner></Banner>
-    <Filtro ></Filtro>
+  <Filtro ></Filtro>
   <Rodape></Rodape> 
 </template>

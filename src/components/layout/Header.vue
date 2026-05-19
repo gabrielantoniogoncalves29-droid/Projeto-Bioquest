@@ -32,26 +32,54 @@ function barra(id){
       <router-link to="/sobre"><span class="material-icons">info</span>Sobre o projeto</router-link>
       <router-link to="/ajuda"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
-    <div class="user">
-    <button @click="barra(1)"> <img src="@/components/icons/image.png" alt="Notificações" /></button>
-    <div v-if="aberta === 1" class="alerts"> 
-      <div>
+
+<div class="user">
+  <div class="menu-box">
+    <button
+      class="icon-btn"
+      @click="barra(1)"
+    >
+      <img
+        src="@/components/icons/image.png"
+        alt="Notificações"
+      />
+    </button>
+    <div
+      v-if="aberta === 1"
+      class="menu-dropdown notifications"
+    >
       <a href="#">Notificação 1</a>
       <a href="#">Notificação 2</a>
-      </div>
     </div>
-    <div @click="barra(2)" id="user_box">
-    <img class="avatar" width="10px" height="auto" src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png" >
-    <p>Olá, {{nome}}</p>
-    <img v-show="aberta === 2" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_up_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
-    <img v-show="aberta !== 2" style="margin-left: 12px;" width="10px" height="auto" src="@/components/icons/keyboard_arrow_down_45dp_000000_FILL0_wght400_GRAD0_opsz48.png" >
+  </div>
+
+  <div class="menu-box">
+    <div
+      @click="barra(2)"
+      id="user_box"
+    >
+      <img
+        class="avatar"
+        src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+      >
+      <p>
+        Olá, {{ nome }}
+      </p>
+      <span class="material-icons arrow">
+        {{ aberta === 2 ? 'expand_less' : 'expand_more' }}
+      </span>
     </div>
-    <div v-if="aberta === 2" class="dropdown"> 
+    <div
+      v-if="aberta === 2"
+      class="menu-dropdown profile-dropdown"
+    >
       <a href="#">Perfil</a>
       <a href="#">Configurações</a>
       <a href="#">Sair</a>
+
     </div>
-    </div>
+  </div>
+</div>
   </header>
 </template>
 
@@ -112,83 +140,120 @@ width: 20px;
 height: 20px;
 }
 
-
 .avatar{
 scale: 1.7;
 filter: grayscale(1) brightness(0.3);
 margin-left: 10px;
 }
 
-.alerts{
-position: absolute;
-top: 50px;
-right: 100px;
-background: white;
-border: 1px solid #ccc;
-border-radius: 8px;
-display: flex;
-flex-direction: column;
-min-width: 150px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-z-index: 2;
+.user{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  position: relative;
 }
 
-.alerts a{
-display: block;
-padding: 10px;
-text-decoration: none;
-color: black;
+.menu-box{
+  position: relative;
+
+  display: flex;
+  align-items: center;
 }
 
-.alerts a:hover{
-background: #f0f0f0;
-text-anchor: start;
+.icon-btn{
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 10px;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s;
 }
 
-
-.dropdown{
-position: absolute;
-top: 50px;
-right: 50px;
-background: white;
-border: 1px solid #ccc;
-border-radius: 8px;
-display: flex;
-flex-direction: column;
-min-width: 150px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.icon-btn:hover{
+  background: #ececec94;
 }
 
-.dropdown a{
-display: block;
-padding: 10px;
-text-decoration: none;
-color: black;
-}
-
-.dropdown a:hover{
-background: #f0f0f0;
-text-anchor: start;
+.icon-btn img{
+  width: 20px;
+  height: 20px;
 }
 
 #user_box{
-margin: 20px;
-background-color: #f0f0f02f;
-border-radius: 8px;
-border-collapse: collapse;
-border-bottom: 2px solid #04040455;
-display: flex;
-align-items: center;
-cursor: pointer;
-width:150px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#user_box:hover{
+  background: #ececec;
+}
+
+.avatar{
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 #user_box p{
-margin-left: 10px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.arrow{
+  font-size: 20px;
+  color: #666;
+}
+
+.menu-dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 190px;
+  background: white;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+  z-index: 999;
+}
+
+.menu-dropdown a{
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 16px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.menu-dropdown a:hover{
+  background: #f5f5f5;
 }
 
 .material-icons{
   vertical-align: middle;
   transform: scale(0.75);
 }
+
 </style>
