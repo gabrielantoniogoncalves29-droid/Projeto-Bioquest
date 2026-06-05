@@ -1,12 +1,5 @@
 <template>
   <div class="card">
-  <div class="left">
-          <img
-        class="icon"
-        src="@/features/Questões/Imagens/Botanica-rmv.png"
-        alt=""
-      >
-
     <div class="content">
       <div class="top">
         <span class="year">
@@ -50,7 +43,7 @@
   </button>
 
 </div>
-  </div>
+
   </div>
 
 </template>
@@ -179,19 +172,4 @@ margin-left: 6px;
 .arrow{
   font-size: 13px;
 }
-
-.left{
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  flex: 1;
-}
-
-.icon{
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
 </style>
