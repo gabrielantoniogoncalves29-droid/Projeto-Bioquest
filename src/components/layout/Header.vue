@@ -73,7 +73,7 @@ function barra(id){
       v-if="aberta === 2"
       class="menu-dropdown profile-dropdown"
     >
-      <a href="#">Perfil</a>
+      <router-link to="/perfil">Perfil</router-link>
       <a href="#">Configurações</a>
       <a href="#">Sair</a>
 
