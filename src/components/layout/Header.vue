@@ -130,7 +130,7 @@ onUnmounted(() => {
       v-if="aberta === 2"
       class="menu-dropdown profile-dropdown"
     >
-      <router-link to="/perfil">Perfil</router-link>
+      <a href="#">Perfil</a>
       <a href="#">Configurações</a>
       <a href="#">Sair</a>
 =======
