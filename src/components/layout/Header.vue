@@ -14,6 +14,30 @@ function barra(id){
     }
   }
 
+function fecharAoClicarFora(event){
+
+  const clicouDentro =
+    event.target.closest('.menu-box');
+
+  if(!clicouDentro){
+    aberta.value = null;
+  }
+
+}
+
+onMounted(() => {
+  document.addEventListener(
+    'click',
+    fecharAoClicarFora
+  );
+});
+
+onUnmounted(() => {
+  document.removeEventListener(
+    'click',
+    fecharAoClicarFora
+  );
+});
 </script>
 
 <template>
@@ -34,7 +58,7 @@ function barra(id){
     </nav>
 
 <div class="user">
- <!-- <div class="menu-box">
+  <div class="menu-box">
     <button
       class="icon-btn"
       @click="barra(1)"
@@ -44,14 +68,45 @@ function barra(id){
         alt="Notificações"
       />
     </button>
-    <div
-      v-if="aberta === 1"
-      class="menu-dropdown notifications"
-    >
-      <a href="#">Notificação 1</a>
-      <a href="#">Notificação 2</a>
+
+
+<div
+  v-if="aberta === 1"
+  class="menu-dropdown notifications"
+>
+
+  <div class="dropdown-header">
+    <h3>Notificações</h3>
+  </div>
+
+  <div class="notification-list">
+
+    <div class="notification-item">
+      <img src="@/components/layout/Questoes/Imagens/Botanica-rmv.png" alt="">
+      
+      <div class="notification-content">
+        <p>
+          Novas Questões adicionadas ao banco de dados.
+        </p>
+        <span>12 de Abril</span>
+      </div>
     </div>
-  </div> -->
+    <div class="notification-item">
+      <img src="@/components/layout/Questoes/Imagens/Botanica-rmv.png" alt="">
+      
+      <div class="notification-content">
+        <p>
+          Novo simulado disponível.
+        </p>
+        <span>Ontem</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
 
   <div class="menu-box">
     <div
@@ -70,13 +125,41 @@ function barra(id){
       </span>
     </div>
 <div
-      v-if="aberta === 2"
-      class="menu-dropdown profile-dropdown"
-    >
-      <router-link to="/perfil">Perfil</router-link>
-      <a href="#">Configurações</a>
-      <a href="#">Sair</a>
-    </div>
+  v-if="aberta === 2"
+  class="menu-dropdown profile-dropdown"
+>
+
+  <div class="profile-options">
+
+    <router-link to="/perfil">
+      <i class="fa-solid fa-user"></i>
+      Meu Perfil
+    </router-link>
+
+    <a href="#">
+      <i class="fa-solid fa-chart-line"></i>
+      Meu Desempenho
+    </a>
+
+    <a href="#">
+      <i class="fa-solid fa-gear"></i>
+      Configurações
+    </a>
+
+    <a href="#">
+      <i class="fa-solid fa-book"></i>
+      Minhas Questões
+    </a>
+
+  </div>
+
+  <div class="profile-footer">
+    <button class="logout-btn">
+      Sair da Conta
+    </button>
+  </div>
+
+</div>
   </div>
 </div>
   </header>
@@ -90,8 +173,7 @@ function barra(id){
   align-items: center;
   padding: 16px 32px;
   background: white;
-  border-bottom: 2px solid rgba(54, 54, 54, 0.084);
-
+  border-bottom: 2px solid rgba(54, 54, 54, 0.086);
 }
 
 #logo {
@@ -223,21 +305,21 @@ margin-left: 10px;
 
 .menu-dropdown{
   position: absolute;
-  top: calc(100% + 10px);
+  top: 65px;
   right: 0;
-  min-width: 190px;
-  background: white;
-  border: 1px solid #e7e7e7;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  overflow: hidden;
+  width: 340px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.12);
+  padding: 15px;
   z-index: 999;
 }
 
 .menu-dropdown a{
   display: flex;
   align-items: center;
-  height: 46px;
+  height: 30px;
   padding: 0 16px;
   text-decoration: none;
   color: #333;
@@ -255,4 +337,83 @@ margin-left: 10px;
   transform: scale(0.75);
 }
 
+.profile-options{
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  gap: 2px;
+}
+
+.profile-options a,
+.logout-btn{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  text-decoration: none;
+  color: #333;
+  background: transparent;
+  border: none;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: .15s;
+  text-align: left;
+}
+
+.profile-options i{
+  color: #296f5b;
+  font-size: 14px;
+}
+
+.profile-footer{
+  margin-top: 8px;
+  border-top: 1px solid #eee;
+  padding: 8px 18px;
+  font-size: 10px;
+}
+
+.notification-list{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item{
+  display: flex;
+  gap: 12px;
+
+  padding: 10px;
+
+  border-radius: 12px;
+
+  transition: .2s;
+  cursor: pointer;
+}
+
+.notification-item:hover{
+  background: #f5f7fb;
+}
+
+.notification-item img{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.notification-content p{
+  font-size: 14px;
+  color: #222;
+}
+
+.notification-content span{
+  font-size: 12px;
+  color: #888;
+}
 </style>
+

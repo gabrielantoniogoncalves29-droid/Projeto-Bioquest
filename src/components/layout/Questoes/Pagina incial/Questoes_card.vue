@@ -1,5 +1,12 @@
 <template>
   <div class="card">
+  <div class="left">
+          <img
+        class="icon"
+        src="@/components/layout/Questoes/Imagens/Botanica-rmv.png"
+        alt=""
+      >
+
     <div class="content">
       <div class="top">
         <span class="year">
@@ -30,6 +37,7 @@
 
 <div class="actions">
 
+
   <router-link to="/resolver" class="btn">
     Resolver
   </router-link>
@@ -43,10 +51,12 @@
   </button>
 
 </div>
-
+  </div>
   </div>
 
 </template>
+
+
 
 <style scoped>
 
@@ -123,27 +133,6 @@ h3 {
   color: #2767c7;
 }
 
-.btn {
-  color: #1f6f5c;
-  height: 44px;
-  padding: 0 26px;
-  border: 2px solid #1f6f5c;
-  border-radius: 10px;
-  background: #ffffff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s;
-  display: flex;
-  align-items: center;     
-  text-decoration: none;      
-}
-
-.btn:hover {
-  background: #1f6f5c;
-  color: #ffffff;
-}
-
-
 .actions{
   display: flex;
   flex-direction: column;
@@ -175,4 +164,42 @@ margin-left: 6px;
 .arrow{
   font-size: 13px;
 }
+
+.left{
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+.icon{
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+
+
+
+.btn {
+  color: #1f6f5c;
+  height: 44px;
+  padding: 0 26px;
+  border: 2px solid #1f6f5c;
+  border-radius: 10px;
+  background: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;     
+  text-decoration: none;      
+}
+
+.btn:hover {
+  background: #1f6f5c;
+  color: #ffffff;
+}
+
 </style>
