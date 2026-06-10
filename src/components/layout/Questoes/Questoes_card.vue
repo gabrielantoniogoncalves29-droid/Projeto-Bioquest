@@ -30,9 +30,9 @@
 
 <div class="actions">
 
-  <button class="btn">
+  <router-link to="/resolver" class="btn">
     Resolver
-  </button>
+  </router-link>
 
   <button class="details-btn">
     Ver detalhes
@@ -133,6 +133,9 @@ h3 {
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s;
+  display: flex;
+  align-items: center;     
+  text-decoration: none;      
 }
 
 .btn:hover {

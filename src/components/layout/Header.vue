@@ -34,7 +34,7 @@ function barra(id){
     </nav>
 
 <div class="user">
-  <div class="menu-box">
+ <!-- <div class="menu-box">
     <button
       class="icon-btn"
       @click="barra(1)"
@@ -51,7 +51,7 @@ function barra(id){
       <a href="#">Notificação 1</a>
       <a href="#">Notificação 2</a>
     </div>
-  </div>
+  </div> -->
 
   <div class="menu-box">
     <div
@@ -90,7 +90,7 @@ function barra(id){
   align-items: center;
   padding: 16px 32px;
   background: white;
-  border-bottom: 2px solid rgba(54, 54, 54, 0.248);
+  border-bottom: 2px solid rgba(54, 54, 54, 0.084);
 
 }
 

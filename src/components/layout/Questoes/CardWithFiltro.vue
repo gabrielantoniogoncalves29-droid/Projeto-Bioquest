@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import CardQuestao  from '@/components/layout/Questoes_card.vue'
-import Ordenar from '@/components/layout/Ordenar.vue'
-import Filtros  from '@/components/layout/Filtro.vue'
+import CardQuestao  from '@/components/layout/Questoes/Questoes_card.vue'
+import Ordenar from '@/components/layout/Questoes/Ordenar.vue'
+import Filtros  from '@/components/layout/Questoes/Filtro.vue'
 
 const aberta = ref(null);
 const opcaoSelecionada = ref("Ordenar por");

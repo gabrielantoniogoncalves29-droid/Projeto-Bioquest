@@ -1,7 +1,7 @@
 <script setup>
 import Header from '../components/layout/Header.vue';
 import Banner from '../components/layout/TopBanner.vue';
-import Filtro from '../components/layout/CardWithFiltro.vue';
+import Filtro from '../components/layout/Questoes/CardWithFiltro.vue';
 import Rodape from '../components/layout/Rodape.vue';
 </script>
 
