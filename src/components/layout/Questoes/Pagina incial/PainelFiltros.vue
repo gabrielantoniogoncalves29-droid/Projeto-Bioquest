@@ -4,6 +4,7 @@ import FiltrosSelect from './filtros/FiltrosSelect.vue'
 import FiltrosCheckbox from './filtros/FiltrosCheckbox.vue'
 import FiltrosAcoes from './filtros/FiltrosAcoes.vue'
 
+
 const anos = [
   '2025',
   '2024',
@@ -29,50 +30,135 @@ const eixos = [
 ]
 
 const conteudos = [
-  'Citologia',
-  'Histologia',
-  'Embriologia',
-  'Bioquímica',
-  'Genética',
-  'Evolução',
-  'Botânica',
-  'Zoologia',
-  'Ecologia',
-  'Fisiologia',
-  'Parasitologia',
-  'Microbiologia',
-  'Biotecnologia'
+'Origem da vida',
+'Bioquímica',
+'Citologia',
+'Metabolismo celular',
+'Histologia',
+'Reprodução e embriologia',
+'Taxonomia e classificação dos seres vivos',
+'Vírus',
+'Seres procarióticos',
+'Reino Protoctista',
+'Fungos',
+'Botânica',
+'Zoologia',
+'Fisiologia humana e comparada',
+'Genética',
+'Evolução',
+'Ecologia'
 ]
+ 
+const subconteudos = {
 
-const subconteudos = [
-  'C1',
-  'C2',
-  'C3',
-  'C4',
-  'C5',
-  'C6',
-  'C7',
-  'C8'
-]
+  "Origem da vida": [
+    "Teorias sobre a origem da vida",
+    "Metabolismo dos primeiros seres vivos"
+  ],
+  "Bioquímica": [
+    "Água e sais minerais",
+    "Carboidratos",
+    "Lipídios",
+    "Proteínas",
+    "Vitaminas"
+  ],
+  "Citologia": [
+    "Microscopia e teoria celular",
+    "Membrana plasmática",
+    "Citoplasma e organelas citoplasmáticas",
+    "Núcleo celular e seus componentes",
+    "Divisão celular"
+  ],
+  "Metabolismo celular": [
+    "Respiração aeróbica / Produção de ATP",
+    "Fermentação",
+    "Quimiossíntese"
+  ],
+  "Histologia": [
+    "Tecido epitelial",
+    "Tecido conjuntivo",
+    "Tecido muscular",
+    "Tecido nervoso"
+  ],
+  "Reprodução e embriologia": [
+    "Tipos de reprodução e ciclos de vida",
+    "Reprodução humana ",
+    "Desenvolvimento embrionário humano"
+  ],
+  "Taxonomia e classificação": [
+    "Cladograma e análise evolutiva das espécies",
+    "Classificação dos seres vivos"
+  ],
+  "Vírus": [
+    "Estrutura geral dos vírus",
+    "Reprodução dos vírus",
+    "Vírus e saúde humana"
+  ],
+  "Seres procarióticos": [
+    "Estrutura geral das células procariontes",
+    "Reprodução das bactérias",
+    "Relação das bactérias com a saúde humana"
+  ],
+  "Reino Protoctista": [
+    "Importância econômica e ambiental das algas",
+    "Importância médica dos protozoários"
+  ],
+  "Fungos": [
+    "Características gerais",
+    "Reprodução dos fungos",
+    "Importância médica, econômica e ambiental"
+  ],
+  "Botânica": [
+    "Filos das plantas (Briófitas, Pteridófitas, Gimnospermas e Angiospermas)",
+    "Reprodução das plantas",
+    "Anatomia das angiospermas (raiz, caule, folha, flor, fruto)",
+    "Fisiologia das angiospermas (nutrição, fotossíntese e hormônios vegetais)"
+  ],
+  "Zoologia": [
+    "Características dos animais e dos principais filos",
+    "Aspectos evolutivos dos animais"
+  ],
+  "Fisiologia humana e comparada": [
+    "Sistema digestório",
+    "Sistema respiratório",
+    "Sistema circulatório",
+    "Sistema urinário",
+    "Sistema imunológico",
+    "Sistema esquelético",
+    "Sistema nervoso",
+    "Sistema endócrino",
+    "Sistema sensorial"
+  ],
+  "Genética": [
+    "Genética molecular (DNA, RNA e síntese de proteínas)",
+    "Genética clássica (leis de Mendel, heredogramas, herança ligada ao sexo)",
+    "Genética e biotecnologia"
+  ],
+  "Evolução": [
+    "Teorias evolucionistas (Darwin e Lamarck)",
+    "Evidências evolutivas",
+    "Teoria sintética da evolução",
+    "Evolução humana",
+    "Tempo geológico e formação das espécies",
+    "Genética de populações"
+  ],
+  "Ecologia": [
+    "Conceitos de Ecologia",
+    "Cadeias e teias alimentares",
+    "Fluxo de energia e ciclos biogeoquímicos",
+    "Ecologia de populações",
+    "Relações ecológicas",
+    "Sucessão ecológica",
+    "Biomas e suas características",
+    "Interferência antrópica nos ecossistemas"
+  ],
+  "Biologia e aspectos sociais humanos": [
+    "Primeiros socorros",
+    "Importância das atividades físicas e vida saudável",
+    "Questões socioambientais e de saúde pública (pobreza, obesidade, violência, drogas, etc.)"
+  ]
+}
 
-const textoIntro = [
-  'Com texto',
-  'Sem texto'
-]
-
-const recursosVisuais = [
-  'Sem imagem',
-  'Figura',
-  'Gráfico',
-  'Tabela' 
-]
-
-const importanciaImagem = [
-  'Essencial',
-  'Importante',
-  'Complementar',
-  'Irrelevante'
-]
 </script>
 
 <template>
@@ -85,12 +171,6 @@ const importanciaImagem = [
       titulo="Ano da prova"
       placeholder="Todos"
       :opcoes="anos"
-    />
-
-    <FiltrosSelect
-      titulo="Banca"
-      placeholder="Todas"
-      :opcoes="bancas"
     />
 
     <FiltrosSelect
@@ -111,23 +191,6 @@ const importanciaImagem = [
       :opcoes="subconteudos"
     />
 
-<FiltrosSelect
-  titulo="Texto introdutório"
-  placeholder="Todos"
-  :opcoes="textoIntro"
-/>
-
-<FiltrosSelect
-  titulo="Recurso visual"
-  placeholder="Todos"
-  :opcoes="recursosVisuais"
-/>
-
-<FiltrosSelect
-  titulo="Importância da imagem"
-  placeholder="Todas"
-  :opcoes="importanciaImagem"
-/>
   </div>
   </div>
 

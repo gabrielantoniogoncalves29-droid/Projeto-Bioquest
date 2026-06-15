@@ -28,11 +28,6 @@ const routes = [
     component: Ajuda
 },
 {
-    path: '/sobre',
-    name: 'Sobre',
-    component: Sobre
-},
-{
     path: '/perfil',
     name: 'Perfil',
     component: Perfil

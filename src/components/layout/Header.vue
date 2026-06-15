@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
 
-let nome = "Gabriel";
+let nome = "Gabriel Antônio";
 
 const aberta = ref(null);
 
@@ -53,61 +53,10 @@ onUnmounted(() => {
       <router-link to="/"><span class="material-icons">home</span>Início</router-link>
       <router-link to="/questoes"><span class="material-icons">format_list_bulleted</span>Questões</router-link>
       <router-link to="/estatisticas"><span class="material-icons">leaderboard</span>Estatísticas</router-link>
-      <router-link to="/sobre"><span class="material-icons">info</span>Sobre o projeto</router-link>
       <router-link to="/ajuda"><span class="material-icons">help</span>Ajuda</router-link>
     </nav>
 
 <div class="user">
-  <div class="menu-box">
-    <button
-      class="icon-btn"
-      @click="barra(1)"
-    >
-      <img
-        src="@/components/icons/image.png"
-        alt="Notificações"
-      />
-    </button>
-
-
-<div
-  v-if="aberta === 1"
-  class="menu-dropdown notifications"
->
-
-  <div class="dropdown-header">
-    <h3>Notificações</h3>
-  </div>
-
-  <div class="notification-list">
-
-    <div class="notification-item">
-      <img src="@/components/layout/Questoes/Imagens/Botanica-rmv.png" alt="">
-      
-      <div class="notification-content">
-        <p>
-          Novas Questões adicionadas ao banco de dados.
-        </p>
-        <span>12 de Abril</span>
-      </div>
-    </div>
-    <div class="notification-item">
-      <img src="@/components/layout/Questoes/Imagens/Botanica-rmv.png" alt="">
-      
-      <div class="notification-content">
-        <p>
-          Novo simulado disponível.
-        </p>
-        <span>Ontem</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-
   <div class="menu-box">
     <div
       @click="barra(2)"
@@ -137,27 +86,22 @@ onUnmounted(() => {
     </router-link>
 
     <a href="#">
-      <i class="fa-solid fa-chart-line"></i>
-      Meu Desempenho
+      <i class="fa-solid fa-book"></i>
+      Minhas Questões
     </a>
 
     <a href="#">
       <i class="fa-solid fa-gear"></i>
       Configurações
     </a>
-
-    <a href="#">
-      <i class="fa-solid fa-book"></i>
-      Minhas Questões
-    </a>
-
-  </div>
-
-  <div class="profile-footer">
-    <button class="logout-btn">
+        <a href="#" class="logout-btn">
       Sair da Conta
-    </button>
+    </a>
   </div>
+
+
+
+
 
 </div>
   </div>
