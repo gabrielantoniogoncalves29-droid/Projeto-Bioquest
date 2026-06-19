@@ -3,7 +3,6 @@ import Home from '@/pages/Home.vue'
 import Questoes from '@/components/layout/Questoes/Pagina incial/Biblioteca.vue';
 import Estatisticas from '@/pages/Estatisticas.vue';
 import Ajuda from '@/pages/Ajuda.vue';
-import Sobre from '@/pages/Sobre.vue';
 import Perfil from '@/pages/Perfil.vue';
 import Resolver from '@/components/layout/Questoes/Painel Resolução/ResolverQuestao.vue';
 const routes = [

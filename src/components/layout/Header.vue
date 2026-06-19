@@ -45,8 +45,8 @@ onUnmounted(() => {
     <div class="left">
 
 
-    <h1 id="logo">BioQuest</h1>
-    <p id="subtitle">Plataforma de questões de Biologia</p>
+    <h1 id="logo"><router-link to="/">BioQuest</router-link></h1>
+
     </div>
 
     <nav class="nav">
@@ -98,11 +98,6 @@ onUnmounted(() => {
       Sair da Conta
     </a>
   </div>
-
-
-
-
-
 </div>
   </div>
 </div>
@@ -123,15 +118,13 @@ onUnmounted(() => {
 #logo {
   color: #1c4a3d;
   font-weight: bold;
-  transform: translateY(9px);
+  font-size: 36px;
   margin-left: 20px;
 }
 
-
-#subtitle{
-font-family:'Times New Roman', Times, serif;
-font-size: 15px;
-transform: translateY(-16px);
+#logo a{
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav a{
