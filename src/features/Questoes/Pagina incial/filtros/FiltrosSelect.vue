@@ -6,38 +6,54 @@
       {{ titulo }}
     </label>
 
-    <select>
 
-      <option>
+    <select v-model="selecionado">
+
+
+      <option value="">
         {{ placeholder }}
       </option>
 
+
       <option
+
         v-for="opcao in opcoes"
-        :key="opcao"
+
+        :key="opcao.id"
+
+        :value="opcao.id"
+
       >
-        {{ opcao }}
+
+        {{ opcao.nome }}
+
       </option>
 
+
     </select>
+
 
   </div>
 
 </template>
 
+
 <script setup>
 
-defineProps({
+
+const props = defineProps({
 
   titulo: {
     type: String,
     required: true
   },
 
+
   placeholder: {
     type: String,
     default: 'Selecione'
   },
+
 
   opcoes: {
     type: Array,
@@ -46,7 +62,19 @@ defineProps({
 
 })
 
+
+const selecionado = defineModel({
+
+  type: [String, Number],
+
+  default: ''
+
+})
+
+
 </script>
+
+
 
 <style scoped>
 

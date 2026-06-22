@@ -1,0 +1,40 @@
+[
+{
+"id":91,
+"enunciado":
+"Os vírus são organismos acelulares que possuem material genético protegido por uma cápsula proteica. Sobre esses organismos, assinale a alternativa correta.",
+
+
+"alternativas":[
+{
+"letra":"A",
+"texto":"Possuem metabolismo próprio."
+},
+
+{
+"letra":"B",
+"texto":"São formados por células."
+},
+
+{
+"letra":"C",
+"texto":"Dependem de células hospedeiras."
+},
+
+{
+"letra":"D",
+"texto":"Realizam respiração celular."
+}
+],
+
+
+
+"resposta":"C",
+
+"comentario":
+
+"Os vírus dependem da maquinaria celular do hospedeiro para reprodução."
+
+}
+
+]

@@ -1,9 +1,9 @@
 <script setup>
-import HeaderQuestao from '@/components/layout/Questoes/Painel Resolução/HeaderQuestão.vue'
-import Enunciado from '@/components/layout/Questoes/Painel Resolução/Enunciado.vue'
-import AlternativaItem from '@/components/layout/Questoes/Painel Resolução/AlternativaItem.vue'
-import QuestaoFooter from '@/components/layout/Questoes/Painel Resolução/QuestaoFooter.vue'
-import PainelResolucao from '@/components/layout/Questoes/Painel Resolução/PainelResolucao.vue'
+import HeaderQuestao from '@/features/Questoes/Painel Resolução/HeaderQuestão.vue'
+import Enunciado from '@/features/Questoes/Painel Resolução/Enunciado.vue'
+import AlternativaItem from '@/features/Questoes/Painel Resolução/AlternativaItem.vue'
+import QuestaoFooter from '@/features/Questoes/Painel Resolução/QuestaoFooter.vue'
+import PainelResolucao from '@/features/Questoes/Painel Resolução/PainelResolucao.vue'
 import Header from '@/components/layout/Header.vue'
 
 function goback() {

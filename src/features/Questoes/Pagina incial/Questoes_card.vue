@@ -1,61 +1,131 @@
+<script setup>
+
+import { computed } from 'vue'
+
+
+const props = defineProps({
+
+  questao:{
+    type:Object,
+    required:true
+  }
+
+})
+
+
+const icone = computed(()=>{
+
+  return new URL(
+    `../icons/${props.questao.conteudoId}.png`,
+    import.meta.url
+  ).href
+
+})
+
+
+</script>
+
+
 <template>
+
   <div class="card">
-  <div class="left">
-          <img
+
+    <div class="left">
+
+      <img
         class="icon"
-        src="@/components/layout/Questoes/Imagens/Botanica-rmv.png"
-        alt=""
+        :src="icone"
+        alt="Ícone do conteúdo"
       >
 
-    <div class="content">
-      <div class="top">
-        <span class="year">
-          2025
-        </span>
-        <span>
-          Questão 91
-        </span>
+
+      <div class="content">
+
+        <div class="top">
+
+          <span class="year">
+            {{ questao.ano }}
+          </span>
+
+
+          <span>
+            Questão {{ questao.numeroQuestao }}
+          </span>
+
+        </div>
+
+
+
+        <h3>
+          {{ questao.resumo }}
+        </h3>
+
+
+
+        <div class="tags">
+
+
+          <span class="tag green">
+
+            {{ questao.subconteudo }}
+
+          </span>
+
+
+
+          <span
+            v-for="tag in questao.tags"
+            :key="tag"
+            class="tag blue"
+          >
+
+            {{ tag }}
+
+          </span>
+
+
+        </div>
+
+
       </div>
-      <h3>
-        O gráfico mostra a produção de determinado hormônio
-        em diferentes fases da vida.
-      </h3>
 
-      <div class="tags">
 
-        <span class="tag green">
-          Fisiologia
-        </span>
 
-        <span class="tag blue">
-          Hormônios
-        </span>
+      <div class="actions">
+
+
+        <router-link
+          :to="`/resolver/${questao.id}`"
+          class="btn"
+        >
+
+          Resolver
+
+        </router-link>
+
+
+
+        <button class="details-btn">
+
+          Ver detalhes
+
+          <span class="arrow">
+            ❯
+          </span>
+
+        </button>
+
 
       </div>
+
 
     </div>
 
-<div class="actions">
 
-
-  <router-link to="/resolver" class="btn">
-    Resolver
-  </router-link>
-
-  <button class="details-btn">
-    Ver detalhes
-
-    <span class="arrow">
-         ❯
-    </span>
-  </button>
-
-</div>
   </div>
-  </div>
+
 
 </template>
-
 
 
 <style scoped>
@@ -81,10 +151,12 @@
     0 6px 20px rgba(0,0,0,0.05);
 }
 
+
 .content {
   flex: 1;
   min-width: 0;
 }
+
 
 .top {
   display: flex;
@@ -95,6 +167,7 @@
   flex-wrap: wrap;
 }
 
+
 .year {
   background: #e7f5ee;
   color: #1f6f5c;
@@ -103,6 +176,7 @@
   font-weight: 700;
 }
 
+
 h3 {
   font-size: 17px;
   line-height: 1.5;
@@ -110,11 +184,13 @@ h3 {
   margin-bottom: 16px;
 }
 
+
 .tags {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
+
 
 .tag {
   padding: 6px 12px;
@@ -123,15 +199,18 @@ h3 {
   font-weight: 600;
 }
 
+
 .green {
   background: #e7f5ee;
   color: #1f8a5b;
 }
 
+
 .blue {
   background: #e8f1ff;
   color: #2767c7;
 }
+
 
 .actions{
   display: flex;
@@ -140,6 +219,7 @@ h3 {
   gap: 20px;
   flex-shrink: 0;
 }
+
 
 .details-btn{
   border: none;
@@ -153,17 +233,16 @@ h3 {
   cursor: pointer;
 }
 
-.details-btn span{
-margin-left: 6px;
-}
 
 .details-btn:hover{
   color: #1f6f5c;
 }
 
+
 .arrow{
   font-size: 13px;
 }
+
 
 .left{
   display: flex;
@@ -172,13 +251,13 @@ margin-left: 6px;
   flex: 1;
 }
 
+
 .icon{
   width: 100px;
   height: 100px;
   object-fit: contain;
   flex-shrink: 0;
 }
-
 
 
 
@@ -193,13 +272,15 @@ margin-left: 6px;
   cursor: pointer;
   transition: 0.2s;
   display: flex;
-  align-items: center;     
-  text-decoration: none;      
+  align-items: center;
+  text-decoration: none;
 }
+
 
 .btn:hover {
   background: #1f6f5c;
   color: #ffffff;
 }
+
 
 </style>
