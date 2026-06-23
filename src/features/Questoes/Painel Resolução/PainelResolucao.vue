@@ -1,151 +1,228 @@
+<script setup>
+
+defineProps({
+
+  questao:{
+
+    type:Object,
+
+    required:true
+
+  }
+
+})
+
+
+</script>
+
+
+
 <template>
 
-  <div class="painel">
+<div class="painel">
 
-    <div class="card-resposta">
 
-      <span class="label">
-        Resposta correta
-      </span>
 
-      <div class="resposta">
-        B  
-      </div>
+  <div class="card-resposta">
 
-    </div>
 
-    <div class="card-info">
+    <span class="label">
 
-      <h3>
-        Explicação
-      </h3>
+      Resposta correta
 
-      <p>
-        A hipófise atua como glândula mestre do sistema endócrino.
-      </p>
-
-    </div>
-
-    <div class="card-info">
-
-      <h3>
-        Conteúdo relacionado
-      </h3>
-
-      <div class="tags">
-
-        <span>Hipófise</span>
-
-        <span>Hormônios</span>
-
-        <span>Endócrino</span>
-
-      </div>
-
-    </div>
- <div class="card-estatistica">
-
-  <div class="header-card">
-
-    <span>
-     Percentual de acertos
     </span>
 
-    <strong>
-      78%
-    </strong>
+
+    <div class="resposta">
+
+      {{ questao.resposta }}
+
+    </div>
+
 
   </div>
 
-  <div class="barra">
+
+
+
+
+  <div class="card-info">
+
+
+    <h3>
+
+      Explicação
+
+    </h3>
+
+
+    <p>
+
+      {{ questao.comentario }}
+
+    </p>
+
+
+  </div>
+
+
+
+
+
+  <div class="card-info">
+
+
+    <h3>
+
+      Conteúdo relacionado
+
+    </h3>
+
+
+  </div>
+
+
+
+
+
+
+
+  <div class="card-estatistica">
+
+
+    <div class="header-card">
+
+
+      <span>
+
+        Percentual de acertos
+
+      </span>
+
+
+      <strong>
+
+        {{questao.estatisticas.taxaAcerto}}%
+
+      </strong>
+
+
+    </div>
+
+
+
+    <div class="barra">
+
+
+      <div
+
+        class="preenchimento"
+
+        :style="{
+          width:
+          questao.estatisticas.taxaAcerto + '%'
+        }"
+
+      ></div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+  <div class="card-distribuicao">
+
+
+    <span>
+
+      Alternativas mais marcadas
+
+    </span>
+
+
+
 
     <div
-      class="preenchimento"
-      style="width:78%"
-    ></div>
+
+      class="item"
+
+      v-for="item in questao.estatisticas.distribuicao"
+
+      :key="item.alternativa"
+
+    >
+
+
+
+      <span>
+
+        {{item.alternativa}}
+
+      </span>
+
+
+
+
+      <div class="barra-mini">
+
+
+        <div
+
+          class="fill"
+
+          :class="{
+
+            correta:
+            item.alternativa === questao.resposta
+
+          }"
+
+
+          :style="{
+
+            width:item.percentual + '%'
+
+          }"
+
+
+        ></div>
+
+
+
+      </div>
+
+
+
+      <span>
+
+        {{item.percentual}}%
+
+      </span>
+
+
+
+    </div>
+
+
+
 
   </div>
+
+
+
+
+
 
 </div>
-<div class="card-distribuicao">
-
-  <span>
-   Alternativas mais marcadas
-  </span>
-
-  <div class="item">
-
-    <span>A</span>
-
-    <div class="barra-mini">
-      <div
-        class="fill"
-        style="width:32%"
-      ></div>
-    </div>
-
-    <span>32%</span>
-
-  </div>
-
-  <div class="item">
-
-    <span>B</span>
-
-    <div class="barra-mini">
-      <div
-        class="fill correta"
-        style="width:68%"
-      ></div>
-    </div>
-
-    <span>48%</span>
-
-  </div>
-
-    <div class="item">
-    <span>C</span>
-    <div class="barra-mini">
-      <div
-        class="fill"
-        style="width:8%"
-      ></div>
-    </div>
-    <span>8%</span>
-  </div>
-
-      <div class="item">
-    <span>D</span>
-    <div class="barra-mini">
-      <div
-        class="fill"
-        style="width:9%"
-      ></div>
-    </div>
-    <span>9%</span>
-  </div>
-
-
-      <div class="item">
-    <span>E</span>
-    <div class="barra-mini">
-      <div
-        class="fill"
-        style="width:3%"
-      ></div>
-    </div>
-    <span>3%</span>
-  </div>
-</div>
-
-
-
-
-
-  </div>
 
 </template>
-
 
 
 <style scoped>

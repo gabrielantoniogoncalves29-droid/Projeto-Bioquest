@@ -1,0 +1,182 @@
+[
+  {
+    "id": 202592,
+
+    "ano": 2025,
+
+    "numeroQuestao": 91,
+
+    "tipo": "Múltipla escolha",
+
+    "nivel": "Intermediário",
+
+    "resumo": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida.",
+
+
+    "tags": [
+      "Hormônios",
+      "Endócrino"
+    ],
+
+
+    "enem": {
+
+      "competencia": 4,
+
+      "habilidade": 13,
+
+      "descricaoCompetencia": "Compreender sistemas biológicos.",
+
+      "descricaoHabilidade": "Analisar características adaptativas."
+
+    },
+
+
+    "estrutura": [
+
+      {
+        "nome": "Biologia",
+
+        "icone": "🧬"
+      },
+
+      {
+        "nome": "Fisiologia",
+
+        "icone": "🔬"
+      },
+
+      {
+        "nome": "Sistema Endócrino",
+
+        "icone": "⚕"
+      }
+
+    ],
+
+
+
+    "informacoes": {
+
+      "codigo": "202591",
+
+      "nivelIntelectual": "Análise",
+
+      "taxaAcerto": "63%",
+
+      "resolvidaPor": "824 usuários",
+
+      "favoritadaPor": "115 usuários"
+
+    },
+
+
+    "palavrasChave": [
+
+      "Hormônios",
+
+      "Glândulas",
+
+      "Hipófise"
+
+    ],
+
+
+    "enunciado": {
+
+      "texto": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida."
+
+    }
+
+  },
+  {
+    "id": 202593,
+
+    "ano": 2025,
+
+    "numeroQuestao": 92,
+
+    "tipo": "Múltipla escolha",
+
+    "nivel": "Intermediário",
+
+    "resumo": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida.",
+
+
+    "tags": [
+      "Hormônios",
+      "Endócrino"
+    ],
+
+
+    "enem": {
+
+      "competencia": 4,
+
+      "habilidade": 13,
+
+      "descricaoCompetencia": "Compreender sistemas biológicos.",
+
+      "descricaoHabilidade": "Analisar características adaptativas."
+
+    },
+
+
+    "estrutura": [
+
+      {
+        "nome": "Biologia",
+
+        "icone": "🧬"
+      },
+
+      {
+        "nome": "Fisiologia",
+
+        "icone": "🔬"
+      },
+
+      {
+        "nome": "Sistema Endócrino",
+
+        "icone": "⚕"
+      }
+
+    ],
+
+
+
+    "informacoes": {
+
+      "codigo": "202591",
+
+      "nivelIntelectual": "Análise",
+
+      "taxaAcerto": "63%",
+
+      "resolvidaPor": "824 usuários",
+
+      "favoritadaPor": "115 usuários"
+
+    },
+
+
+    "palavrasChave": [
+
+      "Hormônios",
+
+      "Glândulas",
+
+      "Hipófise"
+
+    ],
+
+
+    "enunciado": {
+
+      "texto": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida."
+
+    }
+
+  }
+]

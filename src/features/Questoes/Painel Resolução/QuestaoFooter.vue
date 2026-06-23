@@ -1,29 +1,168 @@
+<script setup>
+
+import { useRouter } from 'vue-router'
+
+
+const props = defineProps({
+
+  questao: {
+
+    type: Object,
+
+    required: true
+
+  },
+
+
+  proximaQuestao: {
+
+    type: Number,
+
+    default: null
+
+  },
+questaoAnterior: {
+
+type:Number,
+
+default:null
+
+}
+})
+
+
+
+const router = useRouter()
+
+
+
+function responder(){
+
+
+router.push(
+
+`/resolver/${props.questao.id}`
+
+)
+
+
+}
+
+
+
+function verExplicacao(){
+
+
+console.log(
+'Mostrar explicação da questão',
+props.questao.id
+)
+
+
+}
+
+
+
+function proxima(){
+
+
+if(!props.proximaQuestao)
+return
+
+
+
+router.push(
+
+`/resolver/${props.proximaQuestao}`
+
+)
+}
+
+
+function anterior(){
+
+if(!props.questaoAnterior)
+return
+
+
+router.push(
+`/resolver/${props.questaoAnterior}`
+)
+
+}
+
+</script>
+
 <template>
 
-  <div class="footer-questao">
 
-    <button class="btn-responder">
-      Responder
+<div class="footer-questao">
+
+
+
+  <button
+
+    class="btn-responder"
+
+    @click="responder"
+
+  >
+
+    Responder
+
+  </button>
+
+
+
+
+
+  <div class="acoes-direita">
+
+
+
+    <button
+
+      class="btn-explicacao"
+
+      @click="verExplicacao"
+
+    >
+
+      Ver explicação
+
     </button>
 
-    <div class="acoes-direita">
 
-      <button class="btn-explicacao">
-        Ver explicação
-      </button>
 
-      <button class="btn-proxima">
-        Próxima questão →
-      </button>
 
-    </div>
+
+    <button
+
+      class="btn-proxima"
+
+      @click="proxima"
+
+      :disabled="!proximaQuestao"
+
+    >
+
+      Próxima questão →
+
+    </button>
+    
+
+
 
   </div>
 
-</template>
 
-<script setup>
-</script>
+
+
+
+</div>
+
+
+</template>
 
 <style scoped>
 

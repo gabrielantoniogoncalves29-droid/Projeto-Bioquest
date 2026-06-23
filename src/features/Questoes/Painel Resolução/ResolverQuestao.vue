@@ -1,55 +1,229 @@
 <script setup>
+
+import {onMounted,ref, computed} from 'vue'
+
+import {useRoute} from 'vue-router'
+
+import {useResolverStore}
+from '@/store/resolver.js'
+
+import {buscarIdsQuestoes}
+from '@/services/questoes.js'
+
+import {buscarQuestaoResolver}
+from '@/services/resolver.js'
+
+
 import HeaderQuestao from '@/features/Questoes/Painel Resolução/HeaderQuestão.vue'
+
 import Enunciado from '@/features/Questoes/Painel Resolução/Enunciado.vue'
+
 import AlternativaItem from '@/features/Questoes/Painel Resolução/AlternativaItem.vue'
+
 import QuestaoFooter from '@/features/Questoes/Painel Resolução/QuestaoFooter.vue'
+
 import PainelResolucao from '@/features/Questoes/Painel Resolução/PainelResolucao.vue'
+
 import Header from '@/components/layout/Header.vue'
 
-function goback() {
-  window.history.back();
+
+
+const route = useRoute()
+
+const store = useResolverStore()
+
+
+const id = Number(route.params.id)
+
+
+
+const questao = computed(()=>{
+
+return store.questao
+
+})
+
+
+
+onMounted(async()=>{
+
+
+const dados =
+
+await buscarQuestaoResolver(id)
+
+
+
+store.carregarQuestao(dados)
+
+
+
+
+const ids =
+
+await buscarIdsQuestoes()
+
+
+
+store.carregarIds(ids)
+
+
+
+})
+
+
+
+function goback(){
+
+window.history.back()
+
 }
+
+const proximaQuestao = computed(()=>{
+
+return store.proximaQuestao
+
+})
+
+
+
+const questaoAnterior = computed(()=>{
+
+return store.questaoAnterior
+
+})
 </script>
-
 <template>
-<Header />
-  <main class="resolver-page">
+<Header/>
+<main class="resolver-page">
 
-    <div class="breadcrumb">
-      <span @click="goback()" style='cursor: pointer;' class="voltar">⟵ Voltar </span>
-      <br>
-      <span class="separator">|</span>
-      <br>
-      <span>Biblioteca de Questões</span>
-      <span>/</span>
-      <span>Pesquisa</span>
-      <span>/</span>
-      <span>Questão 91</span>
-      <span>/</span>
-      <span>Resolver</span>
-    </div>
 
-    <div class="resolver-layout">
+  <div class="breadcrumb">
 
-      <section class="questao-container">
+    <span 
+      @click="goback()" 
+      class="voltar"
+    >
+      ⟵ Voltar
+    </span>
 
-        <HeaderQuestao />
 
-        <Enunciado />
+    <span class="separator">|</span>
 
-        <AlternativaItem />
 
-        <QuestaoFooter />
+    <span>Biblioteca de Questões</span>
 
-      </section>
+    <span>/</span>
 
-      <aside class="painel-container">
-        <PainelResolucao />
-      </aside>
+    <span>Pesquisa</span>
 
-    </div>
+    <span>/</span>
 
-  </main>
+
+    <span>
+      Questão {{ questao?.id }}
+    </span>
+
+
+    <span>/</span>
+
+
+    <span>Resolver</span>
+
+
+  </div>
+
+  <div 
+    v-if="!questao"
+    class="loading"
+  >
+
+    Carregando questão...
+
+  </div>
+
+
+
+
+
+  <div 
+    v-else
+    class="resolver-layout"
+  >
+
+
+
+    <section class="questao-container">
+
+
+<HeaderQuestao
+
+:questao="questao"
+
+:idsQuestoes="store.idsQuestoes"
+
+/>
+
+
+
+<Enunciado
+
+:questao="questao"
+
+/>
+
+
+
+
+      <AlternativaItem
+
+        :alternativas="questao.alternativas"
+
+      />
+
+
+
+
+
+<QuestaoFooter
+
+:questao="questao"
+
+:proximaQuestao="proximaQuestao"
+
+:questaoAnterior="questaoAnterior"
+
+/>
+
+
+    </section>
+
+
+
+
+
+
+    <aside class="painel-container">
+
+
+      <PainelResolucao
+
+        :questao="questao"
+
+      />
+
+
+    </aside>
+
+
+
+
+
+  </div>
+
+
+</main>
+
 </template>
 
 <style scoped>

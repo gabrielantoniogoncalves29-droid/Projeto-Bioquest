@@ -1,32 +1,83 @@
+<script setup>
+
+
+defineProps({
+
+  questao:{
+
+    type:Object,
+
+    required:true
+
+  }
+
+})
+
+
+</script>
+
+
+
+
 <template>
-  <div class="enunciado-container">
 
-    <div class="imagem-container">
 
-      <img
-        src="https://placehold.co/500x280?text=Grafico+da+Questao"
-        alt="Gráfico da questão"
-      />
+<div class="enunciado-container">
 
-    </div>
 
-    <div class="texto-container">
 
-      <h2>
-        O gráfico mostra a produção de determinado hormônio
-        em diferentes fases da vida de um indivíduo.
-      </h2>
+  <div
 
-      <p>
-        A variação observada na produção desse hormônio está
-        relacionada à atuação de qual estrutura do sistema
-        endócrino?
-      </p>
+    v-if="questao.enunciado.imagem"
 
-    </div>
+    class="imagem-container"
+
+  >
+
+
+    <img
+
+      :src="questao.enunciado.imagem"
+
+      :alt="questao.enunciado.alt"
+
+    />
+
 
   </div>
+
+
+
+
+  <div class="texto-container">
+
+
+    <h2>
+
+      {{ questao.enunciado.textoPrincipal }}
+
+    </h2>
+
+
+
+    <p>
+
+      {{ questao.enunciado.textoComplementar }}
+
+    </p>
+
+
+  </div>
+
+
+
+</div>
+
+
 </template>
+
+
+
 
 
 <style scoped>
@@ -45,6 +96,8 @@
 
 }
 
+
+
 .imagem-container {
 
   border: 1px solid #e5e7eb;
@@ -53,63 +106,75 @@
 
   overflow: hidden;
 
-  background: white;
+  background:white;
 
 }
+
+
 
 .imagem-container img {
 
-  width: 100%;
+  width:100%;
 
-  height: 100%;
+  height:100%;
 
-  object-fit: cover;
+  object-fit:contain;
 
-  display: block;
+  display:block;
 
 }
+
+
 
 .texto-container {
 
-  display: flex;
+  display:flex;
 
-  flex-direction: column;
+  flex-direction:column;
 
-  justify-content: center;
+  justify-content:center;
 
 }
+
+
 
 .texto-container h2 {
 
-  font-size: 1.1rem;
+  font-size:1.1rem;
 
-  line-height: 1.6;
+  line-height:1.6;
 
-  color: #1f2937;
+  color:#1f2937;
 
-  margin-bottom: 12px;
+  margin-bottom:12px;
 
-  font-weight: 600;
+  font-weight:600;
 
 }
+
+
 
 .texto-container p {
 
-  font-size: 0.95rem;
+  font-size:.95rem;
 
-  line-height: 1.7;
+  line-height:1.7;
 
-  color: #4b5563;
+  color:#4b5563;
 
 }
 
-@media (max-width: 1100px) {
 
-  .enunciado-container {
 
-    grid-template-columns: 1fr;
+@media(max-width:1100px){
 
-  }
+
+.enunciado-container{
+
+grid-template-columns:1fr;
+
+}
+
 
 }
 

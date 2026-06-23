@@ -1,65 +1,233 @@
+<script setup>
+
+import {computed} from 'vue'
+
+
+const props = defineProps({
+
+questao:{
+
+type:Object,
+
+default:()=>({})
+
+},
+
+
+idsQuestoes:{
+
+ type:Array,
+
+ default:()=>[]
+
+}
+
+})
+
+
+
+const indiceAtual = computed(()=>{
+
+
+return props.idsQuestoes.indexOf(
+props.questao.id
+)
+
+
+})
+
+
+
+
+const questaoAnterior = computed(()=>{
+
+
+if(indiceAtual.value <= 0)
+return null
+
+
+return props.idsQuestoes[
+indiceAtual.value - 1
+]
+
+
+})
+
+
+
+
+const proximaQuestao = computed(()=>{
+
+
+if(
+indiceAtual.value === -1 ||
+indiceAtual.value >= props.idsQuestoes.length-1
+)
+
+return null
+
+
+
+return props.idsQuestoes[
+indiceAtual.value + 1
+]
+
+
+})
+
+
+</script>
+
 <template>
-  <div class="header-questao">
 
-    <div class="header-top">
+<div class="header-questao">
 
-      <div class="info-esquerda">
 
-        <span class="badge-ano">
-          2025
-        </span>
-        <div class="navegacao">
-        <span class="texto-info">&larr; Anterior</span>
-  
-         <span class="texto-info-static">
-          Questão 91 de 100
-         </span>
-  
-         <span class="texto-info">Próxima &rarr;</span>
-        </div>
-      </div>
+  <div class="header-top">
 
-      <div class="acoes">
 
-        <button class="btn-salvar">
-            <span class="material-icons">
-            bookmark_border
-            </span> Salvar questão
-        </button>
+    <div class="info-esquerda">
 
-        <button class="btn-detalhes">
-          Ver detalhes
-        </button>
 
-      </div>
+      <span class="badge-ano">
 
-    </div>
+        {{ questao.ano }}
 
-    <div class="header-bottom">
-
-      <div class="tags">
-
-        <span class="tag-verde">
-          Fisiologia
-        </span>
-
-        <span class="tag-azul">
-          Hormônios
-        </span>
-
-      </div>
-
-      <span class="codigo">
-        Código: BIO-2025-091
       </span>
 
+
+
+
+      <div class="navegacao">
+
+
+
+        <span
+
+          class="texto-info"
+
+          :class="{
+            disabled: !questaoAnterior
+          }"
+
+        >
+
+          ← Anterior
+
+        </span>
+
+
+
+
+
+        <span class="texto-info-static">
+
+
+          Questão
+
+          {{ questao.id }}
+
+
+
+        </span>
+
+
+
+
+
+        <span
+
+          class="texto-info"
+
+          :class="{
+            disabled: !proximaQuestao
+          }"
+
+        >
+
+          Próxima →
+
+        </span>
+
+
+
+
+      </div>
+
+
+
     </div>
 
-  </div>
-</template>
 
-<script setup>
-</script>
+
+
+
+    <div class="acoes">
+
+
+
+      <button class="btn-salvar">
+
+
+        <span class="material-icons">
+
+          bookmark_border
+
+        </span>
+
+
+        Salvar questão
+
+
+      </button>
+
+
+
+
+
+       
+
+<router-link
+:to="`/detalhes/${questao.id}`"
+ class="details-btn">
+
+          Ver detalhes
+
+          <span class="arrow">
+            ❯
+          </span>
+</router-link>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+<div class="header-bottom">
+
+
+  <span class="codigo">
+
+    Código:
+    {{ questao.id }}
+
+  </span>
+
+
+</div>
+</div>
+
+</template>
 
 <style scoped>
 
@@ -137,14 +305,54 @@
   border: none;
 }
 
-.btn-detalhes {
-  background: white;
-  border: 1px solid #0d6b4d;
-  color: #0d6b4d;
-  padding: 10px 18px;
-  border-radius: 10px;
+.details-btn {
+
+  border: none;
+
+
+  padding: 0 12px;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 14px;
+
+  font-weight: 300;
+
+  color: #515357;
+
   cursor: pointer;
+
+    text-decoration: none; 
+  display: inline-block; 
+
 }
+
+
+
+
+
+.details-btn:hover {
+
+  color: #1f6f5c;
+
+}
+
+
+
+
+
+.arrow {
+
+  font-size: 13px;
+
+}
+
 
 .header-bottom {
   margin-top: 18px;

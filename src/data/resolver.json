@@ -1,0 +1,173 @@
+[
+ {
+  "id":202592,
+
+  "enunciado":{
+
+    "imagem":"",
+
+    "alt":"",
+
+    "textoPrincipal":
+    "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano.",
+
+    "textoComplementar":
+    "Estarão presentes no organismo geneticamente modificado os genes do: "
+
+  },
+
+
+  "alternativas":[
+    {
+      "letra":"A",
+      "texto":" metabolismo de E. coli, apenas."
+    },
+
+    {
+      "letra":"B",
+      "texto":" ciclo circadiano de E. coli, apenas."
+    },
+
+    {
+      "letra":"C",
+      "texto":" metabolismo de S. elongatus e do ciclo circadiano de E. coli."
+    },
+
+    {
+      "letra":"D",
+      "texto":"ciclo circadiano de S. elongatus e do metabolismo de E. coli."
+    },
+    {
+      "letra":"E",
+      "texto":" ciclo circadiano de S. elongatus e do ciclo circadiano de E. coli."
+    }
+  ],
+
+
+  "resposta":"D",
+
+
+  "comentario":
+  "Os vírus dependem da maquinaria celular do hospedeiro para reprodução.",
+
+  "estatisticas": {
+
+  "taxaAcerto": 78,
+
+  "distribuicao": [
+
+    {
+      "alternativa":"A",
+      "percentual":32
+    },
+
+    {
+      "alternativa":"B",
+      "percentual":48
+    },
+
+    {
+      "alternativa":"C",
+      "percentual":8
+    },
+
+    {
+      "alternativa":"D",
+      "percentual":9
+    },
+
+    {
+      "alternativa":"E",
+      "percentual":3
+    }
+
+  ]
+
+}
+ },
+ {
+  "id":202593,
+
+  "enunciado":{
+
+    "imagem":"",
+
+    "alt":"",
+
+    "textoPrincipal":
+    "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água.",
+
+    "textoComplementar":
+    " aumento na taxa de mortalidade dessas aves estava associado a uma redução na: "
+  },
+
+
+  "alternativas":[
+    {
+      "letra":"A",
+      "texto":"dilatação do papo."
+    },
+
+    {
+      "letra":"B",
+      "texto":"reposição de penas das asas."
+    },
+
+    {
+      "letra":"C",
+      "texto":"secreção da glândula uropigial."
+    },
+
+    {
+      "letra":"D",
+      "texto":" formação da membrana natatória."
+    },
+    {
+      "letra":"E",
+      "texto":"largura das cavidades de ossos pneumáticos."
+    }
+  ],
+
+
+  "resposta":"C",
+
+
+  "comentario":
+  "Os vírus dependem da maquinaria celular do hospedeiro para reprodução.",
+
+  "estatisticas": {
+
+  "taxaAcerto": 78,
+
+  "distribuicao": [
+
+    {
+      "alternativa":"A",
+      "percentual":32
+    },
+
+    {
+      "alternativa":"B",
+      "percentual":48
+    },
+
+    {
+      "alternativa":"C",
+      "percentual":8
+    },
+
+    {
+      "alternativa":"D",
+      "percentual":9
+    },
+
+    {
+      "alternativa":"E",
+      "percentual":100
+    }
+
+  ]
+
+}
+}
+]

@@ -1,40 +1,99 @@
+<script setup>
+
+import { ref } from 'vue'
+
+
+const props = defineProps({
+
+  alternativas: {
+
+    type: Array,
+
+    default: () => []
+
+  }
+
+})
+
+
+const selecionada = ref(null)
+
+
+
+function selecionarAlternativa(letra){
+
+  selecionada.value = letra
+
+}
+
+
+</script>
+
+
+
 <template>
 
-  <div class="alternativas-container">
+<div class="alternativas-container">
 
-    <div class="alternativa">
-      <div class="letra">A</div>
-      <span>Hipotálamo.</span>
+
+  <div
+
+    v-for="alternativa in props.alternativas"
+
+    :key="alternativa.letra"
+
+    class="alternativa"
+
+    :class="{
+
+      selecionada: selecionada === alternativa.letra
+
+    }"
+
+    @click="selecionarAlternativa(alternativa.letra)"
+
+  >
+
+
+    <div
+
+      class="letra"
+
+      :class="{
+
+        'letra-selecionada':
+        selecionada === alternativa.letra
+
+      }"
+
+    >
+
+      {{ alternativa.letra }}
+
     </div>
 
-    <div class="alternativa selecionada">
-      <div class="letra letra-selecionada">B</div>
-      <span>Hipófise.</span>
-    </div>
 
-    <div class="alternativa">
-      <div class="letra">C</div>
-      <span>Tireoide.</span>
-    </div>
 
-    <div class="alternativa">
-      <div class="letra">D</div>
-      <span>Pâncreas.</span>
-    </div>
+    <span>
 
-    <div class="alternativa">
-      <div class="letra">E</div>
-      <span>Adrenal.</span>
-    </div>
+      {{ alternativa.texto }}
+
+    </span>
+
+
 
   </div>
 
+
+</div>
+
 </template>
 
-<script setup>
-</script>
+
+
 
 <style scoped>
+
 
 .alternativas-container {
 
@@ -47,6 +106,8 @@
   gap: 8px;
 
 }
+
+
 
 .alternativa {
 
@@ -70,6 +131,8 @@
 
 }
 
+
+
 .alternativa:hover {
 
   border-color: #0d6b4d;
@@ -77,6 +140,8 @@
   background: #f9fcfa;
 
 }
+
+
 
 .letra {
 
@@ -104,6 +169,8 @@
 
 }
 
+
+
 .alternativa span {
 
   font-size: 14px;
@@ -114,6 +181,8 @@
 
 }
 
+
+
 .selecionada {
 
   background: #f2fbf7;
@@ -122,6 +191,8 @@
 
 }
 
+
+
 .letra-selecionada {
 
   background: #0d6b4d;
@@ -129,5 +200,6 @@
   color: white;
 
 }
+
 
 </style>

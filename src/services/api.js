@@ -1,4 +1,4 @@
-import questoes from '@/features/Questoes/test/card.json'
+import questoes from '@/data/card.json'
 
 
 export function buscarQuestoes(){

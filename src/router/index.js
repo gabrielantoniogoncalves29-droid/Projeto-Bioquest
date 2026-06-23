@@ -5,6 +5,7 @@ import Estatisticas from '@/pages/Estatisticas.vue';
 import Ajuda from '@/pages/Ajuda.vue';
 import Perfil from '@/pages/Perfil.vue';
 import Resolver from '@/features/Questoes/Painel Resolução/ResolverQuestao.vue';
+import Detalhes from '@/features/Questoes/Detalhes/Detalhes.vue';
 const routes = [
 {
     path: '/',
@@ -32,9 +33,14 @@ const routes = [
     component: Perfil
 },
 {
-    path: '/resolver',
-    name: 'Resolver',
+    path:'/resolver/:id',
+    name:'Resolver',
     component: Resolver
+},
+{
+    path: '/detalhes/:id',
+    name: 'Detalhes',
+    component: Detalhes
 }
 
 ]

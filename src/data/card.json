@@ -1,0 +1,23 @@
+[
+ {
+  "id":202592,
+  "ano":2025,
+  "numeroQuestao":92,
+  "conteudoId":15,
+  "subconteudo":"Genética e biotecnologia",
+  "resumo":
+  "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano."
+ },
+
+
+ {
+  "id":202593,
+  "ano":2025,
+  "numeroQuestao":93,
+  "conteudoId":14,
+  "subconteudo":"sistema endócrino",
+  "resumo":
+  "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água."
+ }
+
+]

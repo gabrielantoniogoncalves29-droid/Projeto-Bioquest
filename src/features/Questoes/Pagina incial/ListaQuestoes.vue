@@ -4,7 +4,7 @@ import { onMounted, computed } from 'vue'
 
 import QuestoesCard from './Questoes_card.vue'
 
-import { useQuestoesStore } from '@/store/questoes.js'
+import { useQuestoesStore } from '@/store/questoes_card.js'
 
 
 
@@ -91,50 +91,67 @@ v-for="questao in questoes"
 
 </template>
 
-
-
 <style scoped>
+
 
 .lista-questoes {
 
-  width: 100%;
+  width:100%;
+
+  background:#f8faf9;
+
+  padding:24px;
+
+  box-sizing:border-box;
+
+  min-height:100%;
 
 }
+
 
 .lista-questoes.lista {
 
-  display: flex;
+  display:flex;
 
-  flex-direction: column;
+  flex-direction:column;
 
-  gap: 16px;
+  gap:10px;
 
 }
+
 
 .lista-questoes.grade {
 
-  display: grid;
+  display:grid;
 
-  grid-template-columns: repeat(
+  grid-template-columns:repeat(
     auto-fill,
-    minmax(450px, 1fr)
+    minmax(450px,1fr)
   );
 
-  gap: 20px;
-
-  width: 100%;
+  gap:16px;
 
 }
 
-@media (max-width: 768px) {
 
-  .lista-questoes {
+@media(max-width:768px){
 
-    grid-template-columns: 1fr;
+  .lista-questoes{
+
+    padding:12px;
+
+  }
+
+
+  .lista-questoes.grade{
+
+    grid-template-columns:1fr;
 
   }
 
 }
+
+
 
 .loading,
 .empty {
@@ -146,9 +163,4 @@ v-for="questao in questoes"
   color:#6b7280;
 
 }
-
 </style>
-
-
-
-

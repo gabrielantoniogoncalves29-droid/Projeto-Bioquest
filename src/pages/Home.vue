@@ -1,6 +1,6 @@
 <script setup>
 import Header from '../components/layout/Header.vue'
-import TopBanner from '../components/layout/TopBanner.vue'
+import TopBanner from '../features/Inicio/TopBanner.vue'
 import Rodape from '../components/layout/Rodape.vue'
 </script>
 
