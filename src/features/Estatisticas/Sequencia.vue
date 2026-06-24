@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import Resume_card from '../../features/Estatisticas/Resume_card.vue';
+import iconeBioquimica from '../Questoes/icons/2.png'
+import iconeCitologia from '../Questoes/icons/3.png'
+import iconeEcologia from '../Questoes/icons/12.png'
+import iconeVirus from '../Questoes/icons/4.png'
 
 const lista = ref(["", "", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"])
 
@@ -27,6 +31,50 @@ function selecionado(dia){
         diaInfo.value = true
     }
 }
+
+const atividades = [
+    {   
+        nome: "Bioquimica",
+        descricao: "Metabolismo",
+        icone: iconeBioquimica,
+        questoes: 26,
+        progresso: 62
+    },
+    {   
+        nome: "Citologia",
+        descricao: "Organelas celulares",
+        icone: iconeCitologia,
+        questoes: 14,
+        progresso: 43
+    },
+    {   
+        nome: "Ecologia",
+        descricao: "Caracteristicas reino animalia",
+        icone: iconeEcologia,
+        questoes: 7,
+        progresso: 18
+    },
+    {   
+        nome: "Virus",
+        descricao: "Caracteristicas dos virus",
+        icone: iconeVirus,
+        questoes: 20,
+        progresso: 55
+    }
+]
+
+function corProgresso(valor){
+    if(valor>=60){
+        return "rgb(10, 153, 10)"
+    }
+    else if(valor<60 && valor>=30){
+        return "rgb(224, 185, 10)"
+    }
+    else{
+        return "rgb(182, 1, 1)"
+    }
+}
+
 
 </script>
 
@@ -99,28 +147,44 @@ function selecionado(dia){
                         <p class="melhoria">+7% este mês</p>
                     </div>
             </div>
+
             <div class="atividades">
                 <div class="atividades-info">
                     <span class="material-symbols-outlined livro">import_contacts</span>
-                    <h2>Continue seus estudos</h2>
+                    <h2 class="high-title">Continue seus estudos</h2>
                     <div class="Ver-questoes">
-                        <h2 class="direita">Ver todas as questoes</h2>
-                        <span class="material-icons">arrow_forward</span>
+                        <router-link to="/questoes" class="link-questoes">Ver todas as questoes <span class="material-icons">arrow_forward</span></router-link>
                     </div>
                 </div>
-                <div class="conteiner-atividades">
-                    <img src="../layout/Questoes/Imagens/Bioquimica-rmv.png" alt="bioquimica" class="icone">
-                    <h2>Bioquimica</h2>
-                </div>
-                <div class="conteiner-atividades">
-                    <img src="../layout/Questoes/Imagens/Citologia-rmv.png" alt="citologia" class="icone">
-                    <h2>Citologia</h2>
-                </div>
-                <div class="conteiner-atividades">
-                    <img src="../layout/Questoes/Imagens/Ecologia-rmv.png" alt="ecologia" class="icone">
-                    <h2>Ecologia</h2>
+
+                <div class="conteiner-atividades"
+                     v-for="atividade in atividades"
+                     :key="atividade.nome"
+                >
+                    <img :src="atividade.icone" :alt="atividade.nome" class="icone">
+                    <div class="activites-description">
+                        <h2> {{ atividade.nome }}</h2>
+                        <p>{{ atividade.descricao }}</p>
+                    </div>
+                    <div class="direita">
+                        <p> {{ atividade.questoes }} questões</p>
+                        <div class="barra">
+                            <div class="progresso"
+                                 :style="{
+                                    width: atividade.progresso + '%',
+                                    background: corProgresso(atividade.progresso)
+                                 }"
+                            ></div>
+                        </div>
+                        <p :style="{
+                            color: corProgresso(atividade.progresso)
+                        }"
+                        >{{ atividade.progresso }}%</p>
+                        <router-link to="/questoes" class="btn-continuar">Continuar</router-link>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -269,9 +333,12 @@ function selecionado(dia){
         color: rgb(0, 201, 0);
         font-family: sans-serif;
     }
-    .lado-direito{
-        display: flex;
-        flex-direction: column;
+    .link-questoes{
+        font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        text-decoration: none;
+        color: #296f5b;
+        font-weight: bold;
     }
     .atividades{
         margin-top: 20px;
@@ -322,5 +389,47 @@ function selecionado(dia){
         'wght' 400,
         'GRAD' 0,
         'opsz' 24;
+    }
+    .high-title{
+        padding-left: 10px;
+    }
+    .activites-description{
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+        margin-top: 20px;
+    }
+    .activites-description p{
+        margin: 0;
+    }
+    .activites-description h2{
+        margin: 0;
+    }
+    .barra{
+        width: 120px;
+        height: 8px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #ececec;
+    }
+    .progresso{
+        height: 100%;
+        transition: 0.3s;
+    }
+    .direita{
+        display: flex;
+        margin-left: auto;
+        align-items: center;
+        gap: 20px;
+    }
+    .btn-continuar{
+        text-decoration: none;
+        border: 1px solid #296f5b;
+        border-radius: 8px;
+        background-color: #296f5b;
+        padding: 10px;
+        color: white;
+        
+        cursor: pointer;
     }
 </style>
