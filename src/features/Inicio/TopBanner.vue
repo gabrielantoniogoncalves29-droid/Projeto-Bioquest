@@ -1,123 +1,67 @@
-<script setup>
+<script>
 </script>
 
 <template>
-
   <section class="banner">
-
-    <section class="secao">
-
-      <h2>
-        O que é a BioQuest?
-      </h2>
-
-      <p class="descricao">
-        A BioQuest é uma plataforma educacional que reúne questões
-        de Biologia do ENEM em um ambiente organizado para consulta,
-        estudo e análise.
-      </p>
-
-      <div class="grid-info">
-
-        <div class="card-info">
-          Eixos temáticos da Matriz de Referência do ENEM
-        </div>
-
-        <div class="card-info">
-          Competências e habilidades avaliadas
-        </div>
-
-        <div class="card-info">
-          Conteúdos e subconteúdos de Biologia
-        </div>
-
-        <div class="card-info">
-          Níveis cognitivos exigidos nas questões
-        </div>
-
-        <div class="card-info">
-          Informações complementares sobre cada questão
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="secao projeto">
-
-      <h2>
-        Sobre o projeto
-      </h2>
-
-      <p>
-        A BioQuest está em desenvolvimento como parte de um projeto
-        de Iniciação Científica voltado à organização e disponibilização
-        das questões de Biologia do ENEM. A plataforma integra
-        conhecimentos de Biologia, tecnologia e educação para oferecer
-        um ambiente digital de consulta, estudo e análise educacional.
-      </p>
-
-    </section>
-
+    <div class="banner_description">
+      <h1>BIOLOGIA PARA <br>ENEM</h1>
+      <h2>Plataforma 100% gratuita com as ultimas questões de biologia do ENEM <br>para você estudar</h2>
+      <button type="button">Começar a estudar</button>
+    </div>
   </section>
-
 </template>
 
-<style scoped>
+<style>
+  .banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    background-image: url('@/assets/Banner.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-.banner {
-  min-height: 1700px;
-  width: 100%;
-
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.60),
-      rgba(255, 255, 255, 0.50)
-    ),
-    url('@/assets/Design-sem-nome.jpg');
-
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-}
-
-.secao{
-  max-width: 1400px;
- 
-  padding: 30px 40px;
-  text-align: center;
-}
-
-.secao h2{
-  color: #0d4d3a;
-  margin-bottom: 20px;
-}
-
-.descricao{
-  max-width: 900px;
-  margin: auto;
-}
-
-.grid-info{
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.card-info{
-  background: rgba(255,255,255,.85);
-  border: 1px solid #d8e6d9;
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(4px);
-}
-
+    transition: all 0.3s ease;
+    top: 0;
+    overflow: hidden;
+  }
+  .banner_description{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .banner_description h1{
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 54px;
+    margin: 0;
+    text-align: center;
+    line-height: 1.2;
+    color: rgb(28, 75, 47);
+  }
+  .banner_description h2{
+    font-family: sans-serif;
+    font-size: 16px;
+    color: rgb(50, 54, 53);
+    text-align: center;
+  }
+  .banner_description button{
+    font-family: sans-serif;
+    font-size: 16px;
+    width: 250px;
+    height: 45px;
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(28, 75, 47);
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+  .banner_description button:hover{
+    background-color: rgb(39, 109, 67);
+  }
 </style>
