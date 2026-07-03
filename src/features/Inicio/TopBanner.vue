@@ -11,7 +11,7 @@
   </section>
 </template>
 
-<style>
+<style scoped>
   .banner{
     display: flex;
     align-items: center;

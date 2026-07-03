@@ -4,9 +4,9 @@
 <template>
     <section class="secao-cards">
         <h1 class="title">BEM-VINDO AO <br>BIOQUEST</h1>
-        <div class="cards-grid">
+        <div class="cards-flex">
             <div class="card-conteiner">
-                <span class="material-symbols-outlined livro">import_contacts</span>
+                <span class="material-symbols-outlined">import_contacts</span>
                 <h3>+120 Questoes</h3>
                 <p>Questoes de biologia do ENEM mais recentes</p>
             </div>
@@ -24,7 +24,7 @@
     </section>  
 </template>
 
-<style>
+<style scoped>
 .title{
     font-family: sans-serif;
     font-size: 44px;
@@ -49,8 +49,9 @@
 }
 .card-conteiner:hover{
     transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
-.cards-grid{
+.cards-flex{
     display: flex;
     gap: 60px;
     padding: 20px;
@@ -59,5 +60,8 @@
 .secao-cards{
     padding: 60px;
     text-align: center;
+}
+.material-symbols-outlined{
+    font-size: 48px;
 }
 </style>
