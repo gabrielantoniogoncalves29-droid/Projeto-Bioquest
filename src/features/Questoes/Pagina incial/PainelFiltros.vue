@@ -1,191 +1,153 @@
+<template>
+
+  <div class="painel-filtros">
+
+    <div class="coluna">
+
+<FiltrosAccordion
+    titulo="Ano da prova"
+    :opcoes="anos"
+    v-model="anosSelecionados"
+/>
+
+<FiltrosAccordion
+    titulo="Categoria"
+    :opcoes="niveis"
+    v-model="niveisSelecionados"
+/>
+
+<FiltrosAccordion
+    titulo="Eixo Temático"
+    :opcoes="eixos"
+    v-model="eixosSelecionados"
+/>
+
+
+    </div>
+
+    <div class="coluna">
+
+<FiltrosAccordion
+    titulo="Conteúdo"
+    :opcoes="conteudos"
+    v-model="conteudosSelecionados"
+/>
+
+<FiltrosSubconteudo
+    :conteudos="conteudos"
+    :conteudosSelecionados="conteudosSelecionados"
+    v-model="subconteudosSelecionados"
+/>
+
+    </div>
+
+    <div class="acoes">
+
+      <FiltrosAcoes />
+
+    </div>
+
+  </div>
+
+</template>
+
 <script setup>
-import {ref, computed} from 'vue'
+
+import { ref, computed } from 'vue'
+
 import {
- anos,
- niveis,
- eixos,
- conteudos
+  anos,
+  niveis,
+  eixos,
+  conteudos
 } from '@/features/Questoes/data/filtros.js'
+import FiltrosSubconteudo from './FiltroSubconteudo.vue'
+import FiltrosAccordion from './Filtros.vue'
+import FiltrosAcoes from './FiltrosAcoes.vue'
 
+const anosSelecionados = ref([])
 
-import FiltrosSelect from './filtros/FiltrosSelect.vue'
-import FiltrosCheckbox from './filtros/FiltrosCheckbox.vue'
-import FiltrosAcoes from './filtros/FiltrosAcoes.vue'
+const niveisSelecionados = ref([])
 
+const eixosSelecionados = ref([])
 
 const conteudosSelecionados = ref([])
+
 const subconteudosSelecionados = ref([])
 
 const subconteudosFiltrados = computed(() => {
 
-
-  const resultado = []
-
+  const lista = []
 
   conteudosSelecionados.value.forEach(id => {
 
+    const conteudo = conteudos.find(item => item.id === id)
 
-    const conteudo = conteudos.find(
-      item => item.id === id
-    )
+    if(!conteudo) return
 
+    conteudo.subconteudos.forEach((sub,index)=>{
 
-    if(conteudo){
+      lista.push({
 
+        id: `${id}-${index}`,
 
-      conteudo.subconteudos.forEach((sub,index)=>{
-
-
-        resultado.push({
-
-          id:`${id}-${index}`,
-
-          nome:sub
-
-        })
-
+        nome: sub
 
       })
 
-
-    }
-
+    })
 
   })
 
-
-  return resultado
-
+  return lista
 
 })
+
 </script>
 
+<style scoped>
 
-<template>
+.painel-filtros{
 
-<div class="painel-filtros">
+  display:grid;
 
-  <div class="linha-filtros">
+  grid-template-columns: 1fr 1fr;
 
-    <FiltrosSelect
-      titulo="Ano da prova"
-      placeholder="Todos"
-      :opcoes="anos"
-    />
+  gap:24px;
+  margin: 10px 20px;
+  padding:24px;
 
-    <FiltrosSelect
-      titulo="Categoria"
-      placeholder="Todos"
-      :opcoes="niveis"
-    />
+  border:1px solid #e5e7eb;
 
-    <FiltrosSelect
-      titulo="Eixo temático"
-      placeholder="Todos"
-      :opcoes="eixos"
-    />
+  border-radius:14px;
 
-<FiltrosCheckbox
-
-  titulo="Conteúdo"
-
-  :opcoes="conteudos"
-
-  v-model="conteudosSelecionados"
-
-/>
-
-<FiltrosCheckbox
-
-titulo="Subconteúdo"
-
-:opcoes="subconteudosFiltrados"
-
-v-model="subconteudosSelecionados"
-
-/>
-
-  </div>
-  </div>
-
-</template>
-  <style scoped>
-
-.painel-filtros {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 24px;
-  box-sizing: border-box;
-  padding: 24px;
-
-  background: white;
-
-  border: 1px solid #e5e7eb;
-
-  border-radius: 12px;
+  background:white;
 
 }
 
-.linha-filtros {
+.coluna{
 
-  display: grid;
+  display:flex;
 
-grid-template-columns:
-  repeat(auto-fit, minmax(160px, 1fr));
+  flex-direction:column;
 
-  gap: 18px;
-
-}
-
-
-
-.linha-checkbox {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(320px, 1fr));
-
-  gap: 24px;
+  gap:16px;
 
 }
 
-@media (max-width: 1400px) {
+.acoes{
 
-  .linha-filtros {
+  grid-column:1 / -1;
 
-    grid-template-columns:
-      repeat(3, minmax(180px, 1fr));
-
-  }
+  margin-top:10px;
 
 }
 
-@media (max-width: 900px) {
+@media(max-width:900px){
 
-  .linha-filtros {
+  .painel-filtros{
 
-    grid-template-columns:
-      repeat(2, minmax(180px, 1fr));
-
-  }
-
-}
-
-@media (max-width: 600px) {
-
-  .linha-filtros {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .linha-checkbox {
-
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
 
   }
 

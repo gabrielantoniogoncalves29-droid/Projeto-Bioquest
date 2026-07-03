@@ -1,182 +1,50 @@
 [
   {
     "id": 202592,
-
-    "ano": 2025,
-
-    "numeroQuestao": 91,
-
-    "tipo": "Múltipla escolha",
-
-    "nivel": "Intermediário",
-
-    "resumo": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida.",
-
-
-    "tags": [
-      "Hormônios",
-      "Endócrino"
-    ],
-
-
-    "enem": {
-
-      "competencia": 4,
-
-      "habilidade": 13,
-
-      "descricaoCompetencia": "Compreender sistemas biológicos.",
-
-      "descricaoHabilidade": "Analisar características adaptativas."
-
-    },
-
-
+    "nivel": "Cognitivo",
+    "objeto": 4,
     "estrutura": [
-
-      {
-        "nome": "Biologia",
-
-        "icone": "🧬"
-      },
-
       {
         "nome": "Fisiologia",
-
-        "icone": "🔬"
+        "icone": "16"
       },
-
       {
-        "nome": "Sistema Endócrino",
-
-        "icone": "⚕"
+        "nome": "Sistema Endócrino"
       }
+    ],    
 
-    ],
+  "estatisticas": {
 
+  "taxaAcerto": 78,
+  "distribuicao": [
 
-
-    "informacoes": {
-
-      "codigo": "202591",
-
-      "nivelIntelectual": "Análise",
-
-      "taxaAcerto": "63%",
-
-      "resolvidaPor": "824 usuários",
-
-      "favoritadaPor": "115 usuários"
-
+    {
+      "alternativa":"A",
+      "percentual":32
     },
 
+    {
+      "alternativa":"B",
+      "percentual":48
+    },
 
-    "palavrasChave": [
+    {
+      "alternativa":"C",
+      "percentual":8
+    },
 
-      "Hormônios",
+    {
+      "alternativa":"D",
+      "percentual":9
+    },
 
-      "Glândulas",
-
-      "Hipófise"
-
-    ],
-
-
-    "enunciado": {
-
-      "texto": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida."
-
+    {
+      "alternativa":"E",
+      "percentual":3
     }
 
-  },
-  {
-    "id": 202593,
-
-    "ano": 2025,
-
-    "numeroQuestao": 92,
-
-    "tipo": "Múltipla escolha",
-
-    "nivel": "Intermediário",
-
-    "resumo": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida.",
-
-
-    "tags": [
-      "Hormônios",
-      "Endócrino"
-    ],
-
-
-    "enem": {
-
-      "competencia": 4,
-
-      "habilidade": 13,
-
-      "descricaoCompetencia": "Compreender sistemas biológicos.",
-
-      "descricaoHabilidade": "Analisar características adaptativas."
-
-    },
-
-
-    "estrutura": [
-
-      {
-        "nome": "Biologia",
-
-        "icone": "🧬"
-      },
-
-      {
-        "nome": "Fisiologia",
-
-        "icone": "🔬"
-      },
-
-      {
-        "nome": "Sistema Endócrino",
-
-        "icone": "⚕"
-      }
-
-    ],
-
-
-
-    "informacoes": {
-
-      "codigo": "202591",
-
-      "nivelIntelectual": "Análise",
-
-      "taxaAcerto": "63%",
-
-      "resolvidaPor": "824 usuários",
-
-      "favoritadaPor": "115 usuários"
-
-    },
-
-
-    "palavrasChave": [
-
-      "Hormônios",
-
-      "Glândulas",
-
-      "Hipófise"
-
-    ],
-
-
-    "enunciado": {
-
-      "texto": "O gráfico mostra a produção de determinado hormônio por uma glândula em diferentes fases da vida."
-
-    }
-
+  ]
   }
+  }
+  
 ]

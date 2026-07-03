@@ -270,7 +270,17 @@ subconteudos:[
     "Questões socioambientais e de saúde pública (pobreza, obesidade, violência, drogas, etc.)"
 ]
 }
+]
 
+export const estado = [
+  {
+    id:1,
+    nome:"Respondidas"
+  },
+  {
+    id:2,
+    nome:"Não respondidas"
+  }
 ]
 
 

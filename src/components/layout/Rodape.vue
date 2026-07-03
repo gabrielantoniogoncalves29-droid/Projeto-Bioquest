@@ -3,11 +3,10 @@
       <div class="footer-content">
 
         <div class="left">
-          © 2025 BioQuest  •  Plataforma educacional sem fins lucrativos
+          © 2026 BioQuest  •  Plataforma educacional sem fins lucrativos
         </div>
 
         <div class="right">
-          <router-link to="/sobre">Sobre o projeto</router-link>
           <a href="#">Contato</a>
           <a href="#">Termos de uso</a>
           <a href="#">Política de privacidade</a>
@@ -20,8 +19,10 @@
 <style scoped>
 .footer {
   background: rgba(21, 85, 70, 0.855);
+  border-top:1px ;
   color: white;
   padding: 15px 30px;
+  box-shadow: 0px -4px 6px  rgba(21, 85, 70, 0.456);
 }
 
 .footer-content {

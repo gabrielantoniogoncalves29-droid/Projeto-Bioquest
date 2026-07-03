@@ -52,7 +52,6 @@ const modoVisualizacao = ref('lista')
 
 <style scoped>
 
-
 .biblioteca-page {
   min-height: 100vh;
   padding: 28px;

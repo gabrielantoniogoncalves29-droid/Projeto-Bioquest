@@ -79,7 +79,7 @@ Nenhuma questão encontrada.
 v-for="questao in questoes"
 
 :key="questao.id"
-
+:modo="modo"
 :questao="questao"
 
 />
@@ -97,8 +97,9 @@ v-for="questao in questoes"
 .lista-questoes {
 
   width:100%;
-
-  background:#f8faf9;
+  border-top:1px solid #cacbcf;
+  
+  background:#ffffff;
 
   padding:24px;
 

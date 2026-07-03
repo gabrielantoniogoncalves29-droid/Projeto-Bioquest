@@ -188,7 +188,6 @@ indiceAtual.value + 1
        
 
 <router-link
-:to="`/detalhes/${questao.id}`"
  class="details-btn">
 
           Ver detalhes

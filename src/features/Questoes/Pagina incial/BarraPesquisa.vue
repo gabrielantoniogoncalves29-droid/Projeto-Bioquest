@@ -4,10 +4,10 @@
 
     <div class="input-container">
 
-      <span class="material-icons">
-        search
-      </span>
 
+        <span class="material-icons">
+          search
+        </span>
       <input
         type="text"
         placeholder="Pesquisar por assunto, habilidade, palavra-chave..."
@@ -19,12 +19,7 @@
 
       <button class="btn-buscar">
 
-        <span class="material-icons">
-          search
-        </span>
-
         Buscar
-
       </button>
 
       <button
@@ -73,7 +68,7 @@ defineProps({
 
     type: Boolean,
 
-    default: true
+    default: false
 
   }
 
@@ -90,20 +85,17 @@ defineEmits([
 .barra-pesquisa {
 
   background: white;
+  margin: 0px 20px;
+  border-radius: 8px;
 
-  border: 1px solid #e5e7eb;
-
-  border-radius: 16px;
-
-  padding: 18px;
-
+  padding: 0px;
   display: flex;
 
   justify-content: space-between;
 
   align-items: center;
 
-  gap: 16px;
+  gap: 10px;
 
 }
 
@@ -115,13 +107,13 @@ defineEmits([
 
   align-items: center;
 
-  gap: 10px;
+  gap: 15px;
 
   background: #f9fafb;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #c5c6c9;
 
-  border-radius: 12px;
+  border-radius: 15px;
 
   padding: 0 14px;
 
@@ -138,8 +130,8 @@ defineEmits([
   background: transparent;
 
   outline: none;
-
-  font-size: 14px;
+  color: #000000a9;
+  font-size: 16px;
 
 }
 
@@ -147,7 +139,7 @@ defineEmits([
 
   display: flex;
 
-  gap: 10px;
+  gap: 5px;
 
 }
 
@@ -157,7 +149,7 @@ defineEmits([
 
   height: 48px;
 
-  padding: 0 16px;
+  padding: 0 26px;
 
   border-radius: 12px;
 
@@ -178,11 +170,14 @@ defineEmits([
 .btn-buscar {
 
   border: none;
-
+  padding: 0 30px;
   background: #0d6b4d;
-
+  font-weight: 700;
+  font-size: 15px;
+  font-family: bold;
   color: white;
-
+  border-radius: 15px;
+  margin-right: 25px;
 }
 
 .btn-buscar:hover {
@@ -194,8 +189,7 @@ defineEmits([
 .btn-filtro {
 
   background: white;
-
-  border: 1px solid #d1d5db;
+  border: none;
 
 }
 
@@ -209,7 +203,7 @@ defineEmits([
 
   background: white;
 
-  border: 1px solid #d1d5db;
+  border:none;
 
 }
 

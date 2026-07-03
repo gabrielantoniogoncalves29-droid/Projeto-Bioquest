@@ -4,12 +4,15 @@ import { computed } from 'vue'
 
 
 const props = defineProps({
+  questao: {
+    type: Object,
+    required: true
+  },
 
-  questao:{
-    type:Object,
-    required:true
+  modo: {
+    type: String,
+    default: 'lista'
   }
-
 })
 
 
@@ -28,9 +31,12 @@ const icone = computed(()=>{
 
 <template>
 
-  <div class="card">
-
+<div
+  class="card"
+  :class="modo"
+>
     <div class="left">
+
 
       <img
         class="icon"
@@ -43,15 +49,19 @@ const icone = computed(()=>{
 
         <div class="top">
 
+
+
           <span class="year">
             {{ questao.ano }}
           </span>
 
 
-          <span>
+          <span class="question-number">
             Questão {{ questao.numeroQuestao }}
           </span>
-
+            <span class="codigo">
+            Código: {{ questao.id }}
+           </span>
         </div>
 
         <h3>
@@ -60,11 +70,7 @@ const icone = computed(()=>{
         <div class="tags">
 
 
-          <span class="tag green">
 
-            {{ questao.subconteudo }}
-
-          </span>
 
 
         </div>
@@ -85,18 +91,6 @@ const icone = computed(()=>{
           Resolver
 
         </router-link>
-
-<router-link
-:to="`/detalhes/${questao.id}`"
- class="details-btn">
-
-          Ver detalhes
-
-          <span class="arrow">
-            ❯
-          </span>
-</router-link>
-
 
       </div>
 
@@ -143,7 +137,20 @@ const icone = computed(()=>{
   min-width: 0;
 }
 
+ .codigo{
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
 
+  padding: 4px 30px;
+  border-radius: 999px;
+  margin-left: auto;
+}
+
+.question-number{
+  color: #494d56;
+  padding:4px 10px;
+}
 
 
 
@@ -176,8 +183,8 @@ const icone = computed(()=>{
   align-items: center;
   gap: 10px;
 
-  margin-bottom: 8px;
-
+  margin:10px 8px;
+  border-bottom: 1px solid #e7ece9;
   font-size: 14px;
   color: #6b7280;
 
@@ -188,43 +195,40 @@ const icone = computed(()=>{
 
 
 .year {
-  background: #e7f5ee;
+
 
   color: #1f6f5c;
 
-  padding: 5px 12px;
+  padding: 5px 0px;
 
   border-radius: 999px;
 
   font-weight: 700;
 
-  font-size: 13px;
+  font-size: 14px;
 }
 
 
 
 
-h3 {
+h3{
+  font-size:16px;
+  line-height:1.45;
+  color:#404245;
+  font-weight:500;
+  margin:0 0 12px;
 
-  font-size: 16px;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
 
-  line-height: 1.45;
+.card.lista h3{
+  -webkit-line-clamp:3;
+}
 
-  color: #404245;
-
-  font-weight: 500;
-
-  margin: 0 0 12px;
-
-
-  display: -webkit-box;
-
-  -webkit-line-clamp: 2;
-
-  -webkit-box-orient: vertical;
-
-  overflow: hidden;
-
+.card.grade h3{
+  -webkit-line-clamp:2;
 }
 
 
@@ -345,47 +349,6 @@ h3 {
 
 }
 
-
-
-
-
-.details-btn {
-
-  border: none;
-
-
-  padding: 0 12px;
-
-  background: transparent;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 6px;
-
-  font-size: 14px;
-
-  font-weight: 300;
-
-  color: #515357;
-
-  cursor: pointer;
-
-    text-decoration: none; 
-  display: inline-block; 
-
-}
-
-
-
-
-
-.details-btn:hover {
-
-  color: #1f6f5c;
-
-}
 
 
 

@@ -7,7 +7,7 @@
       <h1>
         Biblioteca de Questões
       </h1>
-
+      <br>
       <p>
         Explore e filtre questões de Biologia.
       </p>
@@ -18,19 +18,18 @@
 
 </template>
 
-<script setup>
-</script>
+
 
 <style scoped>
 
 .header-biblioteca {
   display: flex;
-
+  margin: 0px 30px;
   justify-content: space-between;
 
   align-items: flex-start;
 
-  gap: 20px;
+  gap: 0px;
 
 }
 
@@ -42,7 +41,7 @@
 
   color: #1f2937;
 
-  margin-bottom: 6px;
+  margin: 6px 12px;
 
 }
 
@@ -51,6 +50,7 @@
   font-size: 15px;
 
   color: #6b7280;
+  margin-bottom: 0px;
 
 }
 
@@ -68,7 +68,7 @@
 
     align-items: stretch;
 
-  }
+}
 
   .btn-ajuda {
 

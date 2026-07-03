@@ -1,7 +1,7 @@
 [
  {
   "id":202592,
-
+  "ano":"Enem 2025",
   "enunciado":{
 
     "imagem":"",
@@ -44,50 +44,12 @@
   ],
 
 
-  "resposta":"D",
+  "resposta":"D"
 
-
-  "comentario":
-  "Os vírus dependem da maquinaria celular do hospedeiro para reprodução.",
-
-  "estatisticas": {
-
-  "taxaAcerto": 78,
-
-  "distribuicao": [
-
-    {
-      "alternativa":"A",
-      "percentual":32
-    },
-
-    {
-      "alternativa":"B",
-      "percentual":48
-    },
-
-    {
-      "alternativa":"C",
-      "percentual":8
-    },
-
-    {
-      "alternativa":"D",
-      "percentual":9
-    },
-
-    {
-      "alternativa":"E",
-      "percentual":3
-    }
-
-  ]
-
-}
  },
  {
-  "id":202593,
-
+  "id":202592,
+  "ano":"Enem 2025",
   "enunciado":{
 
     "imagem":"",

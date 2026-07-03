@@ -13,6 +13,12 @@ from '@/services/questoes.js'
 import {buscarQuestaoResolver}
 from '@/services/resolver.js'
 
+import { useDetalhesStore } 
+from '@/store/detalhes.js'
+
+
+import { buscarDetalhesPorId }
+from '@/services/detalhes.js'
 
 import HeaderQuestao from '@/features/Questoes/Painel Resolução/HeaderQuestão.vue'
 
@@ -34,19 +40,35 @@ const store = useResolverStore()
 
 
 const id = Number(route.params.id)
+const detalhesStore = useDetalhesStore()
 
 
+const barraAberta = ref(true)
+
+const classeLayout = computed(()=>{
+
+  return {
+
+    "barra-fechada": !barraAberta.value
+
+  }
+
+})
 
 const questao = computed(()=>{
 
-return store.questao
+  return store.questao
 
 })
 
 
 
 onMounted(async()=>{
+const detalhes =
+await buscarDetalhesPorId(id)
 
+
+detalhesStore.carregarDetalhes(detalhes)
 
 const dados =
 
@@ -92,7 +114,16 @@ const questaoAnterior = computed(()=>{
 return store.questaoAnterior
 
 })
+
+const detalhes = computed(()=>{
+
+  return detalhesStore.detalheAtual
+
+})
+
 </script>
+
+
 <template>
 <Header/>
 <main class="resolver-page">
@@ -146,10 +177,11 @@ return store.questaoAnterior
 
 
 
-  <div 
-    v-else
-    class="resolver-layout"
-  >
+<div 
+  v-else
+  class="resolver-layout"
+  :class="classeLayout"
+>
 
 
 
@@ -205,13 +237,11 @@ return store.questaoAnterior
 
     <aside class="painel-container">
 
-
-      <PainelResolucao
-
-        :questao="questao"
-
-      />
-
+<PainelResolucao
+:questao="questao"
+v-model:aberto="barraAberta"
+:detalhes="detalhes"
+/>
 
     </aside>
 
@@ -232,6 +262,19 @@ return store.questaoAnterior
   padding: 24px;
   background: #fcfefd67;
   min-height: 100vh;
+}
+.painel-container {
+
+background:white;
+
+border:1px solid #e6e6e6;
+
+border-radius:16px;
+
+overflow:visible;
+
+transition:width .35s ease;
+
 }
 
 .breadcrumb {
@@ -259,9 +302,25 @@ return store.questaoAnterior
 }
 
 .resolver-layout {
-  display: grid;
-  grid-template-columns: 2.4fr 0.9fr;
-  gap: 16px;
+
+  display:grid;
+
+  grid-template-columns:
+  minmax(0, 2.4fr)
+  380px;
+
+  gap:16px;
+
+  transition:grid-template-columns .35s ease;
+
+}
+
+.resolver-layout.barra-fechada {
+
+  grid-template-columns:
+  minmax(0, 1fr)
+  55px;
+
 }
 
 .questao-container {
@@ -271,12 +330,7 @@ return store.questaoAnterior
   overflow: hidden;
 }
 
-.painel-container {
-  background: white;
-  border: 1px solid #e6e6e6;
-  border-radius: 16px;
-  overflow: hidden;
-}
+
 
 @media (max-width: 1200px) {
 
