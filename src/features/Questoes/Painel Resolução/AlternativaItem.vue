@@ -1,34 +1,27 @@
 <script setup>
 
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useUiStore } from '@/store/resolver/ui'
 
+const resolver = useResolverStore()
+const ui = useUiStore()
 
-const props = defineProps({
+const alternativas = computed(
+    () => resolver.questao?.alternativas ?? []
+)
 
-  alternativas: {
+const selecionada = computed(
+    () => ui.alternativaSelecionada
+)
 
-    type: Array,
+function selecionarAlternativa(letra) {
 
-    default: () => []
-
-  }
-
-})
-
-
-const selecionada = ref(null)
-
-
-
-function selecionarAlternativa(letra){
-
-  selecionada.value = letra
+    ui.selecionarAlternativa(letra)
 
 }
 
-
 </script>
-
 
 
 <template>
@@ -38,7 +31,7 @@ function selecionarAlternativa(letra){
 
   <div
 
-    v-for="alternativa in props.alternativas"
+   v-for="alternativa in alternativas"
 
     :key="alternativa.letra"
 

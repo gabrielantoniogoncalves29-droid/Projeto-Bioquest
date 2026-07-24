@@ -79,7 +79,10 @@ onUnmounted(() => {
 >
 
   <div class="profile-options">
-
+    <router-link to="/login">
+      <i class="fa-solid fa-user"></i>
+      Login/cadastro
+    </router-link>
     <router-link to="/perfil">
       <i class="fa-solid fa-user"></i>
       Meu Perfil

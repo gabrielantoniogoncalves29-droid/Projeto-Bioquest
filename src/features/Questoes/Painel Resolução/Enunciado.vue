@@ -1,29 +1,31 @@
 <script setup>
 
+import { computed } from 'vue'
 
-defineProps({
+import { useResolverStore } from '@/store/resolver/resolver'
 
-  questao:{
+const resolver = useResolverStore()
 
-    type:Object,
+const questao = computed(() => resolver.questao)
 
-    required:true
 
-  }
 
-})
+const enunciado = computed(
+    () => resolver.questao?.enunciado ?? null
+)
 
 
 </script>
 
 
 
-
 <template>
 
 
-<div class="enunciado-container">
-
+<div
+    v-if="enunciado"
+    class="enunciado-container"
+>
 
 
   <div

@@ -1,181 +1,104 @@
 <script setup>
+import { computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
-import {onMounted,ref, computed} from 'vue'
+import { buscarQuestaoResolver } from '@/services/resolver'
+import { buscarDetalhesPorId } from '@/services/detalhes'
+import { buscarIdsQuestoes } from '@/services/questoes'
 
-import {useRoute} from 'vue-router'
-
-import {useResolverStore}
-from '@/store/resolver.js'
-
-import {buscarIdsQuestoes}
-from '@/services/questoes.js'
-
-import {buscarQuestaoResolver}
-from '@/services/resolver.js'
-
-import { useDetalhesStore } 
-from '@/store/detalhes.js'
-
-
-import { buscarDetalhesPorId }
-from '@/services/detalhes.js'
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useDetalhesStore } from '@/store/resolver/detalhes'
+import { useUiStore } from '@/store/resolver/ui'
 
 import HeaderQuestao from '@/features/Questoes/Painel Resolução/HeaderQuestão.vue'
-
 import Enunciado from '@/features/Questoes/Painel Resolução/Enunciado.vue'
-
 import AlternativaItem from '@/features/Questoes/Painel Resolução/AlternativaItem.vue'
-
 import QuestaoFooter from '@/features/Questoes/Painel Resolução/QuestaoFooter.vue'
-
 import PainelResolucao from '@/features/Questoes/Painel Resolução/PainelResolucao.vue'
-
 import Header from '@/components/layout/Header.vue'
-
-
 
 const route = useRoute()
 
-const store = useResolverStore()
-
-
-const id = Number(route.params.id)
+const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
+const painel = useUiStore()
 
+const { questao } = storeToRefs(resolver)
 
-const barraAberta = ref(true)
-
-const classeLayout = computed(()=>{
-
-  return {
-
-    "barra-fechada": !barraAberta.value
-
-  }
-
-})
-
-const questao = computed(()=>{
-
-  return store.questao
-
-})
-
-
-
-onMounted(async()=>{
-const detalhes =
-await buscarDetalhesPorId(id)
-
-
-detalhesStore.carregarDetalhes(detalhes)
-
-const dados =
-
-await buscarQuestaoResolver(id)
-
-
-
-store.carregarQuestao(dados)
-
-
-
-
-const ids =
-
-await buscarIdsQuestoes()
-
-
-
-store.carregarIds(ids)
-
-
-
-})
-
-
-
-function goback(){
-
-window.history.back()
-
+function goback() {
+    window.history.back()
 }
 
-const proximaQuestao = computed(()=>{
+const classeLayout = computed(() =>
+    painel.aberto
+        ? ''
+        : 'barra-fechada'
+)
 
-return store.proximaQuestao
+watch(
+    () => route.params.id,
 
-})
+    async (novoId) => {
 
+        if (!novoId) return
 
+        const id = Number(novoId)
 
-const questaoAnterior = computed(()=>{
+        // Carrega a questão
+        const dadosQuestao = await buscarQuestaoResolver(id)
+        resolver.carregarQuestao(dadosQuestao)
 
-return store.questaoAnterior
+        // Carrega os detalhes
+        const detalhes = await buscarDetalhesPorId(id)
+        detalhesStore.carregarDetalhes(detalhes)
 
-})
+        // Carrega os ids apenas uma vez
+        if (resolver.idsQuestoes.length === 0) {
 
-const detalhes = computed(()=>{
+            const ids = await buscarIdsQuestoes()
+            resolver.carregarIds(ids)
 
-  return detalhesStore.detalheAtual
+        }
 
-})
+        // Limpa a alternativa selecionada ao trocar de questão
+        painel.limparAlternativa()
 
+    },
+
+    {
+        immediate: true
+    }
+
+)
 </script>
 
 
 <template>
+
 <Header/>
+
 <main class="resolver-page">
 
+<div class="breadcrumb">
 
-  <div class="breadcrumb">
+<span @click="goback()" class="voltar"> ⟵ Voltar</span>
+<span class="separator">|</span>
+<span>Biblioteca de Questões</span>
+<span>/</span>
+<span>Pesquisa</span>
+<span>/</span>
+<span>Questão {{ questao?.id }}</span>
+<span>/</span>
+<span>Resolver</span>
+</div>
 
-    <span 
-      @click="goback()" 
-      class="voltar"
-    >
-      ⟵ Voltar
-    </span>
-
-
-    <span class="separator">|</span>
-
-
-    <span>Biblioteca de Questões</span>
-
-    <span>/</span>
-
-    <span>Pesquisa</span>
-
-    <span>/</span>
-
-
-    <span>
-      Questão {{ questao?.id }}
-    </span>
-
-
-    <span>/</span>
-
-
-    <span>Resolver</span>
-
-
-  </div>
-
-  <div 
+<div 
     v-if="!questao"
     class="loading"
   >
-
     Carregando questão...
-
-  </div>
-
-
-
-
+</div>
 
 <div 
   v-else
@@ -183,78 +106,29 @@ const detalhes = computed(()=>{
   :class="classeLayout"
 >
 
+<section class="questao-container">
+
+<HeaderQuestao/>
+
+<Enunciado/>
+
+<AlternativaItem/>
+
+<QuestaoFooter/>
 
 
-    <section class="questao-container">
+</section>
 
+<aside class="painel-container">
+<PainelResolucao/>
+</aside>
 
-<HeaderQuestao
-
-:questao="questao"
-
-:idsQuestoes="store.idsQuestoes"
-
-/>
-
-
-
-<Enunciado
-
-:questao="questao"
-
-/>
-
-
-
-
-      <AlternativaItem
-
-        :alternativas="questao.alternativas"
-
-      />
-
-
-
-
-
-<QuestaoFooter
-
-:questao="questao"
-
-:proximaQuestao="proximaQuestao"
-
-:questaoAnterior="questaoAnterior"
-
-/>
-
-
-    </section>
-
-
-
-
-
-
-    <aside class="painel-container">
-
-<PainelResolucao
-:questao="questao"
-v-model:aberto="barraAberta"
-:detalhes="detalhes"
-/>
-
-    </aside>
-
-
-
-
-
-  </div>
-
+</div>
 
 </main>
-
 </template>
+
+
 
 <style scoped>
 
@@ -309,17 +183,27 @@ transition:width .35s ease;
   minmax(0, 2.4fr)
   380px;
 
-  gap:16px;
+  gap:18px;
 
   transition:grid-template-columns .35s ease;
+
+}
+
+.loading{
+
+  text-align:center;
+
+  padding:40px;
+
+  color:#6b7280;
 
 }
 
 .resolver-layout.barra-fechada {
 
   grid-template-columns:
-  minmax(0, 1fr)
-  55px;
+  minmax(0, 1fr) 0px;
+
 
 }
 
@@ -328,16 +212,6 @@ transition:width .35s ease;
   border: 1px solid #e6e6e6;
   border-radius: 16px;
   overflow: hidden;
-}
-
-
-
-@media (max-width: 1200px) {
-
-  .resolver-layout {
-    grid-template-columns: 1fr;
-  }
-
 }
 
 </style>

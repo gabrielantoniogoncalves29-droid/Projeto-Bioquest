@@ -1,168 +1,74 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useDetalhesStore } from '@/store/resolver/detalhes'
+import { useUiStore } from '@/store/resolver/ui'
 
+const resolver = useResolverStore()
+const detalhesStore = useDetalhesStore()
+const painel = useUiStore()
 
-const props = defineProps({
-
-  questao: {
-
-    type:Object,
-
-    required:true
-
-  },
-
-
-  detalhes:{
-
-    type:Object,
-
-    required:true
-
-  },
-
-
-  abertoInicial:{
-
-    type:Boolean,
-
-    default:true
-
-  }
-
-
-})
+const {
+    aberto
+} = storeToRefs(painel)
 
 
 
 
+const { questao } = storeToRefs(resolver)
 
-
-const emit = defineEmits([
-
-  'update:aberto'
-
-])
-
-
-
-
-const aberto = ref(props.abertoInicial)
-
-
-
-
-function alternarBarra(){
-
-
-  aberto.value = !aberto.value
-
-
-
-  emit(
-
-    'update:aberto',
-
-    aberto.value
-
-  )
-
-
-}
-
-
-
+const { detalheAtual: detalhes } = storeToRefs(detalhesStore)
 
 const copiado = ref(false)
 
 
 
-
-
 async function copiarLink(){
 
+    await navigator.clipboard.writeText(
+        window.location.href
+    )
 
-  await navigator.clipboard.writeText(
+    copiado.value = true
 
-    window.location.href
+    setTimeout(() => {
 
-  )
+        copiado.value = false
 
-
-
-  copiado.value = true
-
-
-
-  setTimeout(()=>{
-
-
-    copiado.value = false
-
-
-  },2000)
-
-
+    },2000)
 
 }
-
-
-
 
 
 
 async function compartilhar(){
 
+    if(navigator.share){
 
-  if(navigator.share){
+        await navigator.share({
 
+            title: `Questão ${questao.value?.numeroQuestao}`,
 
-    await navigator.share({
+            text: questao.value?.resumo,
 
+            url: window.location.href
 
-      title:
+        })
 
-      `Questão ${props.questao.numeroQuestao}`,
+    }else{
 
+        copiarLink()
 
-
-      text:
-
-      props.questao.resumo,
-
-
-
-      url:
-
-      window.location.href
-
-
-    })
-
-
-
-  }else{
-
-
-    copiarLink()
-
-
-  }
-
+    }
 
 }
 
 
 
-
-
-
-
-
-const objetosEnem = {
-
+const objetosEnem={
 
 1:"Moléculas, células e tecidos",
 
@@ -176,217 +82,105 @@ const objetosEnem = {
 
 6:"Qualidade de vida das populações humanas"
 
-
 }
 
 
 
-
-
-
-
-const numeroObjeto = computed(()=>{
-
-
-return props.detalhes?.objeto ?? null
-
-
-})
-
-
-
-
-
-
-
-
-const nomeObjeto = computed(()=>{
-
-
-return (
-
-objetosEnem[numeroObjeto.value]
-
-??
-
-"Objeto não informado"
-
+const numeroObjeto = computed(()=>
+    detalhes.value?.objeto ?? null
 )
 
 
-})
 
+const nomeObjeto = computed(()=>
 
+    objetosEnem[numeroObjeto.value]
 
+    ??
 
+    "Objeto não informado"
 
-
+)
 
 
 
 const imagemObjeto = computed(()=>{
 
+    if(!numeroObjeto.value)
+        return null
 
-if(!numeroObjeto.value)
+    return new URL(
 
-return null
+        `../icons/objeto${numeroObjeto.value}.png`,
 
+        import.meta.url
 
-
-
-return new URL(
-
-`../icons/objeto${numeroObjeto.value}.png`,
-
-import.meta.url
-
-).href
-
-
+    ).href
 
 })
-
-
-
-
-
 
 
 
 function imagemEstrutura(item){
 
+    if(!item?.icone)
+        return ''
 
-if(!item?.icone)
+    return new URL(
 
-return ''
+        `../icons/${item.icone}.png`,
 
+        import.meta.url
 
-
-return new URL(
-
-`../icons/${item.icone}.png`,
-
-import.meta.url
-
-).href
-
-
+    ).href
 
 }
 
 
 
+const estrutura = computed(()=>
+
+    detalhes.value?.estrutura ?? []
+
+)
 
 
 
+const estatisticas = computed(()=>
 
-const estrutura = computed(()=>{
+    detalhes.value?.estatisticas ??
 
+    {
 
-return props.detalhes?.estrutura ?? []
+        taxaAcerto:0,
 
+        distribuicao:[]
 
-})
+    }
 
-
-
-
-
-
-
-const estatisticas = computed(()=>{
-
-
-return props.detalhes?.estatisticas ?? {
-
-
-taxaAcerto:0,
-
-distribuicao:[]
-
-
-}
-
-
-})
+)
 
 
 
+const nivel = computed(()=>
 
+    detalhes.value?.nivel ??
 
+    "Não informado"
 
-const nivel = computed(()=>{
-
-
-return props.detalhes?.nivel ?? 
-
-"Não informado"
-
-
-
-})
-
-
+)
 
 </script>
 
 <template>
 
 <div
-  class="barra-lateral"
-  :class="{ fechado: !aberto }"
+class="barra-lateral"
+:class="{ fechado: !aberto }"
 >
 
 
-<button
 
-class="botao-toggle"
-
-@click="alternarBarra"
-
->
-
-<svg
-
-width="20"
-
-height="20"
-
-viewBox="0 0 24 24"
-
-fill="none"
-
-stroke="currentColor"
-
-stroke-width="3"
-
-stroke-linecap="round"
-
-stroke-linejoin="round"
-
->
-
-<polyline
-
-v-if="aberto"
-
-points="15 18 9 12 15 6"
-
-/>
-
-
-<polyline
-
-v-else
-
-points="9 18 15 12 9 6"
-
-/>
-
-</svg>
-
-
-</button>
 
 
 
@@ -404,11 +198,9 @@ class="painel"
 <div class="card-info">
 
 
-<h2>
-Objeto de conhecimento ENEM
-</h2>
-
-
+    <span class="label">
+      Objeto de conhecimento
+    </span>
 
 <div class="card objeto">
 
@@ -421,9 +213,7 @@ Objeto de conhecimento ENEM
 
   <div class="objeto-info">
 
-    <span class="label">
-      Objeto de conhecimento
-    </span>
+
 
     <h3>
       {{ nomeObjeto }}
@@ -443,72 +233,43 @@ Objeto de conhecimento ENEM
 
 
 
-<h2>
+<div class="card-info">
+    <span class="label">
+      Estrutura do livro didático
+    </span>
 
-Estrutura dos livros didáticos
+    <div class="card estrutura">
+    <div class="objeto">
+        <template
+            v-for="(item,index) in estrutura"
+            :key="index"
+        >
 
-</h2>
+            <div class="estrutura-item">
 
+                <img
+                    v-if="item.icone"
+                    class="estrutura-icon"
+                    :src="imagemEstrutura(item)"
+                    alt=""
+                >
 
+                <span>{{ item.nome }}</span>
 
+            </div>
 
+            <span
+                v-if="index < estrutura.length-1"
+                class="arrow"
+            >
+                ›
+            </span>
 
-<div class="estrutura">
+        </template>
 
-
-
-<div 
-v-for="(item,index) in estrutura"
-:key="index"
->
-
-
-<div class="estrutura-item">
-
-
-<img
-
-v-if="index===0"
-
-class="estrutura-icon"
-
-:src="imagemEstrutura(item)"
-
-alt="Ícone"
-
-/>
-
-
-<span>
-
-{{ item.nome }}
-
-</span>
-
-
+    </div>
+    </div>
 </div>
-
-
-
-
-
-<span
-v-if="index < estrutura.length-1"
-class="arrow"
->
-
-›
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
 
 
 
@@ -588,29 +349,22 @@ Percentual de acertos
 
 
 
+
+
+
+
+
 <div class="barra">
-
-
-<div
-
-class="preenchimento"
-
-:style="{
-
-width:
-estatisticas.taxaAcerto + '%'
-
-}"
-
->
-
+    <div
+        class="preenchimento"
+        :style="{
+            width: estatisticas.taxaAcerto + '%'
+        }"
+    />
 </div>
 
 
-</div>
 
-
-</div>
 
 
 
@@ -764,712 +518,279 @@ c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z
 
 </div> 
 
-
+</div>
 </template>
+
 
 <style scoped>
 
-
-
-
-.barra-lateral {
-
-
-width:380px;
-
-height:100vh;
-
+.barra-lateral{
+    position: relative;
+    width:380px;
+    height:100%;
     background:#fcfcfc;
-
     border-left:1px solid #eef2f4;
-
-    box-shadow:-2px 0 12px rgba(0,0,0,.05);
-
-position:absolute;
-
-
-
-
-
-
-
-transition:
-
-width .35s ease;
-
-
-overflow:visible;
-
-
-box-shadow:
-
--5px 0 20px rgba(0,0,0,.08);
-
-
+    box-shadow:-5px 0 20px rgba(0,0,0,.08);
+    transition:width .35s ease;
+    overflow:hidden;
 }
 
-
-
-
-.barra-lateral.fechado {
-
-
-width:55px;
-
-
+.barra-lateral.fechado{
+    width:55px;
 }
 
+.botao-toggle{
+    position:absolute;
+    left:-18px;
+    top:30px;
 
+    width:36px;
+    height:36px;
 
-.botao-toggle {
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
+    border-radius:50%;
+    border:1px solid #e5e7eb;
+    background:#fff;
 
-position:absolute;
+    color:#0d6b4d;
+    cursor:pointer;
 
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
 
-left:-18px;
-
-
-top:30px;
-
-
-width:36px;
-
-height:36px;
-
-
-border-radius:50%;
-
-
-background:white;
-
-
-border:1px solid #e5e7eb;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-cursor:pointer;
-
-
-color:#0d6b4d;
-
-
-box-shadow:0 4px 12px rgba(0,0,0,.15);
-
-
+    transition:.2s;
 }
 
-
-
-.botao-toggle:hover {
-
-
-  transform:
-
-  translateX(-50%)
-
-  scale(1.05);
-
-
+.botao-toggle:hover{
+    transform:scale(1.05);
 }
-
-
-
-
-
 
 .painel{
-
-    padding:24px;
-
+    display:flex;
+    flex-direction:column;
     gap:22px;
 
+    height:100%;
+    padding:24px;
+
     overflow-y:auto;
-
 }
-
-
-
-
-
-
-
-
-
-
 
 .card-info,
 .card-estatistica,
 .card-distribuicao,
 .compartilhar{
-
-    background:#ffffff;
-
-    border:none;
-
+    background:#fff;
     border-radius:16px;
-
     padding:18px;
-
-    box-shadow:
-
-        0 2px 8px rgba(15,23,42,.04);
-
+    box-shadow:0 2px 8px rgba(15,23,42,.04);
 }
-
-
-
-
-
-
-.card-resposta {
-
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:10px;
-
-
-}
-
-
-
-
-
-
-
-.label {
-
-
-  display:block;
-
-
-  color:#6b7280;
-
-
-  font-size:12px;
-
-
-  margin-bottom:6px;
-
-
-}
-
-
-
-
-
-
-
-.resposta {
-
-
-  width:42px;
-
-
-  height:42px;
-
-
-  border-radius:50%;
-
-
-  background:#0d6b4d;
-
-
-  color:white;
-
-
-  display:flex;
-
-
-  align-items:center;
-
-
-  justify-content:center;
-
-
-  font-weight:700;
-
-
-  font-size:18px;
-
-
-}
-
-
-
-
-
-
-
-.card-info h3 {
-
-
-  margin:0 0 8px;
-
-
-  font-size:15px;
-
-
-  color:#111827;
-
-
-}
-
-
-
-
-
-.card-info p {
-
-
-  margin:0;
-
-
-  font-size:13px;
-
-
-  line-height:1.5;
-
-
-  color:#6b7280;
-
-
-}
-
-
-
-
-.objeto {
-
-
-  display:flex;
-
-
-  align-items:center;
-
-
-  gap:12px;
-
-
-  margin-bottom:18px;
-
-
-}
-
-
-
-
-.objeto-icon {
-
-
-  width:50px;
-
-
-  height:50px;
-
-
-  object-fit:contain;
-
-
-}
-
-
-
 
 h2{
+    margin:0 0 14px;
 
     font-size:13px;
-
     font-weight:700;
 
     color:#6b7280;
 
     text-transform:uppercase;
-
     letter-spacing:.08em;
-
-    margin-bottom:14px;
-
 }
 
-
-
-
-
-.estrutura {
-
-
-  display:flex;
-
-
-  align-items:center;
-
-
-  flex-wrap:wrap;
-
-
-  gap:8px;
-
-
-}
-
-
-
-
-.estrutura-item {
-
-
-  display:flex;
-
-
-  align-items:center;
-
-
-  gap:8px;
-
-
-
-
-  padding:8px 10px;
-
-
-  border-radius:10px;
-
-
-  font-size:13px;
-
-
-  color:#0d6b4d;
-
-
-    background:#f6faf8;
-
-    border:1px solid #e7f2ec;
-
-
-
-}
-
-.estrutura-icon {
-
-
-  width:26px;
-
-
-  height:26px;
-
-
-  object-fit:contain;
-
-
-}
-
-
-
-
-.arrow {
-
-
-  color:#94a3b8;
-
-
-  font-size:22px;
-
-
-}
-
-
-
-
-.nivel {
-
-
-  margin-top:16px;
-
-
-  display:flex;
-
-
-  align-items:center;
-
-
-  gap:10px;
-
-
-}
-
-
-
-.icon {
-
-
-  width:26px;
-
-
-  height:26px;
-
-
-  color:#0d6b4d;
-
-
-}
-
-
-
-
-
-
-
-
-
-.header-card {
-
-
-  display:flex;
-
-
-  justify-content:space-between;
-
-
-  margin-bottom:10px;
-
-
-  font-size:14px;
-
-
-}
-
-
-
-.barra{
-
-    height:12px;
-
-    background:#eef2f5;
-
-    border-radius:999px;
-
-}
-
-.preenchimento{
-
-    background:linear-gradient(
-        90deg,
-        #0d6b4d,
-        #22c55e
-    );
-
-}
-
-
-.item{
-
-    padding:6px 0;
-
-}
-
-
-.item+.item{
-
-    border-top:1px solid #f1f3f5;
-
-}
-
-
-
-.titulo {
-
-
-  font-size:14px;
-
-
-  font-weight:600;
-
-
-}
-
-
-
-
-.item {
-
-
-  display:grid;
-
-
-  grid-template-columns:
-
-  20px
-
-  1fr
-
-  45px;
-
-
-  align-items:center;
-
-
-  gap:10px;
-
-
-  margin-top:12px;
-
-
-  font-size:13px;
-
-
-}
-
-
-
-
-.barra-mini {
-
-
-  height:8px;
-
-
-  background:#edf0f2;
-
-
-  border-radius:999px;
-
-
-  overflow:hidden;
-
-
-}
-
-
-
-
-.fill {
-
-
-  height:100%;
-
-
-  background:#94a3b8;
-
-
-  transition:width .8s ease;
-
-
-}
-
-
-
-
-.fill.correta {
-
-
-  background:#0d6b4d;
-
-
-}
-
-
-
-
-
-.compartilhar {
-
-
-  background:white;
-
-
-  border:1px solid #edf0f2;
-
-
-  border-radius:12px;
-
-
-  padding:14px;
-
-
-}
-
-
-
-.action{
-
-    background:#ffffff;
-
-    color:#0d6b4d;
-
-    border:1px solid #0d6b4d;
-
-    transition:.2s;
-
-}
-
-.action:hover{
-
-    background:#0d6b4d;
-
-    color:white;
-
-}
-
-
-
-
-/* ==================================================
-   SCROLL
-================================================== */
-
-
-.painel::-webkit-scrollbar {
-
-
-  width:6px;
-
-
+.label{
+    display:block;
+    margin-bottom:6px;
+
+    color:#6b7280;
+    font-size:12px;
 }
 
 .objeto{
-
+    display:flex;
     align-items:flex-start;
-
+    gap:12px;
 }
 
 .objeto-icon{
-
     width:42px;
-
     height:42px;
-
+    object-fit:contain;
 }
 
 .card-info h3{
-
+    margin:0 0 4px;
     font-size:16px;
-
-    margin-bottom:4px;
-
+    color:#111827;
 }
 
-.painel::-webkit-scrollbar-thumb {
+.card-info p{
+    margin:0;
 
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.5;
+}
+.estrutura-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-  background:#d1d5db;
+    padding:16px 18px;
 
+    background:#fff;
+    border-radius:14px;
+}
 
-  border-radius:20px;
+.estrutura-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
 
+    color:#111827;
+    font-size:15px;
+    font-weight:500;
+}
 
+.estrutura-icon{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.arrow{
+    font-size:24px;
+    color:#9ca3af;
+    font-weight:600;
+}
+
+.compartilhar{
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.estrutura-icon{
+    width:26px;
+    height:26px;
+    object-fit:contain;
+}
+
+.arrow{
+    font-size:22px;
+    color:#94a3b8;
+}
+
+.nivel{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon{
+    width:26px;
+    height:26px;
+    color:#0d6b4d;
+}
+
+.header-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+}
+
+.barra{
+    width:90%;
+    height:12px;
+
+    background:#eef2f5;
+    border-radius:999px;
+
+    overflow:hidden;
+}
+
+.preenchimento{
+    height:100%;
+    background:linear-gradient(90deg,#0d6b4d,#22c55e);
+    transition:width .8s ease;
+}
+
+.titulo{
+    font-size:14px;
+    font-weight:600;
+}
+
+.item{
+    display:grid;
+    grid-template-columns:20px 1fr 45px;
+    align-items:center;
+
+    gap:10px;
+
+    padding:6px 0;
+    font-size:13px;
+}
+
+.item+.item{
+    border-top:1px solid #f1f3f5;
+}
+
+.barra-mini{
+    height:8px;
+    background:#edf0f2;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:#94a3b8;
+    transition:width .8s ease;
+}
+
+.fill.correta{
+    background:#0d6b4d;
+}
+
+.action{
+    display:flex;
+
+    gap:8px;
+
+    padding:8px 12px;
+
+    background:#fff;
+    color:#0d6b4d;
+
+    border:1px solid #0d6b4d43;
+    border-radius:8px;
+
+    cursor:pointer;
+    font-size: 14px;
+    transition:.2s;
 }
 
 
 
+.action:hover{
+    background:#0d6b4d;
+    color:#fff;
+}
+
+.painel::-webkit-scrollbar{
+    width:6px;
+}
+
+.painel::-webkit-scrollbar-thumb{
+    background:#d1d5db;
+    border-radius:20px;
+}
 
 </style>

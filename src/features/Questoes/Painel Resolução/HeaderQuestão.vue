@@ -1,86 +1,45 @@
 <script setup>
+import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 
-import {computed} from 'vue'
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useUiStore } from '@/store/resolver/ui'
 
+const router = useRouter()
 
-const props = defineProps({
+const resolver = useResolverStore()
+const ui = useUiStore()
 
-questao:{
+const {
+    questao,
+    questaoAnterior,
+    proximaQuestao,
+    navegacao
+} = storeToRefs(resolver)
 
-type:Object,
+function irAnterior() {
 
-default:()=>({})
+    if (!questaoAnterior.value) return
 
-},
-
-
-idsQuestoes:{
-
- type:Array,
-
- default:()=>[]
+    router.push(`/resolver/${questaoAnterior.value}`)
 
 }
 
-})
+function irProxima() {
 
+    if (!proximaQuestao.value) return
 
+    router.push(`/resolver/${proximaQuestao.value}`)
 
-const indiceAtual = computed(()=>{
-
-
-return props.idsQuestoes.indexOf(
-props.questao.id
-)
-
-
-})
-
-
-
-
-const questaoAnterior = computed(()=>{
-
-
-if(indiceAtual.value <= 0)
-return null
-
-
-return props.idsQuestoes[
-indiceAtual.value - 1
-]
-
-
-})
-
-
-
-
-const proximaQuestao = computed(()=>{
-
-
-if(
-indiceAtual.value === -1 ||
-indiceAtual.value >= props.idsQuestoes.length-1
-)
-
-return null
-
-
-
-return props.idsQuestoes[
-indiceAtual.value + 1
-]
-
-
-})
-
-
+}
 </script>
 
 <template>
 
-<div class="header-questao">
+<div
+    v-if="questao"
+    class="header-questao"
+>
 
 
   <div class="header-top">
@@ -89,11 +48,7 @@ indiceAtual.value + 1
     <div class="info-esquerda">
 
 
-      <span class="badge-ano">
 
-        {{ questao.ano }}
-
-      </span>
 
 
 
@@ -105,10 +60,8 @@ indiceAtual.value + 1
         <span
 
           class="texto-info"
-
-          :class="{
-            disabled: !questaoAnterior
-          }"
+          @click="irAnterior"
+          :class="{ disabled: !questaoAnterior}"
 
         >
 
@@ -123,11 +76,11 @@ indiceAtual.value + 1
         <span class="texto-info-static">
 
 
-          Questão
+Questão
 
-          {{ questao.id }}
-
-
+{{ navegacao.atual }}
+de
+{{ navegacao.total }}
 
         </span>
 
@@ -138,7 +91,7 @@ indiceAtual.value + 1
         <span
 
           class="texto-info"
-
+          @click="irProxima"
           :class="{
             disabled: !proximaQuestao
           }"
@@ -184,19 +137,40 @@ indiceAtual.value + 1
 
 
 
+    
 
-       
+<button
+    @click="ui.alternarBarra"
+    class="details-btn"
+>
 
-<router-link
- class="details-btn">
+    <svg
+        class="botao-toggle"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
 
-          Ver detalhes
+        <polyline
+            v-if="!ui.aberto"
+            points="15 18 9 12 15 6"
+        />
 
-          <span class="arrow">
-            ❯
-          </span>
-</router-link>
+        <polyline
+            v-else
+            points="9 18 15 12 9 6"
+        />
 
+    </svg>
+
+    <span>Ver detalhes</span>
+
+</button>
 
 
 
@@ -214,6 +188,11 @@ indiceAtual.value + 1
 
 <div class="header-bottom">
 
+        <span class="badge-ano">
+
+        {{ questao.ano }}
+
+      </span>
 
   <span class="codigo">
 
@@ -221,6 +200,7 @@ indiceAtual.value + 1
     {{ questao.id }}
 
   </span>
+ 
 
 
 </div>
@@ -260,11 +240,11 @@ indiceAtual.value + 1
 
 
 .badge-ano {
-  background: #e8f6ef;
+  background: none;
   color: #0d6b4d;
   padding: 6px 12px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -303,45 +283,65 @@ indiceAtual.value + 1
   cursor: pointer;
   border: none;
 }
+.details-btn{
 
-.details-btn {
+    display:flex;
 
-  border: none;
+    align-items:center;
 
+    gap:4px;
 
-  padding: 0 12px;
+    padding:8px 14px;
 
-  background: transparent;
+    border:none;
 
-  display: flex;
+    border-radius:10px;
 
-  align-items: center;
+    background:transparent;
 
-  gap: 6px;
+    color:#707070;
 
-  font-size: 14px;
+    font-size:14px;
 
-  font-weight: 300;
+    font-weight:600;
 
-  color: #515357;
+    cursor:pointer;
 
-  cursor: pointer;
+    transition:
+        background .25s,
+        color .25s,
+        transform .2s;
 
-    text-decoration: none; 
-  display: inline-block; 
+}
+
+.details-btn:hover{
+
+    color:#0d6b4d;
 
 }
 
 
 
+.botao-toggle{
 
+    flex-shrink:0;
 
-.details-btn:hover {
-
-  color: #1f6f5c;
+    transition:transform 5s ease;
 
 }
 
+.details-btn.aberto .botao-toggle{
+
+    transform:rotate(180deg);
+
+
+}
+
+.details-btn:hover .botao-toggle{
+
+    transform:translateX(1px);
+
+}
 
 
 
@@ -357,7 +357,8 @@ indiceAtual.value + 1
   margin-top: 18px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start;
+  gap: 20px;
   align-items: center;
 }
 

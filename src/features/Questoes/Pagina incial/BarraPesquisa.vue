@@ -10,17 +10,14 @@
         </span>
       <input
         type="text"
-        placeholder="Pesquisar por assunto, habilidade, palavra-chave..."
+        placeholder="Pesquisar por assunto, conteudo, palavra-chave, código da questão..."
       >
 
     </div>
 
     <div class="acoes">
 
-      <button class="btn-buscar">
 
-        Buscar
-      </button>
 
       <button
         class="btn-filtro"
@@ -44,15 +41,6 @@
 
       </button>
 
-      <button class="btn-limpar">
-
-        <span class="material-icons">
-          restart_alt
-        </span>
-
-        Limpar
-
-      </button>
 
     </div>
 
@@ -95,7 +83,7 @@ defineEmits([
 
   align-items: center;
 
-  gap: 10px;
+  gap: 150px;
 
 }
 
@@ -167,18 +155,6 @@ defineEmits([
 
 }
 
-.btn-buscar {
-
-  border: none;
-  padding: 0 30px;
-  background: #0d6b4d;
-  font-weight: 700;
-  font-size: 15px;
-  font-family: bold;
-  color: white;
-  border-radius: 15px;
-  margin-right: 25px;
-}
 
 .btn-buscar:hover {
 
@@ -199,19 +175,7 @@ defineEmits([
 
 }
 
-.btn-limpar {
 
-  background: white;
-
-  border:none;
-
-}
-
-.btn-limpar:hover {
-
-  background: #f9fafb;
-
-}
 
 .material-icons {
 

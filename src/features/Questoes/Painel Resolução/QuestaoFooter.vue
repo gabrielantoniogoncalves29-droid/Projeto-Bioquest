@@ -1,177 +1,80 @@
 <script setup>
 
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
-
-const props = defineProps({
-
-  questao: {
-
-    type: Object,
-
-    required: true
-
-  },
-
-
-  proximaQuestao: {
-
-    type: Number,
-
-    default: null
-
-  },
-questaoAnterior: {
-
-type:Number,
-
-default:null
-
-}
-})
-
-
+import { useResolverStore } from '@/store/resolver/resolver'
 
 const router = useRouter()
 
+const resolver = useResolverStore()
 
+const {
+    questao,
+    proximaQuestao
+} = storeToRefs(resolver)
 
-function responder(){
+function responder() {
 
+    if (!questao.value) return
 
-router.push(
-
-`/resolver/${props.questao.id}`
-
-)
-
-
-}
-
-
-
-function verExplicacao(){
-
-
-console.log(
-'Mostrar explicação da questão',
-props.questao.id
-)
-
+    router.push(`/resolver/${questao.value.id}`)
 
 }
 
+function verExplicacao() {
 
+    if (!questao.value) return
 
-function proxima(){
-
-
-if(!props.proximaQuestao)
-return
-
-
-
-router.push(
-
-`/resolver/${props.proximaQuestao}`
-
-)
-}
-
-
-function anterior(){
-
-if(!props.questaoAnterior)
-return
-
-
-router.push(
-`/resolver/${props.questaoAnterior}`
-)
+    console.log(
+        'Mostrar explicação da questão',
+        questao.value.id
+    )
 
 }
 
+function proxima() {
+
+    if (!proximaQuestao.value) return
+
+    router.push(`/resolver/${proximaQuestao.value}`)
+
+}
 </script>
 
+
+
+
+
 <template>
-
-
-<div class="footer-questao">
-
-
-
-  <button
-
-    class="btn-responder"
-
-    @click="responder"
-
-  >
-
-    Responder
-
-  </button>
-
 
 
 
 
   <div class="acoes-direita">
 
+  <button class="btn-responder" @click="responder">
+    Responder
+  </button>
 
-
-    <button
-
-      class="btn-explicacao"
-
-      @click="verExplicacao"
-
-    >
-
-      Ver explicação
-
-    </button>
-
-
-
-
-
-    <button
-
-      class="btn-proxima"
-
-      @click="proxima"
-
-      :disabled="!proximaQuestao"
-
-    >
-
+    <button class="btn-proxima" @click="proxima" :disabled="!proximaQuestao">
       Próxima questão →
-
     </button>
-    
-
-
 
   </div>
 
 
-
-
-
-</div>
-
-
 </template>
+
 
 <style scoped>
 
-.footer-questao {
+
+.acoes-direita {
 
   display: flex;
-
-  justify-content: space-between;
-
+  justify-content:flex-end;
+  gap: 20px;
   align-items: center;
 
   padding: 16px 20px;
@@ -179,15 +82,6 @@ router.push(
   border-top: 1px solid #eef1f3;
 
   background: #fafbfc;
-
-}
-
-.acoes-direita {
-
-  display: flex;
-
-  gap: 10px;
-
 }
 
 .btn-explicacao {
@@ -268,37 +162,6 @@ router.push(
 .btn-proxima:hover {
 
   opacity: .92;
-
-}
-
-@media (max-width: 768px) {
-
-  .footer-questao {
-
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap: 12px;
-
-  }
-
-  .acoes-direita {
-
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-  }
-
-  .btn-explicacao,
-  .btn-proxima {
-
-    width: 100%;
-
-  }
 
 }
 

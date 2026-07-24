@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useQuestoesStore } from '@/store/questoes_card.js'
+
+const store = useQuestoesStore()
 
 const props = defineProps({
   modo: String
@@ -25,7 +29,7 @@ function selecionar(opcao) {
 <div class="resultado-acoes">
 
   <div class="resultado">
-    <strong>12</strong>
+    <strong>{{ store.totalQuestoes }}</strong>
     <span>questões encontradas</span>
   </div>
 

@@ -18,7 +18,7 @@
         search
       </span>
 
-      Aplicar filtros
+      Buscar Questões
 
     </button>
 

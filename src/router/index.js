@@ -4,6 +4,7 @@ import Questoes from '@/pages/Questoes.vue';
 import Estatisticas from '@/pages/Estatisticas.vue';
 import Ajuda from '@/pages/Ajuda.vue';
 import Perfil from '@/pages/Perfil.vue';
+import Login from '@/pages/Login.vue'
 import Resolver from '@/features/Questoes/Painel Resolução/ResolverQuestao.vue';
 const routes = [
 {
@@ -30,6 +31,11 @@ const routes = [
     path: '/perfil',
     name: 'Perfil',
     component: Perfil
+},
+{
+    path: '/login',
+    name: 'Login',
+    component: Login  
 },
 {
     path:'/resolver/:id',
