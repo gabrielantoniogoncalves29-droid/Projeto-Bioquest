@@ -1,8 +1,12 @@
+<script>
+
+</script>
+
 <template>
     <div class="resume">
         <div class="tarefas">
             <span class="material-icons">check_box</span>
-            <h2 class="title">TAREFAS REALIZADAS</h2>
+            <h2 class="title">TAREFAS REALIZADAS - dia</h2>
         </div>
         <ul class="lista-info">
             <li>Questao 91 / 2025 - <strong>Finalizada</strong></li>
@@ -14,13 +18,13 @@
 
 <style>
     .resume{
-        border: 1px solid rgb(41, 111, 91);
+        border: 1px solid rgb(28, 75, 47);
         border-radius: 6px;
         padding: 10px;
         margin-left: 50px;
         text-align: left;
         color: white;
-        background-color: rgb(41, 111, 91);
+        background-color: rgb(28, 75, 47);
         margin-top: 10px;
         position: relative;
         width: 400px;
@@ -32,7 +36,7 @@
         left: 20px;
         border-width: 0 15px 15px;
         border-style: solid;
-        border-color: transparent transparent rgb(41, 111, 91);
+        border-color: transparent transparent rgb(28, 75, 47);
     }
     .title{
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;

@@ -30,6 +30,8 @@ function selecionado(dia){
         diaSelecionado.value = dia
         diaInfo.value = true
     }
+
+    
 }
 
 const atividades = [
@@ -215,7 +217,7 @@ function corProgresso(valor){
         color: #202020;
     }
     .topo{
-        color: #296f5b;
+        color: rgb(28, 75, 47);
         display: flex;
         align-items: center;
         padding: 10px;
@@ -235,7 +237,7 @@ function corProgresso(valor){
     .lista-dias{
         margin-bottom: 10px;
         font-weight: bold;
-        color: #296f5b;
+        color: rgb(28, 75, 47);
     }
     .lista-datas li{
         display: flex;
@@ -256,11 +258,11 @@ function corProgresso(valor){
     .lista-datas li.ativo{
         width: 10px;
         height: 10px;
-        border: 1.5px solid #296f5b;
+        border: 1.5px solid rgb(28, 75, 47);
         border-radius: 50%;
         display: flex;
         color: white;
-        background-color: #296f5b;
+        background-color: rgb(28, 75, 47);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.3s;
@@ -337,7 +339,7 @@ function corProgresso(valor){
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         font-size: 14px;
         text-decoration: none;
-        color: #296f5b;
+        color: rgb(28, 75, 47);
         font-weight: bold;
     }
     .atividades{
@@ -376,12 +378,15 @@ function corProgresso(valor){
         align-items: center;
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         font-size: 10px;
-        color: #296f5b;
+        color: rgb(28, 75, 47);
         cursor: pointer;
+    }
+    .Ver-questoes:hover{
+        color: rgb(39, 109, 67);
     }
     .livro{
         font-size: 32px;
-        color: #296f5b;
+        color: rgb(28, 75, 47);
     }
     .material-symbols-outlined{
         font-variation-settings:
@@ -424,12 +429,18 @@ function corProgresso(valor){
     }
     .btn-continuar{
         text-decoration: none;
-        border: 1px solid #296f5b;
+        border: 1px solid rgb(28, 75, 47);
         border-radius: 8px;
-        background-color: #296f5b;
+        background-color: rgb(28, 75, 47);
         padding: 10px;
         color: white;
         
         cursor: pointer;
+    }
+    .btn-continuar:hover{
+        background-color: rgb(39, 109, 67);
+    }
+    .lado-direito{
+        margin-bottom: 80px;
     }
 </style>
