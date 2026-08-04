@@ -18,11 +18,11 @@
 
 <style scoped>
 .footer {
-  background: rgba(21, 85, 70, 0.855);
+  background: rgba(28, 75, 47, 0.855);
   border-top:1px ;
   color: white;
   padding: 15px 30px;
-  box-shadow: 0px -4px 6px  rgba(21, 85, 70, 0.456);
+  box-shadow: 0px -4px 6px  rgba(28, 75, 47, 0.456);
 }
 
 .footer-content {

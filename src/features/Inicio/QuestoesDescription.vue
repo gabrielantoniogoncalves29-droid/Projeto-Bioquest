@@ -80,6 +80,7 @@
         margin: 0;
         color: white;
         margin-right: 60px;
+        margin-left: 20px;
     }
     .container-right p{
         text-align: justify;
