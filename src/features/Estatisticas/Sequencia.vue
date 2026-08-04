@@ -85,8 +85,17 @@ function corProgresso(valor){
         <div class="resumo">
             <div class="sequencia">
                 <div class="topo">
-                    <span class="material-icons calendar">event</span>
+                    <span class="material-symbols-outlined calendar">calendar_month</span>
                     <h1 class="titulo">RESUMO DO MES</h1>
+                </div>
+                <div class="mes">
+                    <span class="material-symbols-outlined seta1">
+                        keyboard_arrow_down
+                    </span>
+                    <p>Maio</p>
+                    <span class="material-symbols-outlined seta2">
+                        keyboard_arrow_down
+                    </span>
                 </div>
                 <div class="lista-completa">
                     <ul class="lista-dias">
@@ -209,21 +218,45 @@ function corProgresso(valor){
         margin-bottom: 0px;
         overflow: hidden;
         width: 420px;
-        height: 300px;
+        min-height: 350px;
+        height: fit-content;
+    }
+    .mes{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: sans-serif;
+        font-size: 17px;
+        font-weight: bold;
+        margin: 0;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .seta1{
+        rotate: 90deg;
+        cursor: pointer;
+    }
+    .seta2{
+        rotate: -90deg;
+        cursor: pointer;
     }
     .titulo{
-        font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 16px;
-        color: #202020;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+        color: #000000;
+        font-weight: bold;
+        padding-bottom: 0;
     }
     .topo{
         color: rgb(28, 75, 47);
         display: flex;
         align-items: center;
         padding: 10px;
+        padding-bottom: 0;
     }
     .lista-completa{
         padding: 10px;
+        padding-top: 10px;
     }
     .lista-dias, .lista-datas{
         display: grid;
@@ -271,7 +304,8 @@ function corProgresso(valor){
         opacity: 0;
     }
     .calendar{
-        font-size: 32px;
+        font-size: 30px;
+        padding: 6px;
     }
     .info-geral{
         display: grid;
