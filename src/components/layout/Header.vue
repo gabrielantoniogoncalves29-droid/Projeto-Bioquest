@@ -67,7 +67,7 @@ onUnmounted(() => {
         src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
       >
       <p>
-        Olá, {{ nome }}
+        {{ nome }}
       </p>
       <span class="material-icons arrow">
         {{ aberta === 2 ? 'expand_less' : 'expand_more' }}
@@ -79,25 +79,24 @@ onUnmounted(() => {
 >
 
   <div class="profile-options">
+
     <router-link to="/login">
       <i class="fa-solid fa-user"></i>
       Login/cadastro
     </router-link>
+
     <router-link to="/perfil">
       <i class="fa-solid fa-user"></i>
       Meu Perfil
     </router-link>
 
-    <a href="#">
-      <i class="fa-solid fa-book"></i>
-      Minhas Questões
-    </a>
 
-    <a href="#">
+    <a >
       <i class="fa-solid fa-gear"></i>
       Configurações
     </a>
-        <a href="#" class="logout-btn">
+    
+    <a href="#" class="logout-btn">
       Sair da Conta
     </a>
   </div>
