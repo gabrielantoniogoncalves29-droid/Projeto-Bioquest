@@ -50,10 +50,10 @@ onUnmounted(() => {
     </div>
 
     <nav class="nav">
-      <router-link to="/"><span class="material-icons">home</span>Início</router-link>
-      <router-link to="/questoes"><span class="material-icons">format_list_bulleted</span>Questões</router-link>
-      <router-link to="/estatisticas"><span class="material-icons">leaderboard</span>Estatísticas</router-link>
-      <router-link to="/ajuda"><span class="material-icons">help</span>Ajuda</router-link>
+      <router-link to="/" class="linha"><span class="material-icons">home</span>Início</router-link>
+      <router-link to="/questoes" class="linha"><span class="material-symbols-outlined">description</span>Questões</router-link>
+      <router-link to="/estatisticas" class="linha"><span class="material-icons">leaderboard</span>Estatísticas</router-link>
+      <router-link to="/ajuda" class="linha"><span class="material-symbols-outlined">help</span>Ajuda</router-link>
     </nav>
 
 <div class="user">
@@ -140,6 +140,7 @@ onUnmounted(() => {
 .nav a:hover{
   background-color: #f0f0f06d;
 }
+
 .user {
   font-size: 14px;
   position: relative;
@@ -271,6 +272,11 @@ margin-left: 10px;
   background: #f5f5f5;
 }
 
+.material-symbols-outlined{
+  font-size: 20px;
+  vertical-align: middle;
+}
+
 .material-icons{
   vertical-align: middle;
   transform: scale(0.75);
@@ -354,5 +360,6 @@ margin-left: 10px;
   font-size: 12px;
   color: #888;
 }
+
 </style>
 
