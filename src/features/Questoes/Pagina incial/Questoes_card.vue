@@ -1,7 +1,7 @@
 <script setup>
 
 import { computed } from 'vue'
-
+import { conteudos } from '@/features/Questoes/data/filtros.js'
 
 const props = defineProps({
   questao: {
@@ -15,6 +15,9 @@ const props = defineProps({
   }
 })
 
+const conteudo = computed(()=>{
+  return conteudos.find(c => c.id === props.questao.conteudoId)
+})
 
 const icone = computed(()=>{
 
@@ -40,40 +43,34 @@ const icone = computed(()=>{
 
       <img
         class="icon"
+        :class="modo"
         :src="icone"
         alt="Ícone do conteúdo"
       >
 
-
       <div class="content">
 
-        <div class="top">
+<div class="top" :class="modo">
+
+      <span class="year">
+        {{ questao.ano }}
+    </span>
+
+    <span class="meta">
+        {{ conteudo?.nome }}
+    </span>
+
+    <span class="meta">
+        Questão #{{ questao.id }}
+    </span>
 
 
 
-          <span class="year">
-            {{ questao.ano }}
-          </span>
+</div>
 
-
-          <span class="question-number">
-            Questão {{ questao.numeroQuestao }}
-          </span>
-            <span class="codigo">
-            Código: {{ questao.id }}
-           </span>
-        </div>
-
-        <h3>
+        <h3 :class="modo">
           {{ questao.resumo }}
         </h3>
-        <div class="tags">
-
-
-
-
-
-        </div>
 
 
       </div>
@@ -102,289 +99,235 @@ const icone = computed(()=>{
 
 
 </template>
-
 <style scoped>
+
+/* ===========================
+   CARD
+=========================== */
 
 .card {
   width: 100%;
-  background: white;
-  border: 1px solid #e7ece9;
-  border-radius: 10px;
-  padding: 18px 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  transition: 0.2s;
-  box-sizing: border-box;
-  min-height: 125px;
-}
 
+  background: #fff;
+  border: 1px solid #e7ece9;
+  border-radius: 12px;
+
+  box-sizing: border-box;
+  transition: all .25s ease;
+}
 
 .card:hover {
   transform: translateY(-2px);
-
-  box-shadow:
-    0 6px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
 }
 
+/* ===========================
+   LISTA
+=========================== */
 
-.left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex: 1;
-  min-width: 0;
+.card.lista{
+  min-height:132px;      /* antes: 140px */
+  padding:16px 22px;     /* antes: 18px 22px */
 }
 
- .codigo{
-  font-size: 14px;
-  font-weight: 600;
-  color: #6b7280;
-
-  padding: 4px 30px;
-  border-radius: 999px;
-  margin-left: auto;
+.card.lista .left{
+  gap:18px;
 }
 
-.question-number{
-  color: #494d56;
-  padding:4px 10px;
+.card.lista .icon{
+  width:74px;
+  height:74px;
 }
 
-
-
-.icon {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  flex-shrink: 0;
+.card.lista .top{
+  gap:26px;
+  margin-bottom:12px;
+  padding-bottom:10px;
 }
 
-
-
-
-
-.content {
-  flex: 1;
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
+.card.lista .year{
+  font-size:15px;        /* antes: 14px */
 }
 
-
-
-
-
-
-.top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin:10px 8px;
-  border-bottom: 1px solid #e7ece9;
-  font-size: 14px;
-  color: #6b7280;
-
-  flex-wrap: wrap;
+.card.lista .meta{
+  font-size:14px;        /* antes: 13px */
 }
 
-
-
-
-.year {
-
-
-  color: #1f6f5c;
-
-  padding: 5px 0px;
-
-  border-radius: 999px;
-
-  font-weight: 700;
-
-  font-size: 14px;
+.card.lista h3{
+  font-size:15.3px;
+  line-height:1.6;
+  -webkit-line-clamp:3;
 }
 
+.card.lista .btn{
+  min-width:102px;
+  height:35px;
+  padding:0 16px;
 
+  font-size:15px;
+  font-weight:600;
+}
 
+/* ===========================
+   GRADE
+=========================== */
+
+.card.grade{
+  min-height:118px;
+  padding:14px;
+}
+
+.card.grade .left{
+  gap:12px;
+}
+
+.card.grade .icon{
+  width:64px;
+  height:64px;
+}
+
+.card.grade .top{
+  gap:20px;
+  margin-bottom:8px;
+  padding-bottom:8px;
+}
+
+.card.grade h3{
+  font-size:14px;
+  line-height:1.45;
+  -webkit-line-clamp:2;
+}
+
+.card.grade .btn{
+  height:35px;
+  padding:0 16px;
+}
+
+/* ===========================
+   CONTEÚDO
+=========================== */
+
+.left{
+  display:flex;
+  align-items:center;
+  flex:1;
+  min-width:0;
+}
+
+.icon{
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.content{
+  flex:1;
+  min-width:0;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+
+  border-bottom:1px solid #edf0f2;
+}
+
+.year{
+  color:#1f6f5c;
+  font-size:14px;
+  font-weight:700;
+}
+
+.meta{
+  font-size:13px;
+  color:#6b7280;
+  font-weight:500;
+}
 
 h3{
-  font-size:16px;
-  line-height:1.45;
-  color:#404245;
-  font-weight:500;
-  margin:0 0 12px;
+  margin:0;
+
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  color:#404040;
 
   display:-webkit-box;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
 
-.card.lista h3{
-  -webkit-line-clamp:3;
+/* ===========================
+   BOTÃO
+=========================== */
+
+.actions{
+  display:flex;
+  align-items:center;
+  margin-left:20px;
+  flex-shrink:0;
 }
 
-.card.grade h3{
-  -webkit-line-clamp:2;
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height: 40px;
+  padding:0 20px;
+
+  color: #0d6b4d;
+  background:#fff;
+
+  border:1px solid  #0d6b4d;
+  border-radius:9px;
+
+  font-weight:600;
+  text-decoration:none;
+
+  transition:all .2s ease;
 }
 
-
-
-
-
-.tags {
-
-  display: flex;
-
-  gap: 8px;
-
-  flex-wrap: wrap;
-
+.btn:hover{
+  background: #0d6b4d;
+  color:#fff;
 }
 
+/* ===========================
+   MOBILE
+=========================== */
 
+@media (max-width:768px){
 
+  .card{
+    padding:16px;
+  }
 
+  .left{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 
-.tag {
+  .actions{
+    margin:18px 0 0;
+    width:100%;
+  }
 
-  padding: 5px 12px;
+  .btn{
+    width:100%;
+    height:42px;
+  }
 
-  border-radius: 999px;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-
-}
-
-
-
-
-
-.green {
-
-  background: #e7f5ee;
-
-  color: #1f8a5b;
-
-}
-
-
-
-
-
-.blue {
-
-  background: #e8f1ff;
-
-  color: #2767c7;
+  .card.lista .icon,
+  .card.grade .icon{
+    width:66px;
+    height:66px;
+  }
 
 }
-
-
-
-.actions {
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-end;
-
-  gap: 16px;
-
-  flex-shrink: 0;
-
-}
-
-
-
-
-
-.btn {
-
-  color: #1f6f5c;
-
-  height: 35px;
-
-  padding: 0 20px;
-
-  border: 1.5px solid #1f6f5c;
-
-  border-radius: 8px;
-
-  background: #ffffff;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-decoration: none;
-
-}
-
-
-
-
-
-.btn:hover {
-
-  background: #1f6f5c;
-
-  color: #ffffff;
-
-}
-
-
-
-
-
-
-.arrow {
-
-  font-size: 13px;
-
-}
-
-
-
-
-
-@media(max-width:768px){
-
-
-.card {
-
-  flex-direction: column;
-
-  align-items: stretch;
-
-}
-
-
-
-.actions {
-
-  align-items:flex-start;
-
-}
-
-
-}
-
 
 </style>

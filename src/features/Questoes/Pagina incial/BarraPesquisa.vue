@@ -17,8 +17,6 @@
 
     <div class="acoes">
 
-
-
       <button
         class="btn-filtro"
         @click="$emit('toggle-filtros')"
@@ -41,7 +39,13 @@
 
       </button>
 
+    <button class="btn-limpar">
 
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter-x text-sub-text stroke-sub-text group-hover:text-headings group-focus:text-action group-disabled:text-disabled group-hover:stroke-headings group-disabled:stroke-disabled "><path d="M13.013 3H2l8 9.46V19l4 2v-8.54l.9-1.055"></path><path d="m22 3-5 5"></path><path d="m17 3 5 5"></path></svg>
+
+      Limpar filtros
+
+    </button>
     </div>
 
   </section>
@@ -70,10 +74,46 @@ defineEmits([
 
 <style scoped>
 
+.btn-limpar {
+
+  height: 44px;
+
+
+  padding: 0 15px;
+
+  border: 1px solid #d1d5dbcc;
+
+  border-radius: 8px;
+
+  background: white;
+
+  color: #4b5563;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-weight: 500;
+
+  transition: .2s;
+
+}
+.btn-filtro:hover,
+.btn-limpar:hover {
+
+  border-color: #0d6b4d;
+
+  color: #0d6b4d;
+
+}
 .barra-pesquisa {
 
   background: white;
-  margin: 0px 20px;
+  margin: 0px 40px;
   border-radius: 8px;
 
   padding: 0px;
@@ -163,17 +203,13 @@ defineEmits([
 }
 
 .btn-filtro {
-
+  color: #3f4752;
   background: white;
   border: none;
 
 }
 
-.btn-filtro:hover {
 
-  background: #f9fafb;
-
-}
 
 
 

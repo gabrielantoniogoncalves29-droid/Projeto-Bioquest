@@ -11,7 +11,9 @@ const resolver = useResolverStore()
 
 const {
     questao,
-    proximaQuestao
+    proximaQuestao,
+    questaoAnterior
+
 } = storeToRefs(resolver)
 
 function responder() {
@@ -22,16 +24,6 @@ function responder() {
 
 }
 
-function verExplicacao() {
-
-    if (!questao.value) return
-
-    console.log(
-        'Mostrar explicação da questão',
-        questao.value.id
-    )
-
-}
 
 function proxima() {
 
@@ -40,26 +32,37 @@ function proxima() {
     router.push(`/resolver/${proximaQuestao.value}`)
 
 }
+
+function anterior() {
+
+    if (!questaoAnterior.value) return
+
+    router.push(`/resolver/${questaoAnterior.value}`)
+
+}
 </script>
-
-
-
 
 
 <template>
 
 
-
-
   <div class="acoes-direita">
 
-  <button class="btn-responder" @click="responder">
-    Responder
-  </button>
-
-    <button class="btn-proxima" @click="proxima" :disabled="!proximaQuestao">
-      Próxima questão →
+    <button class="btn-prox" @click="anterior" :disabled="!proximaQuestao">
+       ← Questão anterior
     </button>
+
+    <div class="grupo-direita">
+
+      <button class="btn-responder" @click="responder">
+        Responder
+      </button>
+
+      <button class="btn-prox" @click="proxima" :disabled="!proximaQuestao">
+        Próxima questão →
+      </button>
+
+    </div>
 
   </div>
 
@@ -73,8 +76,7 @@ function proxima() {
 .acoes-direita {
 
   display: flex;
-  justify-content:flex-end;
-  gap: 20px;
+  justify-content: space-between;
   align-items: center;
 
   padding: 16px 20px;
@@ -84,7 +86,15 @@ function proxima() {
   background: #fafbfc;
 }
 
-.btn-explicacao {
+.grupo-direita {
+
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+}
+
+.btn-prox {
 
   background: white;
 
@@ -92,7 +102,7 @@ function proxima() {
 
   color: #374151;
 
-  padding: 8px 14px;
+  padding: 9px 14px;
 
   border-radius: 8px;
 
@@ -106,7 +116,7 @@ function proxima() {
 
 }
 
-.btn-explicacao:hover {
+.btn-prox:hover {
 
   border-color: #0d6b4d;
 
@@ -116,46 +126,25 @@ function proxima() {
 
 }
 
-.btn-proxima {
-
-  background: #0d6b4d;
-
-  color: white;
-
-  border: none;
-
-  padding: 8px 16px;
-
-  border-radius: 8px;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all .15s ease;
-
-}
 
 .btn-responder {
-    margin-left: 18px;
+
     background: #0d6b4d;
-    
+
     color: white;
-    
-    border: none;
-    
-    padding: 10px 20px;
-    
+
+    border:none;
+
+    padding: 10px 35px;
+
     border-radius: 8px;
-    
-    font-size: 14px;
-    
+
+    font-size: 15px;
+
     font-weight: 600;
-    
+
     cursor: pointer;
-    
+
     transition: all .15s ease;
 }
 .btn-responder:hover ,

@@ -110,13 +110,15 @@ const questoes = computed(() => {
 
 .card{
 
-    background:white;
+    background:#fff;
 
-    border-radius:18px;
+    border:1px solid #e7ece9;
 
-    padding:24px;
+    border-radius:12px;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    padding:22px;
+
+    box-sizing:border-box;
 
 }
 
@@ -128,29 +130,33 @@ const questoes = computed(() => {
 
     align-items:center;
 
-    margin-bottom:24px;
+    margin-bottom:20px;
 
 }
 
 .header h2{
 
-    font-size:22px;
+    font-size:19px;
 
-    color:#20352A;
+    font-weight:700;
+
+    color:#1f2937;
 
 }
 
 .contador{
 
-    background:#EEF7F2;
+    background:#e8f6ef;
 
-    color:#2E8B57;
+    color:#0d6b4d;
 
-    padding:6px 12px;
+    padding:5px 12px;
 
-    border-radius:20px;
+    border-radius:999px;
 
-    font-weight:600;
+    font-size:13px;
+
+    font-weight:700;
 
 }
 
@@ -160,7 +166,7 @@ const questoes = computed(() => {
 
     flex-direction:column;
 
-    gap:16px;
+    gap:14px;
 
 }
 
@@ -172,21 +178,23 @@ const questoes = computed(() => {
 
     align-items:center;
 
-    padding:16px;
+    padding:16px 18px;
 
-    border:1px solid #ECECEC;
+    background:#fff;
+
+    border:1px solid #e7ece9;
 
     border-radius:12px;
 
-    transition:.2s;
+    transition:all .25s ease;
 
 }
 
 .item:hover{
 
-    border-color:#2E8B57;
-
     transform:translateY(-2px);
+
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
 
 }
 
@@ -202,49 +210,73 @@ const questoes = computed(() => {
 
 .numero{
 
+    font-size:14.5px;
+
     font-weight:700;
 
-    color:#20352A;
+    color:#1f2937;
 
 }
 
 .ano{
 
-    color:#777;
+    color:#6b7280;
 
-    font-size:14px;
+    font-size:13px;
+
+    font-weight:500;
 
 }
 
 .conteudo{
 
-    color:#2E8B57;
+    color:#1f6f5c;
 
-    font-size:14px;
+    font-size:13px;
+
+    font-weight:500;
 
 }
 
 .abrir{
 
-    border:none;
+    display:flex;
 
-    background:#2E8B57;
+    align-items:center;
 
-    color:white;
+    justify-content:center;
 
-    padding:10px 18px;
+    height:38px;
 
-    border-radius:10px;
+    padding:0 18px;
+
+    flex-shrink:0;
+
+    margin-left:16px;
+
+    color:#0d6b4d;
+
+    background:#fff;
+
+    border:1px solid #0d6b4d;
+
+    border-radius:9px;
+
+    font-size:14px;
+
+    font-weight:600;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:all .2s ease;
 
 }
 
 .abrir:hover{
 
-    background:#256F46;
+    background:#0d6b4d;
+
+    color:#fff;
 
 }
 
@@ -252,9 +284,33 @@ const questoes = computed(() => {
 
     text-align:center;
 
-    color:#888;
+    color:#6b7280;
+
+    font-size:14px;
 
     padding:40px 0;
+
+}
+
+@media (max-width:768px){
+
+    .item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:14px;
+
+    }
+
+    .abrir{
+
+        width:100%;
+
+        margin-left:0;
+
+    }
 
 }
 

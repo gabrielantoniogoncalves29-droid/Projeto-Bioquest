@@ -11,20 +11,100 @@ const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
 const painel = useUiStore()
 
-const {
-    aberto
-} = storeToRefs(painel)
-
-
-
-
+const { aberto } = storeToRefs(painel)
 const { questao } = storeToRefs(resolver)
-
 const { detalheAtual: detalhes } = storeToRefs(detalhesStore)
 
 const copiado = ref(false)
+const linkQuestao = ref(window.location.href)
+const objetosEnem = {
 
+    1:"Moléculas, células e tecidos",
+    2:"Hereditariedade e diversidade da vida",
+    3:"Identidade dos seres vivos",
+    4:"Ecologia e ciências ambientais",
+    5:"Origem e evolução da vida",
+    6:"Qualidade de vida das populações humanas"
 
+}
+
+const nomeObjeto = computed(()=>
+
+    objetosEnem[
+        detalhes.value?.objeto?.id
+    ] ?? "Não informado"
+
+)
+
+const imagemObjeto = computed(()=>{
+
+    const id = detalhes.value?.objeto?.id
+
+    if(!id)
+        return ''
+
+    return new URL(
+
+        `../icons/objeto${id}.png`,
+
+        import.meta.url
+
+    ).href
+
+})
+
+const conteudo = computed(()=>
+
+    detalhes.value?.conteudo ?? {}
+
+)
+
+const imagemConteudo = computed(()=>{
+
+    const icone = conteudo.value?.area?.icone
+
+    if(!icone)
+        return ''
+
+    return new URL(
+
+        `../icons/${icone}.png`,
+
+        import.meta.url
+
+    ).href
+
+})
+
+const nivel = computed(()=>
+
+    detalhes.value?.nivel ?? 'Não informado'
+
+)
+
+const taxaAcerto = computed(()=>
+
+    detalhes.value?.taxaAcerto ?? 0
+
+)
+
+const tituloProva = computed(()=>
+
+    `${detalhes.value?.banca ?? ''} ${detalhes.value?.ano ?? ''}`
+
+)
+
+const subtituloProva = computed(()=>
+
+    detalhes.value?.prova ?? ''
+
+)
+
+const numeroQuestao = computed(()=>
+
+    detalhes.value?.numeroQuestao ?? ''
+
+)
 
 async function copiarLink(){
 
@@ -34,7 +114,7 @@ async function copiarLink(){
 
     copiado.value = true
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
         copiado.value = false
 
@@ -42,755 +122,740 @@ async function copiarLink(){
 
 }
 
-
-
-async function compartilhar(){
-
-    if(navigator.share){
-
-        await navigator.share({
-
-            title: `Questão ${questao.value?.numeroQuestao}`,
-
-            text: questao.value?.resumo,
-
-            url: window.location.href
-
-        })
-
-    }else{
-
-        copiarLink()
-
-    }
-
-}
-
-
-
-const objetosEnem={
-
-1:"Moléculas, células e tecidos",
-
-2:"Hereditariedade e diversidade da vida",
-
-3:"Identidade dos seres vivos",
-
-4:"Ecologia e ciências ambientais",
-
-5:"Origem e evolução da vida",
-
-6:"Qualidade de vida das populações humanas"
-
-}
-
-
-
-const numeroObjeto = computed(()=>
-    detalhes.value?.objeto ?? null
-)
-
-
-
-const nomeObjeto = computed(()=>
-
-    objetosEnem[numeroObjeto.value]
-
-    ??
-
-    "Objeto não informado"
-
-)
-
-
-
-const imagemObjeto = computed(()=>{
-
-    if(!numeroObjeto.value)
-        return null
-
-    return new URL(
-
-        `../icons/objeto${numeroObjeto.value}.png`,
-
-        import.meta.url
-
-    ).href
-
-})
-
-
-
-function imagemEstrutura(item){
-
-    if(!item?.icone)
-        return ''
-
-    return new URL(
-
-        `../icons/${item.icone}.png`,
-
-        import.meta.url
-
-    ).href
-
-}
-
-
-
-const estrutura = computed(()=>
-
-    detalhes.value?.estrutura ?? []
-
-)
-
-
-
-const estatisticas = computed(()=>
-
-    detalhes.value?.estatisticas ??
-
-    {
-
-        taxaAcerto:0,
-
-        distribuicao:[]
-
-    }
-
-)
-
-
-
-const nivel = computed(()=>
-
-    detalhes.value?.nivel ??
-
-    "Não informado"
-
-)
-
 </script>
 
 <template>
 
 <div
-class="barra-lateral"
-:class="{ fechado: !aberto }"
+    class="barra-lateral"
+    :class="{ fechado: !aberto }"
 >
-
-
-
-
-
-
-
 
 <div
-v-if="aberto"
-class="painel"
+    v-show="aberto"
+    class="painel"
 >
 
+<!-- =========================================
+PROVA
+========================================== -->
 
+<div class="secao prova">
 
+    <span class="tipo">{{  subtituloProva }}</span>
 
+    <span class="separador-ponto">·</span>
 
-<div class="card-info">
+    <span class="numero">Questão {{ numeroQuestao }}</span>
 
-
-    <span class="label">
-      Objeto de conhecimento
-    </span>
-
-<div class="card objeto">
-
-  <img
-    v-if="imagemObjeto"
-    class="objeto-icon"
-    :src="imagemObjeto"
-    alt="Objeto de conhecimento"
-  />
-
-  <div class="objeto-info">
-
-
-
-    <h3>
-      {{ nomeObjeto }}
-    </h3>
-
-  </div>
+    <h2>{{ tituloProva }}</h2>
 
 </div>
 
 
-</div>
+<!-- =========================================
+OBJETO DE CONHECIMENTO
+========================================== -->
 
+<div class="secao central">
 
+    <div class="icone-caixa">
 
+        <img
 
+            v-if="imagemObjeto"
 
+            :src="imagemObjeto"
 
+            alt=""
 
-
-<div class="card-info">
-    <span class="label">
-      Estrutura do livro didático
-    </span>
-
-    <div class="card estrutura">
-    <div class="objeto">
-        <template
-            v-for="(item,index) in estrutura"
-            :key="index"
         >
 
-            <div class="estrutura-item">
+    </div>
 
-                <img
-                    v-if="item.icone"
-                    class="estrutura-icon"
-                    :src="imagemEstrutura(item)"
-                    alt=""
-                >
+    <div class="texto-bloco">
 
-                <span>{{ item.nome }}</span>
+        <div class="titulo-card">Objeto de conhecimento</div>
 
-            </div>
+        <div class="valor-card">{{ nomeObjeto }}</div>
 
-            <span
-                v-if="index < estrutura.length-1"
-                class="arrow"
+    </div>
+
+</div>
+
+
+<!-- =========================================
+CONTEÚDO / ESTRUTURA DO LIVRO DIDÁTICO
+========================================== -->
+
+<div class="secao central">
+
+    <div class="icone-caixa">
+
+        <img
+
+            v-if="imagemConteudo"
+
+            :src="imagemConteudo"
+
+            alt=""
+
+        >
+
+    </div>
+
+    <div class="texto-bloco">
+
+        <div class="titulo-card">Conteúdo</div>
+
+        <div class="valor-card">
+
+            {{ conteudo.area?.nome }}
+
+            <span class="seta">›</span>
+
+            {{ conteudo.assunto?.nome }}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+NÍVEL DA QUESTÃO
+========================================== -->
+
+<div class="secao central">
+
+    <div class="icone-caixa icone-nivel">
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path d="M9 18h6"/>
+
+            <path d="M10 22h4"/>
+
+            <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+
+        </svg>
+
+    </div>
+
+    <div class="texto-bloco">
+
+        <div class="titulo-card">Nível da questão</div>
+
+        <div class="valor-card">{{ nivel }}</div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+PERCENTUAL DE ACERTOS
+========================================== -->
+
+<div class="secao central">
+
+    <div class="icone-caixa icone-nivel">
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path d="M3 3v18h18"/>
+
+            <path d="M7 15v3"/>
+
+            <path d="M12 10v8"/>
+
+            <path d="M17 6v12"/>
+
+        </svg>
+
+    </div>
+
+    <div class="texto-bloco">
+
+        <div class="titulo-card">Percentual de acertos</div>
+
+        <div class="valor-card">
+
+            <strong class="percentual-numero">{{ taxaAcerto }}%</strong>
+
+            dos estudantes acertaram
+
+        </div>
+
+        <div class="barra">
+
+            <div
+
+                class="preenchimento"
+
+                :style="{ width: taxaAcerto + '%' }"
+
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+LINK DA QUESTÃO
+========================================== -->
+
+<div class="secao sem-borda link-final">
+
+    <div class="rotulo">Link da questão</div>
+
+    <div class="link-container">
+
+        <input
+
+            class="input-link"
+
+            type="text"
+
+            :value="linkQuestao"
+
+            readonly
+
+        >
+
+        <button
+
+            class="botao-copiar"
+
+            :class="{ copiado }"
+
+            @click="copiarLink"
+
+        >
+
+            <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
             >
-                ›
-            </span>
 
-        </template>
+                <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12z" fill="currentColor" stroke="none"/>
+
+                <rect x="8" y="7" width="14" height="16" rx="2"/>
+
+            </svg>
+
+            {{ copiado ? 'Copiado' : 'Copiar' }}
+
+        </button>
 
     </div>
-    </div>
-</div>
-
-
-
-<div class="nivel">
-
-
-<svg
-class="icon"
-viewBox="0 0 24 24"
-fill="none"
-stroke="currentColor"
-stroke-width="2"
->
-
-
-<path d="M9 18h6"/>
-
-<path d="M10 22h4"/>
-
-<path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
-
-
-</svg>
-
-
-
-
-<div>
-
-<span class="label">
-
-Nível
-
-</span>
-
-
-<strong>
-
-{{ nivel }}
-
-</strong>
-
 
 </div>
 
+</div>
 
 </div>
 
-
-
-
-
-
-
-<div class="card-estatistica">
-
-
-<div class="header-card">
-
-
-<span>
-
-Percentual de acertos
-
-</span>
-
-
-<strong>
-
-{{ estatisticas.taxaAcerto }}%
-
-</strong>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="barra">
-    <div
-        class="preenchimento"
-        :style="{
-            width: estatisticas.taxaAcerto + '%'
-        }"
-    />
-</div>
-
-
-
-
-
-
-
-
-
-
-
-<div class="card-distribuicao">
-
-
-<span class="titulo">
-
-Alternativas mais marcadas
-
-</span>
-
-
-
-
-
-<div
-
-class="item"
-
-v-for="item in estatisticas.distribuicao"
-
-:key="item.alternativa"
-
->
-
-
-<span>
-
-{{ item.alternativa }}
-
-</span>
-
-
-
-
-
-<div class="barra-mini">
-
-
-<div
-
-class="fill"
-
-:class="{
-
-correta:
-item.alternativa === questao.resposta
-
-}"
-
-:style="{
-
-width:item.percentual + '%'
-
-}"
-
->
-
-</div>
-
-
-</div>
-
-
-
-
-
-<span>
-
-{{ item.percentual }}%
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="compartilhar">
-
-
-<span class="label">
-
-Compartilhar link da questão
-
-</span>
-
-
-
-
-<button
-
-class="action"
-
-@click="copiarLink"
-
->
-
-
-<svg
-
-width="16"
-
-height="16"
-
-viewBox="0 0 24 24"
-
-fill="currentColor"
-
->
-
-
-<path d="
-M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3
-4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11
-c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z
-"/>
-
-
-</svg>
-
-
-
-{{ copiado ? 'Copiado' : 'Copiar' }}
-
-
-
-</button>
-
-
-</div>
-
-
-
-
-
-</div> 
-
-
-</div> 
-
-</div>
 </template>
 
 
 <style scoped>
 
 .barra-lateral{
-    position: relative;
+
     width:380px;
     height:100%;
-    background:#fcfcfc;
-    border-left:1px solid #eef2f4;
-    box-shadow:-5px 0 20px rgba(0,0,0,.08);
+
+    background:#fff;
+
+    border-left:1px solid #e9edf2;
+
     transition:width .35s ease;
+
     overflow:hidden;
+
 }
 
 .barra-lateral.fechado{
+
     width:55px;
-}
 
-.botao-toggle{
-    position:absolute;
-    left:-18px;
-    top:30px;
-
-    width:36px;
-    height:36px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-    border:1px solid #e5e7eb;
-    background:#fff;
-
-    color:#0d6b4d;
-    cursor:pointer;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
-
-    transition:.2s;
-}
-
-.botao-toggle:hover{
-    transform:scale(1.05);
 }
 
 .painel{
-    display:flex;
-    flex-direction:column;
-    gap:22px;
 
     height:100%;
-    padding:24px;
 
     overflow-y:auto;
-}
 
-.card-info,
-.card-estatistica,
-.card-distribuicao,
-.compartilhar{
-    background:#fff;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 2px 8px rgba(15,23,42,.04);
-}
+    padding:24px 22px;
 
-h2{
-    margin:0 0 14px;
-
-    font-size:13px;
-    font-weight:700;
-
-    color:#6b7280;
-
-    text-transform:uppercase;
-    letter-spacing:.08em;
-}
-
-.label{
-    display:block;
-    margin-bottom:6px;
-
-    color:#6b7280;
-    font-size:12px;
-}
-
-.objeto{
     display:flex;
-    align-items:flex-start;
-    gap:12px;
+
+    flex-direction:column;
+
 }
 
-.objeto-icon{
-    width:42px;
-    height:42px;
-    object-fit:contain;
+
+/* ===========================================
+SEÇÃO BASE — sem cartão, só divisórias finas
+=========================================== */
+
+.secao{
+
+    padding:18px 0;
+
+    border-bottom:1px solid #eef1f4d1;
+
 }
 
-.card-info h3{
-    margin:0 0 4px;
-    font-size:16px;
-    color:#111827;
+.secao.sem-borda{
+
+    border-bottom:none;
+
 }
 
-.card-info p{
-    margin:0;
+.link-final{
 
-    color:#6b7280;
-    font-size:13px;
-    line-height:1.5;
-}
-.estrutura-card{
-    display:flex;
-    align-items:center;
-    gap:10px;
+    margin-top:auto;
 
-    padding:16px 18px;
-
-    background:#fff;
-    border-radius:14px;
 }
 
-.estrutura-item{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    color:#111827;
-    font-size:15px;
-    font-weight:500;
-}
-
-.estrutura-icon{
-    width:42px;
-    height:42px;
-    object-fit:contain;
-    flex-shrink:0;
-}
-
-.arrow{
-    font-size:24px;
-    color:#9ca3af;
-    font-weight:600;
-}
-
-.compartilhar{
-display: flex;
-align-items: center;
-gap: 20px;
-}
-
-.estrutura-icon{
-    width:26px;
-    height:26px;
-    object-fit:contain;
-}
-
-.arrow{
-    font-size:22px;
-    color:#94a3b8;
-}
-
-.nivel{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.icon{
-    width:26px;
-    height:26px;
-    color:#0d6b4d;
-}
-
-.header-card{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.rotulo{
 
     margin-bottom:10px;
 
+    font-size:15px;
+
+    color:#7a828b;
+
+}
+
+
+/* ===========================================
+PROVA — nem colado na borda, nem centralizado
+=========================================== */
+
+.prova{
+
+    padding-top:0;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:baseline;
+
+    gap:6px;
+
+    padding-left:22px;
+
+}
+
+.prova .tipo{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#0d6b4d;
+
+}
+
+.prova .separador-ponto{
+
+    color:#c3cbd3;
+
+    font-size:13px;
+
+}
+
+.prova .numero{
+
+    font-size:13px;
+
+    color:#8a94a1;
+
+}
+
+.prova h2{
+
+    width:100%;
+
+    margin:2px 0 0;
+
+    font-size:19px;
+
+    font-weight:600;
+
+    color:#1f2937;
+
+    line-height:1.3;
+
+}
+
+
+/* ===========================================
+OBJETO DE CONHECIMENTO / CONTEÚDO / NÍVEL
+— conteúdo livre, distribuído, ícone sem fundo/sombra
+=========================================== */
+
+.secao.central{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding-left:10px;
+
+    padding-right:10px;
+
+}
+
+.icone-caixa{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.icone-caixa img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+}
+
+.icone-caixa svg{
+
+    color:#0d6b4d;
+
+}
+
+.icone-nivel svg{
+
+    width:26px;
+
+    height:26px;
+
+}
+
+.texto-bloco{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:4px;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.titulo-card{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+}
+
+.valor-card{
+
     font-size:14px;
+
+    color:#6b7280;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    flex-wrap:wrap;
+
+}
+
+.valor-card .seta{
+
+    color:#0d6b4d;
+
+    font-weight:600;
+
+}
+
+
+/* ===========================================
+PERCENTUAL DE ACERTOS
+=========================================== */
+
+.percentual-numero{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
 }
 
 .barra{
-    width:90%;
-    height:12px;
 
-    background:#eef2f5;
+    width:100%;
+
+    max-width:180px;
+
+    height:6px;
+
+    margin-top:8px;
+
+    background:#eef1f4;
+
     border-radius:999px;
 
     overflow:hidden;
+
 }
 
 .preenchimento{
+
     height:100%;
-    background:linear-gradient(90deg,#0d6b4d,#22c55e);
-    transition:width .8s ease;
-}
 
-.titulo{
-    font-size:14px;
-    font-weight:600;
-}
-
-.item{
-    display:grid;
-    grid-template-columns:20px 1fr 45px;
-    align-items:center;
-
-    gap:10px;
-
-    padding:6px 0;
-    font-size:13px;
-}
-
-.item+.item{
-    border-top:1px solid #f1f3f5;
-}
-
-.barra-mini{
-    height:8px;
-    background:#edf0f2;
     border-radius:999px;
-    overflow:hidden;
-}
 
-.fill{
-    height:100%;
-    background:#94a3b8;
-    transition:width .8s ease;
-}
-
-.fill.correta{
     background:#0d6b4d;
+
+    transition:width .45s ease;
+
 }
 
-.action{
+
+/* ===========================================
+LINK DA QUESTÃO
+=========================================== */
+
+.link-container{
+
     display:flex;
+    margin-bottom: 30px;
+    align-items:center;
 
     gap:8px;
 
-    padding:8px 12px;
+}
 
-    background:#fff;
-    color:#0d6b4d;
+.input-link{
 
-    border:1px solid #0d6b4d43;
+    flex:1;
+
+    min-width:0;
+
+    height:38px;
+
+    padding:0 10px;
+
+    border:1px solid #e2e8f0;
+
     border-radius:8px;
 
-    cursor:pointer;
-    font-size: 14px;
-    transition:.2s;
+    background:#f8fafc;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    outline:none;
+
 }
 
+.input-link:focus{
 
+    border-color:#0d6b4d;
 
-.action:hover{
+}
+
+.botao-copiar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+    height:38px;
+
+    padding:0 12px;
+
+    border:1px solid transparent;
+
+    border-radius:8px;
+
     background:#0d6b4d;
+
     color:#fff;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+
 }
+
+.botao-copiar:hover{
+
+    background:#fff;
+
+    color:#0d6b4d;
+
+    border-color:#0d6b4d;
+
+}
+
+.botao-copiar.copiado{
+
+    background:#0d6b4d;
+
+    color:#fff;
+
+    border-color:transparent;
+
+}
+
+
+/* ===========================================
+SCROLLBAR
+=========================================== */
 
 .painel::-webkit-scrollbar{
+
     width:6px;
+
+}
+
+.painel::-webkit-scrollbar-track{
+
+    background:transparent;
+
 }
 
 .painel::-webkit-scrollbar-thumb{
-    background:#d1d5db;
-    border-radius:20px;
+
+    background:#cfd8df;
+
+    border-radius:999px;
+
+}
+
+.painel::-webkit-scrollbar-thumb:hover{
+
+    background:#b9c4cd;
+
+}
+
+
+/* ===========================================
+RESPONSIVIDADE
+=========================================== */
+
+@media (max-width:1200px){
+
+    .barra-lateral{
+
+        width:290px;
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    .barra-lateral{
+
+        width:100%;
+
+        border-left:none;
+
+        border-top:1px solid #e9edf2;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .painel{
+
+        padding:18px 16px;
+
+    }
+
+    .prova{
+
+        padding-left:0;
+
+    }
+
+    .link-container{
+        
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .botao-copiar{
+
+        width:100%;
+
+    }
+
 }
 
 </style>

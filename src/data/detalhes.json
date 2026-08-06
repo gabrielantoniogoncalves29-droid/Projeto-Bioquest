@@ -1,97 +1,27 @@
 [
   {
     "id": 202592,
-    "nivel": "Cognitivo",
-    "objeto": 4,
-    "estrutura": [
-      {
+    "ano": 2025,
+    "numeroQuestao": 92,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+
+    "objeto": {
+      "id": 4
+    },
+
+    "conteudo": {
+      "area": {
         "nome": "Fisiologia",
         "icone": "16"
       },
-      {
+      "assunto": {
         "nome": "Sistema Endócrino"
       }
-    ],    
-
-  "estatisticas": {
-
-  "taxaAcerto": 78,
-  "distribuicao": [
-
-    {
-      "alternativa":"A",
-      "percentual":32
     },
 
-    {
-      "alternativa":"B",
-      "percentual":48
-    },
-
-    {
-      "alternativa":"C",
-      "percentual":8
-    },
-
-    {
-      "alternativa":"D",
-      "percentual":9
-    },
-
-    {
-      "alternativa":"E",
-      "percentual":3
-    }
-
-  ]
-  }
-  },
-    {
-    "id": 202593,
     "nivel": "Cognitivo",
-    "objeto": 4,
-    "estrutura": [
-      {
-        "nome": "Fisiologia",
-        "icone": "15"
-      },
-      {
-        "nome": "Sistema Endócrino"
-      }
-    ],    
 
-  "estatisticas": {
-
-  "taxaAcerto": 78,
-  "distribuicao": [
-
-    {
-      "alternativa":"A",
-      "percentual":32
-    },
-
-    {
-      "alternativa":"B",
-      "percentual":48
-    },
-
-    {
-      "alternativa":"C",
-      "percentual":8
-    },
-
-    {
-      "alternativa":"D",
-      "percentual":90
-    },
-
-    {
-      "alternativa":"E",
-      "percentual":3
-    }
-
-  ]
+    "taxaAcerto": 78
   }
-  }
-  
 ]

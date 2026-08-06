@@ -1,7 +1,6 @@
 <template>
   <div class="card">
 
-    <h1>BioQuest</h1>
     <h2>Acessar a plataforma</h2>
 
     <div class="field">
@@ -121,50 +120,47 @@ function esqueciSenha() {
 
 </script>
 
-
 <style scoped>
 
 .card{
-
     width:100%;
     max-width:430px;
-    max-height: 480px;
-    padding:36px;
+    height:450px;
 
-    background:rgba(255, 255, 255, 0.056);
+    padding:32px;
+
+    background:rgba(255,255,255,0.441);
 
     border-radius:18px;
 
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.182);
-
-
+    box-shadow:none;
 
     box-sizing:border-box;
 
+    display:flex;
+    flex-direction:column;
 }
 
-
 h1{
-
     margin:0;
 
     text-align:center;
 
-    font-size:51px;
+    font-size:50px;
 
     font-weight:700;
 
     color:#234b3b;
 
+    line-height:1;
 }
 
 h2{
 
-    margin:8px 0 28px;
+    margin:8px 0 24px;
 
     text-align:center;
-    transform: translateX(-60px);
+
     font-size:20px;
 
     font-weight:500;
@@ -179,9 +175,9 @@ h2{
 
     flex-direction:column;
 
-    gap:2px;
+    gap:6px;
 
-    margin-bottom:15px;
+    margin-bottom:14px;
 
 }
 
@@ -211,9 +207,8 @@ label{
 
     background:#ffffff87;
 
-    transition:
-        border-color .25s,
-        box-shadow .25s;
+    transition:border-color .25s,
+               box-shadow .25s;
 
 }
 
@@ -221,8 +216,7 @@ label{
 
     border-color:#2d6a4f;
 
-    box-shadow:
-        0 0 0 4px rgba(45, 106, 79, 0.042);
+    box-shadow:0 0 0 4px rgba(45,106,79,.04);
 
 }
 
@@ -284,7 +278,6 @@ input::placeholder{
 
 }
 
-
 .forgot-password,
 
 .register-button{
@@ -309,8 +302,10 @@ input::placeholder{
 
     padding:0;
 
-    margin-bottom:15px;
-    margin-top:10px;
+    margin:2px 0 16px;
+
+    align-self:flex-start;
+
 }
 
 .forgot-password:hover,
@@ -323,19 +318,19 @@ input::placeholder{
 
 }
 
-
 .login-button{
 
     width:100%;
 
-    height:45px;
+    height:46px;
+
     border:none;
 
     border-radius:12px;
 
     background:#2d6a4f;
 
-    color:white;
+    color:#fff;
 
     font-size:16px;
 
@@ -343,9 +338,8 @@ input::placeholder{
 
     cursor:pointer;
 
-    transition:
-        background .25s,
-        transform .2s;
+    transition:background .25s,
+               transform .2s;
 
 }
 
@@ -373,19 +367,19 @@ input::placeholder{
 
 }
 
-
 .divider{
 
     height:1px;
 
-    margin:22px 0;
+    margin:22px 0 18px;
 
     background:#ECECEC;
 
 }
 
-
 .register-text{
+
+    margin-top:auto;
 
     text-align:center;
 
@@ -394,7 +388,6 @@ input::placeholder{
     font-size:15px;
 
 }
-
 
 input::-ms-reveal,
 input::-ms-clear{

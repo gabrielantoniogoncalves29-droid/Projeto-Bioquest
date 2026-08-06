@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
@@ -16,6 +17,20 @@ const {
     proximaQuestao,
     navegacao
 } = storeToRefs(resolver)
+
+const salvo = ref(false)
+
+function salvarQuestao() {
+
+    salvo.value = true
+
+    setTimeout(() => {
+
+        salvo.value = false
+
+    }, 3000)
+
+}
 
 function irAnterior() {
 
@@ -42,38 +57,31 @@ function irProxima() {
 >
 
 
-  <div class="header-top">
-
-
-    <div class="info-esquerda">
+  <div class="header-linha">
 
 
 
+    <div class="navegacao">
 
 
 
+      <span
 
-      <div class="navegacao">
+        class="texto-info"
+        @click="irAnterior"
+        :class="{ disabled: !questaoAnterior}"
 
+      >
 
+        ← Anterior
 
-        <span
-
-          class="texto-info"
-          @click="irAnterior"
-          :class="{ disabled: !questaoAnterior}"
-
-        >
-
-          ← Anterior
-
-        </span>
+      </span>
 
 
 
 
 
-        <span class="texto-info-static">
+      <span class="texto-info-static">
 
 
 Questão
@@ -82,30 +90,26 @@ Questão
 de
 {{ navegacao.total }}
 
-        </span>
+      </span>
 
 
 
 
 
-        <span
+      <span
 
-          class="texto-info"
-          @click="irProxima"
-          :class="{
-            disabled: !proximaQuestao
-          }"
+        class="texto-info"
+        @click="irProxima"
+        :class="{
+          disabled: !proximaQuestao
+        }"
 
-        >
+      >
 
-          Próxima →
+        Próxima →
 
-        </span>
+      </span>
 
-
-
-
-      </div>
 
 
 
@@ -113,64 +117,79 @@ de
 
 
 
+    <div class="info-prova">
+
+      <span class="badge-ano">
+
+        {{ questao.ano }}
+
+      </span>
+
+      <span class="codigo">
+
+        Código:
+        {{ questao.id }}
+
+      </span>
+
+    </div>
+
 
 
     <div class="acoes">
 
 
 
-      <button class="btn-salvar">
+      <button
+          class="btn-salvar"
+          :class="{ salvo }"
+          @click="salvarQuestao"
+      >
 
+          <span class="material-icons salvar">
 
-        <span class="material-icons">
+              {{ salvo ? 'bookmark' : 'bookmark_border' }}
 
-          bookmark_border
+          </span>
 
-        </span>
-
-
-        Salvar questão
-
+          {{ salvo ? 'Salvo' : 'Salvar questão' }}
 
       </button>
 
 
 
+      <button
+          @click="ui.alternarBarra"
+          class="details-btn"
+      >
 
-    
+          <svg
+              class="botao-toggle"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+          >
 
-<button
-    @click="ui.alternarBarra"
-    class="details-btn"
->
+              <polyline
+                  v-if="!ui.aberto"
+                  points="15 18 9 12 15 6"
+              />
 
-    <svg
-        class="botao-toggle"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    >
+              <polyline
+                  v-else
+                  points="9 18 15 12 9 6"
+              />
 
-        <polyline
-            v-if="!ui.aberto"
-            points="15 18 9 12 15 6"
-        />
+          </svg>
 
-        <polyline
-            v-else
-            points="9 18 15 12 9 6"
-        />
+          <span>Ver detalhes</span>
 
-    </svg>
-
-    <span>Ver detalhes</span>
-
-</button>
+      </button>
 
 
 
@@ -181,29 +200,6 @@ de
   </div>
 
 
-
-
-
-
-
-<div class="header-bottom">
-
-        <span class="badge-ano">
-
-        {{ questao.ano }}
-
-      </span>
-
-  <span class="codigo">
-
-    Código:
-    {{ questao.id }}
-
-  </span>
- 
-
-
-</div>
 </div>
 
 </template>
@@ -211,33 +207,59 @@ de
 <style scoped>
 
 .header-questao {
-  padding: 24px 28px;
+  padding: 18px 28px;
   border-bottom: 1px solid #e9ecef;
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.info-esquerda {
+.header-linha {
   display: flex;
   align-items: center;
-  gap: 30px; 
+  gap: 110px;
+  margin-left: 0px;  
 }
 
 .navegacao {
 
   display: flex;
-  flex: 1;               
-  justify-content: center;
   align-items: center;
-  gap: 17px;               
+  gap: 17px;
+
 }
 
+.texto-info {
 
+  color: #2a313dc6;
+  font-size: 15px;
+  font-weight: 550;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  cursor: pointer;
+  transition: all .15s ease;
+}
 
+.texto-info-static {
+
+  color: #282f3bd7;
+  font-size: 15px;
+  font-weight: 550;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.texto-info:hover {
+  color: #0d6b4d;
+}
+
+.info-prova {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-left: auto;
+}
 
 .badge-ano {
   background: none;
@@ -248,41 +270,64 @@ de
   font-weight: 600;
 }
 
-.texto-info {
-
-  color: #2a313dc6;           
-  font-size: 15px;
-  font-weight: 550;
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-  cursor: pointer;
-  transition: all .15s ease;
+.codigo {
+  color: #5d636f;
+  font-size: 14px;
 }
 
-.texto-info-static {
 
-  color: #282f3bd7;           
-  font-size: 15px;
-  font-weight: 550;
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-}
-
-.texto-info:hover {
-  color: #0d6b4d;            
-}
-
-.acoes {
-  display: flex;
-  gap: 12px;
-
-}
+/* ===========================================
+BOTÃO SALVAR — com animação de confirmação
+=========================================== */
 
 .btn-salvar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   background: transparent;
   color: #0d6b4d;
   font-weight: 600;
+  font-size: 14px;
+
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 8px 10px;
+
   cursor: pointer;
-  border: none;
+  transition: background .25s ease, color .25s ease;
 }
+
+.btn-salvar.salvo {
+  color: #0d6b4d;
+}
+
+.btn-salvar .salvar {
+  display: inline-flex;
+  transition: transform .25s ease;
+}
+
+.btn-salvar.salvo .salvar {
+  animation: pop-salvo .45s ease;
+}
+
+@keyframes pop-salvo {
+
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.35) rotate(-8deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+
 .details-btn{
 
     display:flex;
@@ -344,71 +389,17 @@ de
 }
 
 
-
-
-.arrow {
-
-  font-size: 13px;
-
-}
-
-
-.header-bottom {
-  margin-top: 18px;
-
-  display: flex;
-  justify-content:flex-start;
-  gap: 20px;
-  align-items: center;
-}
-
-.tags {
-  display: flex;
-  gap: 10px;
-}
-
-.tag-verde {
-  background: #e8f6ef;
-  color: #0d6b4d;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.tag-azul {
-  background: #e7f0ff;
-  color: #2563eb;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
 .material-icons{
   vertical-align: middle;
   transform: scale(0.75);
 }
 
-.codigo {
-  color: #5d636f;
-  font-size: 14px;
-}
-
 @media (max-width: 768px) {
 
-  .header-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  .header-linha {
+    flex-wrap: wrap;
+    gap: 14px;
   }
-
-  .header-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
 
 }
 

@@ -10,8 +10,9 @@
     />
 
     <PainelFiltros
-      v-if="mostrarFiltros"
+      v-show="mostrarFiltros"
     />
+    <FiltrosAcoes/>
 <Ordenacao
   :modo="modoVisualizacao"
   @alterarModo="modoVisualizacao = $event"
@@ -36,7 +37,7 @@ import BarraPesquisa from '@/features/Questoes/Pagina incial/BarraPesquisa.vue'
 import PainelFiltros from '@/features/Questoes/Pagina incial/PainelFiltros.vue'
 import Ordenacao from '@/features/Questoes/Pagina incial/Ordenacao.vue'
 import ListaQuestoes from '@/features/Questoes/Pagina incial/ListaQuestoes.vue'
-
+import FiltrosAcoes from '@/features/Questoes/Pagina incial/FiltrosAcoes.vue'
 
 const mostrarFiltros = ref(true)
 

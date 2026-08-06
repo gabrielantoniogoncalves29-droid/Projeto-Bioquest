@@ -1,7 +1,6 @@
 <template>
   <div class="card">
 
-    <h1>BioQuest</h1>
     <h2>Criar uma conta</h2>
 
     <div class="field">
@@ -170,19 +169,21 @@ function criarConta(){
 .card{
 
     width:100%;
-    max-width:400px;
+    max-width:430px;
+    height:480px;
 
-    padding:30px;
+    padding:28px 32px;
+
+    background:rgba(255,255,255,0.441);
 
     border-radius:18px;
 
-    background:rgba(255,255,255,.92);
-
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
-
-    backdrop-filter:blur(8px);
+    box-shadow:none;
 
     box-sizing:border-box;
+
+    display:flex;
+    flex-direction:column;
 
 }
 
@@ -192,17 +193,19 @@ h1{
 
     text-align:center;
 
-    font-size:46px;
+    font-size:48px;
 
     font-weight:700;
 
-    color:#224235;
+    color:#234b3b;
+
+    line-height:1;
 
 }
 
 h2{
 
-    margin:6px 0 24px;
+    margin:8px 0 18px;
 
     text-align:center;
 
@@ -220,9 +223,9 @@ h2{
 
     flex-direction:column;
 
-    gap:6px;
+    gap:4px;
 
-    margin-bottom:16px;
+    margin-bottom:10px;
 
 }
 
@@ -242,19 +245,18 @@ label{
 
     align-items:center;
 
-    height:48px;
+    height:46px;
 
-    padding:0 14px;
+    padding:0 16px;
 
     border:1px solid #D8D8D8;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    background:#FFF;
+    background:#ffffff87;
 
-    transition:
-        border-color .25s,
-        box-shadow .25s;
+    transition:border-color .25s,
+               box-shadow .25s;
 
 }
 
@@ -262,7 +264,7 @@ label{
 
     border-color:#2d6a4f;
 
-    box-shadow:0 0 0 3px rgba(45,106,79,.12);
+    box-shadow:0 0 0 4px rgba(45,106,79,.04);
 
 }
 
@@ -293,6 +295,8 @@ input{
     background:transparent;
 
     font-size:15px;
+
+    color:#333;
 
 }
 
@@ -330,11 +334,13 @@ input::placeholder{
 
 .feedback{
 
-    min-height:16px;
+    min-height:14px;
 
-    font-size:12px;
+    font-size:11px;
 
     color:#d9534f;
+
+    margin-top:2px;
 
 }
 
@@ -348,27 +354,26 @@ input::placeholder{
 
     width:100%;
 
-    height:46px;
+    height:45px;
 
-    margin-top:10px;
+    margin-top:auto;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#2d6a4f;
 
     color:#FFF;
 
-    font-size:15px;
+    font-size:16px;
 
     font-weight:600;
 
     cursor:pointer;
 
-    transition:
-        background .25s,
-        transform .2s;
+    transition:background .25s,
+               transform .2s;
 
 }
 
@@ -385,6 +390,8 @@ input::placeholder{
     background:#D6D6D6;
 
     cursor:not-allowed;
+
+    transform:none;
 
 }
 
@@ -414,8 +421,9 @@ input::placeholder{
 
     text-decoration:underline;
 
-}
+    color:#234b3b;
 
+}
 
 input::-ms-reveal,
 input::-ms-clear{
@@ -429,7 +437,5 @@ input[type="password"]::-webkit-textfield-decoration-container{
     display:none;
 
 }
-
-
 
 </style>

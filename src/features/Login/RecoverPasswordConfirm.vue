@@ -11,7 +11,7 @@
 
         </div>
 
-        <h1>BioQuest</h1>
+
 
         <h2>Verifique seu e-mail</h2>
 
@@ -69,20 +69,27 @@ function reenviar(){
 }
 
 </script>
-
 <style scoped>
 
 .card{
 
-    width:430px;
+    width:100%;
+    max-width:430px;
+    height:480px;
 
-    padding:40px;
+    padding:32px;
 
-    background:white;
+    background:rgba(255,255,255,0.441);
 
-    border-radius:20px;
+    border-radius:18px;
 
-    box-shadow:0 20px 45px rgba(0,0,0,.15);
+    box-shadow:none;
+
+    box-sizing:border-box;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 
     text-align:center;
 
@@ -94,7 +101,7 @@ function reenviar(){
 
     justify-content:center;
 
-    margin-bottom:20px;
+    margin-bottom:6px;
 
 }
 
@@ -136,35 +143,43 @@ h1{
 
     margin:0;
 
-    font-size:48px;
+    font-size:50px;
 
-    color:#224235;
+    font-weight:700;
+
+    color:#234b3b;
+
+    line-height:1;
 
 }
 
 h2{
 
-    margin:12px 0 20px;
+    margin:8px 0 16px;
 
-    color:#666;
+    font-size:20px;
 
     font-weight:500;
+
+    color:#666;
 
 }
 
 .description{
 
+    margin:0;
+
     color:#666;
 
-    line-height:1.6;
+    line-height:1.5;
+
+    font-size:15px;
 
 }
 
 .description.small{
 
-    margin-top:20px;
-
-    margin-bottom:30px;
+    margin:18px 0 0;
 
     font-size:14px;
 
@@ -172,19 +187,25 @@ h2{
 
 .email{
 
-    margin:22px 0;
+    width:100%;
+
+    margin:18px 0;
 
     padding:14px;
 
     border-radius:12px;
 
-    background:#f5f7f8;
+    background:#ffffff87;
 
-    color:#224235;
+    border:1px solid #d9d9d9;
+
+    color:#234b3b;
 
     font-weight:600;
 
     word-break:break-word;
+
+    box-sizing:border-box;
 
 }
 
@@ -192,21 +213,26 @@ h2{
 
     width:100%;
 
-    height:48px;
+    height:46px;
+
+    margin-top:22px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#2d6a4f;
 
-    color:white;
+    color:#fff;
 
     font-size:16px;
 
+    font-weight:600;
+
     cursor:pointer;
 
-    transition:.25s;
+    transition:background .25s,
+               transform .2s;
 
 }
 
@@ -214,23 +240,45 @@ h2{
 
     background:#255740;
 
+    transform:translateY(-2px);
+
+}
+
+.primary-button:active{
+
+    transform:translateY(0);
+
 }
 
 .secondary-button{
 
     width:100%;
 
-    margin-top:15px;
+    margin-top:auto;
+
+    padding-top:16px;
 
     border:none;
 
     background:none;
 
-    color:#255740;
+    color:#2d6a4f;
 
     font-size:15px;
 
+    font-weight:600;
+
     cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.secondary-button:hover{
+
+    color:#234b3b;
+
+    text-decoration:underline;
 
 }
 

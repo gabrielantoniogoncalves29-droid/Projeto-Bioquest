@@ -26,19 +26,11 @@ function selecionar(opcao) {
 <template>
 
 <section class="ordenacao">
-<div class="resultado-acoes">
+    <div class="resultado">
+      <strong> {{ store.totalQuestoes }} </strong>
+      <span>  questões encontradas</span>
+    </div>
 
-  <div class="resultado">
-    <strong>{{ store.totalQuestoes }}</strong>
-    <span>questões encontradas</span>
-  </div>
-
-  <button class="resolver-btn">
-    <span class="material-icons">play_arrow</span>
-    Resolver todas
-  </button>
-
-</div>
   <div class="direita">
 
 <div class="acoes">
@@ -135,6 +127,24 @@ function selecionar(opcao) {
 
 
 <style scoped>
+
+
+.resultado {
+
+  color: #4b5563;
+
+  font-size: 16px;
+
+}
+
+.resultado strong {
+
+  color: #0d6b4d;
+
+  font-size: 17px;
+
+}
+
 .direita {
 
   display: flex;
@@ -165,39 +175,6 @@ function selecionar(opcao) {
 
 }
 
-.resultado {
-
-  color: #4b5563;
-
-  font-size: 15px;
-
-}
-
-.resultado strong {
-
-  color: #0d6b4d;
-
-  font-size: 16px;
-
-}
-
-.acoes {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-}
-
-.acoes label {
-
-  font-size: 14px;
-
-  color: #6b7280;
-
-}
 
 .acoes select {
 
@@ -286,9 +263,9 @@ function selecionar(opcao) {
 }
 
 .option{
-    padding:14px 14px;
-    cursor:pointer;
 
+    cursor:pointer;
+padding:11px 12px;
     font-size:14px;
 
     transition:.15s;
@@ -299,9 +276,14 @@ function selecionar(opcao) {
 }
 
 .option.active{
-    background:#e8f5eb;
+    background:transparent;
     color:#0d6b4d;
-    font-weight:500;
+    font-weight:600;
+}
+
+.option:hover{
+    background:#f6f7f8;
+    color:#0d6b4d;
 }
 
 .material-icons{
@@ -309,7 +291,7 @@ function selecionar(opcao) {
 }
 .select-menu{
     position:absolute;
-
+    padding:6px;
     left:0;
 
     width:100%;
@@ -356,35 +338,55 @@ function selecionar(opcao) {
 }
 
 .resolver-btn{
-    display: flex;
-    align-items: center;
-    gap: 8px;
 
-    padding: 5px 8px;
-    border: none;
-    border-radius: 6px;
-    color: #383939;
-    font-family: Arial, sans-serif;
-    background: #e8f5eb59;
-    font-size: 15px;
-    height: 32px;
-    font-weight: 500;
-    cursor: pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
 
-    transition: .2s;
-}
+    padding:0px 15px 0px 16px;
+    width:100%;
+    height:40px;
 
-.resolver-btn .material-icons{
-    font-size: 22px;
-    transition: .2s;
+    background:#fafafa36;
+
+    border:1px solid #5e5e5c7c;
+
+    border-radius:9px;
+
+    color:#444;
+
+    transition:.2s;
 }
 
 .resolver-btn:hover{
-    color: #0d6b4d;
+
+    background:#f3f6f4;
+    border-color:#dbe8df;
+
 }
 
+.resolver-btn .material-icons{
+    font-size:21px;
+    color:#1f6f5c;
+}
+
+
+
 .resolver-btn:hover .material-icons{
-    transform: translateX(3px);
+    transform:scale(1.08);
+}
+
+.acoes{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.acoes label{
+    font-size:14px;
+    font-weight:500;
+    color:#6b7280;
+    white-space:nowrap;
 }
 
 @media (max-width: 768px) {

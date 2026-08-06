@@ -25,30 +25,8 @@ const enunciado = computed(
 <div
     v-if="enunciado"
     class="enunciado-container"
+    :class="{ 'sem-imagem': !questao.enunciado.imagem }"
 >
-
-
-  <div
-
-    v-if="questao.enunciado.imagem"
-
-    class="imagem-container"
-
-  >
-
-
-    <img
-
-      :src="questao.enunciado.imagem"
-
-      :alt="questao.enunciado.alt"
-
-    />
-
-
-  </div>
-
-
 
 
   <div class="texto-container">
@@ -73,6 +51,28 @@ const enunciado = computed(
 
 
 
+  <div
+
+    v-if="questao.enunciado.imagem"
+
+    class="imagem-container"
+
+  >
+
+
+    <img
+
+      :src="questao.enunciado.imagem"
+
+      :alt="questao.enunciado.alt"
+
+    />
+
+
+  </div>
+
+
+
 </div>
 
 
@@ -88,13 +88,21 @@ const enunciado = computed(
 
   display: grid;
 
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 55% 45%;
 
-  gap: 20px;
+  gap: 24px;
 
   padding: 20px;
 
   border-bottom: 1px solid #e9ecef;
+
+  align-items: start;
+
+}
+
+.enunciado-container.sem-imagem {
+
+  grid-template-columns: 1fr;
 
 }
 
@@ -102,13 +110,13 @@ const enunciado = computed(
 
 .imagem-container {
 
-  border: 1px solid #e5e7eb;
-
   border-radius: 12px;
 
   overflow: hidden;
 
   background:white;
+
+  height: 300px;
 
 }
 
@@ -144,13 +152,15 @@ const enunciado = computed(
 
   font-size:1.1rem;
 
-  line-height:1.6;
+  line-height:1.7;
 
   color:#1f2937;
 
-  margin-bottom:12px;
+  margin-bottom:14px;
 
-  font-weight:600;
+  font-weight:500;
+
+  letter-spacing:.01em;
 
 }
 
@@ -160,9 +170,9 @@ const enunciado = computed(
 
   font-size:.95rem;
 
-  line-height:1.7;
+  line-height:1.8;
 
-  color:#4b5563;
+  color:#5b6472;
 
 }
 
@@ -174,6 +184,12 @@ const enunciado = computed(
 .enunciado-container{
 
 grid-template-columns:1fr;
+
+}
+
+.imagem-container{
+
+height:240px;
 
 }
 

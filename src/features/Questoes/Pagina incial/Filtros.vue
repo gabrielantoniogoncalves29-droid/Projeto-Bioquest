@@ -33,46 +33,48 @@
     </button>
 
     <Transition name="accordion">
+<div
+  v-if="aberto"
+  class="conteudo"
+>
 
-      <div
-        v-if="aberto"
-        class="conteudo"
+  <label class="opcao destaque">
+
+    <input
+      type="checkbox"
+      :checked="todosSelecionados"
+      @change="selecionarTodos"
+    >
+
+    Todos
+
+  </label>
+
+  <div class="lista-opcoes">
+
+    <div class="grupo">
+
+      <label
+        v-for="opcao in opcoes"
+        :key="opcao.id"
+        class="opcao"
       >
 
-        <div class="grupo">
+        <input
+          type="checkbox"
+          :checked="selecionados.includes(opcao.id)"
+          @change="alternarOpcao(opcao.id)"
+        >
 
-          <label class="opcao destaque">
+        {{ opcao.nome }}
 
-            <input
-              type="checkbox"
-              :checked="todosSelecionados"
-              @change="selecionarTodos"
-            >
+      </label>
 
-            Todos
+    </div>
 
-          </label>
+  </div>
 
-          <label
-            v-for="opcao in opcoes"
-            :key="opcao.id"
-            class="opcao"
-          >
-
-            <input
-              type="checkbox"
-              :checked="selecionados.includes(opcao.id)"
-              @change="alternarOpcao(opcao.id)"
-            >
-
-            {{ opcao.nome }}
-
-          </label>
-
-        </div>
-
-      </div>
-
+</div>
     </Transition>
 
   </div>
@@ -185,22 +187,20 @@ function selecionarTodos(){
 <style scoped>
 
 .accordion{
-
-  border:1px solid #d1d5db;
-
-  border-radius:10px;
-
-  background:white;
-
-  overflow:hidden;
-
+    position:relative;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    background:#fff;
+    overflow:visible;
 }
 
 .cabecalho{
 
   width:100%;
 
-  border:none;
+  border:1px solid #d1d5db;
+
+  border-radius:10px;
 
   background:white;
 
@@ -283,35 +283,41 @@ function selecionarTodos(){
 }
 
 .conteudo{
-
-  padding:18px;
-
+    padding:18px;
 }
 
 .grupo{
 
-  border:1px solid #edf0f2;
+    border:1px solid #dadde0;
+    border-radius:10px;
+    background:#fafafa;
 
-  border-radius:10px;
-
-  padding:14px;
-
-  background:#fafafa;
+    padding:14px;
 
 }
+
+.lista-opcoes{
+
+    margin-top:12px;
+
+    max-height:340px;
+
+    overflow-y:auto;
+
+    border-radius:10px;
+
+}
+
 
 .destaque{
 
-  font-weight:700;
 
-  border-bottom:1px solid #e5e7eb;
 
-  padding-bottom:10px;
+    padding:10px 4px;
 
-  margin-bottom:10px;
+    margin-bottom:12px;
 
 }
-
 .opcao{
 
   display:flex;

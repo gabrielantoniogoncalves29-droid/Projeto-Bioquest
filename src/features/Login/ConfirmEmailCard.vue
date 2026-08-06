@@ -10,7 +10,7 @@
 
         </div>
 
-        <h1>BioQuest</h1>
+      
 
         <h2>Confirme seu e-mail</h2>
 
@@ -72,11 +72,13 @@ function reenviarEmail(){
 .card{
 
     width:100%;
-    max-width:400px;
+    max-width:430px;
+    max-height: 480px;
+    padding:32px;
 
-    padding:30px;
+    background:rgba(255, 255, 255, 0.441);
 
-    background:rgba(255,255,255,.92);
+    border-radius:18px;
 
     border-radius:18px;
 

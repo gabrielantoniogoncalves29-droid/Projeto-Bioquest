@@ -34,49 +34,59 @@
           Selecione um conteúdo primeiro.
 
         </div>
-<label
-  v-if="grupos.length"
-  class="opcao todos"
->
 
-  <input
-    type="checkbox"
-    :checked="todosSelecionados"
-    @change="selecionarTodos"
-  >
-
-  Todos os subconteúdos
-
-</label>
-        <div
-        v-for="conteudo in grupos"
-          :key="conteudo.id"
-          class="grupo"
-        >
-
-          <div class="nome-conteudo">
-
-            {{ conteudo.nome }}
-
-          </div>
+        <template v-else>
 
           <label
-            v-for="(sub,index) in conteudo.subconteudos"
-            :key="index"
-            class="opcao"
+            v-if="grupos.length"
+            class="opcao todos"
           >
 
             <input
               type="checkbox"
-              :checked="selecionados.includes(`${conteudo.id}-${index}`)"
-              @change="alternar(`${conteudo.id}-${index}`)"
+              :checked="todosSelecionados"
+              @change="selecionarTodos"
             >
 
-            {{ sub }}
+            Todos os subconteúdos
 
           </label>
 
-        </div>
+          <div class="lista-subconteudos">
+
+            <div
+              v-for="conteudo in grupos"
+              :key="conteudo.id"
+              class="grupo"
+            >
+
+              <div class="nome-conteudo">
+
+                {{ conteudo.nome }}
+
+              </div>
+
+              <label
+                v-for="(sub, index) in conteudo.subconteudos"
+                :key="index"
+                class="opcao"
+              >
+
+                <input
+                  type="checkbox"
+                  :checked="selecionados.includes(`${conteudo.id}-${index}`)"
+                  @change="alternar(`${conteudo.id}-${index}`)"
+                >
+
+                {{ sub }}
+
+              </label>
+
+            </div>
+
+          </div>
+
+        </template>
 
       </div>
 
@@ -196,6 +206,23 @@ const todosSelecionados = computed(() => {
 </script>
 
 <style scoped>
+.lista-subconteudos{
+
+  margin-top:16px;
+
+  max-height:520px;
+
+  overflow-y:auto;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+  padding-right:6px;
+
+}
 
 .accordion{
 
@@ -209,11 +236,25 @@ const todosSelecionados = computed(() => {
 
 }
 
+.todos{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:8px 4px 12px;
+
+
+}
+
 .cabecalho{
 
   width:100%;
+  border:1px solid #d1d5db;
 
-  border:none;
+  border-radius:10px;
 
   background:white;
 
@@ -255,25 +296,27 @@ const todosSelecionados = computed(() => {
 
 .grupo{
 
-  border:1px solid #edf0f2;
+    border:1px solid #edf0f2;
 
-  border-radius:10px;
+    border-radius:10px;
 
-  padding:14px;
+    background:#fafafa;
 
-  background:#fafafa;
+    padding:14px;
 
 }
 
+
 .conteudo{
 
-  padding:18px;
+    padding:18px;
 
-  display:flex;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 
-  flex-direction:column;
-
-  gap:14px;
+    max-height:550px;
+    overflow-y:auto;
 
 }
 

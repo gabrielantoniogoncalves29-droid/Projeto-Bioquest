@@ -88,6 +88,29 @@ v-for="questao in questoes"
 
 </section>
 
+<div class="resultado-acoes">
+<button class="resolver-btn text-on-action hover:text-information disabled:text-disabled">
+  Resolver todas as questões
+  <svg 
+    width="18" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+    class="cursor-pointer"
+    fill="none"
+    stroke="currentColor"
+  >
+    <path 
+      d="M5 12H19M19 12L12 5M19 12L12 19" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </svg>
+</button>
+
+
+</div>
 
 </template>
 
@@ -164,4 +187,71 @@ v-for="questao in questoes"
   color:#6b7280;
 
 }
+
+.resultado-acoes{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    padding: 6px 0;
+}
+
+.resultado{
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.resultado strong{
+    font-size: 16px;
+    font-weight: 700;
+    color: #0d6b4d;
+    line-height: 1;
+}
+
+.resultado span{
+    font-size: 16px;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+.resolver-btn{
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:0px 15px 0px 16px;
+    width:240px;
+    height:40px;
+    background:#fafafa36;
+    margin-right: 40px;
+    margin-left: auto;
+    border:1px solid #5e5e5c7c;
+
+    border-radius:9px;
+
+    color:#444;
+
+    transition:.2s;
+}
+
+.resolver-btn:hover{
+
+    background:#f3f6f4;
+    border-color:#dbe8df;
+
+}
+
+.resolver-btn .material-icons{
+    font-size:21px;
+    color:#1f6f5c;
+}
+
+
+
+.resolver-btn:hover .material-icons{
+    transform:scale(1.08);
+}
+
 </style>

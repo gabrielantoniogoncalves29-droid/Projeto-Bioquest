@@ -1,16 +1,12 @@
+<script setup>
+import { useQuestoesStore } from '@/store/questoes_card.js'
+const store = useQuestoesStore()
+</script>
 <template>
 
   <div class="acoes-filtros">
 
-    <button class="btn-limpar">
 
-      <span class="material-icons">
-        refresh
-      </span>
-
-      Limpar filtros
-
-    </button>
 
     <button class="btn-aplicar">
 
@@ -31,53 +27,50 @@
 
 <style scoped>
 
-.acoes-filtros {
-
-  display: flex;
-
-  justify-content: flex-end;
-
-  align-items: center;
-
-  gap: 14px;
-
-  width: 100%;
-
-}
-
-.btn-limpar {
-
-  height: 44px;
-
-  padding: 0 18px;
-
-  border: 1px solid #d1d5db;
-
-  border-radius: 8px;
-
-  background: white;
+.resultado {
 
   color: #4b5563;
 
+  font-size: 16px;
+
+}
+
+.resultado strong {
+
+  color: #0d6b4d;
+
+  font-size: 17px;
+
+}
+
+.acoes {
+
   display: flex;
 
   align-items: center;
 
-  gap: 8px;
-
-  cursor: pointer;
-
-  font-weight: 500;
-
-  transition: .2s;
+  gap: 10px;
 
 }
 
-.btn-limpar:hover {
+.acoes label {
 
-  background: #f9fafb;
+  font-size: 14px;
+
+  color: #6b7280;
 
 }
+
+.acoes-filtros{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+
+
+    margin:0px 40px 35px;
+}
+
 
 .btn-aplicar {
 
@@ -85,7 +78,7 @@
 
   padding: 0 22px;
 
-  border: none;
+  border: 1px solid #0d6b4d;
 
   border-radius: 8px;
 
@@ -104,12 +97,17 @@
   font-weight: 600;
 
   transition: .2s;
-
+    margin-left:auto;
 }
 
 .btn-aplicar:hover {
 
-  background: #0b5a40;
+  border-color: #0d6b4d;
+
+  color: #0d6b4d;
+
+  background: #0d6b4d0c;
+
 
 }
 
