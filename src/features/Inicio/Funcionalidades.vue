@@ -45,12 +45,12 @@
 
 <style scoped>
 .funcoes{
-    padding: 60px;
+    padding: 4rem;
     font-family: sans-serif;
 }
 .title{
     font-weight: 800;
-    font-size: 54px;
+    font-size: clamp(2rem, 5vw, 4rem);
     margin: 0;
     text-align: center;
     line-height: 1.2;
@@ -58,26 +58,31 @@
 }
 .cards-funcoes{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding-top: 80px;
     gap: 40px;
 }
 .card{
     display: flex;
+    flex-grow: 1;
+    flex-basis: 200;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 
-    font-size: 16px;
+    font-size: 1rem;
     color: rgb(28, 75, 47);
 
     background-color: white;
     border-radius: 12px;
-    width: 300px;
-    min-height: 400px;
-    padding: 30px;
+    width: 100%;
+    max-width: 300px;
+    min-height: 500px;
+    padding: 2rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transition: 500ms;
 }
 .card:hover{
     transform: scale(1.05);
@@ -92,6 +97,7 @@
     background-color: rgb(28, 75, 47);
     color: white;
     margin-top: 40px;
+    transition: 500ms;
 
     cursor: pointer;
 }

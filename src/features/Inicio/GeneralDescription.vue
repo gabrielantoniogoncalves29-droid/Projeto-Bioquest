@@ -27,25 +27,25 @@
 <style scoped>
 .title{
     font-family: sans-serif;
-    font-size: 44px;
+    font-size: 3rem;
     font-weight: 800;
     text-align: center;
     line-height: 1.2;
-    color: rgb(28, 75, 47);
-
-    transition: all 0.3s ease;
+    color: rgb(28, 75, 47); 
 }
 .card-conteiner{
+    flex-grow: 1;
+    flex-basis: 200;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #ffffff;
     color: rgb(28, 75, 47);
     padding: 20px;
-    width: 320px;
+    width: 100%;
+    max-width: 320px;
     height: 150px;
     font-family: sans-serif;
-
-    transition: all 0.2s ease;
+    transition: 500ms ease; 
 }
 .card-conteiner:hover{
     transform: scale(1.2);
@@ -53,6 +53,7 @@
 }
 .cards-flex{
     display: flex;
+    flex-wrap: wrap;
     gap: 60px;
     padding: 20px;
     justify-content: center;

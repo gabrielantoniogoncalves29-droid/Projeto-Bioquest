@@ -9,9 +9,11 @@
             <h2 class="title">TAREFAS REALIZADAS - dia</h2>
         </div>
         <ul class="lista-info">
-            <li>Questao 91 / 2025 - <strong>Finalizada</strong></li>
-            <li>Questao 91 / 2025 - <strong>Finalizada</strong></li>
-            <li>Questao 91 / 2025 - <strong>Finalizada</strong></li>
+            <li>Questao 92 / 2025 - <strong>Finalizada</strong></li>
+            <li>Questao 92 / 2025 - <strong>Finalizada</strong></li>
+            <li>Questao 93 / 2025 - <strong>Finalizada</strong></li>
+            <li>Questao 92 / 2025 - <strong>Finalizada</strong></li>
+            <li>Questao 93 / 2025 - <strong>Finalizada</strong></li>
         </ul>
     </div>
 </template>
@@ -20,7 +22,7 @@
     .resume{
         border: 1px solid rgb(28, 75, 47);
         border-radius: 6px;
-        padding: 10px;
+        padding: 20px;
         margin-left: 50px;
         text-align: left;
         color: white;
@@ -28,6 +30,7 @@
         margin-top: 10px;
         position: relative;
         width: 400px;
+        height: 340px;
     }
     .resume::after{
         content: '';
@@ -40,7 +43,7 @@
     }
     .title{
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-        font-size: 14px;
+        font-size: clamp(0rem, 5vw, 1.2rem);
     }
     .tarefas{
         display: flex;
@@ -49,5 +52,6 @@
     .lista-info{
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         line-height: 1.5;
+        font-size: clamp(0rem, 5vw, 1.2rem);
     }
 </style>

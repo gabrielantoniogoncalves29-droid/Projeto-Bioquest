@@ -60,6 +60,7 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    transition: 500ms ease;
   }
   .banner_description button:hover{
     background-color: rgb(39, 109, 67);

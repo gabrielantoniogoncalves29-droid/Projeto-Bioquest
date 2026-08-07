@@ -131,7 +131,7 @@ function corProgresso(valor){
                             <h3 class="high">Questões resolvidas</h3>
                         </div>
                         <p class="info-container">34</p>
-                        <p class="melhoria">+12% este mês</p>
+                        <p class="melhoria">+12% este mês <span class="material-symbols-outlined">trending_up</span></p>
                     </div>
                     <div class="container desempenho">
                         <div class="conteiner-line">
@@ -139,7 +139,7 @@ function corProgresso(valor){
                             <h3 class="high">Desempenho</h3>
                         </div>
                         <p class="info-container">78%</p>
-                        <p class="melhoria">+5% este mês</p>
+                        <p class="melhoria">+5% este mês <span class="material-symbols-outlined">trending_up</span></p>
                     </div>
                     <div class="container simulados">
                         <div class="conteiner-line">
@@ -147,15 +147,7 @@ function corProgresso(valor){
                             <h3 class="high">Dias praticados</h3>
                         </div>
                         <p class="info-container">15</p>
-                        <p class="melhoria">+26% este mês</p>
-                    </div>
-                    <div class="container ranking">
-                        <div class="conteiner-line">
-                            <span class="material-symbols-outlined circle">emoji_events</span>
-                            <h3 class="high">Questoes acertadas</h3>
-                        </div>
-                        <p class="info-container">28</p>
-                        <p class="melhoria">+7% este mês</p>
+                        <p class="melhoria">+26% este mês<span class="material-symbols-outlined">trending_up</span></p>
                     </div>
             </div>
 
@@ -172,10 +164,12 @@ function corProgresso(valor){
                      v-for="atividade in atividades"
                      :key="atividade.nome"
                 >
-                    <img :src="atividade.icone" :alt="atividade.nome" class="icone">
-                    <div class="activites-description">
-                        <h2> {{ atividade.nome }}</h2>
-                        <p>{{ atividade.descricao }}</p>
+                    <div class="esquerda">
+                        <img :src="atividade.icone" :alt="atividade.nome" class="icone">
+                        <div class="activites-description">
+                            <h2> {{ atividade.nome }}</h2>
+                            <p>{{ atividade.descricao }}</p>
+                        </div>
                     </div>
                     <div class="direita">
                         <p> {{ atividade.questoes }} questões</p>
@@ -196,6 +190,28 @@ function corProgresso(valor){
                 </div>
             </div>
 
+        </div>
+        <div class="lado-esquerdo">
+            <div class="grafico">
+                <div class="title-grafico">
+                    <span class="material-symbols-outlined circle">track_changes</span>
+                    <h1>Desempenho geral</h1>
+                </div>
+                <div class="circulo">
+                    <div class="centro">
+                        <h2>78%</h2>
+                        <p>Desempenho <br>medio</p>
+                    </div>
+                </div>
+                <div class="acertos">
+                    <div class="acertos-esquerda">
+                        <p>28 <br>Acertos</p>
+                    </div>
+                    <div class="acertos-direita">
+                        <p>6 <br>Erros</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -289,13 +305,12 @@ function corProgresso(valor){
         transform: scale(1.2);
     }
     .lista-datas li.ativo{
-        width: 10px;
-        height: 10px;
-        border: 1.5px solid rgb(28, 75, 47);
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         display: flex;
-        color: white;
-        background-color: rgb(28, 75, 47);
+        color: rgb(28, 75, 47);
+        background-color: rgba(186, 255, 186, 0.5);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.3s;
@@ -309,7 +324,7 @@ function corProgresso(valor){
     }
     .info-geral{
         display: grid;
-        grid-template-columns: repeat(4, 300px);
+        grid-template-columns: repeat(4, 305px);
         gap: 20px;
         margin-top: 50px;
         height: 180px;
@@ -319,6 +334,7 @@ function corProgresso(valor){
         flex-direction: column;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         border-radius: 12px;
+        transition: 300ms ease;
 
         cursor: pointer;
     }
@@ -366,8 +382,9 @@ function corProgresso(valor){
     }
     .melhoria{
         text-align: center;
-        color: rgb(0, 201, 0);
+        color: rgb(40, 209, 40);
         font-family: sans-serif;
+        font-weight: bold;
     }
     .link-questoes{
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
@@ -381,6 +398,7 @@ function corProgresso(valor){
         border-radius: 12px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         padding: 20px;
+        height: fit-content;
     }
     .conteiner-atividades{
         display: flex;
@@ -391,6 +409,8 @@ function corProgresso(valor){
         font-size: 14px;
         margin: 20px;
         background-color: white;
+        transition: 400ms ease;
+        height: 50px;
     }
     .conteiner-atividades:hover{
         transform: scale(1.05);
@@ -432,11 +452,14 @@ function corProgresso(valor){
     .high-title{
         padding-left: 10px;
     }
+    .esquerda{
+        display: flex;
+        align-items: center;
+    }
     .activites-description{
         display: flex;
         flex-direction: column;
         padding-left: 10px;
-        margin-top: 20px;
     }
     .activites-description p{
         margin: 0;
@@ -468,13 +491,88 @@ function corProgresso(valor){
         background-color: rgb(28, 75, 47);
         padding: 10px;
         color: white;
+        transition: 500ms ease;
         
         cursor: pointer;
     }
     .btn-continuar:hover{
-        background-color: rgb(39, 109, 67);
+        background-color: rgb(44, 112, 71);
     }
     .lado-direito{
         margin-bottom: 80px;
+        width: 960px;
+    }
+    .grafico{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        margin: 50px 40px;
+        width: 350px;
+        height: 400px;
+    }
+    .title-grafico{
+        display: flex;
+        align-items: center;
+    }
+    .title-grafico span{
+        color: rgb(44, 112, 71);
+        font-size: 2rem;
+    }
+    .title-grafico h1{
+        font-family: sans-serif;
+        font-size: 1.5rem;
+    }
+    .acertos{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        margin: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 40px;
+    }
+    .acertos-esquerda{
+        font-family: sans-serif;
+        font-weight: bold;
+        border-right: 2px solid #3b3b3b1a ;
+        padding-right: 38px;
+        text-align: center;
+    }
+    .acertos-direita{
+        font-family: sans-serif;
+        font-weight: bold;
+        text-align: center;
+    }
+    .circulo{
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+
+        background: conic-gradient(
+        #2e9d45 0% 78%,
+        #e5e5e5 78% 100%
+        );
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .centro{
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+    }
+    .centro h2{
+        margin: 0;
+        font-size: 2rem;
+    }
+    .centro p{
+        text-align: center;
+        margin: 0;
     }
 </style>

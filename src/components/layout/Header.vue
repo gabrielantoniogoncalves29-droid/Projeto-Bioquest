@@ -108,11 +108,12 @@ onUnmounted(() => {
 
 <style>
 .header {
-  height: 50px;
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
+  padding: 0 2rem;
   background: white;
   border-bottom: 2px solid rgba(54, 54, 54, 0.086);
 }
@@ -120,8 +121,7 @@ onUnmounted(() => {
 #logo {
   color: #1c4a3d;
   font-weight: bold;
-  font-size: 36px;
-  margin-left: 20px;
+  font-size: clamp(0rem, 5vw, 2.5rem);
 }
 
 #logo a{
@@ -129,10 +129,15 @@ onUnmounted(() => {
   color: inherit;
 }
 
+.nav{
+  display: flex;
+}
+
 .nav a{
   font-weight: bold;
-  padding: 10px 10px;
-  margin: 0 10px;
+  padding:  clamp(0.3rem, 1vw, 0.6rem)
+            clamp(0.5rem, 2vw, 1rem);
+  margin: 0 0.6rem;
   text-decoration: none;
   color: #296f5b;
 }
@@ -142,7 +147,7 @@ onUnmounted(() => {
 }
 
 .user {
-  font-size: 14px;
+  font-size: 1rem;
   position: relative;
   display: flex;
   gap: 25px;
