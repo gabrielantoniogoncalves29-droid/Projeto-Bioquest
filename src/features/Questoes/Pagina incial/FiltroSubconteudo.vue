@@ -7,15 +7,21 @@
       @click="aberto = !aberto"
     >
 
-      <div class="titulo">
+<div class="titulo">
 
-        <span class="material-icons seta">
-          {{ aberto ? 'expand_more' : 'chevron_right' }}
-        </span>
+  <span class="material-icons seta">
+    {{ aberto ? 'expand_more' : 'chevron_right' }}
+  </span>
 
-        <span>Subconteúdos</span>
+  <div class="texto">
 
-      </div>
+    <span class="nome">
+      Subconteúdos
+    </span>
+
+  </div>
+
+</div>
 
     </button>
 
@@ -27,7 +33,7 @@
       >
 
         <div
-          v-if="conteudosSelecionados.length === 0"
+          v-if="store.conteudosSelecionados.length === 0"
           class="vazio"
         >
 
@@ -38,7 +44,7 @@
         <template v-else>
 
           <label
-            v-if="grupos.length"
+            v-if="gruposDisponiveis.length"
             class="opcao todos"
           >
 
@@ -55,7 +61,7 @@
           <div class="lista-subconteudos">
 
             <div
-              v-for="conteudo in grupos"
+              v-for="conteudo in gruposDisponiveis"
               :key="conteudo.id"
               class="grupo"
             >
@@ -74,7 +80,7 @@
 
                 <input
                   type="checkbox"
-                  :checked="selecionados.includes(`${conteudo.id}-${index}`)"
+                  :checked="store.subconteudosSelecionados.includes(`${conteudo.id}-${index}`)"
                   @change="alternar(`${conteudo.id}-${index}`)"
                 >
 
@@ -99,71 +105,54 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 const aberto = ref(false)
 
-const props = defineProps({
+const store = useQuestoesFiltrosStore()
 
-  conteudos: {
-    type: Array,
-    default: () => []
-  },
+const gruposDisponiveis = computed(() => {
 
-  conteudosSelecionados: {
-    type: Array,
-    default: () => []
-  }
-
-})
-
-const grupos = computed(() => {
-
-  return props.conteudos.filter(conteudo =>
-    props.conteudosSelecionados.includes(conteudo.id)
+  return store.conteudosOpcoes.filter(conteudo =>
+    store.conteudosSelecionados.includes(conteudo.id)
   )
 
 })
 
-const selecionados = defineModel({
+function alternar(id) {
 
-  type: Array,
+  const index = store.subconteudosSelecionados.indexOf(id)
 
-  default: () => []
+  if (index >= 0) {
 
-})
-
-function alternar(id){
-
-  const index = selecionados.value.indexOf(id)
-
-  if(index >= 0){
-
-    selecionados.value.splice(index,1)
+    const novos = [...store.subconteudosSelecionados]
+    novos.splice(index, 1)
+    store.subconteudosSelecionados = novos
 
   }
+  else {
 
-  else{
-
-    selecionados.value.push(id)
+    store.subconteudosSelecionados = [...store.subconteudosSelecionados, id]
 
   }
 
 }
+
 function selecionarTodos() {
 
   if (todosSelecionados.value) {
 
-    selecionados.value = selecionados.value.filter(
-      id => !todosSubconteudos.value.includes(id)
+    store.subconteudosSelecionados = store.subconteudosSelecionados.filter(
+      id => !todosSubconteudosDisponiveis.value.includes(id)
     )
 
     return
 
   }
 
-  const novos = [...selecionados.value]
+  const novos = [...store.subconteudosSelecionados]
 
-  todosSubconteudos.value.forEach(id => {
+  todosSubconteudosDisponiveis.value.forEach(id => {
 
     if (!novos.includes(id)) {
 
@@ -173,14 +162,15 @@ function selecionarTodos() {
 
   })
 
-  selecionados.value = novos
+  store.subconteudosSelecionados = novos
 
 }
-const todosSubconteudos = computed(() => {
+
+const todosSubconteudosDisponiveis = computed(() => {
 
   const lista = []
 
-  grupos.value.forEach(conteudo => {
+  gruposDisponiveis.value.forEach(conteudo => {
 
     conteudo.subconteudos.forEach((_, index) => {
 
@@ -197,8 +187,8 @@ const todosSubconteudos = computed(() => {
 const todosSelecionados = computed(() => {
 
   return (
-    todosSubconteudos.value.length > 0 &&
-    todosSubconteudos.value.every(id => selecionados.value.includes(id))
+    todosSubconteudosDisponiveis.value.length > 0 &&
+    todosSubconteudosDisponiveis.value.every(id => store.subconteudosSelecionados.includes(id))
   )
 
 })
@@ -284,7 +274,40 @@ const todosSelecionados = computed(() => {
 
   gap:8px;
 
-  font-weight:600;
+
+}
+
+.titulo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+.texto{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  flex:1;
+
+  min-width:0;
+
+}
+
+.nome{
+
+  font-size:15px;
+
+  font-weight:700;
+
+  color:#1f2937;
 
 }
 
@@ -410,6 +433,46 @@ const todosSelecionados = computed(() => {
   opacity:0;
 
   transform:translateY(-8px);
+
+}
+
+@media (max-width: 768px) {
+
+  .cabecalho {
+
+    padding: 12px 14px;
+
+  }
+
+  .conteudo {
+
+    padding: 14px;
+
+  }
+
+  .lista-subconteudos {
+
+    max-height: 400px;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .opcao {
+
+    font-size: 14px;
+
+    padding: 10px 8px;
+
+  }
+
+  .nome-conteudo {
+
+    font-size: 14px;
+
+  }
 
 }
 

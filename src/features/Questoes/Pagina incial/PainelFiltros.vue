@@ -1,106 +1,56 @@
 <template>
 
-  <div class="painel-filtros">
+  <div
+    v-show="store.mostrarFiltros"
+    class="painel-filtros"
+  >
 
     <div class="coluna">
 
+      <FiltrosAccordion
+        titulo="Eixo Temático"
+        filtro="eixosSelecionados"
+      />
 
-<FiltrosAccordion
-    titulo="Eixo Temático"
-    :opcoes="eixos"
-    v-model="eixosSelecionados"
-/>
+      <FiltrosAccordion
+        titulo="Conteúdo"
+        filtro="conteudosSelecionados"
+      />
 
-<FiltrosAccordion
-    titulo="Conteúdo"
-    :opcoes="conteudos"
-    v-model="conteudosSelecionados"
-/>
+      <FiltrosSubconteudo />
 
-<FiltrosSubconteudo
-    :conteudos="conteudos"
-    :conteudosSelecionados="conteudosSelecionados"
-    v-model="subconteudosSelecionados"
-/>
     </div>
 
     <div class="coluna">
-<FiltrosAccordion
-    titulo="Ano da prova"
-    :opcoes="anos"
-    v-model="anosSelecionados"
-/>
 
-<FiltrosAccordion
-    titulo="Categoria"
-    :opcoes="niveis"
-    v-model="niveisSelecionados"
-/>
+      <FiltrosAccordion
+        titulo="Ano da prova"
+        filtro="anosSelecionados"
+      />
 
-<FiltrosAccordion
-    titulo="Estado"
-    :opcoes="estado"
-    v-model="estadoSelecionado"
-/>
+      <FiltrosAccordion
+        titulo="Categoria"
+        filtro="niveisSelecionados"
+      />
+
+      <FiltrosAccordion
+        titulo="Estado"
+        filtro="estadoSelecionado"
+      />
 
     </div>
+
   </div>
+
 </template>
 
 <script setup>
 
-import { ref, computed } from 'vue'
-
-import {
-  anos,
-  niveis,
-  eixos,
-  conteudos,
-  estado
-} from '@/features/Questoes/data/filtros.js'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 import FiltrosSubconteudo from './FiltroSubconteudo.vue'
 import FiltrosAccordion from './Filtros.vue'
 
-
-const anosSelecionados = ref([])
-
-const niveisSelecionados = ref([])
-
-const eixosSelecionados = ref([])
-
-const conteudosSelecionados = ref([])
-
-const subconteudosSelecionados = ref([])
-
-const estadoSelecionado = ref([])
-
-const subconteudosFiltrados = computed(() => {
-
-  const lista = []
-
-  conteudosSelecionados.value.forEach(id => {
-
-    const conteudo = conteudos.find(item => item.id === id)
-
-    if(!conteudo) return
-
-    conteudo.subconteudos.forEach((sub,index)=>{
-
-      lista.push({
-
-        id: `${id}-${index}`,
-
-        nome: sub
-
-      })
-
-    })
-
-  })
-
-  return lista
-
-})
+const store = useQuestoesFiltrosStore()
 
 </script>
 
@@ -147,6 +97,30 @@ const subconteudosFiltrados = computed(() => {
   .painel-filtros{
 
     grid-template-columns:1fr;
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .painel-filtros{
+
+    margin: 10px 12px;
+    padding: 16px;
+    gap: 16px;
+
+  }
+
+}
+
+@media(max-width:480px){
+
+  .painel-filtros{
+
+    margin: 8px;
+    padding: 12px;
+    border-radius: 10px;
 
   }
 

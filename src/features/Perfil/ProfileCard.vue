@@ -2,58 +2,104 @@
 
     <section class="profile-card">
 
-        <div class="profile-photo">
+        <div class="avatar-wrapper">
 
             <img
-                src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+                :src="fotoExibida"
                 alt="Foto do usuário"
+                class="avatar-img"
             >
 
-            <button class="change-photo">
-
-                Alterar foto
-
+            <button
+                class="avatar-edit-btn"
+                type="button"
+                title="Alterar foto"
+                @click="abrirSeletorDeArquivo"
+            >
+                <Camera :size="14" />
             </button>
+
+            <input
+                ref="inputArquivo"
+                type="file"
+                accept="image/*"
+                class="input-oculto"
+                @change="onArquivoSelecionado"
+            >
 
         </div>
 
         <div class="profile-info">
 
             <h1>
-
                 {{ perfil.nome }}
-
             </h1>
 
             <p class="email">
-
+                <Mail :size="14" />
                 {{ perfil.email }}
-
             </p>
+
         </div>
-      
-            <button class="edit-profile">
 
-                Editar perfil
-
-            </button>
+        <button
+            class="edit-profile"
+            type="button"
+            @click="perfil.abrirEdicaoPerfil()"
+        >
+            <Pencil :size="15" />
+            Editar perfil
+        </button>
 
     </section>
+
+    <EditProfileModal v-if="perfil.editandoPerfil" />
 
 </template>
 
 <script setup>
 
-import { computed } from "vue"
+import { ref, computed } from "vue"
+import { Camera, Pencil, Mail } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
+import EditProfileModal from "@/features/Perfil/EditProfileModal.vue"
+import fotoPadrao from "@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
 
 const perfil = usePerfilStore()
 
-const fotoPerfil = computed(() => {
+const inputArquivo = ref(null)
 
-    return perfil.foto 
+const fotoExibida = computed(() => {
+
+    return perfil.foto || fotoPadrao
 
 })
+
+function abrirSeletorDeArquivo() {
+
+    inputArquivo.value?.click()
+
+}
+
+function onArquivoSelecionado(evento) {
+
+    const arquivo = evento.target.files?.[0]
+
+    if (!arquivo) return
+
+    const leitor = new FileReader()
+
+    leitor.onload = () => {
+
+        perfil.alterarFoto(leitor.result)
+
+    }
+
+    leitor.readAsDataURL(arquivo)
+
+    evento.target.value = ""
+
+}
 
 </script>
 
@@ -62,109 +108,192 @@ const fotoPerfil = computed(() => {
 .profile-card{
 
     width:100%;
-    text-align: center;
     background:#fff;
 
-    border-radius:18px;
+    border:1px solid #e9ebea;
+    border-radius:14px;
 
-    padding:12px;
+    padding:24px 28px;
 
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:20px;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.06);
-
-}
- 
-
-
-.profile-photo{
-
-    display:flex;
-   
-    flex-direction:column;
-
-    align-items:center;
+    box-sizing:border-box;
 
 }
 
-.profile-photo img{
+.avatar-wrapper{
 
-    width:100px;
+    position:relative;
 
-    height:100px;
+    width:64px;
+    height:64px;
+
+    flex-shrink:0;
+
+}
+
+.avatar-img{
+
+    width:64px;
+    height:64px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    border:4px solid #eaf5efdf;
+    border:1px solid #e9ebea;
+
+    background:#f4f5f4;
+
+    display:block;
 
 }
 
-.change-photo{
+.avatar-edit-btn{
 
-    background-color: transparent;
-    color:#1E7A49;
+    position:absolute;
 
-    padding:10px 18px;
+    right:-2px;
+    bottom:-2px;
+
+    width:24px;
+    height:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:2px solid #fff;
+
+    background:#0d6b4d;
+    color:#fff;
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:background .2s ease;
 
 }
 
+.avatar-edit-btn:hover{
+
+    background:#0a5a40;
+
+}
+
+.input-oculto{
+
+    display:none;
+
+}
 
 .profile-info{
 
     display:flex;
-    gap: 0px;
     flex-direction:column;
+    gap:4px;
+
+    text-align:left;
+
+    flex:1;
+    min-width:0;
 
 }
 
 .profile-info h1{
 
-    font-size:34px;
-
-    color:#20352A;
-
+    font-size:20px;
     font-weight:700;
+
+    color:#1f2937;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 
 }
 
 .email{
 
-    font-size:17px;
+    display:flex;
+    align-items:center;
+    gap:6px;
 
-    color:#6E7681;
+    font-size:13.5px;
+
+    color:#6b7280;
 
 }
 
 .edit-profile{
 
+    display:flex;
+    align-items:center;
+    gap:7px;
+
     width:max-content;
 
-    margin-top:8px;
+    flex-shrink:0;
 
+    color:#0d6b4d;
 
+    border:1px solid #d6ded9;
 
-    color:#1E7A49;
+    border-radius:9px;
 
-    padding:10px 20px;
+    padding:9px 16px;
+
+    font-size:14px;
+    font-weight:600;
 
     cursor:pointer;
-    background-color: transparent;
-    transition:.25s;
+    background-color:#fff;
+    transition:.15s;
 
 }
 
-.edit-profile:hover, .change-photo:hover{
-border-bottom:#1c6f43;
+.edit-profile:hover{
+
+    border-color:#0d6b4d;
+    background-color:#f7faf8;
 
 }
 
+@media (max-width:640px){
+
+    .profile-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:24px 20px;
+
+    }
+
+    .profile-info{
+
+        align-items:center;
+        text-align:center;
+
+    }
+
+    .profile-info h1{
+
+        white-space:normal;
+
+    }
+
+    .edit-profile{
+
+        width:100%;
+        justify-content:center;
+
+    }
+
+}
 
 </style>

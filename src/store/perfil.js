@@ -1,109 +1,66 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
+import { buscarPerfil, atualizarPerfil } from "@/services/perfil"
 
 export const usePerfilStore = defineStore("perfil", () => {
 
+    // Estado de carregamento
+    const carregando = ref(false)
+    const carregado = ref(false)
 
-    const nome = ref("Gabriel Antônio ")
+    // Dados do usuário
+    const nome = ref("")
+    const email = ref("")
+    const foto = ref(null)
 
-    const email = ref("gabriel@email.com")
+    // Edição de perfil (controla o modal)
+    const editandoPerfil = ref(false)
+    const salvandoPerfil = ref(false)
 
-    const foto = ref("@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png")
-
-
-    const questoesSalvas = ref(48)
-
-    const questoesResolvidas = ref(236)
-
-    const acertos = ref(174)
-
-    const porcentagemAcertos = computed(() => {
-
-        if (questoesResolvidas.value === 0) return 0
-
-        return Math.round(
-            (acertos.value / questoesResolvidas.value) * 100
-        )
-
-    })
-
-
-    const questoesSalvasLista = ref([
-
-        {
-            id: 1,
-            ano: 2023,
-            numeroQuestao: 91,
-            conteudoId: 5,
-            subconteudo: "Citologia",
-            resumo: "Organelas celulares e suas funções."
-        },
-
-        {
-            id: 2,
-            ano: 2022,
-            numeroQuestao: 103,
-            conteudoId: 8,
-            subconteudo: "Ecologia",
-            resumo: "Relações ecológicas."
-        },
-
-        {
-            id: 3,
-            ano: 2021,
-            numeroQuestao: 114,
-            conteudoId: 11,
-            subconteudo: "Genética",
-            resumo: "Primeira Lei de Mendel."
-        }
-
-    ])
-
-    const questoesResolvidasLista = ref([
-
-        {
-            id: 10,
-            ano: 2023,
-            numeroQuestao: 102,
-            conteudoId: 4,
-            subconteudo: "Fisiologia",
-            resumo: "Sistema digestório."
-        },
-
-        {
-            id: 11,
-            ano: 2022,
-            numeroQuestao: 88,
-            conteudoId: 2,
-            subconteudo: "Botânica",
-            resumo: "Tecidos vegetais."
-        },
-
-        {
-            id: 12,
-            ano: 2021,
-            numeroQuestao: 97,
-            conteudoId: 14,
-            subconteudo: "Evolução",
-            resumo: "Seleção natural."
-        },
-
-        {
-            id: 13,
-            ano: 2020,
-            numeroQuestao: 105,
-            conteudoId: 9,
-            subconteudo: "Citologia",
-            resumo: "Membrana plasmática."
-        }
-
-    ])
+    // Questões
+    const questoesSalvasLista = ref([])
+    const questoesResolvidasLista = ref([])
+    const acertos = ref(0)
 
 
     const totalSalvas = computed(() => questoesSalvasLista.value.length)
 
     const totalResolvidas = computed(() => questoesResolvidasLista.value.length)
 
+    const questoesSalvas = totalSalvas
+    const questoesResolvidas = totalResolvidas
+
+    const porcentagemAcertos = computed(() => {
+
+        if (totalResolvidas.value === 0) return 0
+
+        return Math.round(
+            (acertos.value / totalResolvidas.value) * 100
+        )
+
+    })
+
+
+    async function carregarPerfil() {
+
+        if (carregando.value) return
+
+        carregando.value = true
+
+        const dados = await buscarPerfil()
+
+        nome.value = dados.nome
+        email.value = dados.email
+        foto.value = dados.foto
+
+        questoesSalvasLista.value = dados.questoesSalvas
+        questoesResolvidasLista.value = dados.questoesResolvidas
+        acertos.value = dados.acertos
+
+        carregando.value = false
+        carregado.value = true
+
+    }
 
     function alterarFoto(url) {
 
@@ -111,31 +68,63 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     }
 
+    function abrirEdicaoPerfil() {
+
+        editandoPerfil.value = true
+
+    }
+
+    function fecharEdicaoPerfil() {
+
+        editandoPerfil.value = false
+
+    }
+
+    async function salvarEdicaoPerfil({ nome: novoNome, email: novoEmail }) {
+
+        salvandoPerfil.value = true
+
+        await atualizarPerfil({ nome: novoNome, email: novoEmail })
+
+        nome.value = novoNome
+        email.value = novoEmail
+
+        salvandoPerfil.value = false
+        editandoPerfil.value = false
+
+    }
+
     function salvarQuestao(questao) {
 
-        questoesSalvasLista.value.unshift(questao)
+        const jaSalva = questoesSalvasLista.value.some(
+            item => item.id === questao.id
+        )
 
-        questoesSalvas.value = questoesSalvasLista.value.length
+        if (jaSalva) return
+
+        questoesSalvasLista.value.unshift(questao)
 
     }
 
     function removerQuestaoSalva(id) {
 
         questoesSalvasLista.value = questoesSalvasLista.value.filter(
-
             questao => questao.id !== id
-
         )
-
-        questoesSalvas.value = questoesSalvasLista.value.length
 
     }
 
     function adicionarQuestaoResolvida(questao, acertou = false) {
 
-        questoesResolvidasLista.value.unshift(questao)
+        const jaResolvida = questoesResolvidasLista.value.some(
+            item => item.id === questao.id
+        )
 
-        questoesResolvidas.value = questoesResolvidasLista.value.length
+        if (!jaResolvida) {
+
+            questoesResolvidasLista.value.unshift(questao)
+
+        }
 
         if (acertou) {
 
@@ -147,34 +136,37 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     return {
 
+        carregando,
+        carregado,
+
         nome,
-
         email,
-
         foto,
 
+        editandoPerfil,
+        salvandoPerfil,
+
         questoesSalvas,
-
         questoesResolvidas,
-
         acertos,
 
         porcentagemAcertos,
 
         questoesSalvasLista,
-
         questoesResolvidasLista,
 
         totalSalvas,
-
         totalResolvidas,
 
+        carregarPerfil,
         alterarFoto,
 
+        abrirEdicaoPerfil,
+        fecharEdicaoPerfil,
+        salvarEdicaoPerfil,
+
         salvarQuestao,
-
         removerQuestaoSalva,
-
         adicionarQuestaoResolvida
 
     }

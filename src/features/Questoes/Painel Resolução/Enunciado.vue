@@ -144,6 +144,8 @@ const enunciado = computed(
 
   justify-content:center;
 
+  min-width:0;
+
 }
 
 
@@ -162,6 +164,8 @@ const enunciado = computed(
 
   letter-spacing:.01em;
 
+  word-break: break-word;
+
 }
 
 
@@ -174,25 +178,69 @@ const enunciado = computed(
 
   color:#5b6472;
 
-}
-
-
-
-@media(max-width:1100px){
-
-
-.enunciado-container{
-
-grid-template-columns:1fr;
+  word-break: break-word;
 
 }
 
-.imagem-container{
+@container questao (max-width:760px){
 
-height:240px;
+  .enunciado-container{
+
+    grid-template-columns:1fr;
+    padding:18px;
+    gap:18px;
+
+  }
+
+  .imagem-container{
+
+    height:240px;
+
+  }
 
 }
 
+@container questao (max-width:420px){
+
+  .enunciado-container{
+
+    padding:14px;
+
+  }
+
+  .texto-container h2{
+
+    font-size:1rem;
+
+  }
+
+  .texto-container p{
+
+    font-size:.9rem;
+
+  }
+
+  .imagem-container{
+
+    height:190px;
+
+  }
+
+}
+
+@media (max-width:1100px){
+
+  .enunciado-container{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .imagem-container{
+
+    height:240px;
+
+  }
 
 }
 

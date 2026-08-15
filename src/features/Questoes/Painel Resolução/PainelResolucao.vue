@@ -136,9 +136,6 @@ async function copiarLink(){
     class="painel"
 >
 
-<!-- =========================================
-PROVA
-========================================== -->
 
 <div class="secao prova">
 
@@ -152,10 +149,6 @@ PROVA
 
 </div>
 
-
-<!-- =========================================
-OBJETO DE CONHECIMENTO
-========================================== -->
 
 <div class="secao central">
 
@@ -183,10 +176,6 @@ OBJETO DE CONHECIMENTO
 
 </div>
 
-
-<!-- =========================================
-CONTEÚDO / ESTRUTURA DO LIVRO DIDÁTICO
-========================================== -->
 
 <div class="secao central">
 
@@ -223,10 +212,6 @@ CONTEÚDO / ESTRUTURA DO LIVRO DIDÁTICO
 </div>
 
 
-<!-- =========================================
-NÍVEL DA QUESTÃO
-========================================== -->
-
 <div class="secao central">
 
     <div class="icone-caixa icone-nivel">
@@ -261,9 +246,6 @@ NÍVEL DA QUESTÃO
 </div>
 
 
-<!-- =========================================
-PERCENTUAL DE ACERTOS
-========================================== -->
 
 <div class="secao central">
 
@@ -318,10 +300,6 @@ PERCENTUAL DE ACERTOS
 
 </div>
 
-
-<!-- =========================================
-LINK DA QUESTÃO
-========================================== -->
 
 <div class="secao sem-borda link-final">
 
@@ -421,10 +399,6 @@ LINK DA QUESTÃO
 }
 
 
-/* ===========================================
-SEÇÃO BASE — sem cartão, só divisórias finas
-=========================================== */
-
 .secao{
 
     padding:18px 0;
@@ -455,10 +429,6 @@ SEÇÃO BASE — sem cartão, só divisórias finas
 
 }
 
-
-/* ===========================================
-PROVA — nem colado na borda, nem centralizado
-=========================================== */
 
 .prova{
 
@@ -518,11 +488,6 @@ PROVA — nem colado na borda, nem centralizado
 
 }
 
-
-/* ===========================================
-OBJETO DE CONHECIMENTO / CONTEÚDO / NÍVEL
-— conteúdo livre, distribuído, ícone sem fundo/sombra
-=========================================== */
 
 .secao.central{
 
@@ -625,10 +590,6 @@ OBJETO DE CONHECIMENTO / CONTEÚDO / NÍVEL
 }
 
 
-/* ===========================================
-PERCENTUAL DE ACERTOS
-=========================================== */
-
 .percentual-numero{
 
     font-size:15px;
@@ -670,14 +631,9 @@ PERCENTUAL DE ACERTOS
 }
 
 
-/* ===========================================
-LINK DA QUESTÃO
-=========================================== */
-
 .link-container{
 
     display:flex;
-    margin-bottom: 30px;
     align-items:center;
 
     gap:8px;
@@ -769,10 +725,6 @@ LINK DA QUESTÃO
 }
 
 
-/* ===========================================
-SCROLLBAR
-=========================================== */
-
 .painel::-webkit-scrollbar{
 
     width:6px;
@@ -799,10 +751,6 @@ SCROLLBAR
 
 }
 
-
-/* ===========================================
-RESPONSIVIDADE
-=========================================== */
 
 @media (max-width:1200px){
 

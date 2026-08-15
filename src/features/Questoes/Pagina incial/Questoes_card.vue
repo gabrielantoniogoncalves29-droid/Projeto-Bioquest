@@ -2,18 +2,18 @@
 
 import { computed } from 'vue'
 import { conteudos } from '@/features/Questoes/data/filtros.js'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 const props = defineProps({
   questao: {
     type: Object,
     required: true
-  },
-
-  modo: {
-    type: String,
-    default: 'lista'
   }
 })
+
+const filtrosStore = useQuestoesFiltrosStore()
+
+const modo = computed(() => filtrosStore.modoVisualizacao)
 
 const conteudo = computed(()=>{
   return conteudos.find(c => c.id === props.questao.conteudoId)
@@ -101,10 +101,6 @@ const icone = computed(()=>{
 </template>
 <style scoped>
 
-/* ===========================
-   CARD
-=========================== */
-
 .card {
   width: 100%;
   display: flex;
@@ -124,13 +120,9 @@ const icone = computed(()=>{
   box-shadow: 0 8px 24px rgba(0,0,0,.06);
 }
 
-/* ===========================
-   LISTA
-=========================== */
-
 .card.lista{
-  min-height:132px;      /* antes: 140px */
-  padding:16px 22px;     /* antes: 18px 22px */
+  min-height:132px;
+  padding:16px 22px;
 }
 
 .card.lista .left{
@@ -149,11 +141,11 @@ const icone = computed(()=>{
 }
 
 .card.lista .year{
-  font-size:15px;        /* antes: 14px */
+  font-size:15px;
 }
 
 .card.lista .meta{
-  font-size:14px;        /* antes: 13px */
+  font-size:14px;
 }
 
 .card.lista h3{
@@ -170,10 +162,6 @@ const icone = computed(()=>{
   font-size:15px;
   font-weight:600;
 }
-
-/* ===========================
-   GRADE
-=========================== */
 
 .card.grade{
   min-height:118px;
@@ -205,10 +193,6 @@ const icone = computed(()=>{
   height:35px;
   padding:0 16px;
 }
-
-/* ===========================
-   CONTEÚDO
-=========================== */
 
 .left{
   display:flex;
@@ -262,10 +246,6 @@ h3{
   overflow:hidden;
 }
 
-/* ===========================
-   BOTÃO
-=========================== */
-
 .actions{
   display:flex;
   align-items:center;
@@ -297,10 +277,6 @@ h3{
   color:#fff;
 }
 
-/* ===========================
-   MOBILE
-=========================== */
-
 @media (max-width:768px){
 
   .card{
@@ -326,6 +302,41 @@ h3{
   .card.grade .icon{
     width:66px;
     height:66px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .card{
+    padding:14px;
+    border-radius: 10px;
+  }
+
+  .card.lista,
+  .card.grade{
+    min-height: auto;
+  }
+
+  .top{
+    gap:12px;
+    row-gap: 6px;
+  }
+
+  h3{
+    font-size:14px !important;
+  }
+
+  .year{
+    font-size:13px;
+  }
+
+  .meta{
+    font-size:12px;
+  }
+
+  .btn{
+    font-size:14px;
   }
 
 }

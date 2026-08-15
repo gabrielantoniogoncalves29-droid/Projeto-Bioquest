@@ -1,14 +1,16 @@
 <script setup>
 import { useQuestoesStore } from '@/store/questoes_card.js'
+
 const store = useQuestoesStore()
 </script>
 <template>
 
   <div class="acoes-filtros">
 
-
-
-    <button class="btn-aplicar">
+    <button
+      class="btn-aplicar"
+      @click="store.carregarQuestoes()"
+    >
 
       <span class="material-icons">
         search
@@ -21,9 +23,6 @@ const store = useQuestoesStore()
   </div>
 
 </template>
-
-<script setup>
-</script>
 
 <style scoped>
 
@@ -125,6 +124,8 @@ const store = useQuestoesStore()
 
     align-items: stretch;
 
+    margin: 0px 20px 24px;
+
   }
 
   .btn-limpar,
@@ -133,6 +134,22 @@ const store = useQuestoesStore()
     width: 100%;
 
     justify-content: center;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .acoes-filtros {
+
+    margin: 0px 12px 20px;
+
+  }
+
+  .btn-aplicar {
+
+    height: 46px;
 
   }
 

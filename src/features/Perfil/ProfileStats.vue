@@ -1,102 +1,120 @@
 <template>
 
-    <section class="stats">
+    <section class="stats-section">
 
-        <div class="stat-card">
+        <div class="section-header">
 
-            <div class="icon saved">
-       <Bookmark :size="28" class="icon saved" />
+            <h2>Estatísticas</h2>
 
-            </div>
-
-            <div>
-
-                <span class="label">
-
-                    Questões salvas
-
-                </span>
-
-                <h2>
-
-                    {{ perfil.questoesSalvas }}
-
-                </h2>
-
-            </div>
+            <router-link
+                to="/estatisticas"
+                class="ver-mais"
+                title="Ver mais estatísticas"
+            >
+                <ArrowUpRight :size="16" />
+            </router-link>
 
         </div>
 
-        <div class="stat-card">
+        <div
+            v-if="perfil.carregando && !perfil.carregado"
+            class="stats skeleton"
+        >
 
-            <div class="icon solved">
-
-<CircleCheckBig :size="28" class="icon solved" />
-            </div>
-
-            <div>
-
-                <span class="label">
-
-                    Questões resolvidas
-
-                </span>
-
-                <h2>
-
-                    {{ perfil.questoesResolvidas }}
-
-                </h2>
-
-            </div>
+            <div
+                v-for="n in 3"
+                :key="n"
+                class="stat-card placeholder"
+            />
 
         </div>
 
-        <div class="stat-card stats-card">
+        <div
+            v-else
+            class="stats"
+        >
 
-            <div class="progress">
+            <div class="stat-card">
 
-                <svg viewBox="0 0 120 120">
+                <div class="icon saved">
+                    <Bookmark :size="22" />
+                </div>
 
-                    <circle
-                        class="bg"
-                        cx="60"
-                        cy="60"
-                        r="50"
-                    />
+                <div>
 
-                    <circle
-                        class="value"
-                        cx="60"
-                        cy="60"
-                        r="50"
-                        :stroke-dasharray="circunferencia"
-                        :stroke-dashoffset="offset"
-                    />
+                    <span class="label">
+                        Questões salvas
+                    </span>
 
-                </svg>
+                    <h2>
+                        {{ perfil.questoesSalvas }}
+                    </h2>
 
-                <span>
-
-                    {{ perfil.porcentagemAcertos }}%
-
-                </span>
+                </div>
 
             </div>
 
-            <div>
+            <div class="stat-card">
 
-                <span class="label">
+                <div class="icon solved">
+                    <CircleCheckBig :size="22" />
+                </div>
 
-                    Taxa de acertos
+                <div>
 
-                </span>
+                    <span class="label">
+                        Questões resolvidas
+                    </span>
 
-                <p>
+                    <h2>
+                        {{ perfil.questoesResolvidas }}
+                    </h2>
 
-                    Estatísticas gerais
+                </div>
 
-                </p>
+            </div>
+
+            <div class="stat-card stats-card">
+
+                <div class="progress">
+
+                    <svg viewBox="0 0 120 120">
+
+                        <circle
+                            class="bg"
+                            cx="60"
+                            cy="60"
+                            r="50"
+                        />
+
+                        <circle
+                            class="value"
+                            cx="60"
+                            cy="60"
+                            r="50"
+                            :stroke-dasharray="circunferencia"
+                            :stroke-dashoffset="offset"
+                        />
+
+                    </svg>
+
+                    <span>
+                        {{ perfil.porcentagemAcertos }}%
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <span class="label">
+                        Taxa de acertos
+                    </span>
+
+                    <p>
+                        Estatísticas gerais
+                    </p>
+
+                </div>
 
             </div>
 
@@ -111,6 +129,7 @@
 import { computed } from "vue"
 
 import { usePerfilStore } from "@/store/perfil"
+import { CircleCheckBig, Bookmark, ArrowUpRight } from "lucide-vue-next"
 
 const perfil = usePerfilStore()
 
@@ -118,19 +137,73 @@ const raio = 50
 
 const circunferencia = 2 * Math.PI * raio
 
-const offset = computed(() => {
+const percentualExibido = computed(() => {
 
-    return circunferencia * (1 - perfil.porcentagemAcertos / 100)
+    return Math.min(100, Math.max(0, perfil.porcentagemAcertos))
 
 })
 
+const offset = computed(() => {
 
-import { CircleCheckBig } from "lucide-vue-next"
-import { Bookmark } from "lucide-vue-next"
+    return circunferencia * (1 - percentualExibido.value / 100)
+
+})
 
 </script>
 
 <style scoped>
+
+.stats-section{
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+}
+
+.section-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+}
+
+.section-header h2{
+
+    font-size:17px;
+    font-weight:700;
+    color:#1f2937;
+
+}
+
+.ver-mais{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:32px;
+    height:32px;
+
+    border:1px solid #d6ded9;
+    border-radius:50%;
+
+    color:#0d6b4d;
+    background:#fff;
+
+    text-decoration:none;
+
+    transition:all .15s ease;
+
+}
+
+.ver-mais:hover{
+
+    border-color:#0d6b4d;
+    background:#f7faf8;
+
+}
 
 .stats{
 
@@ -138,35 +211,53 @@ import { Bookmark } from "lucide-vue-next"
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:24px;
+    gap:16px;
 
 }
 
 .stat-card{
 
-    background:white;
+    background:#fff;
 
-    border-radius:18px;
+    border:1px solid #e9ebea;
 
-    padding:24px;
+    border-radius:14px;
+
+    padding:20px;
 
     display:flex;
 
     align-items:center;
 
-    gap:20px;
+    gap:16px;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+.placeholder{
+
+    height:88px;
+
+    background:linear-gradient(90deg,#f4f6f5 25%,#eef1ef 37%,#f4f6f5 63%);
+    background-size:400% 100%;
+
+    animation:pulso 1.4s ease infinite;
+
+}
+
+@keyframes pulso{
+
+    0%{ background-position:100% 50%; }
+    100%{ background-position:0 50%; }
 
 }
 
 .icon{
 
-    width:64px;
+    width:44px;
 
-    height:64px;
+    height:44px;
 
-    border-radius:16px;
+    border-radius:10px;
 
     display:flex;
 
@@ -174,19 +265,21 @@ import { Bookmark } from "lucide-vue-next"
 
     align-items:center;
 
-    font-size:28px;
+    flex-shrink:0;
 
 }
 
-.saved{
+.icon.saved{
 
     background:#EAF7F0;
+    color:#1E7A49;
 
 }
 
-.solved{
+.icon.solved{
 
     background:#EEF4FF;
+    color:#2f5fd6;
 
 }
 
@@ -194,17 +287,18 @@ import { Bookmark } from "lucide-vue-next"
 
     color:#7A7A7A;
 
-    font-size:15px;
+    font-size:13px;
 
 }
 
 h2{
 
-    margin-top:8px;
+    margin-top:4px;
 
-    font-size:34px;
+    font-size:26px;
+    font-weight:700;
 
-    color:#20352A;
+    color:#1f2937;
 
 }
 
@@ -218,9 +312,11 @@ h2{
 
     position:relative;
 
-    width:100px;
+    width:72px;
 
-    height:100px;
+    height:72px;
+
+    flex-shrink:0;
 
 }
 
@@ -236,9 +332,9 @@ h2{
 
     fill:none;
 
-    stroke:#E6E6E6;
+    stroke:#eef0ef;
 
-    stroke-width:10;
+    stroke-width:9;
 
 }
 
@@ -246,11 +342,13 @@ h2{
 
     fill:none;
 
-    stroke:#2E8B57;
+    stroke:#0d6b4d;
 
-    stroke-width:10;
+    stroke-width:9;
 
     stroke-linecap:round;
+
+    transition:stroke-dashoffset .6s ease;
 
 }
 
@@ -266,27 +364,47 @@ h2{
 
     align-items:center;
 
-    font-size:20px;
+    font-size:15px;
 
     font-weight:700;
 
-    color:#20352A;
+    color:#1f2937;
+
+}
+
+.stats-card > div:last-child{
+
+    text-align:right;
 
 }
 
 p{
 
-    color:#888;
+    color:#9aa0a6;
 
-    margin-top:6px;
+    font-size:12.5px;
+
+    margin-top:2px;
 
 }
 
-@media(max-width:1100px){
+@media(max-width:900px){
 
     .stats{
 
         grid-template-columns:1fr;
+
+    }
+
+    .stats-card{
+
+        justify-content:flex-start;
+
+    }
+
+    .stats-card > div:last-child{
+
+        text-align:left;
 
     }
 

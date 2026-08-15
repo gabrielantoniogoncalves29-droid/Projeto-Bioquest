@@ -5,38 +5,25 @@ import { onMounted, computed } from 'vue'
 import QuestoesCard from './Questoes_card.vue'
 
 import { useQuestoesStore } from '@/store/questoes_card.js'
-
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 
 const store = useQuestoesStore()
+const filtrosStore = useQuestoesFiltrosStore()
 
 
-
-const questoes = computed(()=>{
+const questoes = computed(() => {
 
   return store.questoes
 
 })
 
 
-
-onMounted(()=>{
+onMounted(() => {
 
   store.carregarQuestoes()
 
 })
-
-
-
-defineProps({
-
-  modo:{
-    type:String,
-    default:'lista'
-  }
-
-})
-
 
 </script>
 
@@ -47,7 +34,7 @@ defineProps({
 
 <section
   class="lista-questoes"
-  :class="modo"
+  :class="filtrosStore.modoVisualizacao"
 >
 
 
@@ -79,7 +66,6 @@ Nenhuma questão encontrada.
 v-for="questao in questoes"
 
 :key="questao.id"
-:modo="modo"
 :questao="questao"
 
 />
@@ -175,6 +161,28 @@ v-for="questao in questoes"
 
 }
 
+@media(max-width:480px){
+
+  .lista-questoes{
+
+    padding:10px;
+
+  }
+
+  .lista-questoes.lista {
+
+    gap: 8px;
+
+  }
+
+  .resultado-acoes {
+
+    padding: 6px 10px;
+
+  }
+
+}
+
 
 
 .loading,
@@ -252,6 +260,20 @@ v-for="questao in questoes"
 
 .resolver-btn:hover .material-icons{
     transform:scale(1.08);
+}
+
+@media (max-width: 480px) {
+
+  .resolver-btn {
+
+    width: 100%;
+
+    margin: 0;
+
+    justify-content: center;
+
+  }
+
 }
 
 </style>

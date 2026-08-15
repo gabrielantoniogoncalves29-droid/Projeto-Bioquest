@@ -279,7 +279,7 @@ export const estado = [
   },
   {
     id:2,
-    nome:"Não respondidas"
+    nome:"Salvas"
   }
 ]
 

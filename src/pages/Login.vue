@@ -202,7 +202,7 @@ function goback(){
 
         background:
             linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45)),
-            url("@/assets/Design-sem-nome.jpg") center/cover no-repeat;
+            url("@/assets/Design-fundo-grande.jpg") center/cover no-repeat;
 
     }
 

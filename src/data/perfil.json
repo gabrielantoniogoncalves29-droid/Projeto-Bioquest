@@ -1,0 +1,82 @@
+{
+  "nome": "Gabriel Antônio",
+  "email": "gabriel@email.com",
+  "foto": null,
+  "acertos": 6,
+  "questoesSalvas": [
+    {
+      "serial": 3,
+      "id": 202594,
+      "ano": 2023,
+      "nivel": 3,
+      "conteudoId": 3,
+      "subconteudo": "Membrana plasmática",
+      "resumo": "Pesquisadores estudaram o transporte de substâncias através da membrana plasmática de células vegetais submetidas a diferentes concentrações salinas, observando o fenômeno de plasmólise e sua relação com o potencial hídrico celular."
+    },
+    {
+      "serial": 4,
+      "id": 202595,
+      "ano": 2021,
+      "nivel": 2,
+      "conteudoId": 17,
+      "subconteudo": "Cadeias e teias alimentares",
+      "resumo": "Um levantamento realizado em um ecossistema de manguezal registrou a diminuição de uma espécie de caranguejo, o que provocou alterações em cascata na cadeia alimentar local, afetando desde produtores até consumidores de níveis tróficos superiores."
+    },
+    {
+      "serial": 1,
+      "id": 202592,
+      "ano": 2025,
+      "nivel": 2,
+      "conteudoId": 15,
+      "subconteudo": "Genética e biotecnologia",
+      "resumo": "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra."
+    }
+  ],
+  "questoesResolvidas": [
+    {
+      "serial": 2,
+      "id": 202593,
+      "ano": 2025,
+      "nivel": 1,
+      "conteudoId": 14,
+      "subconteudo": "Sistema endócrino",
+      "resumo": "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas."
+    },
+    {
+      "serial": 5,
+      "id": 202596,
+      "ano": 2019,
+      "nivel": 1,
+      "conteudoId": 9,
+      "subconteudo": "Reprodução das bactérias",
+      "resumo": "Em um experimento de laboratório, uma cultura bacteriana foi mantida em meio rico em nutrientes e temperatura ideal, permitindo o acompanhamento do crescimento exponencial da população."
+    },
+    {
+      "serial": 6,
+      "id": 202597,
+      "ano": 2024,
+      "nivel": 3,
+      "conteudoId": 12,
+      "subconteudo": "Fisiologia das angiospermas",
+      "resumo": "Estudos sobre fotossíntese em plantas cultivadas sob diferentes intensidades luminosas mostraram variações significativas na taxa de produção de matéria orgânica."
+    },
+    {
+      "serial": 7,
+      "id": 202598,
+      "ano": 2022,
+      "nivel": 2,
+      "conteudoId": 16,
+      "subconteudo": "Evidências evolutivas",
+      "resumo": "Registros fósseis e estudos comparativos de anatomia e embriologia fornecem evidências consistentes sobre a ancestralidade comum entre diferentes grupos de seres vivos."
+    },
+    {
+      "serial": 8,
+      "id": 202599,
+      "ano": 2020,
+      "nivel": 1,
+      "conteudoId": 6,
+      "subconteudo": "Desenvolvimento embrionário humano",
+      "resumo": "O desenvolvimento embrionário humano envolve uma sequência de eventos que vai da fecundação até a formação completa dos órgãos, passando pelas fases de clivagem, gastrulação e organogênese."
+    }
+  ]
+}

@@ -4,60 +4,51 @@
 
         <div class="header">
 
-            <h2>
+            <div class="header-titulo">
 
-                {{ titulo }}
+                <h2>
+                    {{ titulo }}
+                </h2>
 
-            </h2>
+                <span class="contador">
+                    {{ questoes.length }}
+                </span>
 
-            <span class="contador">
+            </div>
 
-                {{ questoes.length }}
-
-            </span>
+            <router-link
+                to="/questoes"
+                class="ver-mais"
+                title="Ver mais questões"
+            >
+                <ArrowUpRight :size="16" />
+            </router-link>
 
         </div>
 
         <div
-            v-if="questoes.length"
+            v-if="perfil.carregando && !perfil.carregado"
             class="lista"
         >
 
             <div
+                v-for="n in 2"
+                :key="n"
+                class="placeholder"
+            />
+
+        </div>
+
+        <div
+            v-else-if="questoes.length"
+            class="lista"
+        >
+
+            <PerfilQuestaoCard
                 v-for="questao in questoes"
                 :key="questao.id"
-                class="item"
-            >
-
-                <div class="informacoes">
-
-                    <span class="numero">
-
-                        Questão {{ questao.numeroQuestao }}
-
-                    </span>
-
-                    <span class="ano">
-
-                        ENEM {{ questao.ano }}
-
-                    </span>
-
-                    <span class="conteudo">
-
-                        {{ questao.subconteudo }}
-
-                    </span>
-
-                </div>
-
-                <button class="abrir">
-
-                    Abrir
-
-                </button>
-
-            </div>
+                :questao="questao"
+            />
 
         </div>
 
@@ -66,7 +57,9 @@
             class="vazio"
         >
 
-            Nenhuma questão encontrada.
+            <FileQuestion :size="26" />
+
+            <p>Nenhuma questão encontrada.</p>
 
         </div>
 
@@ -78,7 +71,9 @@
 
 import { computed } from "vue"
 
+import { ArrowUpRight, FileQuestion } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
+import PerfilQuestaoCard from "@/features/Perfil/PerfilQuestaoCard.vue"
 
 const props = defineProps({
 
@@ -112,13 +107,16 @@ const questoes = computed(() => {
 
     background:#fff;
 
-    border:1px solid #e7ece9;
+    border:1px solid #e9ebea;
 
-    border-radius:12px;
+    border-radius:14px;
 
     padding:22px;
 
     box-sizing:border-box;
+
+    display:flex;
+    flex-direction:column;
 
 }
 
@@ -130,13 +128,21 @@ const questoes = computed(() => {
 
     align-items:center;
 
-    margin-bottom:20px;
+    margin-bottom:16px;
+
+}
+
+.header-titulo{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
 
 }
 
 .header h2{
 
-    font-size:19px;
+    font-size:16px;
 
     font-weight:700;
 
@@ -146,17 +152,46 @@ const questoes = computed(() => {
 
 .contador{
 
-    background:#e8f6ef;
+    background:#f4f6f5;
 
-    color:#0d6b4d;
+    color:#4b5563;
 
-    padding:5px 12px;
+    padding:3px 10px;
 
     border-radius:999px;
 
-    font-size:13px;
+    font-size:12.5px;
 
-    font-weight:700;
+    font-weight:600;
+
+}
+
+.ver-mais{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:32px;
+    height:32px;
+
+    border:1px solid #d6ded9;
+    border-radius:50%;
+
+    color:#0d6b4d;
+    background:#fff;
+
+    text-decoration:none;
+    flex-shrink:0;
+
+    transition:all .15s ease;
+
+}
+
+.ver-mais:hover{
+
+    border-color:#0d6b4d;
+    background:#f7faf8;
 
 }
 
@@ -166,151 +201,50 @@ const questoes = computed(() => {
 
     flex-direction:column;
 
-    gap:14px;
+    gap:10px;
 
 }
 
-.item{
+.placeholder{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:16px 18px;
-
-    background:#fff;
-
-    border:1px solid #e7ece9;
+    height:74px;
 
     border-radius:12px;
 
-    transition:all .25s ease;
+    background:linear-gradient(90deg,#f4f6f5 25%,#eef1ef 37%,#f4f6f5 63%);
+    background-size:400% 100%;
+
+    animation:pulso 1.4s ease infinite;
 
 }
 
-.item:hover{
+@keyframes pulso{
 
-    transform:translateY(-2px);
-
-    box-shadow:0 8px 24px rgba(0,0,0,.06);
-
-}
-
-.informacoes{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-.numero{
-
-    font-size:14.5px;
-
-    font-weight:700;
-
-    color:#1f2937;
-
-}
-
-.ano{
-
-    color:#6b7280;
-
-    font-size:13px;
-
-    font-weight:500;
-
-}
-
-.conteudo{
-
-    color:#1f6f5c;
-
-    font-size:13px;
-
-    font-weight:500;
-
-}
-
-.abrir{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    height:38px;
-
-    padding:0 18px;
-
-    flex-shrink:0;
-
-    margin-left:16px;
-
-    color:#0d6b4d;
-
-    background:#fff;
-
-    border:1px solid #0d6b4d;
-
-    border-radius:9px;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:all .2s ease;
-
-}
-
-.abrir:hover{
-
-    background:#0d6b4d;
-
-    color:#fff;
+    0%{ background-position:100% 50%; }
+    100%{ background-position:0 50%; }
 
 }
 
 .vazio{
 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+
     text-align:center;
 
-    color:#6b7280;
+    color:#9aa39d;
 
-    font-size:14px;
+    font-size:13.5px;
 
-    padding:40px 0;
+    padding:36px 0;
 
 }
 
-@media (max-width:768px){
+.vazio p{
 
-    .item{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:14px;
-
-    }
-
-    .abrir{
-
-        width:100%;
-
-        margin-left:0;
-
-    }
+    margin:0;
 
 }
 

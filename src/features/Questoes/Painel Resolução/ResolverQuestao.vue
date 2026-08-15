@@ -82,25 +82,45 @@ watch(
 
 <div class="breadcrumb">
 
-<span @click="goback()" class="voltar"> ⟵ Voltar</span>
+<span
+    class="voltar"
+    @click="goback()"
+>
+    ⟵ Voltar
+</span>
+
 <span class="separator">|</span>
-<span>Biblioteca de Questões</span>
-<span>/</span>
-<span>Pesquisa</span>
-<span>/</span>
-<span>Questão {{ questao?.id }}</span>
-<span>/</span>
-<span>Resolver</span>
+
+<router-link
+    to="/questoes"
+    class="link-crumb"
+>
+    Biblioteca de Questões
+</router-link>
+
+<span
+    v-if="questao"
+    class="separator-barra"
+>/</span>
+
+<router-link
+    v-if="questao"
+    :to="`/resolver/${questao.id}`"
+    class="link-crumb atual"
+>
+    Resolver questão {{ questao.id }}
+</router-link>
+
 </div>
 
-<div 
+<div
     v-if="!questao"
     class="loading"
   >
     Carregando questão...
 </div>
 
-<div 
+<div
   v-else
   class="resolver-layout"
   :class="classeLayout"
@@ -134,25 +154,29 @@ watch(
 
 .resolver-page {
   padding: 24px;
-  background: #fcfefd67;
+  background: #fcfefdd1;
   min-height: 100vh;
 }
+
 .painel-container {
 
-background:white;
+  background:white;
 
-border:1px solid #e6e6e6;
+  border:1px solid #e6e6e6;
 
-border-radius:16px;
+  border-radius:16px;
 
-overflow:visible;
+  overflow:visible;
 
-transition:width .35s ease;
+  transition:width .35s ease;
+
+  min-width:0;
 
 }
 
 .breadcrumb {
   display: flex;
+  flex-wrap: wrap;
   gap: 7px;
   align-items: center;
   margin-bottom: 24px;
@@ -161,8 +185,22 @@ transition:width .35s ease;
   font-size: 14px;
 }
 
-.breadcrumb span:hover {
+.link-crumb {
+
+  color: inherit;
+  text-decoration: none;
+
+}
+
+.link-crumb:hover {
   text-decoration: underline;
+  color: #0d6b4d;
+}
+
+.link-crumb.atual {
+
+  color: #5f6368;
+
 }
 
 .voltar {
@@ -171,7 +209,12 @@ transition:width .35s ease;
   cursor: pointer;
 }
 
-.separator {
+.voltar:hover {
+  text-decoration: underline;
+}
+
+.separator,
+.separator-barra {
   color: #d0d0d0;
 }
 
@@ -183,7 +226,12 @@ transition:width .35s ease;
   minmax(0, 2.4fr)
   380px;
 
+  align-items:start;
+
   gap:18px;
+
+  container-type: inline-size;
+  container-name: layout-resolver;
 
   transition:grid-template-columns .35s ease;
 
@@ -212,6 +260,56 @@ transition:width .35s ease;
   border: 1px solid #e6e6e6;
   border-radius: 16px;
   overflow: hidden;
+
+  min-width:0;
+
+  container-type: inline-size;
+  container-name: questao;
+}
+
+@media (max-width:900px){
+
+  .resolver-page{
+
+    padding:16px;
+
+  }
+
+  .resolver-layout,
+  .resolver-layout.barra-fechada{
+
+    grid-template-columns: minmax(0,1fr);
+
+    gap:16px;
+
+  }
+
+  .resolver-layout.barra-fechada .painel-container{
+
+    display:none;
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  .resolver-page{
+
+    padding:12px;
+
+  }
+
+  .breadcrumb{
+
+    font-size:12.5px;
+
+    gap:5px;
+
+    margin-bottom:16px;
+
+  }
+
 }
 
 </style>

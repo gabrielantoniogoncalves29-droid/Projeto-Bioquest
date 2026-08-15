@@ -83,12 +83,10 @@ function irProxima() {
 
       <span class="texto-info-static">
 
-
-Questão
-
-{{ navegacao.atual }}
-de
-{{ navegacao.total }}
+        Questão
+        {{ navegacao.atual }}
+        de
+        {{ navegacao.total }}
 
       </span>
 
@@ -143,6 +141,7 @@ de
       <button
           class="btn-salvar"
           :class="{ salvo }"
+          :title="salvo ? 'Salvo' : 'Salvar questão'"
           @click="salvarQuestao"
       >
 
@@ -152,7 +151,7 @@ de
 
           </span>
 
-          {{ salvo ? 'Salvo' : 'Salvar questão' }}
+          <span class="label">{{ salvo ? 'Salvo' : 'Salvar questão' }}</span>
 
       </button>
 
@@ -161,6 +160,8 @@ de
       <button
           @click="ui.alternarBarra"
           class="details-btn"
+          :class="{ aberto: ui.aberto }"
+          title="Ver detalhes"
       >
 
           <svg
@@ -187,7 +188,7 @@ de
 
           </svg>
 
-          <span>Ver detalhes</span>
+          <span class="label">Ver detalhes</span>
 
       </button>
 
@@ -214,8 +215,10 @@ de
 .header-linha {
   display: flex;
   align-items: center;
-  gap: 110px;
-  margin-left: 0px;  
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  column-gap: 24px;
 }
 
 .navegacao {
@@ -223,6 +226,7 @@ de
   display: flex;
   align-items: center;
   gap: 17px;
+  flex-shrink: 0;
 
 }
 
@@ -233,7 +237,15 @@ de
   font-weight: 550;
   font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   cursor: pointer;
+  white-space: nowrap;
   transition: all .15s ease;
+}
+
+.texto-info.disabled {
+
+  color: #c4c9d0;
+  cursor: not-allowed;
+
 }
 
 .texto-info-static {
@@ -242,9 +254,11 @@ de
   font-size: 15px;
   font-weight: 550;
   font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  white-space: nowrap;
+
 }
 
-.texto-info:hover {
+.texto-info:not(.disabled):hover {
   color: #0d6b4d;
 }
 
@@ -252,12 +266,15 @@ de
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0;
+  margin-left: 60px;
 }
 
 .acoes {
   display: flex;
   align-items: center;
   gap: 22px;
+  flex-shrink: 0;
   margin-left: auto;
 }
 
@@ -268,17 +285,14 @@ de
   border-radius: 999px;
   font-size: 16px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .codigo {
   color: #5d636f;
   font-size: 14px;
+  white-space: nowrap;
 }
-
-
-/* ===========================================
-BOTÃO SALVAR — com animação de confirmação
-=========================================== */
 
 .btn-salvar {
   display: flex;
@@ -289,6 +303,7 @@ BOTÃO SALVAR — com animação de confirmação
   color: #0d6b4d;
   font-weight: 600;
   font-size: 14px;
+  white-space: nowrap;
 
   border: 1px solid white;
   border-radius: 10px;
@@ -350,6 +365,8 @@ BOTÃO SALVAR — com animação de confirmação
 
     font-weight:600;
 
+    white-space:nowrap;
+
     cursor:pointer;
 
     transition:
@@ -359,19 +376,19 @@ BOTÃO SALVAR — com animação de confirmação
 
 }
 
-.details-btn:hover{
+.details-btn:hover,
+.details-btn.aberto{
 
     color:#0d6b4d;
 
 }
 
 
-
 .botao-toggle{
 
     flex-shrink:0;
 
-    transition:transform 5s ease;
+    transition:transform .25s ease;
 
 }
 
@@ -382,23 +399,77 @@ BOTÃO SALVAR — com animação de confirmação
 
 }
 
-.details-btn:hover .botao-toggle{
-
-    transform:translateX(1px);
-
-}
-
 
 .material-icons{
   vertical-align: middle;
   transform: scale(0.75);
 }
 
-@media (max-width: 768px) {
+
+@container questao (max-width: 760px) {
 
   .header-linha {
-    flex-wrap: wrap;
-    gap: 14px;
+
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 16px;
+
+  }
+
+  .navegacao {
+
+    justify-content: center;
+
+  }
+
+  .info-prova {
+
+    justify-content: center;
+
+  }
+
+  .acoes {
+
+    margin-left: 0;
+    justify-content: space-between;
+
+  }
+
+}
+
+@container questao (max-width: 420px) {
+
+  .header-questao {
+
+    padding: 16px 18px;
+
+  }
+
+  .texto-info,
+  .texto-info-static {
+
+    font-size: 13.5px;
+
+  }
+
+  .navegacao {
+
+    gap: 10px;
+
+  }
+
+  .btn-salvar .label,
+  .details-btn .label {
+
+    display: none;
+
+  }
+
+  .btn-salvar,
+  .details-btn {
+
+    padding: 8px;
+
   }
 
 }

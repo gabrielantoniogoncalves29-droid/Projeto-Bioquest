@@ -172,6 +172,8 @@ function selecionarAlternativa(letra) {
 
   color: #374151;
 
+  word-break: break-word;
+
 }
 
 
@@ -194,5 +196,49 @@ function selecionarAlternativa(letra) {
 
 }
 
+
+@container questao (max-width:420px){
+
+  .alternativas-container{
+
+    padding:12px 14px;
+    gap:6px;
+
+  }
+
+  .alternativa{
+
+    padding:9px 12px;
+    gap:10px;
+
+  }
+
+  .alternativa span{
+
+    font-size:13.5px;
+
+  }
+
+  .letra{
+
+    width:26px;
+    height:26px;
+    min-width:26px;
+    font-size:12px;
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  .alternativas-container{
+
+    padding:12px 14px;
+    gap:6px;
+
+  }
+
+}
 
 </style>

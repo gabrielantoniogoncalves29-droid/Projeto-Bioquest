@@ -1,23 +1,22 @@
 <script setup>
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useQuestoesStore } from '@/store/questoes_card.js'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 const store = useQuestoesStore()
-
-const props = defineProps({
-  modo: String
-})
-
-const emit = defineEmits([
-  'alterarModo'
-])
+const filtrosStore = useQuestoesFiltrosStore()
 
 const aberto = ref(false)
-const selecionado = ref('Mais recentes')
 
-function selecionar(opcao) {
-  selecionado.value = opcao
+const opcoesOrdenacao = [
+  { valor: 'recentes', nome: 'Mais recentes' },
+  { valor: 'antigas', nome: 'Mais antigas' },
+  { valor: 'maiorDificuldade', nome: 'Maior nível' },
+  { valor: 'menorDificuldade', nome: 'Menor nível' }
+]
+
+function selecionar(valor) {
+  filtrosStore.definirOrdenacao(valor)
   aberto.value = false
 }
 </script>
@@ -26,95 +25,86 @@ function selecionar(opcao) {
 <template>
 
 <section class="ordenacao">
-    <div class="resultado">
-      <strong> {{ store.totalQuestoes }} </strong>
-      <span>  questões encontradas</span>
-    </div>
+
+  <div class="resultado">
+    <strong>{{ store.totalQuestoes }}</strong>
+    <span>questões encontradas</span>
+  </div>
 
   <div class="direita">
 
-<div class="acoes">
-  <label>
-    Ordenar por:
-  </label>
+    <div class="ordenar-por">
 
-  <div
-    class="custom-select"
-    :class="{ open: aberto }"
-  >
-
-    <button
-      class="select-btn"
-      @click="aberto = !aberto"
-      type="button"
-    >
-      <span>{{ selecionado }}</span>
-
-      <span class="material-icons">
-        expand_more
-      </span>
-    </button>
-
-    <div class="select-menu">
+      <label>Ordenar por</label>
 
       <div
-        class="option"
-        :class="{ active: selecionado === 'Mais recentes' }"
-        @click="selecionar('Mais recentes')"
+        class="custom-select"
+        :class="{ open: aberto }"
       >
-        Mais recentes
-      </div>
 
-      <div
-        class="option"
-        :class="{ active: selecionado === 'Mais antigas' }"
-        @click="selecionar('Mais antigas')"
-      >
-        Mais antigas
-      </div>
+        <button
+          class="select-btn"
+          type="button"
+          @click="aberto = !aberto"
+        >
 
-      <div
-        class="option"
-        :class="{ active: selecionado === 'Maior nível' }"
-        @click="selecionar('Maior nível')"
-      >
-        Maior nível
-      </div>
+          <span>{{ opcoesOrdenacao.find(o => o.valor === filtrosStore.ordenacao)?.nome }}</span>
 
-      <div
-        class="option"
-        :class="{ active: selecionado === 'Menor nível' }"
-        @click="selecionar('Menor nível')"
-      >
-        Menor nível
+          <span class="material-icons seta">
+            expand_more
+          </span>
+
+        </button>
+
+        <Transition name="menu">
+          <div
+            v-if="aberto"
+            class="select-menu"
+          >
+
+            <button
+              v-for="opcao in opcoesOrdenacao"
+              :key="opcao.valor"
+              type="button"
+              class="option"
+              :class="{ active: filtrosStore.ordenacao === opcao.valor }"
+              @click="selecionar(opcao.valor)"
+            >
+
+              {{ opcao.nome }}
+
+            </button>
+
+          </div>
+        </Transition>
+
       </div>
 
     </div>
 
-  </div>
-</div>
-
     <div class="view-buttons">
 
-<button
-  class="view-btn"
-  :class="{ active: modo === 'lista' }"
-  @click="emit('alterarModo', 'lista')"
->
-  <span class="material-icons">
-    view_list
-  </span>
-</button>
+      <button
+        class="view-btn"
+        :class="{ active: filtrosStore.modoVisualizacao === 'lista' }"
+        title="Visualizar em lista"
+        @click="filtrosStore.definirModoVisualizacao('lista')"
+      >
+        <span class="material-icons">
+          view_list
+        </span>
+      </button>
 
-<button
-  class="view-btn"
-  :class="{ active: modo === 'grade' }"
-  @click="emit('alterarModo', 'grade')"
->
-  <span class="material-icons">
-    grid_view
-  </span>
-</button>
+      <button
+        class="view-btn"
+        :class="{ active: filtrosStore.modoVisualizacao === 'grade' }"
+        title="Visualizar em grade"
+        @click="filtrosStore.definirModoVisualizacao('grade')"
+      >
+        <span class="material-icons">
+          grid_view
+        </span>
+      </button>
 
     </div>
 
@@ -127,24 +117,6 @@ function selecionar(opcao) {
 
 
 <style scoped>
-
-
-.resultado {
-
-  color: #4b5563;
-
-  font-size: 16px;
-
-}
-
-.resultado strong {
-
-  color: #0d6b4d;
-
-  font-size: 17px;
-
-}
-
 .direita {
 
   display: flex;
@@ -175,6 +147,39 @@ function selecionar(opcao) {
 
 }
 
+.resultado {
+
+  color: #4b5563;
+
+  font-size: 15px;
+
+}
+
+.resultado strong {
+
+  color: #0d6b4d;
+
+  font-size: 16px;
+
+}
+
+.acoes {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+.acoes label {
+
+  font-size: 14px;
+
+  color: #6b7280;
+
+}
 
 .acoes select {
 
@@ -216,35 +221,168 @@ function selecionar(opcao) {
     border-color: #b6d8bd;
 }
 
+.ordenar-por{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+.ordenar-por label{
+
+  font-size:14px;
+
+  color:#6b7280;
+
+  white-space:nowrap;
+
+}
+
 .custom-select{
-    position: relative;
-    width: 180px;
+
+  position:relative;
+
+  width:180px;
+
 }
 
 .select-btn{
-    width:100%;
-    height:40px;
-    margin: 0px 30px 0px 10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
 
-    padding:0px 15px 0px 16px;
+  width:100%;
 
-    background:#fff;
-    border:1px solid #d1d5db;
-    border-radius:10px;
+  height:40px;
 
-    cursor:pointer;
+  display:flex;
 
-    font-size:14px;
-    color:#374151;
+  align-items:center;
 
-    transition:.2s;
+  justify-content:space-between;
+
+  padding:0 14px;
+
+  background:#fff;
+
+  border:1px solid #d1d5db;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-size:14px;
+
+  color:#374151;
+
+  transition:.2s;
+
 }
 
 .select-btn:hover{
-    border-color:#0d6b4d;
+
+  border-color:#0d6b4d;
+
+}
+
+.select-btn:focus{
+
+  outline:none;
+
+  border-color:#0d6b4d;
+
+  box-shadow:0 0 0 3px rgba(13,107,77,.10);
+
+}
+
+.select-btn .material-icons{
+
+  font-size:22px;
+
+  color:#6b7280;
+
+  transition:.25s;
+
+}
+
+.custom-select.open .seta{
+
+  transform:rotate(180deg);
+
+}
+
+.select-menu{
+
+  position:absolute;
+
+  top:calc(100% + 6px);
+
+  left:0;
+
+  width:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  background:white;
+
+  border:1px solid #e5e7eb;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+  z-index:100;
+
+}
+
+.option{
+
+  width:100%;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:12px 14px;
+
+  border:none;
+
+  background:white;
+
+  text-align:left;
+
+  cursor:pointer;
+
+  font-size:14px;
+
+  color:#374151;
+
+  transition:.15s;
+
+}
+
+.option:hover{
+
+  background:#f3f4f6;
+
+  color:#0d6b4d;
+
+}
+
+.option.active{
+
+  background:#e8f5eb;
+
+  color:#0d6b4d;
+
+  font-weight:500;
+
 }
 
 .select-btn .material-icons{
@@ -263,9 +401,9 @@ function selecionar(opcao) {
 }
 
 .option{
-
+    padding:14px 14px;
     cursor:pointer;
-padding:11px 12px;
+
     font-size:14px;
 
     transition:.15s;
@@ -276,14 +414,9 @@ padding:11px 12px;
 }
 
 .option.active{
-    background:transparent;
+    background:#e8f5eb;
     color:#0d6b4d;
-    font-weight:600;
-}
-
-.option:hover{
-    background:#f6f7f8;
-    color:#0d6b4d;
+    font-weight:500;
 }
 
 .material-icons{
@@ -291,7 +424,7 @@ padding:11px 12px;
 }
 .select-menu{
     position:absolute;
-    padding:6px;
+
     left:0;
 
     width:100%;
@@ -338,55 +471,35 @@ padding:11px 12px;
 }
 
 .resolver-btn{
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 6px;
+    color: #383939;
+    font-family: Arial, sans-serif;
+    background: #e8f5eb59;
+    font-size: 15px;
+    height: 32px;
+    font-weight: 500;
+    cursor: pointer;
 
-    padding:0px 15px 0px 16px;
-    width:100%;
-    height:40px;
-
-    background:#fafafa36;
-
-    border:1px solid #5e5e5c7c;
-
-    border-radius:9px;
-
-    color:#444;
-
-    transition:.2s;
-}
-
-.resolver-btn:hover{
-
-    background:#f3f6f4;
-    border-color:#dbe8df;
-
+    transition: .2s;
 }
 
 .resolver-btn .material-icons{
-    font-size:21px;
-    color:#1f6f5c;
+    font-size: 22px;
+    transition: .2s;
 }
 
-
+.resolver-btn:hover{
+    color: #0d6b4d;
+}
 
 .resolver-btn:hover .material-icons{
-    transform:scale(1.08);
-}
-
-.acoes{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.acoes label{
-    font-size:14px;
-    font-weight:500;
-    color:#6b7280;
-    white-space:nowrap;
+    transform: translateX(3px);
 }
 
 @media (max-width: 768px) {

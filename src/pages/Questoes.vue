@@ -4,25 +4,15 @@
 
     <BibliotecaHeader />
 
-    <BarraPesquisa
-      :filtros-abertos="mostrarFiltros"
-      @toggle-filtros="toggleFiltros"
-    />
+    <BarraPesquisa />
 
-    <PainelFiltros
-      v-show="mostrarFiltros"
-    />
+    <PainelFiltros />
+
     <FiltrosAcoes/>
-<Ordenacao
-  :modo="modoVisualizacao"
-  @alterarModo="modoVisualizacao = $event"
-/>
 
-<ListaQuestoes
-  :modo="modoVisualizacao"
-/>
+    <Ordenacao />
 
-
+    <ListaQuestoes />
 
   </main>
 
@@ -30,7 +20,6 @@
 
 <script setup>
 
-import { ref } from 'vue'
 import Header from '@/components/layout/Header.vue'
 import BibliotecaHeader from '@/features/Questoes/Pagina incial/BibliotecaHeader.vue'
 import BarraPesquisa from '@/features/Questoes/Pagina incial/BarraPesquisa.vue'
@@ -38,16 +27,6 @@ import PainelFiltros from '@/features/Questoes/Pagina incial/PainelFiltros.vue'
 import Ordenacao from '@/features/Questoes/Pagina incial/Ordenacao.vue'
 import ListaQuestoes from '@/features/Questoes/Pagina incial/ListaQuestoes.vue'
 import FiltrosAcoes from '@/features/Questoes/Pagina incial/FiltrosAcoes.vue'
-
-const mostrarFiltros = ref(true)
-
-function toggleFiltros() {
-
-  mostrarFiltros.value = !mostrarFiltros.value
-
-}
-
-const modoVisualizacao = ref('lista')
 
 </script>
 
@@ -70,6 +49,18 @@ const modoVisualizacao = ref('lista')
   .biblioteca-page {
 
     padding: 18px;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .biblioteca-page {
+
+    padding: 12px;
+
+    gap: 16px;
 
   }
 

@@ -33,48 +33,48 @@
     </button>
 
     <Transition name="accordion">
-<div
-  v-if="aberto"
-  class="conteudo"
->
-
-  <label class="opcao destaque">
-
-    <input
-      type="checkbox"
-      :checked="todosSelecionados"
-      @change="selecionarTodos"
-    >
-
-    Todos
-
-  </label>
-
-  <div class="lista-opcoes">
-
-    <div class="grupo">
-
-      <label
-        v-for="opcao in opcoes"
-        :key="opcao.id"
-        class="opcao"
+      <div
+        v-if="aberto"
+        class="conteudo"
       >
 
-        <input
-          type="checkbox"
-          :checked="selecionados.includes(opcao.id)"
-          @change="alternarOpcao(opcao.id)"
-        >
+        <label class="opcao destaque">
 
-        {{ opcao.nome }}
+          <input
+            type="checkbox"
+            :checked="todosSelecionados"
+            @change="selecionarTodos"
+          >
 
-      </label>
+          Todos
 
-    </div>
+        </label>
 
-  </div>
+        <div class="lista-opcoes">
 
-</div>
+          <div class="grupo">
+
+            <label
+              v-for="opcao in opcoes"
+              :key="opcao.id"
+              class="opcao"
+            >
+
+              <input
+                type="checkbox"
+                :checked="selecionados.includes(opcao.id)"
+                @change="alternarOpcao(opcao.id)"
+              >
+
+              {{ opcao.nome }}
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
     </Transition>
 
   </div>
@@ -84,101 +84,115 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 const aberto = ref(false)
 
 const props = defineProps({
 
-  titulo:{
-    type:String,
-    required:true
+  titulo: {
+    type: String,
+    required: true
   },
 
-  opcoes:{
-    type:Array,
-    default:()=>[]
+  filtro: {
+    type: String,
+    required: true
   }
 
 })
 
-const selecionados = defineModel({
+const store = useQuestoesFiltrosStore()
 
-  type:Array,
+const opcoesPorFiltro = {
+  anosSelecionados: 'anosOpcoes',
+  niveisSelecionados: 'niveisOpcoes',
+  eixosSelecionados: 'eixosOpcoes',
+  conteudosSelecionados: 'conteudosOpcoes',
+  estadoSelecionado: 'estadoOpcoes'
+}
 
-  default:()=>[]
+const opcoes = computed(() => store[opcoesPorFiltro[props.filtro]])
+
+const selecionados = computed({
+
+  get: () => store[props.filtro],
+
+  set: (valor) => { store[props.filtro] = valor }
 
 })
 
-const todosSelecionados = computed(()=>{
+const todosSelecionados = computed(() => {
 
-  return props.opcoes.length > 0 &&
-         selecionados.value.length === props.opcoes.length
+  return opcoes.value.length > 0 &&
+         selecionados.value.length === opcoes.value.length
 
 })
 
-const resumo = computed(()=>{
+const resumo = computed(() => {
 
-  if(todosSelecionados.value){
+  if (todosSelecionados.value) {
 
     return 'Todos'
 
   }
 
-  const nomes = props.opcoes
-    .filter(opcao=>selecionados.value.includes(opcao.id))
-    .map(opcao=>opcao.nome)
+  const nomes = opcoes.value
+    .filter(opcao => selecionados.value.includes(opcao.id))
+    .map(opcao => opcao.nome)
 
-  if(nomes.length===0){
+  if (nomes.length === 0) {
 
     return ''
 
   }
 
-  if(nomes.length===1){
+  if (nomes.length === 1) {
 
     return nomes[0]
 
   }
 
-  if(nomes.length===2){
+  if (nomes.length === 2) {
 
     return `${nomes[0]}, ${nomes[1]}`
 
   }
 
-  return `${nomes[0]}, ${nomes[1]} +${nomes.length-2}`
+  return `${nomes[0]}, ${nomes[1]} +${nomes.length - 2}`
 
 })
 
-function alternarOpcao(id){
+function alternarOpcao(id) {
 
   const index = selecionados.value.indexOf(id)
 
-  if(index>=0){
+  if (index >= 0) {
 
-    selecionados.value.splice(index,1)
+    const novos = [...selecionados.value]
+    novos.splice(index, 1)
+    selecionados.value = novos
 
   }
+  else {
 
-  else{
-
-    selecionados.value.push(id)
+    selecionados.value = [...selecionados.value, id]
 
   }
 
 }
 
-function selecionarTodos(){
+function selecionarTodos() {
 
-  if(todosSelecionados.value){
+  if (todosSelecionados.value) {
 
-    selecionados.value=[]
+    selecionados.value = []
 
     return
 
   }
 
-  selecionados.value=props.opcoes.map(opcao=>opcao.id)
+  selecionados.value = opcoes.value.map(opcao => opcao.id)
 
 }
 
@@ -373,6 +387,46 @@ function selecionarTodos(){
   opacity:0;
 
   transform:translateY(-8px);
+
+}
+
+@media (max-width: 768px) {
+
+  .cabecalho {
+
+    padding: 14px;
+
+  }
+
+  .nome {
+
+    font-size: 14px;
+
+  }
+
+  .conteudo {
+
+    padding: 14px;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .lista-opcoes {
+
+    max-height: 260px;
+
+  }
+
+  .opcao {
+
+    font-size: 14px;
+
+    padding: 10px 8px;
+
+  }
 
 }
 

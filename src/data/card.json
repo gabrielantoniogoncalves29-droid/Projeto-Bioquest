@@ -1,63 +1,74 @@
 [
- {
-  "serial": 1,
-  "id":202592,
-  "ano":2025,
-  "conteudoId":15,
-  "subconteudo":"Genética e biotecnologia",
-  "resumo":
-  "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano."
- },
-
-
- {
-  "serial": 2,
-  "id":202593,
-  "ano":2025,
-  "conteudoId":14,
-  "subconteudo":"sistema endócrino",
-  "resumo":
-  "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água."
- },
   {
-  "serial": 1,
-  "id":202592,
-  "ano":2025,
-  "conteudoId":15,
-  "subconteudo":"Genética e biotecnologia",
-  "resumo":
-  "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano."
- },
-
-
- {
-  "serial": 2,
-  "id":202593,
-  "ano":2025,
-  "conteudoId":14,
-  "subconteudo":"sistema endócrino",
-  "resumo":
-  "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água."
- },
+    "serial": 1,
+    "id": 202592,
+    "ano": 2025,
+    "nivel": 2,
+    "conteudoId": 15,
+    "subconteudo": "Genética e biotecnologia",
+    "resumo": "A maioria dos seres vivos tem um relógio biológico, conhecido como ciclo circadiano, que regula mudanças metabólicas e comportamentais ao longo de aproximadamente 24 horas. Pesquisadores transferiram genes relacionados ao relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli."
+  },
   {
-  "serial": 1,
-  "id":202592,
-  "ano":2025,
-  "conteudoId":15,
-  "subconteudo":"Genética e biotecnologia",
-  "resumo":
-  "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano."
- },
-
-
- {
-  "serial": 2,
-  "id":202593,
-  "ano":2025,
-  "conteudoId":14,
-  "subconteudo":"sistema endócrino",
-  "resumo":
-  "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água."
- }
-
+    "serial": 2,
+    "id": 202593,
+    "ano": 2025,
+    "nivel": 1,
+    "conteudoId": 13,
+    "subconteudo": "Características dos animais e dos principais filos",
+    "resumo": "Funcionários de um zoológico observaram um aumento na mortalidade de aves aquáticas por afogamento. Os animais apresentavam dificuldade de flutuação porque suas penas ficavam encharcadas, prejudicando a impermeabilização necessária para a vida no ambiente aquático."
+  },
+  {
+    "serial": 3,
+    "id": 202594,
+    "ano": 2023,
+    "nivel": 3,
+    "conteudoId": 3,
+    "subconteudo": "Membrana plasmática",
+    "resumo": "Pesquisadores estudaram o transporte de substâncias através da membrana plasmática de células vegetais submetidas a diferentes concentrações salinas, observando o fenômeno de plasmólise e sua relação com o potencial hídrico celular."
+  },
+  {
+    "serial": 4,
+    "id": 202595,
+    "ano": 2021,
+    "nivel": 2,
+    "conteudoId": 17,
+    "subconteudo": "Cadeias e teias alimentares",
+    "resumo": "Um levantamento realizado em um ecossistema de manguezal registrou a diminuição de uma espécie de caranguejo, provocando alterações em cascata na cadeia alimentar local e afetando organismos de diferentes níveis tróficos."
+  },
+  {
+    "serial": 5,
+    "id": 202596,
+    "ano": 2019,
+    "nivel": 1,
+    "conteudoId": 9,
+    "subconteudo": "Reprodução das bactérias",
+    "resumo": "Em um experimento de laboratório, uma cultura bacteriana foi mantida em meio rico em nutrientes e temperatura ideal. Os pesquisadores acompanharam o crescimento da população e a reprodução por fissão binária ao longo de várias horas."
+  },
+  {
+    "serial": 6,
+    "id": 202597,
+    "ano": 2024,
+    "nivel": 3,
+    "conteudoId": 12,
+    "subconteudo": "Fisiologia das angiospermas (nutrição, fotossíntese e hormônios vegetais)",
+    "resumo": "Estudos sobre plantas cultivadas sob diferentes intensidades luminosas mostraram variações significativas na taxa de produção de matéria orgânica, evidenciando a relação entre a disponibilidade de luz e a eficiência da fotossíntese."
+  },
+  {
+    "serial": 7,
+    "id": 202598,
+    "ano": 2022,
+    "nivel": 2,
+    "conteudoId": 16,
+    "subconteudo": "Evidências evolutivas",
+    "resumo": "A comparação de sequências de DNA entre diferentes espécies de primatas revelou elevado grau de semelhança genética, fornecendo evidências moleculares que sustentam a hipótese de ancestralidade comum."
+  },
+  {
+    "serial": 8,
+    "id": 202599,
+    "ano": 2020,
+    "nivel": 1,
+    "conteudoId": 6,
+    "subconteudo": "Desenvolvimento embrionário humano",
+    "resumo": "Durante o acompanhamento pré-natal, exames permitiram observar fases iniciais do desenvolvimento embrionário humano, incluindo a formação dos folhetos germinativos que darão origem aos diferentes tecidos do organismo."
+  }
 ]

@@ -5,23 +5,166 @@
     "numeroQuestao": 92,
     "banca": "Enem",
     "prova": "Prova Azul",
-
+    "objeto": {
+      "id": 2
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Genética",
+        "icone": "15"
+      },
+      "assunto": {
+        "nome": "Genética e biotecnologia"
+      }
+    },
+    "nivel": "Intermediário",
+    "taxaAcerto": 78
+  },
+  {
+    "id": 202593,
+    "ano": 2025,
+    "numeroQuestao": 93,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 3
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Zoologia",
+        "icone": "13"
+      },
+      "assunto": {
+        "nome": "Características dos animais e dos principais filos"
+      }
+    },
+    "nivel": "Fácil",
+    "taxaAcerto": 78
+  },
+  {
+    "id": 202594,
+    "ano": 2023,
+    "numeroQuestao": 94,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 1
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Citologia",
+        "icone": "3"
+      },
+      "assunto": {
+        "nome": "Membrana plasmática"
+      }
+    },
+    "nivel": "Difícil",
+    "taxaAcerto": 71
+  },
+  {
+    "id": 202595,
+    "ano": 2021,
+    "numeroQuestao": 95,
+    "banca": "Enem",
+    "prova": "Prova Azul",
     "objeto": {
       "id": 4
     },
-
     "conteudo": {
       "area": {
-        "nome": "Fisiologia",
+        "nome": "Ecologia",
+        "icone": "17"
+      },
+      "assunto": {
+        "nome": "Cadeias e teias alimentares"
+      }
+    },
+    "nivel": "Intermediário",
+    "taxaAcerto": 82
+  },
+  {
+    "id": 202596,
+    "ano": 2019,
+    "numeroQuestao": 96,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 3
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Seres procarióticos",
+        "icone": "9"
+      },
+      "assunto": {
+        "nome": "Reprodução das bactérias"
+      }
+    },
+    "nivel": "Fácil",
+    "taxaAcerto": 88
+  },
+  {
+    "id": 202597,
+    "ano": 2024,
+    "numeroQuestao": 97,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 3
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Botânica",
+        "icone": "12"
+      },
+      "assunto": {
+        "nome": "Fisiologia das angiospermas (nutrição, fotossíntese e hormônios vegetais)"
+      }
+    },
+    "nivel": "Difícil",
+    "taxaAcerto": 85
+  },
+  {
+    "id": 202598,
+    "ano": 2022,
+    "numeroQuestao": 98,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 5
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Evolução",
         "icone": "16"
       },
       "assunto": {
-        "nome": "Sistema Endócrino"
+        "nome": "Evidências evolutivas"
       }
     },
-
-    "nivel": "Cognitivo",
-
-    "taxaAcerto": 78
+    "nivel": "Intermediário",
+    "taxaAcerto": 76
+  },
+  {
+    "id": 202599,
+    "ano": 2020,
+    "numeroQuestao": 99,
+    "banca": "Enem",
+    "prova": "Prova Azul",
+    "objeto": {
+      "id": 1
+    },
+    "conteudo": {
+      "area": {
+        "nome": "Reprodução e embriologia",
+        "icone": "6"
+      },
+      "assunto": {
+        "nome": "Desenvolvimento embrionário humano"
+      }
+    },
+    "nivel": "Fácil",
+    "taxaAcerto": 84
   }
 ]

@@ -1,135 +1,474 @@
 [
- {
-  "id":202592,
-  "ano":"Enem 2025",
-  "enunciado":{
-
-    "imagem":"",
-
-    "alt":"",
-
-    "textoPrincipal":
-    "A maioria dos seres vivos tem um relógio biológico (ciclo circadiano), que regula as mudanças metabólicas e comportamentais de acordo com o ciclo de 24 horas de rotação da Terra. Em 2015, um artigo publicado na revista Science Advantage mostrou ser possível a transferência dos genes do relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo não circadiano.",
-
-    "textoComplementar":
-    "Estarão presentes no organismo geneticamente modificado os genes do: "
-
+  {
+    "id": 202592,
+    "ano": "Enem 2025",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "A maioria dos seres vivos tem um relógio biológico, conhecido como ciclo circadiano, que regula mudanças metabólicas e comportamentais de acordo com um ciclo de aproximadamente 24 horas. Em 2015, um artigo científico mostrou ser possível transferir genes relacionados ao relógio circadiano da cianobactéria Synechococcus elongatus para o genoma da bactéria Escherichia coli, um organismo que originalmente não apresenta esse mecanismo.",
+      "textoComplementar": "No organismo geneticamente modificado, estarão presentes genes relacionados ao:"
+    },
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "metabolismo de E. coli, apenas."
+      },
+      {
+        "letra": "B",
+        "texto": "ciclo circadiano de E. coli, apenas."
+      },
+      {
+        "letra": "C",
+        "texto": "metabolismo de S. elongatus e ao ciclo circadiano de E. coli."
+      },
+      {
+        "letra": "D",
+        "texto": "ciclo circadiano de S. elongatus e ao metabolismo de E. coli."
+      },
+      {
+        "letra": "E",
+        "texto": "ciclo circadiano de S. elongatus e ao ciclo circadiano de E. coli."
+      }
+    ],
+    "resposta": "D",
+    "comentario": "A transferência genética introduz em E. coli genes originalmente presentes em S. elongatus e relacionados ao funcionamento do ciclo circadiano. Esses genes passam a atuar dentro de uma célula que continua apresentando seu próprio metabolismo característico.",
+    "estatisticas": {
+      "taxaAcerto": 78,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 5
+        },
+        {
+          "alternativa": "B",
+          "percentual": 7
+        },
+        {
+          "alternativa": "C",
+          "percentual": 6
+        },
+        {
+          "alternativa": "D",
+          "percentual": 78
+        },
+        {
+          "alternativa": "E",
+          "percentual": 4
+        }
+      ]
+    }
   },
-
-
-  "alternativas":[
-    {
-      "letra":"A",
-      "texto":" metabolismo de E. coli, apenas."
+  {
+    "id": 202593,
+    "ano": "Enem 2025",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e verificou que elas apresentavam dificuldade de flutuação, pois suas penas ficavam encharcadas com água.",
+      "textoComplementar": "O aumento na taxa de mortalidade dessas aves estava associado a uma redução na:"
     },
-
-    {
-      "letra":"B",
-      "texto":" ciclo circadiano de E. coli, apenas."
-    },
-
-    {
-      "letra":"C",
-      "texto":" metabolismo de S. elongatus e do ciclo circadiano de E. coli."
-    },
-
-    {
-      "letra":"D",
-      "texto":"ciclo circadiano de S. elongatus e do metabolismo de E. coli."
-    },
-    {
-      "letra":"E",
-      "texto":" ciclo circadiano de S. elongatus e do ciclo circadiano de E. coli."
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "dilatação do papo."
+      },
+      {
+        "letra": "B",
+        "texto": "reposição de penas das asas."
+      },
+      {
+        "letra": "C",
+        "texto": "secreção da glândula uropigial."
+      },
+      {
+        "letra": "D",
+        "texto": "formação da membrana natatória."
+      },
+      {
+        "letra": "E",
+        "texto": "largura das cavidades de ossos pneumáticos."
+      }
+    ],
+    "resposta": "C",
+    "comentario": "A glândula uropigial produz uma secreção oleosa utilizada pelas aves para impermeabilizar e conservar suas penas. Com a redução dessa secreção, as penas ficam mais facilmente encharcadas, aumentando seu peso e dificultando a flutuação.",
+    "estatisticas": {
+      "taxaAcerto": 78,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 4
+        },
+        {
+          "alternativa": "B",
+          "percentual": 8
+        },
+        {
+          "alternativa": "C",
+          "percentual": 78
+        },
+        {
+          "alternativa": "D",
+          "percentual": 6
+        },
+        {
+          "alternativa": "E",
+          "percentual": 4
+        }
+      ]
     }
-  ],
-
-
-  "resposta":"D"
-
- },
- {
-  "id":202593,
-  "ano":"Enem 2025",
-  "enunciado":{
-
-    "imagem":"https://static.vecteezy.com/system/resources/previews/016/916/479/original/placeholder-icon-design-free-vector.jpg",
-
-    "alt":"",
-
-    "textoPrincipal":
-    "Os funcionários de um zoológico observaram um aumento na taxa de mortalidade de aves aquáticas por afogamento. Um grupo de biólogos analisou o comportamento das aves por várias semanas e observou que elas apresentavam dificuldade de flutuação, por causa do encharcamento das penas com água.",
-
-    "textoComplementar":
-    " aumento na taxa de mortalidade dessas aves estava associado a uma redução na: "
   },
-
-
-  "alternativas":[
-    {
-      "letra":"A",
-      "texto":"dilatação do papo."
+  {
+    "id": 202594,
+    "ano": "Enem 2023",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Pesquisadores colocaram células vegetais em soluções com diferentes concentrações de sais. Em uma das soluções, observaram que o volume do conteúdo celular diminuiu e a membrana plasmática se afastou parcialmente da parede celular, caracterizando o fenômeno de plasmólise.",
+      "textoComplementar": "Esse fenômeno ocorreu porque a solução externa era:"
     },
-
-    {
-      "letra":"B",
-      "texto":"reposição de penas das asas."
-    },
-
-    {
-      "letra":"C",
-      "texto":"secreção da glândula uropigial."
-    },
-
-    {
-      "letra":"D",
-      "texto":" formação da membrana natatória."
-    },
-    {
-      "letra":"E",
-      "texto":"largura das cavidades de ossos pneumáticos."
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "hipotônica em relação ao interior da célula."
+      },
+      {
+        "letra": "B",
+        "texto": "isotônica em relação ao interior da célula."
+      },
+      {
+        "letra": "C",
+        "texto": "hipertônica em relação ao interior da célula."
+      },
+      {
+        "letra": "D",
+        "texto": "desprovida de solutos."
+      },
+      {
+        "letra": "E",
+        "texto": "com concentração idêntica à da parede celular."
+      }
+    ],
+    "resposta": "C",
+    "comentario": "Na plasmólise, a célula vegetal perde água por osmose. Isso acontece quando ela é colocada em um meio hipertônico, ou seja, com maior concentração de solutos do que o interior celular.",
+    "estatisticas": {
+      "taxaAcerto": 71,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 10
+        },
+        {
+          "alternativa": "B",
+          "percentual": 9
+        },
+        {
+          "alternativa": "C",
+          "percentual": 71
+        },
+        {
+          "alternativa": "D",
+          "percentual": 5
+        },
+        {
+          "alternativa": "E",
+          "percentual": 5
+        }
+      ]
     }
-  ],
-
-
-  "resposta":"C",
-
-
-  "comentario":
-  "Os vírus dependem da maquinaria celular do hospedeiro para reprodução.",
-
-  "estatisticas": {
-
-  "taxaAcerto": 78,
-
-  "distribuicao": [
-
-    {
-      "alternativa":"A",
-      "percentual":32
+  },
+  {
+    "id": 202595,
+    "ano": "Enem 2021",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Em um ecossistema de manguezal, pesquisadores observaram uma redução acentuada na população de caranguejos. Após algum tempo, verificaram alterações na disponibilidade de alimento para outros organismos e mudanças nas populações de espécies localizadas em diferentes níveis tróficos.",
+      "textoComplementar": "A situação descrita demonstra que, em uma cadeia alimentar:"
     },
-
-    {
-      "alternativa":"B",
-      "percentual":48
-    },
-
-    {
-      "alternativa":"C",
-      "percentual":8
-    },
-
-    {
-      "alternativa":"D",
-      "percentual":9
-    },
-
-    {
-      "alternativa":"E",
-      "percentual":100
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "cada espécie vive independentemente das demais."
+      },
+      {
+        "letra": "B",
+        "texto": "alterações em uma população podem afetar outras populações."
+      },
+      {
+        "letra": "C",
+        "texto": "os produtores dependem diretamente dos consumidores."
+      },
+      {
+        "letra": "D",
+        "texto": "a energia retorna aos produtores após passar pelos consumidores."
+      },
+      {
+        "letra": "E",
+        "texto": "todos os organismos ocupam o mesmo nível trófico."
+      }
+    ],
+    "resposta": "B",
+    "comentario": "Os organismos de uma teia alimentar estão interligados por relações de alimentação. Por isso, a redução ou o aumento de uma população pode provocar efeitos em cascata sobre outras espécies.",
+    "estatisticas": {
+      "taxaAcerto": 82,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 4
+        },
+        {
+          "alternativa": "B",
+          "percentual": 82
+        },
+        {
+          "alternativa": "C",
+          "percentual": 5
+        },
+        {
+          "alternativa": "D",
+          "percentual": 6
+        },
+        {
+          "alternativa": "E",
+          "percentual": 3
+        }
+      ]
     }
-
-  ]
-
-}
-}
+  },
+  {
+    "id": 202596,
+    "ano": "Enem 2019",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Uma cultura de bactérias foi mantida em condições ideais de temperatura e disponibilidade de nutrientes. Durante as primeiras horas do experimento, os pesquisadores observaram um rápido aumento no número de indivíduos.",
+      "textoComplementar": "O processo responsável pela reprodução desses organismos é denominado:"
+    },
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "brotamento."
+      },
+      {
+        "letra": "B",
+        "texto": "fissão binária."
+      },
+      {
+        "letra": "C",
+        "texto": "meiose."
+      },
+      {
+        "letra": "D",
+        "texto": "fecundação."
+      },
+      {
+        "letra": "E",
+        "texto": "esporulação sexual."
+      }
+    ],
+    "resposta": "B",
+    "comentario": "As bactérias normalmente se reproduzem de forma assexuada por fissão binária. Antes da divisão, o material genético é duplicado e a célula origina duas células-filhas.",
+    "estatisticas": {
+      "taxaAcerto": 88,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 3
+        },
+        {
+          "alternativa": "B",
+          "percentual": 88
+        },
+        {
+          "alternativa": "C",
+          "percentual": 4
+        },
+        {
+          "alternativa": "D",
+          "percentual": 2
+        },
+        {
+          "alternativa": "E",
+          "percentual": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": 202597,
+    "ano": "Enem 2024",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Pesquisadores cultivaram plantas da mesma espécie sob diferentes intensidades luminosas. Verificaram que, até determinado limite, o aumento da disponibilidade de luz elevava a taxa de produção de matéria orgânica pelas plantas.",
+      "textoComplementar": "A relação observada está diretamente associada ao processo de:"
+    },
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "digestão intracelular."
+      },
+      {
+        "letra": "B",
+        "texto": "fotossíntese."
+      },
+      {
+        "letra": "C",
+        "texto": "fermentação."
+      },
+      {
+        "letra": "D",
+        "texto": "transpiração."
+      },
+      {
+        "letra": "E",
+        "texto": "germinação."
+      }
+    ],
+    "resposta": "B",
+    "comentario": "A luz é uma fonte de energia utilizada na fotossíntese. Nesse processo, organismos fotossintetizantes produzem matéria orgânica a partir de substâncias inorgânicas.",
+    "estatisticas": {
+      "taxaAcerto": 85,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 3
+        },
+        {
+          "alternativa": "B",
+          "percentual": 85
+        },
+        {
+          "alternativa": "C",
+          "percentual": 4
+        },
+        {
+          "alternativa": "D",
+          "percentual": 5
+        },
+        {
+          "alternativa": "E",
+          "percentual": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": 202598,
+    "ano": "Enem 2022",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "A comparação de sequências de DNA entre diferentes espécies de primatas revelou grande semelhança entre algumas delas. Quanto maior era a proximidade entre as sequências analisadas, maior também era a semelhança entre determinadas características hereditárias.",
+      "textoComplementar": "Esses dados constituem uma evidência evolutiva baseada principalmente em:"
+    },
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "fósseis."
+      },
+      {
+        "letra": "B",
+        "texto": "anatomia comparada."
+      },
+      {
+        "letra": "C",
+        "texto": "biologia molecular."
+      },
+      {
+        "letra": "D",
+        "texto": "seleção artificial."
+      },
+      {
+        "letra": "E",
+        "texto": "deriva genética."
+      }
+    ],
+    "resposta": "C",
+    "comentario": "A comparação entre moléculas, como DNA e proteínas, permite identificar graus de parentesco evolutivo entre organismos. Quanto maior a semelhança genética, maiores podem ser as evidências de ancestralidade comum.",
+    "estatisticas": {
+      "taxaAcerto": 76,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 7
+        },
+        {
+          "alternativa": "B",
+          "percentual": 8
+        },
+        {
+          "alternativa": "C",
+          "percentual": 76
+        },
+        {
+          "alternativa": "D",
+          "percentual": 5
+        },
+        {
+          "alternativa": "E",
+          "percentual": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": 202599,
+    "ano": "Enem 2020",
+    "enunciado": {
+      "imagem": "",
+      "alt": "",
+      "textoPrincipal": "Durante as primeiras etapas do desenvolvimento embrionário humano, ocorrem sucessivas divisões celulares e processos de diferenciação. Posteriormente, são formados os três principais folhetos germinativos: ectoderma, mesoderma e endoderma.",
+      "textoComplementar": "Esses folhetos são importantes porque dão origem:"
+    },
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "aos diferentes tecidos e órgãos do organismo."
+      },
+      {
+        "letra": "B",
+        "texto": "somente ao sistema nervoso."
+      },
+      {
+        "letra": "C",
+        "texto": "exclusivamente às células reprodutivas."
+      },
+      {
+        "letra": "D",
+        "texto": "apenas ao tecido muscular."
+      },
+      {
+        "letra": "E",
+        "texto": "somente às estruturas externas do corpo."
+      }
+    ],
+    "resposta": "A",
+    "comentario": "Os três folhetos germinativos participam da formação dos diferentes tecidos e órgãos durante o desenvolvimento embrionário. Cada um deles origina grupos específicos de estruturas do organismo.",
+    "estatisticas": {
+      "taxaAcerto": 84,
+      "distribuicao": [
+        {
+          "alternativa": "A",
+          "percentual": 84
+        },
+        {
+          "alternativa": "B",
+          "percentual": 5
+        },
+        {
+          "alternativa": "C",
+          "percentual": 3
+        },
+        {
+          "alternativa": "D",
+          "percentual": 4
+        },
+        {
+          "alternativa": "E",
+          "percentual": 4
+        }
+      ]
+    }
+  }
 ]

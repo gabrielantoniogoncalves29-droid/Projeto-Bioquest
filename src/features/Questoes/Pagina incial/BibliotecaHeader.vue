@@ -68,11 +68,43 @@
 
     align-items: stretch;
 
+    margin: 0px 20px;
+
 }
 
   .btn-ajuda {
 
     width: fit-content;
+
+  }
+
+  .texto h1 {
+
+    font-size: 1.6rem;
+
+    margin: 6px 0px;
+
+  }
+
+  .texto p {
+
+    font-size: 14px;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .header-biblioteca {
+
+    margin: 0px 12px;
+
+  }
+
+  .texto h1 {
+
+    font-size: 1.4rem;
 
   }
 

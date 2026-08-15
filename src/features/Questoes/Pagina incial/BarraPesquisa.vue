@@ -4,11 +4,12 @@
 
     <div class="input-container">
 
+      <span class="material-icons">
+        search
+      </span>
 
-        <span class="material-icons">
-          search
-        </span>
       <input
+        v-model="store.termoPesquisa"
         type="text"
         placeholder="Pesquisar por assunto, conteudo, palavra-chave, código da questão..."
       >
@@ -19,33 +20,37 @@
 
       <button
         class="btn-filtro"
-        @click="$emit('toggle-filtros')"
+        @click="store.toggleFiltros()"
       >
 
         <span class="material-icons">
 
           {{
-            filtrosAbertos
+            store.mostrarFiltros
               ? 'expand_less'
               : 'expand_more'
           }}
 
         </span>
 
-        {{ filtrosAbertos
+        {{ store.mostrarFiltros
           ? 'Ocultar filtros'
           : 'Mostrar filtros'
         }}
 
       </button>
 
-    <button class="btn-limpar">
+      <button
+        class="btn-limpar"
+        @click="store.limparFiltros()"
+      >
 
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter-x text-sub-text stroke-sub-text group-hover:text-headings group-focus:text-action group-disabled:text-disabled group-hover:stroke-headings group-disabled:stroke-disabled "><path d="M13.013 3H2l8 9.46V19l4 2v-8.54l.9-1.055"></path><path d="m22 3-5 5"></path><path d="m17 3 5 5"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter-x text-sub-text stroke-sub-text group-hover:text-headings group-focus:text-action group-disabled:text-disabled group-hover:stroke-headings group-disabled:stroke-disabled "><path d="M13.013 3H2l8 9.46V19l4 2v-8.54l.9-1.055"></path><path d="m22 3-5 5"></path><path d="m17 3 5 5"></path></svg>
 
-      Limpar filtros
+        Limpar filtros
 
-    </button>
+      </button>
+
     </div>
 
   </section>
@@ -54,21 +59,9 @@
 
 <script setup>
 
-defineProps({
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
-  filtrosAbertos: {
-
-    type: Boolean,
-
-    default: false
-
-  }
-
-})
-
-defineEmits([
-  'toggle-filtros'
-])
+const store = useQuestoesFiltrosStore()
 
 </script>
 
@@ -209,10 +202,6 @@ defineEmits([
 
 }
 
-
-
-
-
 .material-icons {
 
   font-size: 20px;
@@ -227,6 +216,10 @@ defineEmits([
 
     align-items: stretch;
 
+    margin: 0px 20px;
+
+    gap: 14px;
+
   }
 
   .acoes {
@@ -234,6 +227,55 @@ defineEmits([
     width: 100%;
 
     flex-wrap: wrap;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .barra-pesquisa {
+
+    margin: 0px 12px;
+
+    border-radius: 12px;
+
+    padding: 10px;
+
+  }
+
+  .input-container {
+
+    border-radius: 12px;
+
+  }
+
+  .input-container input {
+
+    height: 44px;
+
+    font-size: 15px;
+
+  }
+
+  .acoes {
+
+    gap: 8px;
+
+  }
+
+  .btn-filtro,
+  .btn-limpar {
+
+    flex: 1 1 auto;
+
+    justify-content: center;
+
+    height: 44px;
+
+    padding: 0 14px;
+
+    font-size: 14px;
 
   }
 
