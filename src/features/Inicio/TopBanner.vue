@@ -24,7 +24,6 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    transition: all 0.3s ease;
     top: 0;
     overflow: hidden;
   }
@@ -32,6 +31,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin: 1rem;
   }
   .banner_description h1{
     font-family: sans-serif;

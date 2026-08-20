@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import Resume_card from '../../features/Estatisticas/Resume_card.vue';
 import iconeBioquimica from '../Questoes/icons/2.png'
 import iconeCitologia from '../Questoes/icons/3.png'
 import iconeEcologia from '../Questoes/icons/12.png'
@@ -10,8 +9,6 @@ const lista = ref(["", "", "01", "02", "03", "04", "05", "06", "07", "08", "09",
 
 const diaSelecionado = ref(null)
 
-const diaInfo = ref(false)
-
 
 function diaVazio(dia){
     return dia === ""
@@ -19,19 +16,14 @@ function diaVazio(dia){
 
 function selecionado(dia){
     if(diaVazio(dia)){
-        diaInfo.value = false
         return
     }
     if(diaSelecionado.value === dia){
         diaSelecionado.value = null
-        diaInfo.value = false
     }
     else{
         diaSelecionado.value = dia
-        diaInfo.value = true
     }
-
-    
 }
 
 const atividades = [
@@ -82,7 +74,7 @@ function corProgresso(valor){
 
 <template>
     <div class="content">
-        <div class="resumo">
+        <div>
             <div class="sequencia">
                 <div class="topo">
                     <span class="material-symbols-outlined calendar">calendar_month</span>
@@ -116,13 +108,20 @@ function corProgresso(valor){
                         </li>
                     </ul>
                 </div>
+                <div class="ofensiva">
+                <span class="material-icons fire">local_fire_department</span>
+                <div class="ofensiva-info">
+                    <h2>Sequência atual</h2>
+                    <h1>7 dias</h1>
+                    <p>Continue assim</p>
+                </div>
+                </div>
             </div>
-            <br>
-            <transition name="fade">
-            <Resume_card v-show="diaInfo"></Resume_card>
-            </transition>
+            <div class="ajuda">
+                <p>Para mais informacões acesse <br>a pagina de ajuda</p>
+                <button type="button">Ajuda</button>
+            </div>
         </div>
-    
         <div class="lado-direito">
             <div class="info-geral">
                     <div class="container questoes">
@@ -156,7 +155,7 @@ function corProgresso(valor){
                     <span class="material-symbols-outlined livro">import_contacts</span>
                     <h2 class="high-title">Continue seus estudos</h2>
                     <div class="Ver-questoes">
-                        <router-link to="/questoes" class="link-questoes">Ver todas as questoes <span class="material-icons">arrow_forward</span></router-link>
+                        <router-link to="/questoes" class="link-questoes">Ver todas as questões <span class="material-icons">arrow_forward</span></router-link>
                     </div>
                 </div>
 
@@ -208,9 +207,14 @@ function corProgresso(valor){
                         <p>28 <br>Acertos</p>
                     </div>
                     <div class="acertos-direita">
-                        <p>6 <br>Erros</p>
+                        <p>6<br>Erros</p>
                     </div>
                 </div>
+            </div>
+            <div class="evolucao">
+                <img src="@/assets/plant.png" alt="">
+                <h1>Você está evoluindo!</h1>
+                <p>Continue praticando e acompanhe seu progresso.</p>
             </div>
         </div>
     </div>
@@ -218,12 +222,81 @@ function corProgresso(valor){
 </template>
 
 <style>
+    .ajuda{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        align-items: center;
+        text-align: center;
+        margin: 50px;
+        margin-bottom: 0px;
+        overflow: hidden;
+        width: 420px;
+        min-height: 120px;
+        height: fit-content;
+        font-family: sans-serif;
+    }
+    .ajuda p{
+        color: rgb(28, 75, 47);
+        font-size: 18px;
+    }
+    .evolucao{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        margin: 50px 40px;
+        width: 310px;
+        height: 245px;
+        border-radius: 12px;
+        font-family: sans-serif;
+        text-align: center;
+        align-items: center;
+        font-size: 16px;
+        padding: 20px;
+    }
+    .evolucao img{
+        width: 110px;
+        padding: 0;
+        margin: 0;
+    }
+    .evolucao h1{
+        color: rgb(28, 75, 47);
+        font-size: 22px;
+    }
     .content{
         display: flex;
     }
-    .resumo{
+    .ofensiva{
         display: flex;
-        flex-direction: column;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin: 30px;
+        font-family: sans-serif;
+        align-items: center;
+        padding: 10px 40px;
+    }
+    .fire{
+        font-size: 96px;
+        color: rgb(255, 145, 0);
+        animation: fogo 2s ease-in-out infinite;
+    }
+    @keyframes fogo{
+        from, to{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.04);
+        }
+    }
+    .ofensiva-info{
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+    .ofensiva h2{
+        font-size: 16px;
+    }
+    .ofensiva p{
+        font-size: 16px;
+        color: rgb(28, 75, 47);
     }
     .sequencia{
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
@@ -234,7 +307,7 @@ function corProgresso(valor){
         margin-bottom: 0px;
         overflow: hidden;
         width: 420px;
-        min-height: 350px;
+        min-height: 550px;
         height: fit-content;
     }
     .mes{
@@ -410,14 +483,14 @@ function corProgresso(valor){
         margin: 20px;
         background-color: white;
         transition: 400ms ease;
-        height: 50px;
+        height: 45px;
     }
     .conteiner-atividades:hover{
         transform: scale(1.05);
     }
     .icone{
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        height: 65px;
     }
     .atividades-info{
         display: flex;

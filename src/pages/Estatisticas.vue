@@ -9,5 +9,5 @@ import Rodape from '../components/layout/Rodape.vue'
   <Header></Header>
   <TopBanner></TopBanner>
   <Sequencia></Sequencia>
-  <!-- <Rodape></Rodape> -->
+  <Rodape></Rodape>
 </template>

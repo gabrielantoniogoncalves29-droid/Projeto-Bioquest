@@ -43,6 +43,7 @@
     padding: 20px;
     width: 100%;
     max-width: 320px;
+    max-height: fit-content;
     height: 150px;
     font-family: sans-serif;
     transition: 500ms ease; 
