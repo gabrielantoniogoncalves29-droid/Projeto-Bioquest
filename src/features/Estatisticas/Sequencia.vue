@@ -118,8 +118,11 @@ function corProgresso(valor){
                 </div>
             </div>
             <div class="ajuda">
-                <p>Para mais informacões acesse <br>a pagina de ajuda</p>
-                <button type="button">Ajuda</button>
+                <span class="material-symbols-outlined">e911_emergency</span>
+                <div class="help">
+                    <p>Para mais informacões acesse <br>a pagina de ajuda</p>
+                    <button type="button">Ajuda</button>
+                </div>
             </div>
         </div>
         <div class="lado-direito">
@@ -223,6 +226,7 @@ function corProgresso(valor){
 
 <style>
     .ajuda{
+        display: flex;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         align-items: center;
@@ -235,9 +239,43 @@ function corProgresso(valor){
         height: fit-content;
         font-family: sans-serif;
     }
-    .ajuda p{
+    .help {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    }
+    .help p{
+        margin: 0;
         color: rgb(28, 75, 47);
-        font-size: 18px;
+        font-size: 16px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .help button{
+        font-family: sans-serif;
+        font-size: 14px;
+        width: 75px;
+        height: 35px;
+        border: 0;
+        border-radius: 10px;
+        background-color: rgb(28, 75, 47);
+        color: white;
+        cursor: pointer;
+        transition: 500ms ease;
+    }
+    .help button:hover{
+        background-color: rgb(39, 109, 67);
+    }
+    .ajuda span{
+        font-size: 46px;
+        color: rgb(28, 75, 47);
+        border-radius: 50%;
+        background-color: rgba(186, 255, 186, 0.5);
+        padding: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+
     }
     .evolucao{
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
