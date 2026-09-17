@@ -2,84 +2,220 @@
 
     <section class="profile-card">
 
-        <div class="avatar-wrapper">
+        <div class="profile-topo">
 
-            <img
-                :src="fotoExibida"
-                alt="Foto do usuário"
-                class="avatar-img"
-            >
+            <div class="profile-main">
 
-            <button
-                class="avatar-edit-btn"
-                type="button"
-                title="Alterar foto"
-                @click="abrirSeletorDeArquivo"
-            >
-                <Camera :size="14" />
-            </button>
+                <div class="avatar-wrapper">
 
-            <input
-                ref="inputArquivo"
-                type="file"
-                accept="image/*"
-                class="input-oculto"
-                @change="onArquivoSelecionado"
-            >
+                    <img
+                        v-if="perfil.foto"
+                        :src="perfil.foto"
+                        alt="Foto do usuário"
+                        class="avatar-img"
+                    >
+
+                    <div
+                        v-else
+                        class="avatar-iniciais"
+                    >
+                        <span v-if="perfil.iniciais">
+                            {{ perfil.iniciais }}
+                        </span>
+
+                        <User
+                            v-else
+                            :size="36"
+                        />
+                    </div>
+
+                    <button
+                        class="avatar-edit-btn"
+                        type="button"
+                        title="Alterar foto"
+                        @click="abrirSeletorDeArquivo"
+                    >
+                        <Camera :size="13" />
+                    </button>
+
+                    <input
+                        ref="inputArquivo"
+                        type="file"
+                        accept="image/*"
+                        class="input-oculto"
+                        @change="onArquivoSelecionado"
+                    >
+
+                </div>
+
+                <div class="profile-info">
+
+                    <h1>
+                        {{ perfil.nome }}
+                    </h1>
+
+                    <p class="email">
+                        <Mail :size="14" />
+                        {{ perfil.email }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="botoes-perfil">
+
+                <button
+                    class="edit-profile"
+                    type="button"
+                    @click="perfil.abrirEdicaoPerfil()"
+                >
+                    <Pencil :size="15" />
+                    Editar perfil
+                </button>
+
+                <button
+                    class="excluir-conta"
+                    type="button"
+                    @click="perfil.abrirExclusaoConta()"
+                >
+                    <Trash2 :size="15" />
+                    Excluir conta e dados
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="profile-info">
+        <div class="stats-row">
 
-            <h1>
-                {{ perfil.nome }}
-            </h1>
+            <div class="stat stat-azul">
 
-            <p class="email">
-                <Mail :size="14" />
-                {{ perfil.email }}
-            </p>
+                <Bookmark
+                    class="stat-icone"
+                    :size="28"
+                />
+
+                <div class="stat-conteudo">
+
+                    <strong class="stat-numero">
+                        {{ perfil.totalSalvas }}
+                    </strong>
+
+                    <span class="stat-legenda">
+                        Questões salvas
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat stat-verde">
+
+                <CheckCircle2
+                    class="stat-icone"
+                    :size="28"
+                />
+
+                <div class="stat-conteudo">
+
+                    <strong class="stat-numero">
+                        {{ perfil.totalResolvidas }}
+                    </strong>
+
+                    <span class="stat-legenda">
+                        Questões resolvidas
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat stat-amarelo">
+
+                <Flag
+                    class="stat-icone"
+                    :size="28"
+                />
+
+                <div class="stat-conteudo">
+
+                    <strong class="stat-numero">
+                        {{ perfil.totalRevisar }}
+                    </strong>
+
+                    <span class="stat-legenda">
+                        Para revisar
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat stat-roxo stat-acertos">
+
+                <div
+                    class="anel-progresso"
+                    :style="{ '--progresso': perfil.porcentagemAcertos }"
+                >
+                    <div class="anel-miolo">
+                        {{ perfil.porcentagemAcertos }}%
+                    </div>
+                </div>
+
+                <div class="stat-conteudo">
+
+                    <span class="stat-legenda">
+                        De acertos
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
-
-        <button
-            class="edit-profile"
-            type="button"
-            @click="perfil.abrirEdicaoPerfil()"
-        >
-            <Pencil :size="15" />
-            Editar perfil
-        </button>
 
     </section>
 
     <EditProfileModal v-if="perfil.editandoPerfil" />
 
+    <ExcluirContaModal v-if="perfil.excluindoContaConfirmacao" />
+
 </template>
 
 <script setup>
 
-import { ref, computed } from "vue"
-import { Camera, Pencil, Mail } from "lucide-vue-next"
+import { ref } from "vue"
+
+import {
+    Camera,
+    Pencil,
+    Mail,
+    User,
+    Trash2,
+    Bookmark,
+    CheckCircle2,
+    Flag
+} from "lucide-vue-next"
+
 import { usePerfilStore } from "@/store/perfil"
+
 import EditProfileModal from "@/features/Perfil/EditProfileModal.vue"
-import fotoPadrao from "@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+
+import ExcluirContaModal from "@/features/Perfil/ExcluirContaModal.vue"
+
 
 const perfil = usePerfilStore()
 
 const inputArquivo = ref(null)
 
-const fotoExibida = computed(() => {
-
-    return perfil.foto || fotoPadrao
-
-})
 
 function abrirSeletorDeArquivo() {
 
     inputArquivo.value?.click()
 
 }
+
 
 function onArquivoSelecionado(evento) {
 
@@ -108,27 +244,78 @@ function onArquivoSelecionado(evento) {
 .profile-card{
 
     width:100%;
-    background:#fff;
 
-    border:1px solid #e9ebea;
-    border-radius:14px;
+    background:var(--cor-fundo-card);
 
-    padding:24px 28px;
+    border:1px solid var(--cor-borda);
 
-    display:flex;
-    align-items:center;
-    gap:20px;
+    border-radius:16px;
+
+    padding:28px;
 
     box-sizing:border-box;
 
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+    transition:box-shadow .25s ease, border-color .25s ease;
+
 }
+
+.profile-card:hover{
+
+    border-color:var(--cor-borda);
+
+    box-shadow:0 10px 26px rgba(0,0,0,.05);
+
+}
+
+
+/* ==============================
+   TOPO DO PERFIL
+   ============================== */
+
+.profile-topo{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+}
+
+.profile-main{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    min-width:0;
+
+}
+
+
+/* ==============================
+   AVATAR
+   ============================== */
 
 .avatar-wrapper{
 
     position:relative;
 
-    width:64px;
-    height:64px;
+    width:88px;
+
+    height:88px;
 
     flex-shrink:0;
 
@@ -136,18 +323,62 @@ function onArquivoSelecionado(evento) {
 
 .avatar-img{
 
-    width:64px;
-    height:64px;
+    width:88px;
+
+    height:88px;
 
     border-radius:50%;
 
     object-fit:cover;
 
-    border:1px solid #e9ebea;
+    border:1px solid var(--cor-borda);
 
-    background:#f4f5f4;
+    background:var(--cor-fundo-sutil);
 
     display:block;
+
+    transition:transform .25s ease;
+
+}
+
+.avatar-iniciais{
+
+    width:88px;
+
+    height:88px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:1px solid var(--cor-borda);
+
+    background:linear-gradient(
+        135deg,
+        var(--cor-primaria),
+        var(--cor-primaria-hover)
+    );
+
+    color:var(--cor-texto-invertido);
+
+    font-size:28px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    transition:transform .25s ease;
+
+}
+
+.avatar-wrapper:hover .avatar-img,
+.avatar-wrapper:hover .avatar-iniciais{
+
+    transform:scale(1.04);
 
 }
 
@@ -155,22 +386,27 @@ function onArquivoSelecionado(evento) {
 
     position:absolute;
 
-    right:-2px;
-    bottom:-2px;
+    right:0;
 
-    width:24px;
-    height:24px;
+    bottom:0;
+
+    width:26px;
+
+    height:26px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     border-radius:50%;
 
-    border:2px solid #fff;
+    border:2px solid var(--cor-fundo-card);
 
-    background:#0d6b4d;
-    color:#fff;
+    background:var(--cor-primaria);
+
+    color:var(--cor-texto-invertido);
 
     cursor:pointer;
 
@@ -180,7 +416,7 @@ function onArquivoSelecionado(evento) {
 
 .avatar-edit-btn:hover{
 
-    background:#0a5a40;
+    background:var(--cor-primaria-hover);
 
 }
 
@@ -190,28 +426,39 @@ function onArquivoSelecionado(evento) {
 
 }
 
+
+/* ==============================
+   INFORMAÇÕES DO PERFIL
+   ============================== */
+
 .profile-info{
 
     display:flex;
+
     flex-direction:column;
-    gap:4px;
+
+    gap:5px;
 
     text-align:left;
 
-    flex:1;
     min-width:0;
 
 }
 
 .profile-info h1{
 
+    margin:0;
+
     font-size:20px;
+
     font-weight:700;
 
-    color:#1f2937;
+    color:var(--cor-texto-principal);
 
     overflow:hidden;
+
     text-overflow:ellipsis;
+
     white-space:nowrap;
 
 }
@@ -219,46 +466,310 @@ function onArquivoSelecionado(evento) {
 .email{
 
     display:flex;
+
     align-items:center;
+
     gap:6px;
+
+    margin:0;
 
     font-size:13.5px;
 
-    color:#6b7280;
+    color:var(--cor-texto-suave);
 
 }
 
-.edit-profile{
+
+/* ==============================
+   BOTÕES
+   ============================== */
+
+.botoes-perfil{
 
     display:flex;
-    align-items:center;
-    gap:7px;
 
-    width:max-content;
+    align-items:center;
+
+    gap:10px;
 
     flex-shrink:0;
 
-    color:#0d6b4d;
+}
 
-    border:1px solid #d6ded9;
+.edit-profile,
+.excluir-conta{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
 
     border-radius:9px;
 
     padding:9px 16px;
 
-    font-size:14px;
+    font-size:13.5px;
+
     font-weight:600;
 
     cursor:pointer;
-    background-color:#fff;
+
     transition:.15s;
+
+    white-space:nowrap;
+
+}
+
+.edit-profile{
+
+    color:var(--cor-primaria);
+
+    border:1px solid var(--cor-borda);
+
+    background-color:var(--cor-fundo-card);
 
 }
 
 .edit-profile:hover{
 
-    border-color:#0d6b4d;
-    background-color:#f7faf8;
+    border-color:var(--cor-primaria);
+
+    background-color:var(--cor-primaria-fundo);
+
+}
+
+[data-tema="escuro"] .edit-profile{
+
+    color:var(--cor-texto-principal);
+
+}
+
+.excluir-conta{
+
+    color:var(--cor-perigo);
+
+    border:1px solid var(--cor-perigo);
+
+    background-color:var(--cor-fundo-card);
+
+}
+
+.excluir-conta:hover{
+
+    border-color:var(--cor-perigo);
+
+    background-color:var(--cor-perigo-fundo);
+
+}
+
+
+/* ==============================
+   ESTATÍSTICAS
+   ============================== */
+
+.stats-row{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+
+    padding-top:22px;
+
+    border-top:1px solid var(--cor-borda-suave);
+
+}
+
+.stat{
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:18px;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    background:var(--cor-fundo-sutil);
+
+    min-height:90px;
+
+    box-sizing:border-box;
+
+}
+
+.stat-conteudo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    gap:5px;
+
+    min-width:0;
+
+}
+
+.stat-icone{
+
+    flex-shrink:0;
+
+}
+
+.stat-azul{
+
+    background:var(--cor-acento-azul-fundo);
+
+}
+
+.stat-verde{
+
+    background:var(--cor-primaria-fundo);
+
+}
+
+.stat-amarelo{
+
+    background:var(--cor-acento-amarelo-fundo);
+
+}
+
+.stat-roxo{
+
+    background:var(--cor-acento-roxo-fundo);
+
+}
+
+.stat-azul .stat-icone{
+
+    color:var(--cor-acento-azul);
+
+}
+
+.stat-verde .stat-icone{
+
+    color:var(--cor-primaria);
+
+}
+
+.stat-amarelo .stat-icone{
+
+    color:var(--cor-acento-amarelo);
+
+}
+
+.stat-numero{
+
+    font-size:26px;
+
+    font-weight:700;
+
+    color:var(--cor-texto-principal);
+
+    line-height:1.1;
+
+}
+
+.stat-legenda{
+
+    font-size:13.5px;
+
+    color:var(--cor-texto-suave);
+
+    line-height:1.3;
+
+    text-align:left;
+
+}
+
+
+/* ==============================
+   CARD DE ACERTOS
+   ============================== */
+
+.stat-acertos{
+
+    align-items:center;
+
+}
+
+.anel-progresso{
+
+    flex-shrink:0;
+
+    width:84px;
+
+    height:84px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:conic-gradient(
+
+        var(--cor-acento-roxo)
+        calc(var(--progresso) * 1%),
+
+        var(--cor-borda) 0
+
+    );
+
+}
+
+.anel-miolo{
+
+    width:66px;
+
+    height:66px;
+
+    border-radius:50%;
+
+    background:var(--cor-acento-roxo-fundo);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:var(--cor-texto-principal);
+
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width:768px){
+
+    .stats-row{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
 
 }
 
@@ -266,17 +777,30 @@ function onArquivoSelecionado(evento) {
 
     .profile-card{
 
+        padding:22px 20px;
+
+    }
+
+    .profile-topo{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .profile-main{
+
         flex-direction:column;
 
         text-align:center;
-
-        padding:24px 20px;
 
     }
 
     .profile-info{
 
         align-items:center;
+
         text-align:center;
 
     }
@@ -287,10 +811,35 @@ function onArquivoSelecionado(evento) {
 
     }
 
-    .edit-profile{
+    .botoes-perfil{
 
-        width:100%;
-        justify-content:center;
+        flex-direction:column;
+
+    }
+
+    .stats-row{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .stat{
+
+        gap:12px;
+
+        padding:16px;
+
+    }
+
+    .stat-numero{
+
+        font-size:23px;
+
+    }
+
+    .stat-legenda{
+
+        font-size:12.5px;
 
     }
 

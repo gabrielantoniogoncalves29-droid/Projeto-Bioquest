@@ -162,7 +162,7 @@ function salvar() {
 
     padding:28px;
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
     border-radius:16px;
 
@@ -201,8 +201,8 @@ function salvar() {
     border:none;
     border-radius:50%;
 
-    background:#F2F5F3;
-    color:#5b6660;
+    background:var(--cor-fundo-sutil);
+    color:var(--cor-texto-secundario);
 
     cursor:pointer;
 
@@ -212,8 +212,8 @@ function salvar() {
 
 .fechar:hover{
 
-    background:#e7ece9;
-    color:#20352A;
+    background:var(--cor-borda-suave);
+    color:var(--cor-texto-principal);
 
 }
 
@@ -227,7 +227,7 @@ h2{
 
     font-weight:700;
 
-    color:#1f2937;
+    color:var(--cor-texto-principal);
 
 }
 
@@ -239,7 +239,7 @@ h2{
 
     font-size:13.5px;
 
-    color:#6b7280;
+    color:var(--cor-texto-suave);
 
 }
 
@@ -261,7 +261,7 @@ label{
 
     font-weight:600;
 
-    color:#444;
+    color:var(--cor-texto-secundario);
 
 }
 
@@ -275,11 +275,11 @@ label{
 
     padding:0 14px;
 
-    border:1px solid #dcdfde;
+    border:1px solid var(--cor-borda);
 
     border-radius:10px;
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
     transition:border-color .2s;
 
@@ -287,7 +287,7 @@ label{
 
 .input-container:focus-within{
 
-    border-color:#0d6b4d;
+    border-color:var(--cor-primaria);
 
 }
 
@@ -295,7 +295,7 @@ label{
 
     margin-right:10px;
 
-    color:#9ca3af;
+    color:var(--cor-texto-fraco);
 
     flex-shrink:0;
 
@@ -313,13 +313,13 @@ input{
 
     font-size:14.5px;
 
-    color:#333;
+    color:var(--cor-texto-principal);
 
 }
 
 input::placeholder{
 
-    color:#AAA;
+    color:var(--cor-texto-fraco);
 
 }
 
@@ -353,17 +353,17 @@ input::placeholder{
 
 .cancelar{
 
-    border:1px solid #dcdfde;
+    border:1px solid var(--cor-borda);
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
-    color:#444;
+    color:var(--cor-texto-secundario);
 
 }
 
 .cancelar:hover{
 
-    background:#f5f5f5;
+    background:var(--cor-fundo-sutil);
 
 }
 
@@ -371,15 +371,15 @@ input::placeholder{
 
     border:none;
 
-    background:#0d6b4d;
+    background:var(--cor-primaria);
 
-    color:#fff;
+    color: var(--cor-texto-invertido);
 
 }
 
 .salvar:hover{
 
-    background:#0a5a40;
+    background:var(--cor-primaria-hover);
 
 }
 

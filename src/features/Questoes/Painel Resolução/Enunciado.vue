@@ -94,7 +94,7 @@ const enunciado = computed(
 
   padding: 20px;
 
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--cor-borda);
 
   align-items: start;
 
@@ -114,7 +114,7 @@ const enunciado = computed(
 
   overflow: hidden;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
   height: 300px;
 
@@ -156,7 +156,7 @@ const enunciado = computed(
 
   line-height:1.7;
 
-  color:#1f2937;
+  color:var(--cor-texto-principal);
 
   margin-bottom:14px;
 
@@ -176,7 +176,7 @@ const enunciado = computed(
 
   line-height:1.8;
 
-  color:#5b6472;
+  color:var(--cor-texto-secundario);
 
   word-break: break-word;
 

@@ -94,6 +94,7 @@ export const eixos = [
 export const conteudos = [
 {
  id:1,
+ eixoId:5,
  nome: 'Origem da vida',
  subconteudos:[
     "Teorias sobre a origem da vida",
@@ -102,6 +103,7 @@ export const conteudos = [
 },
 {
  id:2,
+ eixoId:1,
  nome: 'Bioquímica',
  subconteudos:[
     "Água e sais minerais",
@@ -113,6 +115,7 @@ export const conteudos = [
 },
 {
  id:3,
+ eixoId:1,
  nome:'Citologia',
  subconteudos:[
     "Microscopia e teoria celular",
@@ -124,6 +127,7 @@ export const conteudos = [
 },
 {
  id:4,
+ eixoId:1,
  nome:'Metabolismo celular',
  subconteudos:[
     "Respiração aeróbica / Produção de ATP",
@@ -133,6 +137,7 @@ export const conteudos = [
 },
 {
  id:5,
+ eixoId:1,
  nome:'Histologia',
  subconteudos:[
     "Tecido epitelial",
@@ -143,6 +148,7 @@ export const conteudos = [
 },
 {
 id:6,
+ eixoId:3,
 nome:'Reprodução e embriologia',
 subconteudos:[
     "Tipos de reprodução e ciclos de vida",
@@ -152,6 +158,7 @@ subconteudos:[
 },
 {
 id:7,
+ eixoId:2,
 nome:'Taxonomia e classificação dos seres vivos',
 subconteudos:[
     "Cladograma e análise evolutiva das espécies",
@@ -160,6 +167,7 @@ subconteudos:[
 },
 {
 id:8,
+ eixoId:3,
 nome:'Vírus',
 subconteudos:[
     "Estrutura geral dos vírus",
@@ -169,6 +177,7 @@ subconteudos:[
 },
 {
 id:9,
+ eixoId:3,
 nome:'Seres procarióticos',
 subconteudos:[
     "Estrutura geral das células procariontes",
@@ -178,6 +187,7 @@ subconteudos:[
 },
 {
 id:10,
+ eixoId:3,
 nome:'Reino Protoctista',
 subconteudos:[
     "Importância econômica e ambiental das algas",
@@ -186,6 +196,7 @@ subconteudos:[
 },
 {
 id:11,
+ eixoId:3,
 nome:'Fungos',
 subconteudos:[
     "Características gerais",
@@ -195,6 +206,7 @@ subconteudos:[
 },
 {
 id:12,
+ eixoId:3,
 nome:'Botânica',
 subconteudos:[
     "Filos das plantas (Briófitas, Pteridófitas, Gimnospermas e Angiospermas)",
@@ -205,6 +217,7 @@ subconteudos:[
 },
 {
 id:13,
+ eixoId:3,
 nome:'Zoologia',
 subconteudos:[
     "Características dos animais e dos principais filos",
@@ -213,6 +226,7 @@ subconteudos:[
 },
 {
 id:14,
+ eixoId:3,
 nome:'Fisiologia humana e comparada',
 subconteudos:[
     "Sistema digestório",
@@ -228,6 +242,7 @@ subconteudos:[
 },
 {
 id:15,
+ eixoId:2,
 nome:'Genética',
 subconteudos:[
     "Genética molecular (DNA, RNA e síntese de proteínas)",
@@ -237,6 +252,7 @@ subconteudos:[
 },
 {
 id:16,
+ eixoId:5,
 nome:'Evolução',
 subconteudos:[
     "Teorias evolucionistas (Darwin e Lamarck)",
@@ -249,6 +265,7 @@ subconteudos:[
 },
 {
 id:17,
+ eixoId:4,
 nome:'Ecologia',
 subconteudos:[
     "Conceitos de Ecologia",
@@ -263,6 +280,7 @@ subconteudos:[
 },
 {
 id:18,
+ eixoId:6,
 nome:'Biologia e aspectos sociais humanos ',
 subconteudos:[
     "Primeiros socorros",

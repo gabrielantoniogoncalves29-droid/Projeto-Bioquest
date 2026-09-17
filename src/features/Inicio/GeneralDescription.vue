@@ -31,15 +31,15 @@
     font-weight: 800;
     text-align: center;
     line-height: 1.2;
-    color: rgb(28, 75, 47); 
+    color: var(--cor-primaria-texto); 
 }
 .card-conteiner{
     flex-grow: 1;
     flex-basis: 200;
-    border: 1px solid #ccc;
+    border: 1px solid var(--cor-borda);
     border-radius: 10px;
-    background-color: #ffffff;
-    color: rgb(28, 75, 47);
+    background-color: var(--cor-fundo-card);
+    color: var(--cor-primaria-texto);
     padding: 20px;
     width: 100%;
     max-width: 320px;

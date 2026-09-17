@@ -216,11 +216,11 @@ const todosSelecionados = computed(() => {
 
 .accordion{
 
-  border:1px solid #d1d5db;
+  border:1px solid var(--cor-borda);
 
   border-radius:10px;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
   overflow:hidden;
 
@@ -242,11 +242,11 @@ const todosSelecionados = computed(() => {
 .cabecalho{
 
   width:100%;
-  border:1px solid #d1d5db;
+  border:1px solid var(--cor-borda);
 
   border-radius:10px;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
   padding:14px 16px;
 
@@ -262,7 +262,7 @@ const todosSelecionados = computed(() => {
 
 .cabecalho:hover{
 
-  background:#f9fafb;
+  background:var(--cor-fundo-sutil);
 
 }
 
@@ -307,23 +307,23 @@ const todosSelecionados = computed(() => {
 
   font-weight:700;
 
-  color:#1f2937;
+  color:var(--cor-texto-principal);
 
 }
 
 .seta{
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
 }
 
 .grupo{
 
-    border:1px solid #edf0f2;
+    border:1px solid var(--cor-borda);
 
     border-radius:10px;
 
-    background:#fafafa;
+    background:var(--cor-fundo-sutil);
 
     padding:14px;
 
@@ -355,13 +355,13 @@ const todosSelecionados = computed(() => {
 
   font-weight:700;
 
-  color:#0d6b4d;
+  color:var(--cor-primaria);
 
   margin-bottom:12px;
 
   padding-bottom:8px;
 
-  border-bottom:1px solid #e5e7eb;
+  border-bottom:1px solid var(--cor-borda);
 
   font-size:15px;
 
@@ -390,7 +390,7 @@ const todosSelecionados = computed(() => {
 
   height:18px;
 
-  accent-color:#0d6b4d;
+  accent-color:var(--cor-primaria);
 
   cursor:pointer;
 
@@ -404,13 +404,13 @@ const todosSelecionados = computed(() => {
 
 .opcao:hover{
 
-  background:#f3f4f6;
+  background:var(--cor-fundo-sutil);
 
 }
 
 .vazio{
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
   text-align:center;
 
@@ -474,6 +474,11 @@ const todosSelecionados = computed(() => {
 
   }
 
+}
+
+
+[data-tema="escuro"] .nome-conteudo{
+  color: var(--cor-primaria-texto);
 }
 
 </style>

@@ -27,14 +27,14 @@
     
     .top h1{
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        color: white;
+        color: var(--cor-texto-invertido);
         font-size: 35px;
         align-items: center;
         margin-bottom: 0;
     }
 
     .top p{
-        color: white;
+        color: var(--cor-texto-invertido);
         font-size: 17px;
         font-family: sans-serif;
         margin-top: 10px;

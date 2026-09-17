@@ -2,6 +2,7 @@
 
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { Info } from 'lucide-vue-next'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 
@@ -11,8 +12,7 @@ const resolver = useResolverStore()
 
 const {
     questao,
-    proximaQuestao,
-    questaoAnterior
+    proximaQuestao
 
 } = storeToRefs(resolver)
 
@@ -33,11 +33,11 @@ function proxima() {
 
 }
 
-function anterior() {
+function saibaMais() {
 
-    if (!questaoAnterior.value) return
+    if (!questao.value) return
 
-    router.push(`/resolver/${questaoAnterior.value}`)
+    router.push(`/resolver/${questao.value.id}/detalhes`)
 
 }
 </script>
@@ -48,9 +48,14 @@ function anterior() {
 
   <div class="acoes-direita">
 
-    <button class="btn-prox" @click="anterior" :disabled="!questaoAnterior">
-       ← Questão anterior
-    </button>
+    <div class="grupo-esquerda">
+
+      <button class="btn-saiba-mais" @click="saibaMais">
+       <Info :size="15" />
+        Saiba mais sobre a questão
+      </button>
+
+    </div>
 
     <div class="grupo-direita">
 
@@ -83,9 +88,9 @@ function anterior() {
 
   padding: 16px 20px;
 
-  border-top: 1px solid #eef1f3;
+  border-top: 1px solid var(--cor-borda-suave);
 
-  background: #fafbfc;
+  background: var(--cor-fundo-sutil);
 }
 
 .grupo-direita {
@@ -96,15 +101,66 @@ function anterior() {
 
 }
 
+.grupo-esquerda{
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+}
+
+.btn-saiba-mais{
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+
+  background: var(--cor-fundo-card);
+
+  border: 1px solid var(--cor-borda);
+
+  color: var(--cor-texto-secundario);
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition: all .15s ease;
+
+}
+
+.btn-saiba-mais:hover{
+  border-color: var(--cor-primaria);
+
+  color: var(--cor-primaria);
+
+  background: var(--cor-primaria-fundo);
+}
+
+[data-tema="escuro"] .btn-saiba-mais{
+
+  color: var(--cor-texto-principal);
+
+}
+
 .btn-prox {
 
-  background: white;
+  background: var(--cor-fundo-card);
 
-  border: 1px solid #d8dee4;
+  border: 1px solid var(--cor-borda);
 
-  color: #374151;
+  color: var(--cor-texto-secundario);
 
-  padding: 9px 14px;
+  padding: 10px 16px;
 
   border-radius: 8px;
 
@@ -120,11 +176,11 @@ function anterior() {
 
 .btn-prox:hover {
 
-  border-color: #0d6b4d;
+  border-color: var(--cor-primaria);
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
-  background: #f7fcf9;
+  background: var(--cor-primaria-fundo);
 
 }
 
@@ -137,18 +193,18 @@ function anterior() {
 
 .btn-prox:disabled:hover {
 
-  border-color: #d8dee4;
-  color: #374151;
-  background: white;
+  border-color: var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  background: var(--cor-fundo-card);
 
 }
 
 
 .btn-responder {
 
-    background: #0d6b4d;
+    background: var(--cor-primaria);
 
-    color: white;
+    color: var(--cor-texto-invertido);
 
     border:none;
 
@@ -182,7 +238,8 @@ function anterior() {
 
   }
 
-  .grupo-direita{
+  .grupo-direita,
+  .grupo-esquerda{
 
     justify-content: space-between;
     gap: 14px;
@@ -190,7 +247,8 @@ function anterior() {
   }
 
   .btn-prox,
-  .btn-responder{
+  .btn-responder,
+  .btn-saiba-mais{
 
     flex: 1;
     text-align: center;
@@ -213,7 +271,8 @@ function anterior() {
 
   }
 
-  .btn-prox{
+  .btn-prox,
+  .btn-saiba-mais{
 
     font-size: 12.5px;
     padding: 9px 10px;
@@ -231,7 +290,8 @@ function anterior() {
 
   }
 
-  .grupo-direita{
+  .grupo-direita,
+  .grupo-esquerda{
 
     justify-content: space-between;
     gap: 14px;
@@ -239,7 +299,8 @@ function anterior() {
   }
 
   .btn-prox,
-  .btn-responder{
+  .btn-responder,
+  .btn-saiba-mais{
 
     flex: 1;
     text-align: center;

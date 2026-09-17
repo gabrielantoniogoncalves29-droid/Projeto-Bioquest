@@ -17,8 +17,12 @@
         "nome": "Genética e biotecnologia"
       }
     },
-    "nivel": "Intermediário",
-    "taxaAcerto": 78
+    "nivel": "Conhecimento básico",
+    "taxaAcerto": 78,
+    "teoria": [
+      "A genética estuda como as características são transmitidas de geração em geração por meio dos genes, segmentos de DNA que carregam as instruções para a produção de proteínas.",
+      "A biotecnologia utiliza esse conhecimento para modificar organismos, transferindo genes de uma espécie para outra (organismos transgênicos), o que permite, por exemplo, produzir bactérias capazes de fabricar insulina humana ou expressar características de outro ser vivo."
+    ]
   },
   {
     "id": 202593,
@@ -38,8 +42,12 @@
         "nome": "Características dos animais e dos principais filos"
       }
     },
-    "nivel": "Fácil",
-    "taxaAcerto": 78
+    "nivel": "Cognitiva",
+    "taxaAcerto": 78,
+    "teoria": [
+      "O reino Animalia reúne organismos multicelulares, eucariontes e heterótrofos, organizados em diferentes filos de acordo com características como simetria corporal, presença de celoma e tipo de desenvolvimento embrionário.",
+      "Conhecer as principais características de cada filo (Poríferos, Cnidários, Platelmintos, Nematódeos, Anelídeos, Moluscos, Artrópodes, Equinodermos e Cordados) ajuda a entender a diversidade e a evolução dos animais."
+    ]
   },
   {
     "id": 202594,
@@ -59,8 +67,12 @@
         "nome": "Membrana plasmática"
       }
     },
-    "nivel": "Difícil",
-    "taxaAcerto": 71
+    "nivel": "Conhecimento específico",
+    "taxaAcerto": 71,
+    "teoria": [
+      "A membrana plasmática é uma estrutura formada por uma bicamada de fosfolipídios com proteínas associadas, responsável por controlar a entrada e a saída de substâncias na célula.",
+      "Esse controle seletivo (permeabilidade seletiva) é essencial para manter o equilíbrio interno da célula (homeostase) e envolve processos como difusão simples, difusão facilitada, osmose e transporte ativo."
+    ]
   },
   {
     "id": 202595,
@@ -80,8 +92,12 @@
         "nome": "Cadeias e teias alimentares"
       }
     },
-    "nivel": "Intermediário",
-    "taxaAcerto": 82
+    "nivel": "Conhecimento básico",
+    "taxaAcerto": 82,
+    "teoria": [
+      "Cadeias alimentares representam a sequência linear de transferência de energia entre produtores, consumidores e decompositores. Já as teias alimentares mostram as diversas interações alimentares que ocorrem em um ecossistema.",
+      "Em cada nível trófico, parte da energia é perdida na forma de calor, o que explica por que a quantidade de energia disponível diminui à medida que se avança na cadeia."
+    ]
   },
   {
     "id": 202596,
@@ -101,8 +117,12 @@
         "nome": "Reprodução das bactérias"
       }
     },
-    "nivel": "Fácil",
-    "taxaAcerto": 88
+    "nivel": "Cognitiva",
+    "taxaAcerto": 88,
+    "teoria": [
+      "Bactérias são organismos procarióticos que podem se reproduzir de forma assexuada, principalmente por bipartição (fissão binária), em que uma célula se divide em duas células geneticamente idênticas.",
+      "Também podem trocar material genético por mecanismos como conjugação, transformação e transdução, o que contribui para a variabilidade genética mesmo sem reprodução sexuada."
+    ]
   },
   {
     "id": 202597,
@@ -122,8 +142,12 @@
         "nome": "Fisiologia das angiospermas (nutrição, fotossíntese e hormônios vegetais)"
       }
     },
-    "nivel": "Difícil",
-    "taxaAcerto": 85
+    "nivel": "Conhecimento específico",
+    "taxaAcerto": 85,
+    "teoria": [
+      "As angiospermas possuem tecidos condutores especializados (xilema e floema) responsáveis pelo transporte de água, sais minerais e substâncias orgânicas produzidas na fotossíntese.",
+      "Hormônios vegetais, como auxinas, giberelinas e citocininas, regulam processos como crescimento, floração e resposta a estímulos ambientais, sendo fundamentais para a fisiologia dessas plantas."
+    ]
   },
   {
     "id": 202598,
@@ -143,8 +167,12 @@
         "nome": "Evidências evolutivas"
       }
     },
-    "nivel": "Intermediário",
-    "taxaAcerto": 76
+    "nivel": "Conhecimento básico",
+    "taxaAcerto": 76,
+    "teoria": [
+      "As evidências evolutivas reúnem diferentes áreas do conhecimento, como paleontologia (fósseis), anatomia comparada (órgãos homólogos e análogos), embriologia e biologia molecular, para sustentar a teoria da evolução das espécies.",
+      "Órgãos homólogos indicam ancestralidade comum, enquanto órgãos análogos mostram adaptações semelhantes em espécies sem parentesco próximo (convergência evolutiva)."
+    ]
   },
   {
     "id": 202599,
@@ -164,7 +192,11 @@
         "nome": "Desenvolvimento embrionário humano"
       }
     },
-    "nivel": "Fácil",
-    "taxaAcerto": 84
+    "nivel": "Cognitiva",
+    "taxaAcerto": 84,
+    "teoria": [
+      "O desenvolvimento embrionário humano começa com a fecundação e passa por etapas como segmentação, gastrulação e organogênese, formando as camadas germinativas (ectoderma, mesoderma e endoderma).",
+      "Cada camada germinativa origina tecidos e órgãos específicos, e o entendimento dessas etapas é importante para compreender más-formações e o desenvolvimento saudável do feto."
+    ]
   }
 ]

@@ -40,7 +40,7 @@
     .container-left{
         font-family: sans-serif;
         margin: 0;
-        color: white;
+        color: var(--cor-texto-invertido);
     }
     .container-left h1{
         font-weight: 700;
@@ -80,7 +80,7 @@
     .container-right{
         font-family: sans-serif;
         margin: 0;
-        color: white;
+        color: var(--cor-texto-invertido);
     }
     .container-right p{
         text-align: justify;
@@ -94,7 +94,7 @@
         border: 0;
         border-radius: 10px;
         background-color: rgb(20, 184, 86);
-        color: white;
+        color: var(--cor-texto-invertido);
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         transition: 500ms;
         

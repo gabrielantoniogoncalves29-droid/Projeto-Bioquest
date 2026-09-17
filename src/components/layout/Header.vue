@@ -1,5 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
+import { Sun, Moon } from 'lucide-vue-next';
+import { useTemaStore } from '@/store/tema.js';
+
+const tema = useTemaStore();
 
 let nome = "Gabriel Antônio";
 
@@ -57,6 +61,15 @@ onUnmounted(() => {
     </nav>
 
 <div class="user">
+  <button
+    class="botao-tema"
+    type="button"
+    :title="tema.tema === 'escuro' ? 'Ativar modo claro' : 'Ativar modo noturno'"
+    @click="tema.alternarTema()"
+  >
+    <Sun v-if="tema.tema === 'escuro'" :size="18" />
+    <Moon v-else :size="18" />
+  </button>
   <div class="menu-box">
     <div
       @click="barra(2)"
@@ -114,12 +127,12 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background: white;
+  background: var(--cor-fundo-card);
   border-bottom: 2px solid rgba(54, 54, 54, 0.086);
 }
 
 #logo {
-  color: #1c4a3d;
+  color: var(--cor-primaria-texto);
   font-weight: bold;
   font-size: clamp(0rem, 5vw, 2.5rem);
 }
@@ -139,11 +152,11 @@ onUnmounted(() => {
             clamp(0.5rem, 2vw, 1rem);
   margin: 0 0.6rem;
   text-decoration: none;
-  color: #296f5b;
+  color: var(--cor-primaria-texto);
 }
 
 .nav a:hover{
-  background-color: #f0f0f06d;
+  background-color: var(--cor-fundo-sutil-translucida);
 }
 
 .user {
@@ -186,6 +199,27 @@ margin-left: 10px;
   display: flex;
   align-items: center;
 }
+.botao-tema{
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+  background: var(--cor-fundo-sutil);
+  color: var(--cor-texto-secundario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.botao-tema:hover{
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+  background: var(--cor-primaria-fundo);
+}
+
 
 .icon-btn{
   width: 42px;
@@ -193,7 +227,7 @@ margin-left: 10px;
 
   border: none;
   border-radius: 10px;
-  background: #f7f7f7;
+  background: var(--cor-fundo-sutil);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +238,7 @@ margin-left: 10px;
 }
 
 .icon-btn:hover{
-  background: #ececec94;
+  background: var(--cor-fundo-sutil-translucida);
 }
 
 .icon-btn img{
@@ -217,7 +251,7 @@ margin-left: 10px;
   padding: 0 14px;
   border-radius: 12px;
 
-  background: #f7f7f7;
+  background: var(--cor-fundo-sutil);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -226,7 +260,7 @@ margin-left: 10px;
 }
 
 #user_box:hover{
-  background: #ececec;
+  background: var(--cor-fundo-sutil);
 }
 
 .avatar{
@@ -240,12 +274,12 @@ margin-left: 10px;
   margin: 0;
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: var(--cor-texto-principal);
 }
 
 .arrow{
   font-size: 20px;
-  color: #666;
+  color: var(--cor-texto-suave);
 }
 
 .menu-dropdown{
@@ -253,7 +287,7 @@ margin-left: 10px;
   top: 65px;
   right: 0;
   width: 340px;
-  background: #fff;
+  background: var(--cor-fundo-card);
   border-radius: 18px;
   box-shadow:
     0 10px 30px rgba(0,0,0,0.12);
@@ -267,14 +301,14 @@ margin-left: 10px;
   height: 30px;
   padding: 0 16px;
   text-decoration: none;
-  color: #333;
+  color: var(--cor-texto-principal);
   font-size: 14px;
   font-weight: 500;
   transition: 0.2s;
 }
 
 .menu-dropdown a:hover{
-  background: #f5f5f5;
+  background: var(--cor-fundo-sutil);
 }
 
 .material-symbols-outlined{
@@ -301,7 +335,7 @@ margin-left: 10px;
   gap: 5px;
   width: 100%;
   text-decoration: none;
-  color: #333;
+  color: var(--cor-texto-principal);
   background: transparent;
   border: none;
   padding: 10px 13px;
@@ -314,13 +348,13 @@ margin-left: 10px;
 }
 
 .profile-options i{
-  color: #296f5b;
+  color: var(--cor-primaria-texto);
   font-size: 14px;
 }
 
 .profile-footer{
   margin-top: 8px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--cor-borda-suave);
   padding: 8px 18px;
   font-size: 10px;
 }
@@ -347,7 +381,7 @@ margin-left: 10px;
 }
 
 .notification-item:hover{
-  background: #f5f7fb;
+  background: var(--cor-fundo-sutil);
 }
 
 .notification-item img{
@@ -358,13 +392,18 @@ margin-left: 10px;
 
 .notification-content p{
   font-size: 14px;
-  color: #222;
+  color: var(--cor-texto-principal);
 }
 
 .notification-content span{
   font-size: 12px;
-  color: #888;
+  color: var(--cor-texto-fraco);
 }
 
+@media (min-width: 1024px) and (max-width: 2000px) {
+  .header {
+    height: 90px;
+  }
+}
 </style>
 

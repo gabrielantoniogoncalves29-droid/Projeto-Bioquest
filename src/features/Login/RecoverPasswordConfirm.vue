@@ -76,10 +76,12 @@ function reenviar(){
     width:100%;
     max-width:430px;
     height:480px;
+    max-height:calc(100vh - 140px);
+    overflow-y:auto;
 
     padding:32px;
 
-    background:rgba(255,255,255,0.441);
+    background:var(--cor-fundo-card-vidro);
 
     border-radius:18px;
 
@@ -107,7 +109,7 @@ function reenviar(){
 
 .mail-icon{
 
-    color:#2d6a4f;
+    color:var(--cor-primaria);
 
     animation:pop .45s ease;
 
@@ -147,7 +149,7 @@ h1{
 
     font-weight:700;
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     line-height:1;
 
@@ -161,7 +163,7 @@ h2{
 
     font-weight:500;
 
-    color:#666;
+    color:var(--cor-texto-suave);
 
 }
 
@@ -169,7 +171,7 @@ h2{
 
     margin:0;
 
-    color:#666;
+    color:var(--cor-texto-suave);
 
     line-height:1.5;
 
@@ -195,11 +197,11 @@ h2{
 
     border-radius:12px;
 
-    background:#ffffff87;
+    background:var(--cor-fundo-sutil);
 
-    border:1px solid #d9d9d9;
+    border:1px solid var(--cor-borda);
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     font-weight:600;
 
@@ -213,6 +215,8 @@ h2{
 
     width:100%;
 
+    flex-shrink:0;
+
     height:46px;
 
     margin-top:22px;
@@ -221,9 +225,9 @@ h2{
 
     border-radius:12px;
 
-    background:#2d6a4f;
+    background:var(--cor-primaria);
 
-    color:#fff;
+    color: var(--cor-texto-invertido);
 
     font-size:16px;
 
@@ -238,7 +242,7 @@ h2{
 
 .primary-button:hover{
 
-    background:#255740;
+    background:var(--cor-primaria);
 
     transform:translateY(-2px);
 
@@ -254,6 +258,8 @@ h2{
 
     width:100%;
 
+    flex-shrink:0;
+
     margin-top:auto;
 
     padding-top:16px;
@@ -262,7 +268,7 @@ h2{
 
     background:none;
 
-    color:#2d6a4f;
+    color:var(--cor-primaria);
 
     font-size:15px;
 
@@ -276,10 +282,32 @@ h2{
 
 .secondary-button:hover{
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     text-decoration:underline;
 
+}
+
+
+.card::-webkit-scrollbar{
+    width:6px;
+}
+
+.card::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.card::-webkit-scrollbar-thumb{
+    background:var(--cor-primaria-translucida);
+    border-radius:999px;
+}
+
+.card::-webkit-scrollbar-thumb:hover{
+    background:var(--cor-primaria-translucida-forte);
+}
+
+[data-tema="escuro"] .secondary-button{
+    color:var(--cor-primaria-texto);
 }
 
 </style>

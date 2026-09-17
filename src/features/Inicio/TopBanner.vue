@@ -40,12 +40,12 @@
     margin: 0;
     text-align: center;
     line-height: 1.2;
-    color: rgb(28, 75, 47);
+    color: var(--cor-primaria-texto);
   }
   .banner_description h2{
     font-family: sans-serif;
     font-size: 16px;
-    color: rgb(50, 54, 53);
+    color: var(--cor-texto-secundario);
     text-align: center;
   }
   .banner_description button{
@@ -55,14 +55,14 @@
     height: 45px;
     border: 0;
     border-radius: 10px;
-    background-color: rgb(28, 75, 47);
-    color: white;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-invertido);
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
     transition: 500ms ease;
   }
   .banner_description button:hover{
-    background-color: rgb(39, 109, 67);
+    background-color: var(--cor-primaria-hover);
   }
 </style>

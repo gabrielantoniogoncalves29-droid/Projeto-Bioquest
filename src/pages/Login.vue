@@ -93,7 +93,7 @@ function goback(){
     align-items:center;
 
     background:
-        linear-gradient(rgba(255, 255, 255, 0.606), rgba(255, 255, 255, 0.356)),
+        linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
         url("@/assets/Design sem nome_20260723_125812_0000.png") top/cover no-repeat;
 
     overflow:hidden;
@@ -126,7 +126,7 @@ function goback(){
 
     font-weight:700;
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     letter-spacing:.5px;
 
@@ -144,7 +144,7 @@ function goback(){
 
     top:0px;
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
     font-size:18px;
 
@@ -163,6 +163,18 @@ function goback(){
 .voltar:hover{
 
     transform:translateX(-4px);
+
+}
+
+[data-tema="escuro"] .page-header h1{
+
+    color:var(--cor-texto-principal);
+
+}
+
+[data-tema="escuro"] .voltar{
+
+    color:var(--cor-texto-principal);
 
 }
 
@@ -201,7 +213,7 @@ function goback(){
     .auth-view{
 
         background:
-            linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45)),
+            linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-1)),
             url("@/assets/Design-fundo-grande.jpg") center/cover no-repeat;
 
     }

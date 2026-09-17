@@ -202,9 +202,9 @@ function selecionarTodos() {
 
 .accordion{
     position:relative;
-    border:1px solid #d1d5db;
+    border:1px solid var(--cor-borda);
     border-radius:10px;
-    background:#fff;
+    background: var(--cor-fundo-card);
     overflow:visible;
 }
 
@@ -212,11 +212,11 @@ function selecionarTodos() {
 
   width:100%;
 
-  border:1px solid #d1d5db;
+  border:1px solid var(--cor-borda);
 
   border-radius:10px;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
   padding:16px 18px;
 
@@ -234,7 +234,7 @@ function selecionarTodos() {
 
 .cabecalho:hover{
 
-  background:#f9fafb;
+  background:var(--cor-fundo-sutil);
 
 }
 
@@ -250,7 +250,7 @@ function selecionarTodos() {
 
 .seta{
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
 }
 
@@ -274,7 +274,7 @@ function selecionarTodos() {
 
   font-weight:700;
 
-  color:#1f2937;
+  color:var(--cor-texto-principal);
 
 }
 
@@ -284,7 +284,7 @@ function selecionarTodos() {
 
   font-size:13px;
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
   overflow:hidden;
 
@@ -302,9 +302,9 @@ function selecionarTodos() {
 
 .grupo{
 
-    border:1px solid #dadde0;
+    border:1px solid var(--cor-borda);
     border-radius:10px;
-    background:#fafafa;
+    background:var(--cor-fundo-sutil);
 
     padding:14px;
 
@@ -352,7 +352,7 @@ function selecionarTodos() {
 
 .opcao:hover{
 
-  background:#f3f4f6;
+  background:var(--cor-fundo-sutil);
 
 }
 
@@ -370,7 +370,7 @@ function selecionarTodos() {
 
   cursor:pointer;
 
-  accent-color:#0d6b4d;
+  accent-color:var(--cor-primaria);
 
 }
 

@@ -54,7 +54,7 @@
     margin: 0;
     text-align: center;
     line-height: 1.2;
-    color: rgb(28, 75, 47);
+    color: var(--cor-primaria-texto);
 }
 .cards-funcoes{
     display: flex;
@@ -73,9 +73,9 @@
     text-align: center;
 
     font-size: 1rem;
-    color: rgb(28, 75, 47);
+    color: var(--cor-primaria-texto);
 
-    background-color: white;
+    background-color: var(--cor-fundo-card);
     border-radius: 12px;
     width: 100%;
     max-width: 300px;
@@ -94,15 +94,15 @@
     height: 45px;
     border: 0;
     border-radius: 10px;
-    background-color: rgb(28, 75, 47);
-    color: white;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-invertido);
     margin-top: 40px;
     transition: 500ms;
 
     cursor: pointer;
 }
 .card button:hover{
-    background-color: rgb(39, 109, 67);
+    background-color: var(--cor-primaria-hover);
 }
 .material-symbols-outlined{
     font-size: 64px;

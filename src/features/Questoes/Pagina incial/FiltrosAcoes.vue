@@ -28,7 +28,7 @@ const store = useQuestoesStore()
 
 .resultado {
 
-  color: #4b5563;
+  color: var(--cor-texto-secundario);
 
   font-size: 16px;
 
@@ -36,7 +36,7 @@ const store = useQuestoesStore()
 
 .resultado strong {
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
   font-size: 17px;
 
@@ -56,7 +56,7 @@ const store = useQuestoesStore()
 
   font-size: 14px;
 
-  color: #6b7280;
+  color: var(--cor-texto-suave);
 
 }
 
@@ -77,13 +77,13 @@ const store = useQuestoesStore()
 
   padding: 0 22px;
 
-  border: 1px solid #0d6b4d;
+  border: 1px solid var(--cor-primaria);
 
   border-radius: 8px;
 
-  background: #0d6b4d;
+  background: var(--cor-primaria);
 
-  color: white;
+  color: var(--cor-texto-invertido);
 
   display: flex;
 
@@ -101,11 +101,11 @@ const store = useQuestoesStore()
 
 .btn-aplicar:hover {
 
-  border-color: #0d6b4d;
+  border-color: var(--cor-primaria);
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
-  background: #0d6b4d0c;
+  background: color-mix(in srgb, var(--cor-primaria) 5%, transparent);
 
 
 }
@@ -153,6 +153,11 @@ const store = useQuestoesStore()
 
   }
 
+}
+
+
+[data-tema="escuro"] .resultado strong{
+  color: var(--cor-primaria-texto);
 }
 
 </style>

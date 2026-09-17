@@ -12,7 +12,31 @@
         v-model="store.termoPesquisa"
         type="text"
         placeholder="Pesquisar por assunto, conteudo, palavra-chave, código da questão..."
+        @input="aoDigitar"
+        @focus="aoFocar"
+        @blur="aoDesfocar"
+        @keydown="aoTeclar"
       >
+
+      <ul
+        v-if="mostrarSugestoes && sugestoes.length"
+        class="sugestoes-lista"
+      >
+
+        <li
+          v-for="(sugestao, indice) in sugestoes"
+          :key="sugestao"
+          :class="{ ativa: indice === indiceAtivo }"
+          @mousedown.prevent="selecionarSugestao(sugestao)"
+        >
+
+          <span class="material-icons">search</span>
+
+          {{ sugestao }}
+
+        </li>
+
+      </ul>
 
     </div>
 
@@ -59,9 +83,84 @@
 
 <script setup>
 
+import { ref, computed } from 'vue'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
+import { buscarSugestoes } from '@/utils/autocomplete.js'
 
 const store = useQuestoesFiltrosStore()
+
+const mostrarSugestoes = ref(false)
+const indiceAtivo = ref(-1)
+
+const sugestoes = computed(() =>
+
+    buscarSugestoes(store.termoPesquisa)
+
+)
+
+function aoDigitar() {
+
+    mostrarSugestoes.value = true
+    indiceAtivo.value = -1
+
+}
+
+function aoFocar() {
+
+    if (store.termoPesquisa.trim()) {
+
+        mostrarSugestoes.value = true
+
+    }
+
+}
+
+function aoDesfocar() {
+
+    // pequeno atraso para o clique (mousedown) na sugestão ser processado antes de fechar a lista
+    setTimeout(() => {
+
+        mostrarSugestoes.value = false
+        indiceAtivo.value = -1
+
+    }, 120)
+
+}
+
+function selecionarSugestao(sugestao) {
+
+    store.termoPesquisa = sugestao
+    mostrarSugestoes.value = false
+    indiceAtivo.value = -1
+
+}
+
+function aoTeclar(evento) {
+
+    if (!mostrarSugestoes.value || sugestoes.value.length === 0) return
+
+    if (evento.key === 'ArrowDown') {
+
+        evento.preventDefault()
+        indiceAtivo.value = (indiceAtivo.value + 1) % sugestoes.value.length
+
+    } else if (evento.key === 'ArrowUp') {
+
+        evento.preventDefault()
+        indiceAtivo.value = (indiceAtivo.value - 1 + sugestoes.value.length) % sugestoes.value.length
+
+    } else if (evento.key === 'Enter' && indiceAtivo.value >= 0) {
+
+        evento.preventDefault()
+        selecionarSugestao(sugestoes.value[indiceAtivo.value])
+
+    } else if (evento.key === 'Escape') {
+
+        mostrarSugestoes.value = false
+
+    }
+
+}
 
 </script>
 
@@ -74,13 +173,13 @@ const store = useQuestoesFiltrosStore()
 
   padding: 0 15px;
 
-  border: 1px solid #d1d5dbcc;
+  border: 1px solid color-mix(in srgb, var(--cor-borda) 80%, transparent);
 
   border-radius: 8px;
 
-  background: white;
+  background: var(--cor-fundo-card);
 
-  color: #4b5563;
+  color: var(--cor-texto-secundario);
 
   display: flex;
 
@@ -98,14 +197,14 @@ const store = useQuestoesFiltrosStore()
 .btn-filtro:hover,
 .btn-limpar:hover {
 
-  border-color: #0d6b4d;
+  border-color: var(--cor-primaria);
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
 }
 .barra-pesquisa {
 
-  background: white;
+  background: var(--cor-fundo-card);
   margin: 0px 40px;
   border-radius: 8px;
 
@@ -122,6 +221,8 @@ const store = useQuestoesFiltrosStore()
 
 .input-container {
 
+  position: relative;
+
   flex: 1;
 
   display: flex;
@@ -130,13 +231,103 @@ const store = useQuestoesFiltrosStore()
 
   gap: 15px;
 
-  background: #f9fafb;
+  background: var(--cor-fundo-sutil);
 
-  border: 1px solid #c5c6c9;
+  border: 1px solid var(--cor-borda);
 
   border-radius: 15px;
 
   padding: 0 14px;
+
+}
+
+.sugestoes-lista {
+
+  position: absolute;
+
+  top: calc(100% + 6px);
+
+  left: 0;
+
+  right: 0;
+
+  z-index: 20;
+
+  margin: 0;
+
+  padding: 6px;
+
+  list-style: none;
+
+  background: var(--cor-fundo-card);
+
+  border: 1px solid var(--cor-borda);
+
+  border-radius: 12px;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,.08);
+
+  max-height: 260px;
+
+  overflow-y: auto;
+
+}
+
+.sugestoes-lista li {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  color: var(--cor-texto-secundario);
+
+  cursor: pointer;
+
+}
+
+.sugestoes-lista li .material-icons {
+
+  font-size: 16px;
+
+  color: var(--cor-texto-fraco);
+
+}
+
+.sugestoes-lista li:hover,
+.sugestoes-lista li.ativa {
+
+  background: var(--cor-primaria-fundo);
+
+  color: var(--cor-primaria);
+
+}
+
+.sugestoes-lista li:hover .material-icons,
+.sugestoes-lista li.ativa .material-icons {
+
+  color: var(--cor-primaria);
+
+}
+
+[data-tema="escuro"] .sugestoes-lista li:hover,
+[data-tema="escuro"] .sugestoes-lista li.ativa {
+
+  color: var(--cor-texto-principal);
+
+}
+
+[data-tema="escuro"] .sugestoes-lista li:hover .material-icons,
+[data-tema="escuro"] .sugestoes-lista li.ativa .material-icons {
+
+  color: var(--cor-texto-principal);
 
 }
 
@@ -151,7 +342,7 @@ const store = useQuestoesFiltrosStore()
   background: transparent;
 
   outline: none;
-  color: #000000a9;
+  color: var(--cor-texto-principal);
   font-size: 16px;
 
 }
@@ -196,8 +387,8 @@ const store = useQuestoesFiltrosStore()
 }
 
 .btn-filtro {
-  color: #3f4752;
-  background: white;
+  color: var(--cor-texto-secundario);
+  background: var(--cor-fundo-card);
   border: none;
 
 }

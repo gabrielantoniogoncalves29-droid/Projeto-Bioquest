@@ -33,29 +33,7 @@
     "resposta": "D",
     "comentario": "A transferência genética introduz em E. coli genes originalmente presentes em S. elongatus e relacionados ao funcionamento do ciclo circadiano. Esses genes passam a atuar dentro de uma célula que continua apresentando seu próprio metabolismo característico.",
     "estatisticas": {
-      "taxaAcerto": 78,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 5
-        },
-        {
-          "alternativa": "B",
-          "percentual": 7
-        },
-        {
-          "alternativa": "C",
-          "percentual": 6
-        },
-        {
-          "alternativa": "D",
-          "percentual": 78
-        },
-        {
-          "alternativa": "E",
-          "percentual": 4
-        }
-      ]
+      "taxaAcerto": 78
     }
   },
   {
@@ -92,29 +70,7 @@
     "resposta": "C",
     "comentario": "A glândula uropigial produz uma secreção oleosa utilizada pelas aves para impermeabilizar e conservar suas penas. Com a redução dessa secreção, as penas ficam mais facilmente encharcadas, aumentando seu peso e dificultando a flutuação.",
     "estatisticas": {
-      "taxaAcerto": 78,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 4
-        },
-        {
-          "alternativa": "B",
-          "percentual": 8
-        },
-        {
-          "alternativa": "C",
-          "percentual": 78
-        },
-        {
-          "alternativa": "D",
-          "percentual": 6
-        },
-        {
-          "alternativa": "E",
-          "percentual": 4
-        }
-      ]
+      "taxaAcerto": 78
     }
   },
   {
@@ -151,29 +107,7 @@
     "resposta": "C",
     "comentario": "Na plasmólise, a célula vegetal perde água por osmose. Isso acontece quando ela é colocada em um meio hipertônico, ou seja, com maior concentração de solutos do que o interior celular.",
     "estatisticas": {
-      "taxaAcerto": 71,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 10
-        },
-        {
-          "alternativa": "B",
-          "percentual": 9
-        },
-        {
-          "alternativa": "C",
-          "percentual": 71
-        },
-        {
-          "alternativa": "D",
-          "percentual": 5
-        },
-        {
-          "alternativa": "E",
-          "percentual": 5
-        }
-      ]
+      "taxaAcerto": 71
     }
   },
   {
@@ -210,29 +144,7 @@
     "resposta": "B",
     "comentario": "Os organismos de uma teia alimentar estão interligados por relações de alimentação. Por isso, a redução ou o aumento de uma população pode provocar efeitos em cascata sobre outras espécies.",
     "estatisticas": {
-      "taxaAcerto": 82,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 4
-        },
-        {
-          "alternativa": "B",
-          "percentual": 82
-        },
-        {
-          "alternativa": "C",
-          "percentual": 5
-        },
-        {
-          "alternativa": "D",
-          "percentual": 6
-        },
-        {
-          "alternativa": "E",
-          "percentual": 3
-        }
-      ]
+      "taxaAcerto": 82
     }
   },
   {
@@ -269,29 +181,7 @@
     "resposta": "B",
     "comentario": "As bactérias normalmente se reproduzem de forma assexuada por fissão binária. Antes da divisão, o material genético é duplicado e a célula origina duas células-filhas.",
     "estatisticas": {
-      "taxaAcerto": 88,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 3
-        },
-        {
-          "alternativa": "B",
-          "percentual": 88
-        },
-        {
-          "alternativa": "C",
-          "percentual": 4
-        },
-        {
-          "alternativa": "D",
-          "percentual": 2
-        },
-        {
-          "alternativa": "E",
-          "percentual": 3
-        }
-      ]
+      "taxaAcerto": 88
     }
   },
   {
@@ -328,36 +218,14 @@
     "resposta": "B",
     "comentario": "A luz é uma fonte de energia utilizada na fotossíntese. Nesse processo, organismos fotossintetizantes produzem matéria orgânica a partir de substâncias inorgânicas.",
     "estatisticas": {
-      "taxaAcerto": 85,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 3
-        },
-        {
-          "alternativa": "B",
-          "percentual": 85
-        },
-        {
-          "alternativa": "C",
-          "percentual": 4
-        },
-        {
-          "alternativa": "D",
-          "percentual": 5
-        },
-        {
-          "alternativa": "E",
-          "percentual": 3
-        }
-      ]
+      "taxaAcerto": 85
     }
   },
   {
     "id": 202598,
     "ano": "Enem 2022",
     "enunciado": {
-      "imagem": "",
+      "imagem": "data:image/webp;base64,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",
       "alt": "",
       "textoPrincipal": "A comparação de sequências de DNA entre diferentes espécies de primatas revelou grande semelhança entre algumas delas. Quanto maior era a proximidade entre as sequências analisadas, maior também era a semelhança entre determinadas características hereditárias.",
       "textoComplementar": "Esses dados constituem uma evidência evolutiva baseada principalmente em:"
@@ -387,37 +255,15 @@
     "resposta": "C",
     "comentario": "A comparação entre moléculas, como DNA e proteínas, permite identificar graus de parentesco evolutivo entre organismos. Quanto maior a semelhança genética, maiores podem ser as evidências de ancestralidade comum.",
     "estatisticas": {
-      "taxaAcerto": 76,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 7
-        },
-        {
-          "alternativa": "B",
-          "percentual": 8
-        },
-        {
-          "alternativa": "C",
-          "percentual": 76
-        },
-        {
-          "alternativa": "D",
-          "percentual": 5
-        },
-        {
-          "alternativa": "E",
-          "percentual": 4
-        }
-      ]
+      "taxaAcerto": 76
     }
   },
   {
     "id": 202599,
     "ano": "Enem 2020",
     "enunciado": {
-      "imagem": "",
-      "alt": "",
+      "imagem": "https://tse2.mm.bing.net/th/id/OIP.P5zGe5ZaZI5jHBN-t9DDLAHaE_?r=0&pid=ImgDet&w=192&h=129&c=7&dpr=1,4&o=7&rm=3",
+      "alt": "esquema mostrando embrião humano",
       "textoPrincipal": "Durante as primeiras etapas do desenvolvimento embrionário humano, ocorrem sucessivas divisões celulares e processos de diferenciação. Posteriormente, são formados os três principais folhetos germinativos: ectoderma, mesoderma e endoderma.",
       "textoComplementar": "Esses folhetos são importantes porque dão origem:"
     },
@@ -443,32 +289,8 @@
         "texto": "somente às estruturas externas do corpo."
       }
     ],
-    "resposta": "A",
-    "comentario": "Os três folhetos germinativos participam da formação dos diferentes tecidos e órgãos durante o desenvolvimento embrionário. Cada um deles origina grupos específicos de estruturas do organismo.",
     "estatisticas": {
-      "taxaAcerto": 84,
-      "distribuicao": [
-        {
-          "alternativa": "A",
-          "percentual": 84
-        },
-        {
-          "alternativa": "B",
-          "percentual": 5
-        },
-        {
-          "alternativa": "C",
-          "percentual": 3
-        },
-        {
-          "alternativa": "D",
-          "percentual": 4
-        },
-        {
-          "alternativa": "E",
-          "percentual": 4
-        }
-      ]
+      "taxaAcerto": 84
     }
   }
 ]

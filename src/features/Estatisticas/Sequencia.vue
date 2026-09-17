@@ -236,7 +236,7 @@ function corProgresso(valor){
         font-family: sans-serif;
     }
     .ajuda p{
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         font-size: 18px;
     }
     .evolucao{
@@ -257,7 +257,7 @@ function corProgresso(valor){
         margin: 0;
     }
     .evolucao h1{
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         font-size: 22px;
     }
     .content{
@@ -296,7 +296,7 @@ function corProgresso(valor){
     }
     .ofensiva p{
         font-size: 16px;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
     }
     .sequencia{
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
@@ -332,12 +332,12 @@ function corProgresso(valor){
     .titulo{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 17px;
-        color: #000000;
+        color: var(--cor-texto-principal);
         font-weight: bold;
         padding-bottom: 0;
     }
     .topo{
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         display: flex;
         align-items: center;
         padding: 10px;
@@ -359,7 +359,7 @@ function corProgresso(valor){
     .lista-dias{
         margin-bottom: 10px;
         font-weight: bold;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
     }
     .lista-datas li{
         display: flex;
@@ -370,7 +370,7 @@ function corProgresso(valor){
         align-items: center;
         margin: 0 auto;
         padding: 10px;
-        color: #202020;
+        color: var(--cor-texto-principal);
 
         cursor: pointer;
     }
@@ -382,7 +382,7 @@ function corProgresso(valor){
         height: 12px;
         border-radius: 50%;
         display: flex;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         background-color: rgba(186, 255, 186, 0.5);
     }
     .fade-enter-active, .fade-leave-active {
@@ -422,7 +422,7 @@ function corProgresso(valor){
         width: 55px;
         height: 55px;
         border-radius: 50%;
-        color: white;
+        color: var(--cor-texto-invertido);
         font-size: 32px;
         margin: 20px 10px 10px 20px;
     }
@@ -463,7 +463,7 @@ function corProgresso(valor){
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         font-size: 14px;
         text-decoration: none;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         font-weight: bold;
     }
     .atividades{
@@ -481,7 +481,7 @@ function corProgresso(valor){
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         font-size: 14px;
         margin: 20px;
-        background-color: white;
+        background-color: var(--cor-fundo-card);
         transition: 400ms ease;
         height: 45px;
     }
@@ -505,15 +505,15 @@ function corProgresso(valor){
         align-items: center;
         font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         font-size: 10px;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         cursor: pointer;
     }
     .Ver-questoes:hover{
-        color: rgb(39, 109, 67);
+        color: var(--cor-primaria-hover);
     }
     .livro{
         font-size: 32px;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
     }
     .material-symbols-outlined{
         font-variation-settings:
@@ -545,7 +545,7 @@ function corProgresso(valor){
         height: 8px;
         border-radius: 10px;
         overflow: hidden;
-        background-color: #ececec;
+        background-color: var(--cor-fundo-sutil);
     }
     .progresso{
         height: 100%;
@@ -559,17 +559,17 @@ function corProgresso(valor){
     }
     .btn-continuar{
         text-decoration: none;
-        border: 1px solid rgb(28, 75, 47);
+        border: 1px solid var(--cor-primaria-texto);
         border-radius: 8px;
-        background-color: rgb(28, 75, 47);
+        background-color: var(--cor-primaria);
         padding: 10px;
-        color: white;
+        color: var(--cor-texto-invertido);
         transition: 500ms ease;
         
         cursor: pointer;
     }
     .btn-continuar:hover{
-        background-color: rgb(44, 112, 71);
+        background-color: var(--cor-primaria-hover);
     }
     .lado-direito{
         margin-bottom: 80px;
@@ -587,7 +587,7 @@ function corProgresso(valor){
         align-items: center;
     }
     .title-grafico span{
-        color: rgb(44, 112, 71);
+        color: var(--cor-primaria-hover);
         font-size: 2rem;
     }
     .title-grafico h1{
@@ -605,7 +605,7 @@ function corProgresso(valor){
     .acertos-esquerda{
         font-family: sans-serif;
         font-weight: bold;
-        border-right: 2px solid #3b3b3b1a ;
+        border-right: 2px solid var(--cor-borda) ;
         padding-right: 38px;
         text-align: center;
     }
@@ -620,8 +620,8 @@ function corProgresso(valor){
         border-radius: 50%;
 
         background: conic-gradient(
-        #2e9d45 0% 78%,
-        #e5e5e5 78% 100%
+        var(--cor-primaria) 0% 78%,
+        var(--cor-borda) 78% 100%
         );
 
         display: flex;
@@ -633,7 +633,7 @@ function corProgresso(valor){
         width: 140px;
         height: 140px;
         border-radius: 50%;
-        background-color: white;
+        background-color: var(--cor-fundo-card);
         display: flex;
         flex-direction: column;
         justify-content: center;

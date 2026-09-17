@@ -14,7 +14,7 @@ const filtrosStore = useQuestoesFiltrosStore()
 
 const questoes = computed(() => {
 
-  return store.questoes
+  return store.questoesOrdenadas
 
 })
 
@@ -74,29 +74,6 @@ v-for="questao in questoes"
 
 </section>
 
-<div class="resultado-acoes">
-<button class="resolver-btn text-on-action hover:text-information disabled:text-disabled">
-  Resolver todas as questões
-  <svg 
-    width="18" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    xmlns="http://www.w3.org/2000/svg"
-    class="cursor-pointer"
-    fill="none"
-    stroke="currentColor"
-  >
-    <path 
-      d="M5 12H19M19 12L12 5M19 12L12 19" 
-      stroke-width="2" 
-      stroke-linecap="round" 
-      stroke-linejoin="round"
-    />
-  </svg>
-</button>
-
-
-</div>
 
 </template>
 
@@ -106,9 +83,9 @@ v-for="questao in questoes"
 .lista-questoes {
 
   width:100%;
-  border-top:1px solid #cacbcf;
+  border-top:1px solid var(--cor-borda);
   
-  background:#ffffff;
+  background: var(--cor-fundo-card);
 
   padding:24px;
 
@@ -192,7 +169,7 @@ v-for="questao in questoes"
 
   padding:40px;
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
 }
 
@@ -213,13 +190,13 @@ v-for="questao in questoes"
 .resultado strong{
     font-size: 16px;
     font-weight: 700;
-    color: #0d6b4d;
+    color: var(--cor-primaria);
     line-height: 1;
 }
 
 .resultado span{
     font-size: 16px;
-    color: #6b7280;
+    color: var(--cor-texto-suave);
     white-space: nowrap;
 }
 
@@ -232,28 +209,28 @@ v-for="questao in questoes"
     padding:0px 15px 0px 16px;
     width:240px;
     height:40px;
-    background:#fafafa36;
+    background: color-mix(in srgb, var(--cor-fundo-sutil) 21%, transparent);
     margin-right: 40px;
     margin-left: auto;
-    border:1px solid #5e5e5c7c;
+    border:1px solid var(--cor-borda);
 
     border-radius:9px;
 
-    color:#444;
+    color:var(--cor-texto-secundario);
 
     transition:.2s;
 }
 
 .resolver-btn:hover{
 
-    background:#f3f6f4;
-    border-color:#dbe8df;
+    background:var(--cor-fundo-sutil);
+    border-color:var(--cor-borda);
 
 }
 
 .resolver-btn .material-icons{
     font-size:21px;
-    color:#1f6f5c;
+    color:var(--cor-primaria-texto);
 }
 
 
@@ -274,6 +251,11 @@ v-for="questao in questoes"
 
   }
 
+}
+
+
+[data-tema="escuro"] .resultado strong{
+    color: var(--cor-primaria-texto);
 }
 
 </style>

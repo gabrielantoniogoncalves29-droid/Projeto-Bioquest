@@ -6,6 +6,7 @@ import Ajuda from '@/pages/Ajuda.vue';
 import Perfil from '@/pages/Perfil.vue';
 import Login from '@/pages/Login.vue'
 import Resolver from '@/features/Questoes/Painel Resolução/ResolverQuestao.vue';
+import DetalhesQuestao from '@/features/Questoes/Detalhes/DetalhesQuestao.vue';
 const routes = [
 {
     path: '/',
@@ -41,6 +42,11 @@ const routes = [
     path:'/resolver/:id',
     name:'Resolver',
     component: Resolver
+},
+{
+    path:'/resolver/:id/detalhes',
+    name:'DetalhesQuestao',
+    component: DetalhesQuestao
 }
 
 ]

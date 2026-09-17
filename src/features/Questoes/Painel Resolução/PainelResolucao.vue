@@ -2,10 +2,14 @@
 
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { ArrowUpRight } from 'lucide-vue-next'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useDetalhesStore } from '@/store/resolver/detalhes'
 import { useUiStore } from '@/store/resolver/ui'
+
+const router = useRouter()
 
 const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
@@ -119,6 +123,14 @@ async function copiarLink(){
         copiado.value = false
 
     },2000)
+
+}
+
+function irParaForum(){
+
+    if(!questao.value) return
+
+    router.push(`/resolver/${questao.value.id}/detalhes`)
 
 }
 
@@ -301,6 +313,21 @@ async function copiarLink(){
 </div>
 
 
+<div class="secao central">
+
+    <button
+        class="btn-forum"
+        @click="irParaForum"
+    >
+
+        
+        Ver detalhes completos <ArrowUpRight :size="16"  />
+
+    </button>
+
+</div>
+
+
 <div class="secao sem-borda link-final">
 
     <div class="rotulo">Link da questão</div>
@@ -368,9 +395,9 @@ async function copiarLink(){
     width:380px;
     height:100%;
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
-    border-left:1px solid #e9edf2;
+    border-left:1px solid var(--cor-borda);
 
     transition:width .35s ease;
 
@@ -403,7 +430,7 @@ async function copiarLink(){
 
     padding:18px 0;
 
-    border-bottom:1px solid #eef1f4d1;
+    border-bottom:1px solid color-mix(in srgb, var(--cor-borda-suave) 82%, transparent);
 
 }
 
@@ -425,7 +452,7 @@ async function copiarLink(){
 
     font-size:15px;
 
-    color:#7a828b;
+    color:var(--cor-texto-secundario);
 
 }
 
@@ -452,13 +479,13 @@ async function copiarLink(){
 
     font-weight:600;
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
 }
 
 .prova .separador-ponto{
 
-    color:#c3cbd3;
+    color:var(--cor-texto-fraco);
 
     font-size:13px;
 
@@ -468,7 +495,7 @@ async function copiarLink(){
 
     font-size:13px;
 
-    color:#8a94a1;
+    color:var(--cor-texto-suave);
 
 }
 
@@ -482,7 +509,7 @@ async function copiarLink(){
 
     font-weight:600;
 
-    color:#1f2937;
+    color:var(--cor-texto-principal);
 
     line-height:1.3;
 
@@ -527,7 +554,7 @@ async function copiarLink(){
 
 .icone-caixa svg{
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
 }
 
@@ -561,7 +588,7 @@ async function copiarLink(){
 
     font-weight:700;
 
-    color:#1f2937;
+    color:var(--cor-texto-principal);
 
 }
 
@@ -569,7 +596,7 @@ async function copiarLink(){
 
     font-size:14px;
 
-    color:#6b7280;
+    color:var(--cor-texto-suave);
 
     display:flex;
 
@@ -583,7 +610,7 @@ async function copiarLink(){
 
 .valor-card .seta{
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
     font-weight:600;
 
@@ -596,7 +623,7 @@ async function copiarLink(){
 
     font-weight:700;
 
-    color:#1f2937;
+    color:var(--cor-texto-principal);
 
 }
 
@@ -610,7 +637,7 @@ async function copiarLink(){
 
     margin-top:8px;
 
-    background:#eef1f4;
+    background:var(--cor-borda-suave);
 
     border-radius:999px;
 
@@ -624,7 +651,7 @@ async function copiarLink(){
 
     border-radius:999px;
 
-    background:#0d6b4d;
+    background:var(--cor-primaria);
 
     transition:width .45s ease;
 
@@ -650,13 +677,13 @@ async function copiarLink(){
 
     padding:0 10px;
 
-    border:1px solid #e2e8f0;
+    border:1px solid var(--cor-borda);
 
     border-radius:8px;
 
-    background:#f8fafc;
+    background:var(--cor-fundo-sutil);
 
-    color:#64748b;
+    color:var(--cor-texto-secundario);
 
     font-size:13px;
 
@@ -666,7 +693,7 @@ async function copiarLink(){
 
 .input-link:focus{
 
-    border-color:#0d6b4d;
+    border-color:var(--cor-primaria);
 
 }
 
@@ -688,9 +715,9 @@ async function copiarLink(){
 
     border-radius:8px;
 
-    background:#0d6b4d;
+    background:var(--cor-primaria);
 
-    color:#fff;
+    color: var(--cor-texto-invertido);
 
     cursor:pointer;
 
@@ -706,21 +733,65 @@ async function copiarLink(){
 
 .botao-copiar:hover{
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
-    border-color:#0d6b4d;
+    border-color:var(--cor-primaria);
 
 }
 
 .botao-copiar.copiado{
 
-    background:#0d6b4d;
+    background:var(--cor-primaria);
 
-    color:#fff;
+    color: var(--cor-texto-invertido);
 
     border-color:transparent;
+
+}
+
+.btn-forum{
+
+    display:flex;
+
+    margin-bottom: 15px;
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    width:100%;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:none;
+
+    color:var(--cor-primaria);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:background .2s ease, border-color .2s ease;
+
+}
+
+.btn-forum:hover{
+
+    transform: scale(1.02);
+}
+
+[data-tema="escuro"] .btn-forum{
+
+    color:var(--cor-texto-principal);
 
 }
 
@@ -739,7 +810,7 @@ async function copiarLink(){
 
 .painel::-webkit-scrollbar-thumb{
 
-    background:#cfd8df;
+    background:var(--cor-fundo-sutil);
 
     border-radius:999px;
 
@@ -747,7 +818,7 @@ async function copiarLink(){
 
 .painel::-webkit-scrollbar-thumb:hover{
 
-    background:#b9c4cd;
+    background:var(--cor-borda);
 
 }
 
@@ -770,7 +841,7 @@ async function copiarLink(){
 
         border-left:none;
 
-        border-top:1px solid #e9edf2;
+        border-top:1px solid var(--cor-borda);
 
     }
 

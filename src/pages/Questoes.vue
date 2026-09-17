@@ -40,7 +40,7 @@ import FiltrosAcoes from '@/features/Questoes/Pagina incial/FiltrosAcoes.vue'
 
   flex-direction: column;
 
-  gap: 22px;
+  gap: 15px;
 
 }
 

@@ -1,15 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { Bookmark, Flag } from 'lucide-vue-next'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useUiStore } from '@/store/resolver/ui'
+import { usePerfilStore } from '@/store/perfil'
 
 const router = useRouter()
 
 const resolver = useResolverStore()
 const ui = useUiStore()
+const perfil = usePerfilStore()
 
 const {
     questao,
@@ -18,17 +21,47 @@ const {
     navegacao
 } = storeToRefs(resolver)
 
-const salvo = ref(false)
+const salvo = computed(() =>
+    !!questao.value &&
+    perfil.questoesSalvasLista.some(
+        item => item.id === questao.value.id
+    )
+)
 
-function salvarQuestao() {
+const marcadaParaRevisar = computed(() =>
+    !!questao.value &&
+    perfil.estaMarcadaParaRevisar(questao.value.id)
+)
 
-    salvo.value = true
+function alternarSalvar() {
 
-    setTimeout(() => {
+    if (!questao.value) return
 
-        salvo.value = false
+    if (salvo.value) {
 
-    }, 3000)
+        perfil.removerQuestaoSalva(questao.value.id)
+
+    } else {
+
+        perfil.salvarQuestao(questao.value)
+
+    }
+
+}
+
+function alternarRevisar() {
+
+    if (!questao.value) return
+
+    if (marcadaParaRevisar.value) {
+
+        perfil.desmarcarParaRevisar(questao.value.id)
+
+    } else {
+
+        perfil.marcarParaRevisar(questao.value)
+
+    }
 
 }
 
@@ -141,15 +174,15 @@ function irProxima() {
       <button
           class="btn-salvar"
           :class="{ salvo }"
-          :title="salvo ? 'Salvo' : 'Salvar questão'"
-          @click="salvarQuestao"
+          :title="salvo ? 'Remover dos salvos' : 'Salvar questão'"
+          @click="alternarSalvar"
       >
 
-          <span class="material-icons salvar">
-
-              {{ salvo ? 'bookmark' : 'bookmark_border' }}
-
-          </span>
+          <Bookmark
+              class="icone-acao"
+              :size="17"
+              :fill="salvo ? 'currentColor' : 'none'"
+          />
 
           <span class="label">{{ salvo ? 'Salvo' : 'Salvar questão' }}</span>
 
@@ -158,39 +191,46 @@ function irProxima() {
 
 
       <button
-          @click="ui.alternarBarra"
-          class="details-btn"
-          :class="{ aberto: ui.aberto }"
-          title="Ver detalhes"
+          class="btn-revisar"
+          :class="{ marcada: marcadaParaRevisar }"
+          :title="marcadaParaRevisar ? 'Remover da revisão' : 'Marcar para revisar'"
+          @click="alternarRevisar"
       >
 
-          <svg
-              class="botao-toggle"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-          >
+          <Flag
+              class="icone-acao"
+              :size="17"
+              :fill="marcadaParaRevisar ? 'currentColor' : 'none'"
+          />
 
-              <polyline
-                  v-if="!ui.aberto"
-                  points="15 18 9 12 15 6"
-              />
-
-              <polyline
-                  v-else
-                  points="9 18 15 12 9 6"
-              />
-
-          </svg>
-
-          <span class="label">Ver detalhes</span>
+          <span class="label">{{ marcadaParaRevisar ? 'Marcada p/ revisão' : 'Marcar para revisar' }}</span>
 
       </button>
+
+
+
+<button
+    @click="ui.alternarBarra"
+    class="details-btn"
+    :class="{ aberto: !ui.aberto }"
+    title="Ver detalhes"
+>
+    <svg
+        class="botao-toggle"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <polyline points="9 18 15 12 9 6" />
+    </svg>
+
+    <span class="label">Ver detalhes</span>
+</button>
 
 
 
@@ -209,7 +249,7 @@ function irProxima() {
 
 .header-questao {
   padding: 18px 28px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--cor-borda);
 }
 
 .header-linha {
@@ -232,7 +272,7 @@ function irProxima() {
 
 .texto-info {
 
-  color: #2a313dc6;
+  color: var(--cor-texto-principal);
   font-size: 15px;
   font-weight: 550;
   font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
@@ -243,14 +283,14 @@ function irProxima() {
 
 .texto-info.disabled {
 
-  color: #c4c9d0;
+  color: var(--cor-texto-fraco);
   cursor: not-allowed;
 
 }
 
 .texto-info-static {
 
-  color: #282f3bd7;
+  color: var(--cor-texto-principal);
   font-size: 15px;
   font-weight: 550;
   font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
@@ -259,7 +299,7 @@ function irProxima() {
 }
 
 .texto-info:not(.disabled):hover {
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 }
 
 .info-prova {
@@ -280,7 +320,7 @@ function irProxima() {
 
 .badge-ano {
   background: none;
-  color: #0d6b4d;
+  color: var(--cor-primaria);
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 16px;
@@ -289,7 +329,7 @@ function irProxima() {
 }
 
 .codigo {
-  color: #5d636f;
+  color: var(--cor-texto-suave);
   font-size: 14px;
   white-space: nowrap;
 }
@@ -300,12 +340,12 @@ function irProxima() {
   gap: 6px;
 
   background: transparent;
-  color: #0d6b4d;
+  color: var(--cor-primaria);
   font-weight: 600;
   font-size: 14px;
   white-space: nowrap;
 
-  border: 1px solid white;
+  border: 1px solid transparent;
   border-radius: 10px;
   padding: 8px 10px;
 
@@ -314,15 +354,15 @@ function irProxima() {
 }
 
 .btn-salvar.salvo {
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 }
 
-.btn-salvar .salvar {
+.btn-salvar .icone-acao {
   display: inline-flex;
   transition: transform .25s ease;
 }
 
-.btn-salvar.salvo .salvar {
+.btn-salvar.salvo .icone-acao {
   animation: pop-salvo .45s ease;
 }
 
@@ -342,6 +382,38 @@ function irProxima() {
 
 }
 
+.btn-revisar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: transparent;
+  color: var(--cor-aviso);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 10px;
+
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+
+.btn-revisar.marcada {
+  color: var(--cor-aviso);
+}
+
+.btn-revisar .icone-acao {
+  display: inline-flex;
+  transition: transform .25s ease;
+}
+
+.btn-revisar.marcada .icone-acao {
+  animation: pop-salvo .45s ease;
+}
+
 
 .details-btn{
 
@@ -359,7 +431,7 @@ function irProxima() {
 
     background:transparent;
 
-    color:#707070;
+    color:var(--cor-texto-suave);
 
     font-size:14px;
 
@@ -379,7 +451,7 @@ function irProxima() {
 .details-btn:hover,
 .details-btn.aberto{
 
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 
 }
 
@@ -397,12 +469,6 @@ function irProxima() {
     transform:rotate(180deg);
 
 
-}
-
-
-.material-icons{
-  vertical-align: middle;
-  transform: scale(0.75);
 }
 
 
@@ -459,6 +525,7 @@ function irProxima() {
   }
 
   .btn-salvar .label,
+  .btn-revisar .label,
   .details-btn .label {
 
     display: none;
@@ -466,6 +533,7 @@ function irProxima() {
   }
 
   .btn-salvar,
+  .btn-revisar,
   .details-btn {
 
     padding: 8px;

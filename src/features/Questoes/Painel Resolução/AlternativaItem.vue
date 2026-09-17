@@ -112,7 +112,7 @@ function selecionarAlternativa(letra) {
 
   padding: 10px 14px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--cor-borda);
 
   border-radius: 10px;
 
@@ -120,7 +120,7 @@ function selecionarAlternativa(letra) {
 
   transition: all .15s ease;
 
-  background: white;
+  background: var(--cor-fundo-card);
 
 }
 
@@ -128,9 +128,9 @@ function selecionarAlternativa(letra) {
 
 .alternativa:hover {
 
-  border-color: #0d6b4d;
+  border-color: var(--cor-primaria);
 
-  background: #f9fcfa;
+  background: var(--cor-fundo-sutil);
 
 }
 
@@ -146,9 +146,9 @@ function selecionarAlternativa(letra) {
 
   border-radius: 50%;
 
-  border: 2px solid #0d6b4d;
+  border: 2px solid var(--cor-primaria);
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
   display: flex;
 
@@ -170,7 +170,7 @@ function selecionarAlternativa(letra) {
 
   line-height: 1.5;
 
-  color: #374151;
+  color: var(--cor-texto-secundario);
 
   word-break: break-word;
 
@@ -180,9 +180,9 @@ function selecionarAlternativa(letra) {
 
 .selecionada {
 
-  background: #f2fbf7;
+  background: var(--cor-primaria-fundo);
 
-  border-color: #0d6b4d;
+  border-color: var(--cor-primaria);
 
 }
 
@@ -190,9 +190,9 @@ function selecionarAlternativa(letra) {
 
 .letra-selecionada {
 
-  background: #0d6b4d;
+  background: var(--cor-primaria);
 
-  color: white;
+  color: var(--cor-texto-invertido);
 
 }
 

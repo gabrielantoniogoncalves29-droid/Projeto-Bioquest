@@ -149,7 +149,7 @@ function selecionar(valor) {
 
 .resultado {
 
-  color: #4b5563;
+  color: var(--cor-texto-secundario);
 
   font-size: 15px;
 
@@ -157,7 +157,7 @@ function selecionar(valor) {
 
 .resultado strong {
 
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 
   font-size: 16px;
 
@@ -177,7 +177,7 @@ function selecionar(valor) {
 
   font-size: 14px;
 
-  color: #6b7280;
+  color: var(--cor-texto-suave);
 
 }
 
@@ -185,13 +185,13 @@ function selecionar(valor) {
 
   height: 42px;
 
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--cor-borda);
 
   border-radius: 10px;
 
   padding: 0 12px;
 
-  background: white;
+  background: var(--cor-fundo-card);
 
   cursor: pointer;
 
@@ -202,8 +202,8 @@ function selecionar(valor) {
     width: 50px;
     height: 50px;
     border-radius: 10px;
-    border: 1px solid #ddd;
-    background: white;
+    border: 1px solid var(--cor-borda);
+    background: var(--cor-fundo-card);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -213,12 +213,12 @@ function selecionar(valor) {
 }
 
 .view-btn:hover{
-    background: #f5f5f5;
+    background: var(--cor-fundo-sutil);
 }
 
 .view-btn.active{
-    background: #e8f5eb;
-    border-color: #b6d8bd;
+    background: var(--cor-primaria-fundo);
+    border-color: var(--cor-primaria);
 }
 
 .ordenar-por{
@@ -235,7 +235,7 @@ function selecionar(valor) {
 
   font-size:14px;
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
   white-space:nowrap;
 
@@ -263,9 +263,9 @@ function selecionar(valor) {
 
   padding:0 14px;
 
-  background:#fff;
+  background: var(--cor-fundo-card);
 
-  border:1px solid #d1d5db;
+  border:1px solid var(--cor-borda);
 
   border-radius:10px;
 
@@ -273,7 +273,7 @@ function selecionar(valor) {
 
   font-size:14px;
 
-  color:#374151;
+  color:var(--cor-texto-secundario);
 
   transition:.2s;
 
@@ -281,7 +281,7 @@ function selecionar(valor) {
 
 .select-btn:hover{
 
-  border-color:#0d6b4d;
+  border-color:var(--cor-primaria);
 
 }
 
@@ -289,7 +289,7 @@ function selecionar(valor) {
 
   outline:none;
 
-  border-color:#0d6b4d;
+  border-color:var(--cor-primaria);
 
   box-shadow:0 0 0 3px rgba(13,107,77,.10);
 
@@ -299,7 +299,7 @@ function selecionar(valor) {
 
   font-size:22px;
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
   transition:.25s;
 
@@ -325,9 +325,9 @@ function selecionar(valor) {
 
   flex-direction:column;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
-  border:1px solid #e5e7eb;
+  border:1px solid var(--cor-borda);
 
   border-radius:10px;
 
@@ -353,7 +353,7 @@ function selecionar(valor) {
 
   border:none;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
   text-align:left;
 
@@ -361,7 +361,7 @@ function selecionar(valor) {
 
   font-size:14px;
 
-  color:#374151;
+  color:var(--cor-texto-secundario);
 
   transition:.15s;
 
@@ -369,17 +369,17 @@ function selecionar(valor) {
 
 .option:hover{
 
-  background:#f3f4f6;
+  background:var(--cor-fundo-sutil);
 
-  color:#0d6b4d;
+  color:var(--cor-primaria);
 
 }
 
 .option.active{
 
-  background:#e8f5eb;
+  background:var(--cor-primaria-fundo);
 
-  color:#0d6b4d;
+  color:var(--cor-primaria);
 
   font-weight:500;
 
@@ -387,7 +387,7 @@ function selecionar(valor) {
 
 .select-btn .material-icons{
     font-size:22px;
-    color:#6b7280;
+    color:var(--cor-texto-suave);
 }
 
 
@@ -410,12 +410,12 @@ function selecionar(valor) {
 }
 
 .option:hover{
-    color:#0d6b4d;
+    color:var(--cor-primaria);
 }
 
 .option.active{
-    background:#e8f5eb;
-    color:#0d6b4d;
+    background:var(--cor-primaria-fundo);
+    color:var(--cor-primaria);
     font-weight:500;
 }
 
@@ -429,9 +429,9 @@ function selecionar(valor) {
 
     width:100%;
 
-    background:white;
+    background: var(--cor-fundo-card);
 
-    border:1px solid #e5e7eb;
+    border:1px solid var(--cor-borda);
     border-radius:12px;
 
     overflow:hidden;
@@ -460,13 +460,13 @@ function selecionar(valor) {
 .resultado strong{
     font-size: 16px;
     font-weight: 700;
-    color: #0d6b4d;
+    color: var(--cor-primaria);
     line-height: 1;
 }
 
 .resultado span{
     font-size: 16px;
-    color: #6b7280;
+    color: var(--cor-texto-suave);
     white-space: nowrap;
 }
 
@@ -478,9 +478,9 @@ function selecionar(valor) {
     padding: 5px 8px;
     border: none;
     border-radius: 6px;
-    color: #383939;
+    color: var(--cor-texto-principal);
     font-family: Arial, sans-serif;
-    background: #e8f5eb59;
+    background: color-mix(in srgb, var(--cor-primaria-fundo) 35%, transparent);
     font-size: 15px;
     height: 32px;
     font-weight: 500;
@@ -495,7 +495,7 @@ function selecionar(valor) {
 }
 
 .resolver-btn:hover{
-    color: #0d6b4d;
+    color: var(--cor-primaria);
 }
 
 .resolver-btn:hover .material-icons{
@@ -518,6 +518,19 @@ function selecionar(valor) {
 
   }
 
+}
+
+[data-tema="escuro"] .option:hover,
+[data-tema="escuro"] .option.active{
+    color: var(--cor-texto-principal);
+}
+
+[data-tema="escuro"] .resolver-btn:hover{
+    color: var(--cor-texto-principal);
+}
+
+[data-tema="escuro"] .resultado strong{
+    color: var(--cor-primaria-texto);
 }
 
 </style>

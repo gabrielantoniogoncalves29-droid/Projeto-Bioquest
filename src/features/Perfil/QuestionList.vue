@@ -1,65 +1,86 @@
 <template>
 
-    <section class="card">
+    <section class="questoes-painel">
 
-        <div class="header">
+        <div class="tabs">
 
-            <div class="header-titulo">
+            <button
+                v-for="secao in secoes"
+                :key="secao.tipo"
+                class="tab"
+                :class="{ ativa: abaAtiva === secao.tipo }"
+                type="button"
+                @click="abaAtiva = secao.tipo"
+            >
 
-                <h2>
-                    {{ titulo }}
-                </h2>
+                <component
+                    :is="secao.icone"
+                    :size="16"
+                />
 
-                <span class="contador">
-                    {{ questoes.length }}
-                </span>
+                {{ secao.titulo }}
+
+            </button>
+
+        </div>
+
+        <div class="painel-corpo">
+
+            <div
+                v-if="perfil.carregando && !perfil.carregado"
+                class="lista"
+            >
+
+                <div
+                    v-for="n in 3"
+                    :key="n"
+                    class="placeholder"
+                />
 
             </div>
 
-            <router-link
-                to="/questoes"
-                class="ver-mais"
-                title="Ver mais questões"
+            <div
+                v-else-if="secaoAtiva.lista.length"
+                class="lista"
             >
-                <ArrowUpRight :size="16" />
-            </router-link>
 
-        </div>
+                <PerfilQuestaoCard
+                    v-for="questao in secaoAtiva.lista.slice(0, 6)"
+                    :key="questao.id"
+                    :id="questao.id"
+                />
 
-        <div
-            v-if="perfil.carregando && !perfil.carregado"
-            class="lista"
-        >
+                <router-link
+                    to="/questoes"
+                    class="ver-mais"
+                    title="Ver mais questões"
+                >
+                    Ver mais questões
+                    <ArrowUpRight :size="16" />
+                </router-link>
+
+            </div>
 
             <div
-                v-for="n in 2"
-                :key="n"
-                class="placeholder"
-            />
+                v-else
+                class="vazio"
+            >
 
-        </div>
+                <component
+                    :is="secaoAtiva.icone"
+                    :size="30"
+                />
 
-        <div
-            v-else-if="questoes.length"
-            class="lista"
-        >
+                <p>{{ secaoAtiva.mensagemVazia }}</p>
 
-            <PerfilQuestaoCard
-                v-for="questao in questoes"
-                :key="questao.id"
-                :questao="questao"
-            />
+                <router-link
+                    to="/questoes"
+                    class="link-explorar"
+                >
+                    Explorar questões
+                </router-link>
 
-        </div>
-
-        <div
-            v-else
-            class="vazio"
-        >
-
-            <FileQuestion :size="26" />
-
-            <p>Nenhuma questão encontrada.</p>
+            </div>
 
         </div>
 
@@ -69,129 +90,131 @@
 
 <script setup>
 
-import { computed } from "vue"
+import { ref, computed } from "vue"
 
-import { ArrowUpRight, FileQuestion } from "lucide-vue-next"
+import { ArrowUpRight, Flag, Bookmark, CheckCircle2 } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
 import PerfilQuestaoCard from "@/features/Perfil/PerfilQuestaoCard.vue"
 
-const props = defineProps({
-
-    titulo:{
-        type:String,
-        required:true
-    },
-
-    tipo:{
-        type:String,
-        required:true
-    }
-
-})
-
 const perfil = usePerfilStore()
 
-const questoes = computed(() => {
+const secoes = computed(() => [
 
-    return props.tipo === "salvas"
-        ? perfil.questoesSalvasLista
-        : perfil.questoesResolvidasLista
+    {
+        tipo: "revisar",
+        titulo: "Para revisar",
+        icone: Flag,
+        lista: perfil.questoesRevisarLista,
+        mensagemVazia: "Nenhuma questão marcada para revisar ainda."
+    },
+    {
+        tipo: "salvas",
+        titulo: "Questões salvas",
+        icone: Bookmark,
+        lista: perfil.questoesSalvasLista,
+        mensagemVazia: "Você ainda não salvou nenhuma questão."
+    },
+    {
+        tipo: "resolvidas",
+        titulo: "Questões resolvidas",
+        icone: CheckCircle2,
+        lista: perfil.questoesResolvidasLista,
+        mensagemVazia: "Você ainda não resolveu nenhuma questão."
+    }
 
-})
+])
+
+const abaAtiva = ref("revisar")
+
+const secaoAtiva = computed(() =>
+
+    secoes.value.find(
+        secao => secao.tipo === abaAtiva.value
+    )
+
+)
 
 </script>
 
 <style scoped>
 
-.card{
+.questoes-painel{
 
-    background:#fff;
+    background: var(--cor-fundo-card);
 
-    border:1px solid #e9ebea;
+    border:1px solid var(--cor-borda);
 
-    border-radius:14px;
+    border-radius:16px;
 
-    padding:22px;
-
-    box-sizing:border-box;
-
-    display:flex;
-    flex-direction:column;
+    overflow:hidden;
 
 }
 
-.header{
+.tabs{
 
     display:flex;
 
-    justify-content:space-between;
+    border-bottom:1px solid var(--cor-borda);
+
+    overflow-x:auto;
+
+}
+
+.tab{
+
+    display:flex;
 
     align-items:center;
 
-    margin-bottom:16px;
+    gap:8px;
 
-}
+    flex:1;
 
-.header-titulo{
+    justify-content:center;
 
-    display:flex;
-    align-items:center;
-    gap:10px;
+    padding:16px 18px;
 
-}
+    border:none;
 
-.header h2{
+    border-bottom:2px solid transparent;
 
-    font-size:16px;
+    background:transparent;
 
-    font-weight:700;
+    color:var(--cor-texto-suave);
 
-    color:#1f2937;
-
-}
-
-.contador{
-
-    background:#f4f6f5;
-
-    color:#4b5563;
-
-    padding:3px 10px;
-
-    border-radius:999px;
-
-    font-size:12.5px;
+    font-size:14px;
 
     font-weight:600;
 
-}
+    white-space:nowrap;
 
-.ver-mais{
+    cursor:pointer;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:32px;
-    height:32px;
-
-    border:1px solid #d6ded9;
-    border-radius:50%;
-
-    color:#0d6b4d;
-    background:#fff;
-
-    text-decoration:none;
-    flex-shrink:0;
-
-    transition:all .15s ease;
+    transition:all .2s ease;
 
 }
 
-.ver-mais:hover{
+.tab:hover{
 
-    border-color:#0d6b4d;
-    background:#f7faf8;
+    color:var(--cor-primaria);
+
+    background:var(--cor-fundo-pagina);
+
+}
+
+.tab.ativa{
+
+    color:var(--cor-primaria);
+
+    border-bottom-color:var(--cor-primaria);
+
+    background:var(--cor-primaria-fundo);
+
+}
+
+.painel-corpo{
+
+    padding:22px;
 
 }
 
@@ -203,15 +226,17 @@ const questoes = computed(() => {
 
     gap:10px;
 
+    container-type:inline-size;
+
 }
 
 .placeholder{
 
-    height:74px;
+    min-height:118px;
 
     border-radius:12px;
 
-    background:linear-gradient(90deg,#f4f6f5 25%,#eef1ef 37%,#f4f6f5 63%);
+    background:linear-gradient(90deg,var(--cor-fundo-sutil) 25%,var(--cor-borda-suave) 37%,var(--cor-fundo-sutil) 63%);
     background-size:400% 100%;
 
     animation:pulso 1.4s ease infinite;
@@ -225,26 +250,91 @@ const questoes = computed(() => {
 
 }
 
+.ver-mais{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+
+    margin-top:6px;
+    padding:12px;
+
+    border-radius:10px;
+
+    color:var(--cor-primaria);
+
+    font-size:13.5px;
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:all .15s ease;
+
+}
+
+.ver-mais:hover{
+
+    background:var(--cor-primaria-fundo);
+
+}
+
 .vazio{
 
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:8px;
+    gap:10px;
 
     text-align:center;
 
-    color:#9aa39d;
+    color:var(--cor-texto-fraco);
 
     font-size:13.5px;
 
-    padding:36px 0;
+    padding:48px 0;
 
 }
 
 .vazio p{
 
     margin:0;
+
+}
+
+.link-explorar{
+
+    color:var(--cor-primaria);
+
+    font-weight:600;
+
+    font-size:13.5px;
+
+    text-decoration:none;
+
+}
+
+.link-explorar:hover{
+
+    text-decoration:underline;
+
+}
+
+@media (max-width:640px){
+
+    .tab{
+
+        padding:14px 12px;
+
+        font-size:13px;
+
+    }
+
+    .painel-corpo{
+
+        padding:16px;
+
+    }
 
 }
 

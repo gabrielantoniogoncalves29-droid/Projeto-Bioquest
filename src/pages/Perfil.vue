@@ -4,17 +4,7 @@
 
     <ProfileCard />
 
-    <ProfileStats />
-
-    <QuestionList
-      titulo="Questões salvas"
-      tipo="salvas"
-    />
-
-    <QuestionList
-      titulo="Questões resolvidas"
-      tipo="resolvidas"
-    />
+    <QuestionList />
 
   </main>
 </template>
@@ -23,7 +13,6 @@
 import { onMounted } from "vue"
 import Header from "@/components/layout/Header.vue"
 import ProfileCard from "@/features/Perfil/ProfileCard.vue"
-import ProfileStats from "@/features/Perfil/ProfileStats.vue"
 import QuestionList from "@/features/Perfil/QuestionList.vue"
 import { usePerfilStore } from "@/store/perfil"
 
@@ -45,9 +34,9 @@ onMounted(() => {
 
     margin:0 auto;
 
-    padding:32px;
+    padding:28px 24px;
 
-    background:#f8faf9;
+    background:var(--cor-fundo-pagina);
 
     display:flex;
     flex-direction:column;
@@ -58,11 +47,21 @@ onMounted(() => {
 
 }
 
+.perfil-page > *{
+
+    width:100%;
+
+    max-width:1600px;
+
+    margin:0 auto;
+
+}
+
 @media (max-width:768px){
 
     .perfil-page{
 
-        padding:20px;
+        padding:20px 16px;
 
         gap:16px;
 

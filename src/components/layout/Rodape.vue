@@ -20,7 +20,7 @@
 .footer {
   background: rgba(28, 75, 47, 0.855);
   border-top:1px ;
-  color: white;
+  color: var(--cor-texto-invertido);
   padding: 15px 30px;
   box-shadow: 0px -4px 6px  rgba(28, 75, 47, 0.456);
 }
@@ -33,7 +33,7 @@
 }
 
 .footer a {
-  color: white;
+  color: var(--cor-texto-invertido);
   text-decoration: none;
   margin-left: 20px;
   font-size: 13px;

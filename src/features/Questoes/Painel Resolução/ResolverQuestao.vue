@@ -154,15 +154,15 @@ watch(
 
 .resolver-page {
   padding: 24px;
-  background: #fcfefdd1;
+  background: var(--cor-fundo-pagina);
   min-height: 100vh;
 }
 
 .painel-container {
 
-  background:white;
+  background: var(--cor-fundo-card);
 
-  border:1px solid #e6e6e6;
+  border:1px solid var(--cor-borda);
 
   border-radius:16px;
 
@@ -181,7 +181,7 @@ watch(
   align-items: center;
   margin-bottom: 24px;
 
-  color: #5f6368;
+  color: var(--cor-texto-suave);
   font-size: 14px;
 }
 
@@ -194,17 +194,17 @@ watch(
 
 .link-crumb:hover {
   text-decoration: underline;
-  color: #0d6b4d;
+  color: var(--cor-primaria);
 }
 
 .link-crumb.atual {
 
-  color: #5f6368;
+  color: var(--cor-texto-suave);
 
 }
 
 .voltar {
-  color: #0d6b4d;
+  color: var(--cor-primaria);
   font-weight: 600;
   cursor: pointer;
 }
@@ -215,7 +215,7 @@ watch(
 
 .separator,
 .separator-barra {
-  color: #d0d0d0;
+  color: var(--cor-borda);
 }
 
 .resolver-layout {
@@ -243,7 +243,7 @@ watch(
 
   padding:40px;
 
-  color:#6b7280;
+  color:var(--cor-texto-suave);
 
 }
 
@@ -256,8 +256,8 @@ watch(
 }
 
 .questao-container {
-  background: white;
-  border: 1px solid #e6e6e6;
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
   border-radius: 16px;
   overflow: hidden;
 

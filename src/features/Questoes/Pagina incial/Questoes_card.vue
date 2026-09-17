@@ -1,6 +1,7 @@
 <script setup>
 
 import { computed } from 'vue'
+import { ArrowUpRight } from 'lucide-vue-next'
 import { conteudos } from '@/features/Questoes/data/filtros.js'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
@@ -107,8 +108,8 @@ const icone = computed(()=>{
   justify-content: space-between;
   align-items: center;
 
-  background: #fff;
-  border: 1px solid #e7ece9;
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda-suave);
   border-radius: 12px;
 
   box-sizing: border-box;
@@ -219,18 +220,18 @@ const icone = computed(()=>{
   align-items:center;
   flex-wrap:wrap;
 
-  border-bottom:1px solid #edf0f2;
+  border-bottom:1px solid var(--cor-borda);
 }
 
 .year{
-  color:#1f6f5c;
+  color:var(--cor-primaria-texto);
   font-size:14px;
   font-weight:700;
 }
 
 .meta{
   font-size:13px;
-  color:#6b7280;
+  color:var(--cor-texto-suave);
   font-weight:500;
 }
 
@@ -239,7 +240,7 @@ h3{
 
   font-family:"Inter",sans-serif;
   font-weight:400;
-  color:#404040;
+  color:var(--cor-texto-principal);
 
   display:-webkit-box;
   -webkit-box-orient:vertical;
@@ -248,7 +249,9 @@ h3{
 
 .actions{
   display:flex;
-  align-items:center;
+  flex-direction:column;
+  align-items:stretch;
+  gap:8px;
   margin-left:20px;
   flex-shrink:0;
 }
@@ -260,10 +263,10 @@ h3{
   height: 40px;
   padding:0 20px;
 
-  color: #0d6b4d;
-  background:#fff;
+  color: var(--cor-primaria);
+  background: var(--cor-fundo-card);
 
-  border:1px solid  #0d6b4d;
+  border:1px solid  var(--cor-primaria);
   border-radius:9px;
 
   font-weight:600;
@@ -273,9 +276,15 @@ h3{
 }
 
 .btn:hover{
-  background: #0d6b4d;
-  color:#fff;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-invertido);
 }
+
+[data-tema="escuro"] .btn{
+  color: var(--cor-texto-principal);
+}
+
+
 
 @media (max-width:768px){
 
@@ -296,6 +305,11 @@ h3{
   .btn{
     width:100%;
     height:42px;
+  }
+
+  .btn-saiba-mais{
+    width:100%;
+    height:36px;
   }
 
   .card.lista .icon,

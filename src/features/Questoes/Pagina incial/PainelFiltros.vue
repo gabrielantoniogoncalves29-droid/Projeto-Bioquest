@@ -66,11 +66,11 @@ const store = useQuestoesFiltrosStore()
   margin: 10px 20px;
   padding:24px;
 
-  border:1px solid #e5e7eb;
+  border:1px solid var(--cor-borda);
 
   border-radius:14px;
 
-  background:white;
+  background: var(--cor-fundo-card);
 
 }
 

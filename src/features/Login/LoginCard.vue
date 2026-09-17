@@ -126,10 +126,12 @@ function esqueciSenha() {
     width:100%;
     max-width:430px;
     height:450px;
+    max-height:calc(100vh - 140px);
+    overflow-y:auto;
 
     padding:32px;
 
-    background:rgba(255,255,255,0.441);
+    background:var(--cor-fundo-card-vidro);
 
     border-radius:18px;
 
@@ -150,7 +152,7 @@ h1{
 
     font-weight:700;
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     line-height:1;
 }
@@ -165,7 +167,7 @@ h2{
 
     font-weight:500;
 
-    color:#666;
+    color:var(--cor-texto-suave);
 
 }
 
@@ -187,7 +189,7 @@ label{
 
     font-weight:600;
 
-    color:#444;
+    color:var(--cor-texto-secundario);
 
 }
 
@@ -197,15 +199,17 @@ label{
 
     align-items:center;
 
+    flex-shrink:0;
+
     height:48px;
 
     padding:0 18px;
 
-    border:1px solid #D9D9D9;
+    border:1px solid var(--cor-borda);
 
     border-radius:12px;
 
-    background:#ffffff87;
+    background:var(--cor-fundo-sutil);
 
     transition:border-color .25s,
                box-shadow .25s;
@@ -214,7 +218,7 @@ label{
 
 .input-container:focus-within{
 
-    border-color:#2d6a4f;
+    border-color:var(--cor-primaria);
 
     box-shadow:0 0 0 4px rgba(45,106,79,.04);
 
@@ -224,7 +228,7 @@ label{
 
     margin-right:12px;
 
-    color:#8a8a8a;
+    color:var(--cor-texto-fraco);
 
     flex-shrink:0;
 
@@ -242,13 +246,13 @@ input{
 
     font-size:15px;
 
-    color:#333;
+    color:var(--cor-texto-principal);
 
 }
 
 input::placeholder{
 
-    color:#AAA;
+    color:var(--cor-texto-fraco);
 
 }
 
@@ -266,7 +270,7 @@ input::placeholder{
 
     cursor:pointer;
 
-    color:#7b7b7b;
+    color:var(--cor-texto-suave);
 
     transition:.2s;
 
@@ -274,7 +278,7 @@ input::placeholder{
 
 .eye-button:hover{
 
-    color:#2d6a4f;
+    color:var(--cor-primaria);
 
 }
 
@@ -288,7 +292,7 @@ input::placeholder{
 
     cursor:pointer;
 
-    color:#2d6a4f;
+    color:var(--cor-primaria);
 
     font-size:14px;
 
@@ -312,7 +316,7 @@ input::placeholder{
 
 .register-button:hover{
 
-    color:#234b3b;
+    color:var(--cor-primaria-texto);
 
     text-decoration:underline;
 
@@ -322,15 +326,17 @@ input::placeholder{
 
     width:100%;
 
+    flex-shrink:0;
+
     height:46px;
 
     border:none;
 
     border-radius:12px;
 
-    background:#2d6a4f;
+    background:var(--cor-primaria);
 
-    color:#fff;
+    color: var(--cor-texto-invertido);
 
     font-size:16px;
 
@@ -345,7 +351,7 @@ input::placeholder{
 
 .login-button:hover{
 
-    background:#255740;
+    background:var(--cor-primaria);
 
     transform:translateY(-2px);
 
@@ -359,7 +365,7 @@ input::placeholder{
 
 .login-button:disabled{
 
-    background:#D5D5D5;
+    background:var(--cor-borda);
 
     cursor:not-allowed;
 
@@ -373,7 +379,7 @@ input::placeholder{
 
     margin:22px 0 18px;
 
-    background:#ECECEC;
+    background:var(--cor-fundo-sutil);
 
 }
 
@@ -383,7 +389,7 @@ input::placeholder{
 
     text-align:center;
 
-    color:#666;
+    color:var(--cor-texto-suave);
 
     font-size:15px;
 
@@ -400,6 +406,29 @@ input[type="password"]::-webkit-textfield-decoration-container{
 
     display:none;
 
+}
+
+
+.card::-webkit-scrollbar{
+    width:6px;
+}
+
+.card::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.card::-webkit-scrollbar-thumb{
+    background:var(--cor-primaria-translucida);
+    border-radius:999px;
+}
+
+.card::-webkit-scrollbar-thumb:hover{
+    background:var(--cor-primaria-translucida-forte);
+}
+
+[data-tema="escuro"] .forgot-password,
+[data-tema="escuro"] .register-button{
+    color:var(--cor-primaria-texto);
 }
 
 </style>

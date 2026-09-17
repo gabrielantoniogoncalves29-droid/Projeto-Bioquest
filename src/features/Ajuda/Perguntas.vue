@@ -133,7 +133,7 @@
         padding-bottom: 30px;
     }
     .conteiner-perguntas{
-        background-color: white;
+        background-color: var(--cor-fundo-card);
         border-radius: 10px;
         height: fit-content;
         width: 90%;
@@ -146,13 +146,13 @@
     .conteiner-perguntas h1{
         font-family: sans-serif;
         font-size: 28px;
-        color: rgb(28, 75, 47);
+        color: var(--cor-primaria-texto);
         text-align: center;
         padding-top: 30px;
     }
     .accordion{
-        background-color: white;
-        color: rgb(28, 75, 47);
+        background-color: var(--cor-fundo-card);
+        color: var(--cor-primaria-texto);
         border-radius: 10px;
         margin: 30px 50px;
         padding: 20px;

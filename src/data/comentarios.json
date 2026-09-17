@@ -1,0 +1,119 @@
+[
+  {
+    "questaoId": 202592,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Marina S.",
+        "texto": "Alguém pode explicar por que a alternativa *D* é a correta e não a E?",
+        "data": "2026-08-02",
+        "curtidas": 4
+      },
+      {
+        "id": 2,
+        "autor": "Prof. Renato",
+        "texto": "Boa pergunta! A bactéria **E. coli** continua com seu próprio metabolismo, só ganhou os genes do ciclo circadiano da cianobactéria. Resumindo:\n- Ela não virou uma cianobactéria\n- Ela apenas passou a __expressar__ uma nova proteína\n- O restante do genoma dela continua igual",
+        "data": "2026-08-03",
+        "curtidas": 12
+      }
+    ]
+  },
+  {
+    "questaoId": 202593,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Diego A.",
+        "texto": "Essa questão caiu bem parecida na prova de 2022, vale revisar os filos com mais cuidado.",
+        "data": "2026-07-14",
+        "curtidas": 3
+      }
+    ]
+  },
+  {
+    "questaoId": 202594,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Bianca L.",
+        "texto": "Alguém tem uma dica de como não confundir *transporte ativo* com *difusão facilitada*?",
+        "data": "2026-06-20",
+        "curtidas": 6
+      },
+      {
+        "id": 2,
+        "autor": "Prof. Renato",
+        "texto": "Regra prática:\n- **Transporte ativo**: sempre gasta ATP e vai contra o gradiente\n- **Difusão facilitada**: usa proteína, mas a favor do gradiente (não gasta energia)",
+        "data": "2026-06-21",
+        "curtidas": 15
+      }
+    ]
+  },
+  {
+    "questaoId": 202595,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Carlos E.",
+        "texto": "Ótima questão para revisar níveis tróficos antes da prova.",
+        "data": "2026-05-11",
+        "curtidas": 2
+      }
+    ]
+  },
+  {
+    "questaoId": 202596,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Ana P.",
+        "texto": "*Fissão binária* é o mesmo que *bipartição*, certo?",
+        "data": "2026-04-09",
+        "curtidas": 1
+      },
+      {
+        "id": 2,
+        "autor": "Prof. Renato",
+        "texto": "Isso mesmo, são __sinônimos__ usados para a reprodução assexuada das bactérias.",
+        "data": "2026-04-09",
+        "curtidas": 8
+      }
+    ]
+  },
+  {
+    "questaoId": 202597,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Felipe R.",
+        "texto": "Vale a pena revisar o papel das **auxinas** no crescimento das plantas para essa questão.",
+        "data": "2026-03-18",
+        "curtidas": 5
+      }
+    ]
+  },
+  {
+    "questaoId": 202598,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Juliana M.",
+        "texto": "Alguém sabe um bom resumo sobre *órgãos homólogos* x *órgãos análogos*?",
+        "data": "2026-02-25",
+        "curtidas": 7
+      }
+    ]
+  },
+  {
+    "questaoId": 202599,
+    "comentarios": [
+      {
+        "id": 1,
+        "autor": "Rafael T.",
+        "texto": "As três camadas germinativas sempre confundem, mas essa questão ajudou a fixar:\n- Ectoderma\n- Mesoderma\n- Endoderma",
+        "data": "2026-01-30",
+        "curtidas": 9
+      }
+    ]
+  }
+]

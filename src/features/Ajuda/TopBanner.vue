@@ -26,14 +26,14 @@
     }
     .topo h1{
         margin: 0;
-        color: white;
+        color: var(--cor-texto-invertido);
         font-size: 56px;
     }
     .topo h2{
         color: rgb(137, 197, 132);
     }
     .topo p{
-        color: white;
+        color: var(--cor-texto-invertido);
         font-size: 18px;
     }
 </style>
