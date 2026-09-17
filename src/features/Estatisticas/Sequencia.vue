@@ -239,42 +239,9 @@ function corProgresso(valor){
         height: fit-content;
         font-family: sans-serif;
     }
-    .help {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .help p{
-        margin: 0;
-        color: var(--cor-primaria-texto);
-        font-size: 16px;
-        text-align: left;
-        font-weight: bold;
-    }
-    .help button{
-        font-family: sans-serif;
-        font-size: 14px;
-        width: 75px;
-        height: 35px;
-        border: 0;
-        border-radius: 10px;
-        background-color: var(--cor-primaria-texto);
-        color: var(--cor-texto-invertido);
-        cursor: pointer;
-        transition: 500ms ease;
-    }
-    .help button:hover{
-        background-color: var(--cor-primaria-hover);
-    }
-    .ajuda span{
-        font-size: 46px;
-        color: var(--cor-primaria-texto);
-        border-radius: 50%;
-        background-color: rgba(186, 255, 186, 0.5);
-        padding: 10px;
-        margin-left: 30px;
-        margin-right: 30px;
+    .ajuda p{
+        color: rgb(28, 75, 47);
+        font-size: 18px;
     }
     .evolucao{
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
