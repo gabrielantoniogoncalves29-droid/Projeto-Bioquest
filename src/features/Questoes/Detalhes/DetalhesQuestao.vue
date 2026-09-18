@@ -1,8 +1,13 @@
 <script setup>
-
 import { computed, watch, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { BookOpen, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import {
+    BookOpen,
+    MessageCircle,
+    ChevronLeft,
+    ChevronRight,
+    CornerUpLeft
+} from 'lucide-vue-next'
 
 import { buscarDetalhesPorId } from '@/services/detalhes'
 import { buscarQuestaoResolver } from '@/services/resolver'
@@ -25,717 +30,515 @@ const idsQuestoes = ref([])
 const abaAtiva = ref('explicacao')
 
 const indiceAtual = computed(() =>
-
     idsQuestoes.value.indexOf(Number(route.params.id))
-
 )
 
 const idAnterior = computed(() =>
-
     indiceAtual.value > 0
         ? idsQuestoes.value[indiceAtual.value - 1]
         : null
-
 )
 
 const idProximo = computed(() =>
-
     indiceAtual.value !== -1 &&
     indiceAtual.value < idsQuestoes.value.length - 1
         ? idsQuestoes.value[indiceAtual.value + 1]
         : null
-
 )
 
 const posicaoNavegacao = computed(() => ({
-
     atual: indiceAtual.value === -1 ? 0 : indiceAtual.value + 1,
     total: idsQuestoes.value.length
-
 }))
 
-function irParaQuestao(){
-
+function irParaQuestao() {
     router.push(`/resolver/${route.params.id}`)
-
 }
 
-const imagemAreaHeader = computed(() => {
-
-    const icone = detalhes.value?.conteudo?.area?.icone
-
-    if(!icone) return ''
-
-    return new URL(
-
-        `../icons/${icone}.png`,
-
-        import.meta.url
-
-    ).href
-
-})
-
-function irParaDetalhes(id){
-
-    if(!id) return
-
+function irParaDetalhes(id) {
+    if (!id) return
     router.push(`/resolver/${id}/detalhes`)
-
 }
 
-function goback(){
-
+function goback() {
     window.history.back()
-
 }
 
 watch(
-
     () => route.params.id,
-
     async (novoId) => {
-
-        if(!novoId) return
+        if (!novoId) return
 
         carregando.value = true
 
         const id = Number(novoId)
 
         const [dadosDetalhes, dadosQuestao] = await Promise.all([
-
             buscarDetalhesPorId(id),
             buscarQuestaoResolver(id)
-
         ])
 
         detalhes.value = dadosDetalhes
         questao.value = dadosQuestao
 
-        if(idsQuestoes.value.length === 0){
-
+        if (idsQuestoes.value.length === 0) {
             idsQuestoes.value = await buscarIdsQuestoes()
-
         }
 
         carregando.value = false
-
     },
-
     { immediate: true }
-
 )
-
 </script>
 
 <template>
+    <Header />
 
-<Header/>
+    <main class="detalhes-page">
+        <div class="breadcrumb">
+            <span
+                class="voltar"
+                @click="goback()"
+            >
+                ← Voltar
+            </span>
 
-<main class="detalhes-page">
+            <span class="separator">|</span>
 
-<div class="breadcrumb">
+            <router-link
+                to="/questoes"
+                class="link-crumb"
+            >
+                Biblioteca de Questões
+            </router-link>
 
-<span
-    class="voltar"
-    @click="goback()"
->
-    ⟵ Voltar
-</span>
+            <span
+                v-if="questao"
+                class="separator-barra"
+            >
+                /
+            </span>
 
-<span class="separator">|</span>
-
-<router-link
-    to="/questoes"
-    class="link-crumb"
->
-    Biblioteca de Questões
-</router-link>
-
-<span
-    v-if="questao"
-    class="separator-barra"
->/</span>
-
-<span
-    v-if="questao"
-    class="link-crumb link-acao"
-    @click="irParaQuestao"
->
-    Resolver questão {{ questao.id }}
-</span>
-
-<span
-    v-if="questao"
-    class="separator-barra"
->/</span>
-
-<span
-    v-if="questao"
-    class="link-crumb atual"
->
-    Saiba mais
-</span>
-
-</div>
-
-<div
-    v-if="carregando"
-    class="loading"
->
-    Carregando...
-</div>
-
-<div
-    v-else
-    class="conteudo-container"
->
-
-    <div class="cabecalho-questao">
-
-        <div class="cabecalho-info">
-
-            <div class="cabecalho-icone">
-
-                <img
-                    v-if="imagemAreaHeader"
-                    :src="imagemAreaHeader"
-                    alt=""
-                >
-
-            </div>
-
-            <div>
-
-                <span class="rotulo-topo">Questão {{ detalhes?.numeroQuestao }} · {{ detalhes?.banca }} {{ detalhes?.ano }}</span>
-
-                <h1>Saiba mais sobre a questão</h1>
-
-                <p class="subtitulo">
-                    {{ detalhes?.conteudo?.area?.nome }}
-                    <span class="seta">›</span>
-                    {{ detalhes?.conteudo?.assunto?.nome }}
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="cabecalho-acoes">
-
-            <div class="navegacao-questoes">
-
-                <button
-                    class="btn-nav"
-                    type="button"
-                    :disabled="!idAnterior"
-                    title="Questão anterior"
-                    @click="irParaDetalhes(idAnterior)"
-                >
-                    <ChevronLeft :size="18" />
-                </button>
-
-                <span class="posicao">
-                    {{ posicaoNavegacao.atual }} de {{ posicaoNavegacao.total }}
-                </span>
-
-                <button
-                    class="btn-nav"
-                    type="button"
-                    :disabled="!idProximo"
-                    title="Próxima questão"
-                    @click="irParaDetalhes(idProximo)"
-                >
-                    <ChevronRight :size="18" />
-                </button>
-
-            </div>
-
-            <button
-                class="btn-voltar-questao"
+            <span
+                v-if="questao"
+                class="link-crumb link-acao"
                 @click="irParaQuestao"
             >
-                Voltar para a questão
-            </button>
+                Resolver questão {{ questao.id }}
+            </span>
 
+            <span
+                v-if="questao"
+                class="separator-barra"
+            >
+                /
+            </span>
+
+            <span
+                v-if="questao"
+                class="link-crumb atual"
+            >
+                Saiba mais
+            </span>
         </div>
 
-    </div>
-
-    <PreviaQuestao :questao="questao" />
-
-    <InfoQuestao :detalhes="detalhes" />
-
-    <div class="tabs">
-
-        <button
-            class="tab"
-            :class="{ ativa: abaAtiva === 'explicacao' }"
-            @click="abaAtiva = 'explicacao'"
+        <div
+            v-if="carregando"
+            class="loading"
         >
-            <BookOpen :size="16" />
-            Explicação e teoria
-        </button>
+            Carregando...
+        </div>
 
-        <button
-            class="tab"
-            :class="{ ativa: abaAtiva === 'forum' }"
-            @click="abaAtiva = 'forum'"
+        <div
+            v-else
+            class="conteudo-container"
         >
-            <MessageCircle :size="16" />
-            Fórum de dúvidas
-        </button>
+            <div class="cabecalho-questao">
+                <div class="cabecalho-topo">
+                  
 
-    </div>
+  <div class="cabecalho-texto">
+                        <h1>Saiba mais sobre a questão</h1>
+                    </div>
 
-    <ExplicacaoQuestao
-        v-if="abaAtiva === 'explicacao'"
-        :detalhes="detalhes"
-        :questao="questao"
-    />
 
-    <ForumQuestao
-        v-else
-        :questao-id="Number(route.params.id)"
-    />
+                    <div class="navegacao-questoes">
+                        <button
+                            class="link-nav"
+                            type="button"
+                            :disabled="!idAnterior"
+                            @click="irParaDetalhes(idAnterior)"
+                        >
+                            <ChevronLeft :size="16" />
+                            <span class="link-nav-texto">Questão anterior</span>
+                        </button>
 
-</div>
+                        <span class="posicao">
+                            {{ posicaoNavegacao.atual }} de {{ posicaoNavegacao.total }}
+                        </span>
 
-</main>
+                        <button
+                            class="link-nav"
+                            type="button"
+                            :disabled="!idProximo"
+                            @click="irParaDetalhes(idProximo)"
+                        >
+                            <span class="link-nav-texto">Próxima questão</span>
+                            <ChevronRight :size="16" />
+                        </button>
+                    </div>
+                </div>
 
+                <div class="cabecalho-corpo">
+                  
+  <span class="rotulo-topo">
+                        Questão {{ detalhes?.numeroQuestao }} · {{ detalhes?.banca }} {{ detalhes?.ano }}
+                    </span>
+                    <button
+                        class="btn-voltar-questao"
+                        @click="irParaQuestao"
+                    >
+                        <CornerUpLeft :size="16" />
+                        Voltar para a questão
+                    </button>
+                </div>
+            </div>
+
+            <PreviaQuestao :questao="questao" />
+
+            <InfoQuestao :detalhes="detalhes" />
+
+            <div class="tabs">
+                <button
+                    class="tab"
+                    :class="{ ativa: abaAtiva === 'explicacao' }"
+                    @click="abaAtiva = 'explicacao'"
+                >
+                    <BookOpen :size="16" />
+                    Explicação e teoria
+                </button>
+
+                <button
+                    class="tab"
+                    :class="{ ativa: abaAtiva === 'forum' }"
+                    @click="abaAtiva = 'forum'"
+                >
+                    <MessageCircle :size="16" />
+                    Comentários e discussões
+                </button>
+            </div>
+
+            <ExplicacaoQuestao
+                v-if="abaAtiva === 'explicacao'"
+                :detalhes="detalhes"
+                :questao="questao"
+            />
+
+            <ForumQuestao
+                v-else
+                :questao-id="Number(route.params.id)"
+            />
+        </div>
+    </main>
 </template>
 
 <style scoped>
-
 .detalhes-page {
-  padding: 24px;
-  background: var(--cor-fundo-pagina);
-  min-height: 100vh;
-  box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px 32px 48px;
+    box-sizing: border-box;
+    background: var(--cor-fundo-pagina);
 }
 
 .breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  align-items: center;
-  margin-bottom: 24px;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto 28px;
 
-  color: var(--cor-texto-suave);
-  font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--cor-texto-suave);
+    font-size: 14px;
 }
 
 .link-crumb {
-
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .link-crumb:hover {
-  text-decoration: underline;
-  color: var(--cor-primaria);
+    text-decoration: underline;
+    color: var(--cor-primaria);
 }
 
 .link-crumb.atual {
-
-  color: var(--cor-texto-suave);
-  cursor: default;
-
+    color: var(--cor-texto-suave);
+    cursor: default;
 }
 
-.link-crumb.atual:hover{
-
-  text-decoration:none;
-
+.link-crumb.atual:hover {
+    text-decoration: none;
 }
 
 .voltar {
-  color: var(--cor-primaria);
-  font-weight: 600;
-  cursor: pointer;
+    color: var(--cor-primaria);
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .voltar:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .separator,
 .separator-barra {
-  color: var(--cor-borda);
+    color: var(--cor-borda);
 }
 
-.loading{
-
-  text-align:center;
-
-  padding:40px;
-
-  color:var(--cor-texto-suave);
-
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--cor-texto-suave);
 }
 
-.conteudo-container{
+.conteudo-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
 
-  width: 100%;
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:16px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.cabecalho-questao{
-
-  display:flex;
-
-  align-items:flex-start;
-
-  justify-content:space-between;
-
-  flex-wrap:wrap;
-
-  gap:16px;
-
-  background:linear-gradient(135deg,var(--cor-fundo-card), var(--cor-primaria-fundo));
-
-  border:1px solid var(--cor-borda);
-
-  border-radius:16px;
-
-  padding:24px 28px;
-
+.cabecalho-questao {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding-bottom: 4px;
 }
 
-.cabecalho-info{
+.cabecalho-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
 
-  display:flex;
-
-  align-items:center;
-
-  gap:16px;
-
-  min-width:0;
-
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
-.cabecalho-icone{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  width:56px;
-
-  height:56px;
-
-  min-width:56px;
-
-  border-radius:14px;
-
-  background: var(--cor-fundo-card);
-
-  border:1px solid var(--cor-borda);
-
+.rotulo-topo {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cor-primaria);
+    margin-left: 10px;
 }
 
-.cabecalho-icone img{
-
-  width:36px;
-
-  height:36px;
-
-  object-fit:contain;
-
+.navegacao-questoes {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-.rotulo-topo{
+.link-nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
-  display:block;
+    border: none;
+    background: none;
+    padding: 0;
 
-  font-size:13px;
+    color: var(--cor-primaria);
+    font-size: 13.5px;
+    font-weight: 600;
 
-  font-weight:600;
-
-  color:var(--cor-primaria);
-
-  margin-bottom:6px;
-
+    cursor: pointer;
+    white-space: nowrap;
 }
 
-.cabecalho-questao h1{
-
-  margin:0 0 6px;
-
-  font-size:24px;
-
-  font-weight:700;
-
-  color:var(--cor-texto-principal);
-
+.link-nav:hover:not(:disabled) {
+    text-decoration: underline;
 }
 
-.subtitulo{
-
-  margin:0;
-
-  font-size:14px;
-
-  color:var(--cor-texto-suave);
-
+.link-nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
-.subtitulo .seta{
-
-  color:var(--cor-primaria);
-
-  font-weight:600;
-
+.posicao {
+    padding: 0 2px;
+    font-size: 13px;
+    color: var(--cor-texto-suave);
+    white-space: nowrap;
 }
 
-.cabecalho-acoes{
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:flex-end;
-
-  gap:10px;
-
-  flex-shrink:0;
-
+.cabecalho-corpo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
 }
 
-.navegacao-questoes{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
+.cabecalho-texto {
+    min-width: 0;
+    font-size: 15px;
 }
 
-.btn-nav{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  width:34px;
-
-  height:34px;
-
-  border:1px solid var(--cor-borda);
-
-  border-radius:9px;
-
-  background: var(--cor-fundo-card);
-
-  color:var(--cor-texto-secundario);
-
-  cursor:pointer;
-
-  transition:all .15s ease;
-
+.cabecalho-questao h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--cor-texto-principal);
 }
 
-.btn-nav:hover:not(:disabled){
-
-  border-color:var(--cor-primaria);
-
-  color:var(--cor-primaria);
-
-  background:var(--cor-primaria-fundo);
-
+.subtitulo {
+    margin: 0;
+    font-size: 14px;
+    color: var(--cor-texto-suave);
 }
 
-.btn-nav:disabled{
-
-  opacity:.4;
-
-  cursor:not-allowed;
-
+.subtitulo .seta {
+    margin: 0 4px;
+    color: var(--cor-primaria);
+    font-weight: 600;
 }
 
-.posicao{
+.btn-voltar-questao {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
 
-  font-size:13px;
+    border: none;
+    background: none;
+    padding: 4px 0;
 
-  color:var(--cor-texto-suave);
+    color: var(--cor-primaria);
+    font-size: 14px;
+    font-weight: 600;
 
-  white-space:nowrap;
-
+    cursor: pointer;
 }
 
-.btn-voltar-questao{
-
-  flex-shrink:0;
-
-  height:42px;
-
-  padding:0 18px;
-
-  border:1px solid var(--cor-borda);
-
-  border-radius:10px;
-
-  background: var(--cor-fundo-card);
-
-  color:var(--cor-texto-secundario);
-
-  font-size:14px;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  transition:all .15s ease;
-
+.btn-voltar-questao:hover {
+    text-decoration: underline;
 }
 
-.btn-voltar-questao:hover{
-
-  border-color:var(--cor-primaria);
-
-  color:var(--cor-primaria);
-
-  background:var(--cor-primaria-fundo);
-
+.tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid var(--cor-borda);
 }
 
-.tabs{
+.tab {
+    flex: 1;
 
-  display:flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
-  gap:8px;
+    padding: 14px 8px;
+    margin-bottom: -1px;
 
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+
+    color: var(--cor-texto-suave);
+    font-size: 14.5px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.tab{
-
-  flex:1;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  height:48px;
-
-  border:1px solid var(--cor-borda);
-
-  border-radius:12px;
-
-  background: var(--cor-fundo-card);
-
-  color:var(--cor-texto-suave);
-
-  font-size:14.5px;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  transition:all .2s ease;
-
+.tab:hover {
+    color: var(--cor-primaria);
 }
 
-.tab:hover{
-
-  border-color:var(--cor-primaria);
-
-  color:var(--cor-primaria);
-
+.tab.ativa {
+    color: var(--cor-primaria);
+    border-bottom-color: var(--cor-primaria);
 }
 
-.tab.ativa{
+@media (max-width: 900px) {
+    .detalhes-page {
+        padding: 20px 24px 40px;
+    }
 
-  background:var(--cor-primaria);
+    .cabecalho-topo {
+        align-items: flex-start;
+    }
 
-  border-color:var(--cor-primaria);
-
-  color: var(--cor-texto-invertido);
-
+    .navegacao-questoes {
+        margin-left: auto;
+    }
 }
 
-@media (max-width:600px){
+@media (max-width: 600px) {
+    .detalhes-page {
+        padding: 14px 12px 32px;
+    }
 
-  .detalhes-page{
+    .breadcrumb {
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
 
-    padding:12px;
+    .conteudo-container {
+        gap: 20px;
+    }
 
-  }
+    .cabecalho-questao {
+        gap: 18px;
+    }
 
-  .cabecalho-questao{
+    .cabecalho-topo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
 
-    padding:18px 16px;
+    .navegacao-questoes {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
 
-  }
+    .link-nav-texto {
+        display: none;
+    }
 
-  .cabecalho-questao h1{
+    .cabecalho-corpo {
+        align-items: flex-start;
+    }
 
-    font-size:19px;
+    .cabecalho-questao h1 {
+        font-size: 22px;
+    }
 
-  }
+    .btn-voltar-questao {
+        padding: 0;
+    }
 
-  .cabecalho-icone{
+    .tabs {
+        overflow-x: auto;
+    }
 
-    width:44px;
-
-    height:44px;
-
-    min-width:44px;
-
-  }
-
-  .cabecalho-icone img{
-
-    width:28px;
-
-    height:28px;
-
-  }
-
-  .cabecalho-acoes{
-
-    width:100%;
-
-    align-items:stretch;
-
-  }
-
-  .navegacao-questoes{
-
-    justify-content:space-between;
-
-  }
-
-  .btn-voltar-questao{
-
-    width:100%;
-
-    text-align:center;
-
-  }
-
-  .tabs{
-
-    flex-direction:column;
-
-  }
-
+    .tab {
+        min-width: 180px;
+        white-space: nowrap;
+    }
 }
-
 </style>

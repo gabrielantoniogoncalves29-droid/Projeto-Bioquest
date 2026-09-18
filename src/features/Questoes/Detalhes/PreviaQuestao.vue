@@ -97,11 +97,13 @@ const alternativas = computed(() =>
 
     background: var(--cor-fundo-card);
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
 
     border-radius:16px;
 
-    padding:24px 28px;
+    padding:28px 32px;
+
+    box-shadow: var(--sombra-card);
 
 }
 
@@ -115,7 +117,7 @@ const alternativas = computed(() =>
 
     gap:12px;
 
-    margin-bottom:14px;
+    margin-bottom:20px;
 
 }
 
@@ -141,11 +143,11 @@ const alternativas = computed(() =>
 
     flex-shrink:0;
 
-    border:1px solid var(--cor-borda);
+    border:none;
 
     border-radius:8px;
 
-    background: var(--cor-fundo-card);
+    background: none;
 
     color:var(--cor-primaria);
 
@@ -158,16 +160,14 @@ const alternativas = computed(() =>
     cursor:pointer;
 
     white-space:nowrap;
-
+    animation: 1s ease 0s 1 normal none running fadeIn;
     transition:all .15s ease;
 
 }
 
 .btn-expandir:hover{
 
-    background:var(--cor-primaria-fundo);
-
-    border-color:var(--cor-primaria);
+transform: translateY(-2px);
 
 }
 
@@ -179,11 +179,11 @@ const alternativas = computed(() =>
 
 .texto-principal{
 
-    margin:0 0 10px;
+    margin:0 0 16px;
 
     font-size:14.5px;
 
-    line-height:1.7;
+    line-height:1.75;
 
     color:var(--cor-texto-secundario);
 
@@ -203,7 +203,7 @@ const alternativas = computed(() =>
 
 .texto-complementar{
 
-    margin:0 0 16px;
+    margin:0 0 20px;
 
     font-size:14.5px;
 
@@ -227,7 +227,7 @@ const alternativas = computed(() =>
 
     flex-direction:column;
 
-    gap:10px;
+    gap:12px;
 
 }
 
@@ -237,11 +237,11 @@ const alternativas = computed(() =>
 
     align-items:flex-start;
 
-    gap:12px;
+    gap:14px;
 
-    padding:12px 14px;
+    padding:16px 18px;
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
 
     border-radius:12px;
 
@@ -251,13 +251,21 @@ const alternativas = computed(() =>
 
     line-height:1.5;
 
+    transition:border-color .2s ease, box-shadow .2s ease;
+
+}
+
+.alternativas li:hover{
+
+    border-color:var(--cor-borda);
+
 }
 
 .alternativas li.correta{
 
     background:var(--cor-primaria-fundo);
 
-    border-color:var(--cor-primaria-translucida);
+    border-color:var(--cor-primaria-translucida-fraca);
 
     color:var(--cor-texto-principal);
 

@@ -80,6 +80,16 @@ const taxaAcerto = computed(() =>
 
 )
 
+const raioAnel = 38
+
+const circunferenciaAnel = 2 * Math.PI * raioAnel
+
+const deslocamentoAnel = computed(() =>
+
+    circunferenciaAnel * (1 - taxaAcerto.value / 100)
+
+)
+
 </script>
 
 <template>
@@ -88,59 +98,7 @@ const taxaAcerto = computed(() =>
 
     <div class="info-card">
 
-        <div class="icone-caixa">
-
-            <img
-                v-if="imagemObjeto"
-                :src="imagemObjeto"
-                alt=""
-            >
-
-        </div>
-
-        <div class="texto-bloco">
-
-            <span class="titulo-card">Objeto de conhecimento</span>
-
-            <span class="valor-card">{{ nomeObjeto }}</span>
-
-        </div>
-
-    </div>
-
-    <div class="info-card">
-
-        <div class="icone-caixa">
-
-            <img
-                v-if="imagemConteudo"
-                :src="imagemConteudo"
-                alt=""
-            >
-
-        </div>
-
-        <div class="texto-bloco">
-
-            <span class="titulo-card">Conteúdo do livro didático</span>
-
-            <span class="valor-card">
-
-                {{ conteudo.area?.nome }}
-
-                <span class="seta">›</span>
-
-                {{ conteudo.assunto?.nome }}
-
-            </span>
-
-        </div>
-
-    </div>
-
-    <div class="info-card">
-
-        <div class="icone-caixa icone-nivel">
+        <div class="card-icone">
 
             <svg
                 viewBox="0 0 24 24"
@@ -161,9 +119,9 @@ const taxaAcerto = computed(() =>
 
         <div class="texto-bloco">
 
-            <span class="titulo-card">Nível da questão</span>
+            <span class="card-titulo">Nível da questão</span>
 
-            <span class="valor-card">{{ nivel }}</span>
+            <span class="card-valor">{{ nivel }}</span>
 
         </div>
 
@@ -171,45 +129,99 @@ const taxaAcerto = computed(() =>
 
     <div class="info-card">
 
-        <div class="icone-caixa icone-nivel">
+        <div class="card-icone">
 
-            <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+            <img
+                v-if="imagemObjeto"
+                :src="imagemObjeto"
+                alt=""
             >
-
-                <path d="M3 3v18h18"/>
-                <path d="M7 15v3"/>
-                <path d="M12 10v8"/>
-                <path d="M17 6v12"/>
-
-            </svg>
 
         </div>
 
         <div class="texto-bloco">
 
-            <span class="titulo-card">Percentual de acertos</span>
+            <span class="card-titulo">Objeto de conhecimento</span>
 
-            <span class="valor-card">
+            <span class="card-valor">{{ nomeObjeto }}</span>
 
-                <strong class="percentual-numero">{{ taxaAcerto }}%</strong>
-                dos estudantes acertaram
+        </div>
+
+    </div>
+
+    <div class="info-card">
+
+        <div class="card-icone">
+
+            <img
+                v-if="imagemConteudo"
+                :src="imagemConteudo"
+                alt=""
+            >
+
+        </div>
+
+        <div class="texto-bloco">
+
+            <span class="card-titulo">Estrutura do livro didático</span>
+
+            <span class="card-valor">
+
+                {{ conteudo.area?.nome }}
+
+                <span class="seta">›</span>
+
+                {{ conteudo.assunto?.nome }}
 
             </span>
 
-            <div class="barra">
+        </div>
 
-                <div
-                    class="preenchimento"
-                    :style="{ width: taxaAcerto + '%' }"
-                ></div>
+    </div>
 
-            </div>
+    <div class="info-card">
+
+        <div class="anel-percentual">
+
+            <svg
+                viewBox="0 0 92 92"
+                width="80"
+                height="80"
+            >
+
+                <circle
+                    class="anel-fundo"
+                    cx="46"
+                    cy="46"
+                    r="38"
+                    fill="none"
+                    stroke-width="9"
+                />
+
+                <circle
+                    class="anel-progresso"
+                    cx="46"
+                    cy="46"
+                    r="38"
+                    fill="none"
+                    stroke-width="9"
+                    stroke-linecap="round"
+                    :stroke-dasharray="circunferenciaAnel"
+                    :stroke-dashoffset="deslocamentoAnel"
+                    transform="rotate(-90 46 46)"
+                />
+
+            </svg>
+
+            <span class="anel-texto">{{ taxaAcerto }}%</span>
+
+        </div>
+
+        <div class="texto-bloco">
+
+            <span class="card-titulo">Percentual de acertos</span>
+
+            <span class="card-valor card-valor-suave">dos estudantes acertaram</span>
 
         </div>
 
@@ -235,23 +247,27 @@ const taxaAcerto = computed(() =>
 
     display:flex;
 
-    gap:14px;
+    flex-direction:row;
 
     align-items:center;
 
+    gap:16px;
+
     background: var(--cor-fundo-card);
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
 
     border-radius:14px;
 
-    padding:18px;
+    padding:20px;
 
     min-width:0;
 
+    box-shadow: var(--sombra-card);
+
 }
 
-.icone-caixa{
+.card-icone{
 
     display:flex;
 
@@ -259,29 +275,29 @@ const taxaAcerto = computed(() =>
 
     justify-content:center;
 
-    width:42px;
+    flex-shrink:0;
 
-    height:42px;
+    width:64px;
 
-    min-width:42px;
-
-    border-radius:11px;
-
-    background:var(--cor-primaria-fundo);
+    height:64px;
 
 }
 
-.icone-caixa img{
+.card-icone img{
 
-    width:28px;
+    width:64px;
 
-    height:28px;
+    height:64px;
 
     object-fit:contain;
 
 }
 
-.icone-nivel{
+.card-icone svg{
+
+    width:40px;
+
+    height:40px;
 
     color:var(--cor-primaria);
 
@@ -293,35 +309,39 @@ const taxaAcerto = computed(() =>
 
     flex-direction:column;
 
-    gap:4px;
+    gap:5px;
+
+    flex:1;
 
     min-width:0;
 
 }
 
-.titulo-card{
+.card-titulo{
 
-    font-size:12px;
+    font-size:14.5px;
 
-    font-weight:600;
-
-    color:var(--cor-texto-suave);
-
-    text-transform:uppercase;
-
-    letter-spacing:.3px;
-
-}
-
-.valor-card{
-
-    font-size:14px;
-
-    font-weight:600;
+    font-weight:700;
 
     color:var(--cor-texto-principal);
 
+}
+
+.card-valor{
+
+    font-size:13.5px;
+
+    font-weight:400;
+
+    color:var(--cor-texto-secundario);
+
     line-height:1.4;
+
+}
+
+.card-valor-suave{
+
+    color:var(--cor-texto-suave);
 
 }
 
@@ -335,39 +355,61 @@ const taxaAcerto = computed(() =>
 
 }
 
-.percentual-numero{
+.anel-percentual{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    width:80px;
+
+    height:80px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.anel-fundo{
+
+    stroke:var(--cor-borda-suave);
+
+}
+
+.anel-progresso{
+
+    stroke:var(--cor-primaria);
+
+    transition:stroke-dashoffset .4s ease;
+
+}
+
+.anel-texto{
+
+    position:absolute;
+
+    font-size:16px;
+
+    font-weight:700;
 
     color:var(--cor-primaria);
 
-    font-size:15px;
-
 }
 
-.barra{
+@media (max-width:1200px){
 
-    margin-top:6px;
+    .info-card{
 
-    width:100%;
+        flex-direction:column;
 
-    height:6px;
+        align-items:flex-start;
 
-    border-radius:999px;
+        text-align:left;
 
-    background:var(--cor-borda-suave);
-
-    overflow:hidden;
-
-}
-
-.preenchimento{
-
-    height:100%;
-
-    border-radius:999px;
-
-    background:var(--cor-primaria);
-
-    transition:width .3s ease;
+    }
 
 }
 
@@ -391,7 +433,39 @@ const taxaAcerto = computed(() =>
 
     .info-card{
 
-        padding:14px;
+        padding:16px;
+
+    }
+
+    .card-icone,
+    .card-icone img{
+
+        width:52px;
+
+        height:52px;
+
+    }
+
+    .card-icone svg{
+
+        width:34px;
+
+        height:34px;
+
+    }
+
+    .anel-percentual,
+    .anel-percentual svg{
+
+        width:64px;
+
+        height:64px;
+
+    }
+
+    .anel-texto{
+
+        font-size:14px;
 
     }
 

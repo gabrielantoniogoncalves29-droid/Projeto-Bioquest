@@ -263,7 +263,7 @@ function enviarComentario() {
 
     background: var(--cor-fundo-card);
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
 
     border-radius:16px;
 
@@ -274,6 +274,8 @@ function enviarComentario() {
     flex-direction:column;
 
     gap:10px;
+
+    box-shadow: var(--sombra-card);
 
 }
 
@@ -549,11 +551,13 @@ textarea:focus{
 
     background: var(--cor-fundo-card);
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
 
     border-radius:16px;
 
     padding:18px 20px;
+
+    box-shadow: var(--sombra-card);
 
 }
 

@@ -111,12 +111,14 @@ const alternativaCorreta = computed(() =>
 
     background: var(--cor-fundo-card);
 
-    border:1px solid var(--cor-borda);
+    border:1px solid var(--cor-borda-suave);
     border-left:3px solid var(--cor-primaria);
 
     border-radius:14px;
 
     padding:24px 28px;
+
+    box-shadow: var(--sombra-card);
 
 }
 
