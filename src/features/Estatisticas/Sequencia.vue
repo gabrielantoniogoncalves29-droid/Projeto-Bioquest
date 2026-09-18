@@ -9,6 +9,20 @@ const lista = ref(["", "", "01", "02", "03", "04", "05", "06", "07", "08", "09",
 
 const diaSelecionado = ref(null)
 
+const cardAtual = ref(0)
+
+function proximoCard() {
+  if (cardAtual.value < 5) {
+    cardAtual.value++
+  }
+}
+
+function cardAnterior() {
+  if (cardAtual.value > 0) {
+    cardAtual.value--
+  }
+}
+
 
 function diaVazio(dia){
     return dia === ""
@@ -57,6 +71,38 @@ const atividades = [
     }
 ]
 
+const cards = [
+    {
+        titulo: 'Moléculas, células e tecidos',
+        icone: iconeCitologia
+    },
+
+    {
+        titulo: 'Hereditariedade e diversidade da vida',
+        icone: iconeVirus
+    },
+
+    {
+        titulo: 'Identidade dos seres vivos',
+        icone: iconeBioquimica
+    },
+
+    {
+        titulo: 'Ecologia e Ciências Ambientais',
+        icone: iconeEcologia
+    },
+
+    {
+        titulo: 'Origem e evolução da vida',
+        icone: iconeVirus
+    },
+
+    {
+        titulo: 'Qualidade de vida das populações humanas',
+        icone: iconeEcologia
+    }
+]
+
 function corProgresso(valor){
     if(valor>=60){
         return "rgb(10, 153, 10)"
@@ -74,7 +120,6 @@ function corProgresso(valor){
 
 <template>
     <div class="content">
-        <div>
             <div class="sequencia">
                 <div class="topo">
                     <span class="material-symbols-outlined calendar">calendar_month</span>
@@ -100,7 +145,7 @@ function corProgresso(valor){
                         <li>Sáb</li>
                     </ul>
                     <ul class="lista-datas">
-                        <li v-for="dia in lista" :key="dia" 
+                        <li v-for="dia in lista" :key="dia"
                         @click="selecionado(dia)"
                         :class="{ativo: diaSelecionado === dia}"
                         >
@@ -109,21 +154,46 @@ function corProgresso(valor){
                     </ul>
                 </div>
                 <div class="ofensiva">
-                <span class="material-icons fire">local_fire_department</span>
-                <div class="ofensiva-info">
+                    <span class="material-icons fire">local_fire_department</span>
+                    <div class="ofensiva-info">
                     <h2>Sequência atual</h2>
                     <h1>7 dias</h1>
                     <p>Continue assim</p>
                 </div>
-                </div>
             </div>
-            <div class="ajuda">
-                <span class="material-symbols-outlined">e911_emergency</span>
-                <div class="help">
-                    <p>Para mais informacões acesse <br>a pagina de ajuda</p>
-                    <button type="button">Ajuda</button>
+            <div class="atividade-semana">
+                    <h3>ATIVIDADE DA SEMANA</h3>
+                    <div class="dias-semana">
+                        <div>
+                            <span class="dia">Seg</span>
+                            <span class="bolinha ativo"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Ter</span>
+                            <span class="bolinha"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Qua</span>
+                            <span class="bolinha ativo"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Qui</span>
+                            <span class="bolinha ativo"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Sex</span>
+                            <span class="bolinha ativo"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Sáb</span>
+                            <span class="bolinha"></span>
+                        </div>
+                        <div>
+                            <span class="dia">Dom</span>
+                            <span class="bolinha"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
         <div class="lado-direito">
             <div class="info-geral">
@@ -153,6 +223,7 @@ function corProgresso(valor){
                     </div>
             </div>
 
+
             <div class="atividades">
                 <div class="atividades-info">
                     <span class="material-symbols-outlined livro">import_contacts</span>
@@ -161,6 +232,7 @@ function corProgresso(valor){
                         <router-link to="/questoes" class="link-questoes">Ver todas as questões <span class="material-icons">arrow_forward</span></router-link>
                     </div>
                 </div>
+
 
                 <div class="conteiner-atividades"
                      v-for="atividade in atividades"
@@ -192,6 +264,7 @@ function corProgresso(valor){
                 </div>
             </div>
 
+
         </div>
         <div class="lado-esquerdo">
             <div class="grafico">
@@ -215,83 +288,175 @@ function corProgresso(valor){
                 </div>
             </div>
             <div class="evolucao">
-                <img src="@/assets/plant.png" alt="">
-                <h1>Você está evoluindo!</h1>
-                <p>Continue praticando e acompanhe seu progresso.</p>
+                <h3 class="tituloCard">CONTINUE ESTUDANDO</h3>
+                <div>
+                    <button class="seta seta-esquerda" @click="cardAnterior">
+                    ‹
+                </button>
+                <div class="card">
+                    <div>
+                        <img :src="cards[cardAtual].icone" :alt="cards[cardAtual].titulo" class="icone-card">
+                        <h3>{{ cards[cardAtual].titulo }}</h3>
+                    </div>
+                    <router-link to="/questoes" class="btn-card">Explorar<span class="material-icons icon">arrow_forward</span></router-link>
+                </div>
+                <button class="seta seta-direita" @click="proximoCard">
+                    ›
+                </button>
+                </div>
             </div>
         </div>
     </div>
 
 </template>
 
+
 <style>
-    .ajuda{
-        display: flex;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        align-items: center;
-        text-align: center;
-        margin: 50px;
-        margin-bottom: 0px;
-        overflow: hidden;
-        width: 420px;
-        min-height: 120px;
-        height: fit-content;
-        font-family: sans-serif;
+    .icone-card{
+        width: 65px;
+        height: 65px;
+        transform: translateX(-10px) translateY(-10px);
     }
-    .help {
+    .card > div{
+        display: flex;
+        align-items: center;
+    }
+    .atividade-semana{
+        margin: 45px;
+        margin-top: 25px;
+        padding-top: 20px;
+
+
+        border-top: 1px solid #eeeeee;
+    }
+    .atividade-semana h3{
+        font-family: sans-serif;
+        font-size: 16px;
+        color: rgb(28, 75, 47);
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    .dias-semana{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dias-semana > div{
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        align-items: center;
+        gap: 8px;
     }
-    .help p{
-        margin: 0;
-        color: var(--cor-primaria-texto);
-        font-size: 16px;
-        text-align: left;
-        font-weight: bold;
-    }
-    .help button{
-        font-family: sans-serif;
-        font-size: 14px;
-        width: 75px;
-        height: 35px;
-        border: 0;
-        border-radius: 10px;
-        background-color: var(--cor-primaria-texto);
-        color: var(--cor-texto-invertido);
-        cursor: pointer;
-        transition: 500ms ease;
-    }
-    .help button:hover{
-        background-color: var(--cor-primaria-hover);
-    }
-    .ajuda span{
-        font-size: 46px;
-        color: var(--cor-primaria-texto);
+    .bolinha{
+        width: 15px;
+        height: 15px;
         border-radius: 50%;
-        background-color: rgba(186, 255, 186, 0.5);
+        background-color: #e5e5e5;
+    }
+    .bolinha.ativo{
+       background-color: rgb(44, 112, 71);
+    }
+    .card{
+        margin: 40px;
+        width: 260px;
+        height: 170px;
+        position: relative;
+        box-sizing: border-box;
+    }
+    .card h3{
+        margin-bottom: 35px;
+        text-align: left;
+    }
+    .btn-card{
+        display: inline-block;
+        width: 200px;
+        text-decoration: none;
+        border: 1px solid var(--cor-primaria-texto);
+        border-radius: 8px;
+        background-color: var(--cor-primaria);
         padding: 10px;
-        margin-left: 30px;
-        margin-right: 30px;
+        color: var(--cor-texto-invertido);
+        transition: 500ms ease-in-out;
+        cursor: pointer;
+
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .icon{
+        transition: 300ms ease-in-out;
+    }
+    .btn-card:hover{
+        background-color: var(--cor-primaria-hover);
+        .icon{
+            transform: translateX(4px) scale(0.9);
+        }
+    }
+    .seta{
+        width: 35px;
+        height: 35px;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+    }
+    .seta-esquerda:hover{
+        transform: scale(1.06) translateX(-25px);
+    }
+    .seta-direita:hover{
+        transform: scale(1.06) translateX(25px);
+    }
+    .seta-esquerda {
+        left: 5px;
+        transform: translateX(-25px);
+        transition: 200ms ease-in-out;
+    }
+
+    .seta-direita {
+        right: 5px;
+        transform: translateX(25px);
+        transition: 200ms ease-in-out;
     }
     .evolucao{
+        display: flex;
+        flex-direction: column;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
         margin: 50px 40px;
-        width: 310px;
-        height: 245px;
+        width: 353px;
+        height: 285px;
         border-radius: 12px;
         font-family: sans-serif;
         text-align: center;
         align-items: center;
         font-size: 16px;
-        padding: 20px;
+    }
+    .evolucao > div{
+        display: flex;
+        align-items: center;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        height: 200px;
+        width: 300px;
+        margin: 10px;
+        position: relative;
+        transition: 300ms ease;
     }
     .evolucao img{
         width: 110px;
         padding: 0;
         margin: 0;
+    }
+    .tituloCard{
+        font-family: sans-serif;
+        font-size: 16px;
+        color: rgb(28, 75, 47);
+        text-align: left;
+        border-bottom: 1px solid #eeeeee;
     }
     .evolucao h1{
         color: var(--cor-primaria-texto);
@@ -344,7 +509,7 @@ function corProgresso(valor){
         margin-bottom: 0px;
         overflow: hidden;
         width: 420px;
-        min-height: 550px;
+        min-height: 740px;
         height: fit-content;
     }
     .mes{
