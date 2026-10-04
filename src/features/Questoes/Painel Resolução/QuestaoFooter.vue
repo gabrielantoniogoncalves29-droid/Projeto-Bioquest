@@ -116,18 +116,15 @@ function saibaMais() {
   align-items: center;
   gap: 6px;
 
-
-  background: var(--cor-fundo-card);
-
-  border: 1px solid var(--cor-borda);
-
+  border: none;
+  background: none;
   color: var(--cor-texto-secundario);
 
-  padding: 10px 16px;
+  padding: 10px 38px;
 
   border-radius: 8px;
 
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 600;
 
@@ -140,10 +137,8 @@ function saibaMais() {
 
 .btn-saiba-mais:hover{
   border-color: var(--cor-primaria);
-
+  transform: scale(1.01);
   color: var(--cor-primaria);
-
-  background: var(--cor-primaria-fundo);
 }
 
 [data-tema="escuro"] .btn-saiba-mais{

@@ -12,21 +12,33 @@
 </template>
 
 <style scoped>
-  .banner{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 500px;
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
 
-    background-image: url('@/assets/Banner.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image:
+    linear-gradient(
+      to bottom,
+      #f8faf982 0%,
+      transparent 5%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 90%,
+      #f8faf9 100%
+    ),
+    url('@/assets/Banner_top.png');
 
-    top: 0;
-    overflow: hidden;
-  }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  top: 0;
+  overflow: hidden;
+}
   .banner_description{
     display: flex;
     flex-direction: column;

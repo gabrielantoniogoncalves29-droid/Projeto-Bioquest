@@ -91,7 +91,6 @@ function goback(){
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
     background:
         linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
         url("@/assets/Design sem nome_20260723_125812_0000.png") top/cover no-repeat;

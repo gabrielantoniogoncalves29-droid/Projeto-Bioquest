@@ -179,7 +179,7 @@ watch(
   flex-wrap: wrap;
   gap: 7px;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 
   color: var(--cor-texto-suave);
   font-size: 14px;

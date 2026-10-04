@@ -39,7 +39,7 @@ const alternativas = computed(() =>
             @click="expandido = !expandido"
         >
 
-            {{ expandido ? 'Mostrar menos' : 'Ver questão completa' }}
+            {{ expandido ? 'Mostrar menos' : 'Ver prévia completa' }}
 
             <ChevronUp v-if="expandido" :size="16" />
             <ChevronDown v-else :size="16" />
