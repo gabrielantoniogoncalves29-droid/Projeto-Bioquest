@@ -233,6 +233,9 @@ function saibaMais() {
 
   }
 
+  .btn-saiba-mais{
+      display:none;
+}
   .grupo-direita,
   .grupo-esquerda{
 
@@ -265,7 +268,9 @@ function saibaMais() {
     padding: 14px 16px;
 
   }
-
+  .btn-saiba-mais{
+      display:none;
+}
   .btn-prox,
   .btn-saiba-mais{
 
@@ -292,7 +297,9 @@ function saibaMais() {
     gap: 14px;
 
   }
-
+  .btn-saiba-mais{
+      display:none;
+}
   .btn-prox,
   .btn-responder,
   .btn-saiba-mais{

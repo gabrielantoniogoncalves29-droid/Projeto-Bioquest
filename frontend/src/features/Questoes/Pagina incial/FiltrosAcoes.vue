@@ -143,7 +143,7 @@ const store = useQuestoesStore()
 
   .acoes-filtros {
 
-    margin: 0px 12px 20px;
+    margin: 0px 0px 20px;
 
   }
 

@@ -103,4 +103,36 @@
     .container-right button:hover{
         background-color: rgb(12, 214, 93);
     }
+
+    /* ===== Responsivo (celular) ===== */
+    @media (max-width: 768px){
+        .container-questoes{
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 1.25rem;
+            margin-top: 2rem;
+        }
+        .container-left h1 br{
+            display: none;
+        }
+        .sub-info{
+            font-size: 1.15rem;
+        }
+        .filtro-box{
+            gap: 8px;
+        }
+        .container-right p{
+            text-align: left;
+            font-size: 1rem;
+        }
+        .container-right button{
+            max-width: none;
+        }
+
+        .container-questoes{
+            background-image: url('@/assets/Design-fundo-mobile.png');
+            background-size: cover;
+            background-position: center;
+        }
+    }
 </style>

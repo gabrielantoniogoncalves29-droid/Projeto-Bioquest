@@ -427,7 +427,7 @@ function aoTeclar(evento) {
 
   .barra-pesquisa {
 
-    margin: 0px 12px;
+    margin: 0px;
 
     border-radius: 12px;
 

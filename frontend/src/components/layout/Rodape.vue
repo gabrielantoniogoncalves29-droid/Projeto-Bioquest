@@ -18,7 +18,7 @@
 
 <style scoped>
 .footer {
-  background: rgba(28, 75, 47, 0.855);
+  background-color: var(--cor-primaria-texto);
   border-top:1px ;
   color: var(--cor-texto-invertido);
   padding: 15px 30px;
@@ -50,5 +50,24 @@
 .right {
   display: flex;
   gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 15px 1rem;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .right {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+  }
+  .footer a {
+    margin-left: 0;
+  }
 }
 </style>

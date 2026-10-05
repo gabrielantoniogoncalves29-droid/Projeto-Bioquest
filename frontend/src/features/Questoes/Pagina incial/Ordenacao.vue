@@ -11,8 +11,8 @@ const aberto = ref(false)
 const opcoesOrdenacao = [
   { valor: 'recentes', nome: 'Mais recentes' },
   { valor: 'antigas', nome: 'Mais antigas' },
-  { valor: 'maiorDificuldade', nome: 'Maior nível' },
-  { valor: 'menorDificuldade', nome: 'Menor nível' }
+  { valor: 'maiorDificuldade', nome: 'Maior nível de dificuldade' },
+  { valor: 'menorDificuldade', nome: 'Menor nível de dificuldade' }
 ]
 
 function selecionar(valor) {
@@ -245,7 +245,7 @@ function selecionar(valor) {
 
   position:relative;
 
-  width:180px;
+  width:250px;
 
 }
 
@@ -510,11 +510,81 @@ function selecionar(valor) {
 
     align-items: stretch;
 
+    margin: 0px 20px;
+
+    gap: 12px;
+
   }
 
-  .acoes {
+  .direita {
+
+    width: 100%;
 
     justify-content: space-between;
+
+    gap: 12px;
+
+  }
+
+  .ordenar-por {
+
+    flex: 1;
+
+    min-width: 0;
+
+  }
+
+  .custom-select {
+
+    flex: 1;
+
+    width: auto;
+
+    min-width: 0;
+
+  }
+
+  .view-buttons {
+
+    display: none;
+
+  }
+
+  .select-btn span:first-child {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .ordenacao {
+
+    margin: 0px;
+
+  }
+
+  .ordenar-por {
+
+    gap: 6px;
+
+  }
+
+  .ordenar-por label {
+
+    font-size: 13px;
+
+  }
+
+  .select-btn {
+
+    height: 42px;
 
   }
 

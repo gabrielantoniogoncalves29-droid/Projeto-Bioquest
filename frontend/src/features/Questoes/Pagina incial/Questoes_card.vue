@@ -292,18 +292,29 @@ h3{
     padding:16px;
   }
 
+  .card.lista,
+  .card.grade{
+    padding:16px;
+  }
+
   .left{
-    flex-direction:column;
+    flex-direction:row;
+    flex-wrap:wrap;
     align-items:flex-start;
   }
 
+  .content{
+    flex:1 1 0;
+    min-width:0;
+  }
+
   .actions{
-    margin:18px 0 0;
+    margin:6px 0 0;
     width:100%;
+    flex-basis:100%;
   }
 
   .btn{
-    width:100%;
     height:42px;
   }
 
@@ -311,11 +322,13 @@ h3{
     width:100%;
     height:36px;
   }
-
+  .icon{
+    display:none;
+  }
   .card.lista .icon,
   .card.grade .icon{
-    width:66px;
-    height:66px;
+    width:56px;
+    height:56px;
   }
 
 }
@@ -326,15 +339,27 @@ h3{
     padding:14px;
     border-radius: 10px;
   }
-
+  .icon{
+    display:none;
+  }
   .card.lista,
   .card.grade{
     min-height: auto;
+    padding:14px;
   }
 
-  .top{
+  .card.lista .icon,
+  .card.grade .icon{
+    width:44px;
+    height:44px;
+  }
+
+  .card.lista .top,
+  .card.grade .top{
     gap:12px;
     row-gap: 6px;
+    margin-bottom:10px;
+    padding-bottom:8px;
   }
 
   h3{

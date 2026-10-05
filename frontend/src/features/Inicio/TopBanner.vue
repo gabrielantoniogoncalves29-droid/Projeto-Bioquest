@@ -19,16 +19,25 @@
   width: 100%;
   height: 500px;
 
+  /* Cores do gradiente e da máscara (modo claro) */
+  --banner-topo: #f8faf982;
+  --banner-base: #f8faf9;
+  --banner-mascara: transparent;
+
   background-image:
     linear-gradient(
       to bottom,
-      #f8faf982 0%,
+      var(--banner-topo) 0%,
       transparent 5%
     ),
     linear-gradient(
       to bottom,
       transparent 90%,
-      #f8faf9 100%
+      var(--banner-base) 100%
+    ),
+    linear-gradient(
+      var(--banner-mascara),
+      var(--banner-mascara)
     ),
     url('@/assets/Banner_top.png');
 
@@ -39,6 +48,13 @@
   top: 0;
   overflow: hidden;
 }
+/* Modo escuro: gradiente na cor do fundo escuro + máscara preta translúcida */
+[data-tema="escuro"] .banner {
+  --banner-topo: #2b2b291a;
+  --banner-base: #2b2b29e4;
+  --banner-mascara: rgba(0, 0, 0, 0.249);
+}
+
   .banner_description{
     display: flex;
     flex-direction: column;
@@ -77,4 +93,43 @@
   .banner_description button:hover{
     background-color: var(--cor-primaria-hover);
   }
+
+/* ===== Responsivo (celular) ===== */
+@media (max-width: 768px){
+  .banner{
+    height: auto;
+    min-height: 420px;
+    padding: 2.5rem 0;
+  }
+  .banner_description{
+    gap: 16px;
+    margin: 1rem 1.25rem;
+  }
+  .banner_description h1{
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+  .banner_description h2{
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  /* o <br> do texto atrapalha em telas pequenas: deixa o texto quebrar sozinho */
+  .banner_description h1 br,
+  .banner_description h2 br{
+    display: none;
+  }
+  .banner_description button{
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .banner{
+    background-image:
+      linear-gradient(to bottom, var(--banner-topo) 0%, transparent 5%),
+      linear-gradient(to bottom, transparent 90%, var(--banner-base) 100%),
+      linear-gradient(var(--banner-mascara), var(--banner-mascara)),
+      url('@/assets/Banner_top_mobile.png');
+    background-size: cover;
+    background-position: center;
+  }
+}
 </style>
