@@ -92,9 +92,10 @@ watch(
 </script>
 
 <template>
-    <Header />
+    <div>
+        <Header />
 
-    <main class="detalhes-page">
+        <main class="detalhes-page">
         <div class="breadcrumb">
             <span
                 class="voltar"
@@ -239,7 +240,8 @@ watch(
                 :questao-id="Number(route.params.id)"
             />
         </div>
-    </main>
+        </main>
+    </div>
 </template>
 
 <style scoped>

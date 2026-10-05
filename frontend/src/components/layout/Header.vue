@@ -145,18 +145,32 @@ onUnmounted(() => {
 .nav{
   display: flex;
 }
-
 .nav a{
   font-weight: bold;
-  padding:  clamp(0.3rem, 1vw, 0.6rem)
-            clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(0.3rem, 1vw, 0.6rem)
+           clamp(0.5rem, 2vw, 1rem);
   margin: 0 0.6rem;
   text-decoration: none;
   color: var(--cor-primaria-texto);
+  position: relative;
 }
 
-.nav a:hover{
-  background-color: var(--cor-fundo-sutil-translucida);
+.nav a::after{
+  content: '';
+  position: absolute;
+  left: clamp(0.3rem, 1.5vw, 0.8rem);
+  right: clamp(0.3rem, 1.5vw, 0.8rem);
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--cor-primaria-texto);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+
+.nav a.router-link-active::after{
+  transform: scaleX(1);
 }
 
 .user {
@@ -405,5 +419,72 @@ margin-left: 10px;
     height: 90px;
   }
 }
-</style>
 
+/* ===== Responsivo ===== */
+@media (max-width: 900px) {
+  .header { padding: 0 1rem; }
+  .nav a { margin: 0 0.1rem; }
+  .user { gap: 12px; }
+}
+
+/* Celular: linha 1 = logo + tema + foto | linha 2 = links como "abas" com icone em cima */
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem 0;
+    row-gap: 0;
+  }
+  #logo {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .user { gap: 10px; }
+  .botao-tema { width: 38px; height: 38px; min-width: 38px; }
+
+  /* botao de perfil so com a foto (sem nome e sem seta) */
+  #user_box {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  #user_box p,
+  #user_box .arrow { display: none; }
+  .avatar { margin-left: 0; scale: 1.4; }
+
+  /* nav passa para a segunda linha, ocupando toda a largura */
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-around;
+    border-top: 1px solid var(--cor-borda-suave);
+    margin-top: 0.5rem;
+  }
+  .nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0.45rem 0.1rem 0.6rem;
+    font-size: 0.7rem;
+    text-align: center;
+  }
+  .nav a::after { left: 20%; right: 20%; bottom: 2px; }
+  .nav .material-icons { font-size: 24px; transform: none; }
+  .nav .material-symbols-outlined { font-size: 24px; }
+
+  /* dropdown nunca passa da largura da tela */
+  .menu-dropdown {
+    top: 50px;
+    width: min(300px, calc(100vw - 2rem));
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav a { font-size: 0.65rem; }
+}
+</style>

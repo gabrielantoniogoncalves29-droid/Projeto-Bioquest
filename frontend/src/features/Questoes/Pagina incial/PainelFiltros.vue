@@ -118,7 +118,7 @@ const store = useQuestoesFiltrosStore()
 
   .painel-filtros{
 
-    margin: 8px;
+    margin: 8px 0;
     padding: 12px;
     border-radius: 10px;
 

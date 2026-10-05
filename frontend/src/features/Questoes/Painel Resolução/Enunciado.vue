@@ -244,4 +244,20 @@ const enunciado = computed(
 
 }
 
+@media (max-width:480px){
+  .enunciado-container{
+    padding:14px;
+    gap:14px;
+  }
+  .imagem-container{
+    height:190px;
+  }
+  .texto-container h2{
+    font-size:1rem;
+  }
+  .texto-container p{
+    font-size:.9rem;
+  }
+}
+
 </style>

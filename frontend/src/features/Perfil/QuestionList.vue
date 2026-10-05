@@ -55,7 +55,7 @@
                     class="ver-mais"
                     title="Ver mais questões"
                 >
-                    Ver mais questões
+                    Ver todas as questões
                     <ArrowUpRight :size="16" />
                 </router-link>
 

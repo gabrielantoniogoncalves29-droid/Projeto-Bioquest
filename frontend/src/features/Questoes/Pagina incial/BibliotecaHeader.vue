@@ -66,7 +66,7 @@
 /* Celular */
 @media (max-width: 480px) {
   .header-biblioteca {
-    padding: 22px 16px;
+    padding: 16px 4px;
   }
 
   .texto h1 {

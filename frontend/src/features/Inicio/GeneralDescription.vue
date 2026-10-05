@@ -27,43 +27,70 @@
 <style scoped>
 .title{
     font-family: sans-serif;
-    font-size: 3rem;
+    font-size: clamp(1.75rem, 6vw, 3rem);
     font-weight: 800;
     text-align: center;
     line-height: 1.2;
     color: var(--cor-primaria-texto); 
 }
 .card-conteiner{
-    flex-grow: 1;
-    flex-basis: 200;
     border: 1px solid var(--cor-borda);
     border-radius: 10px;
     background-color: var(--cor-fundo-card);
     color: var(--cor-primaria-texto);
     padding: 20px;
     width: 100%;
-    max-width: 320px;
-    max-height: fit-content;
-    height: 150px;
+    /* altura mínima (e não fixa) para o texto nunca vazar do card
+       quando quebrar em mais linhas */
+    min-height: 150px;
     font-family: sans-serif;
     transition: 500ms ease; 
+}
+.card-conteiner h3{
+    overflow-wrap: anywhere;
 }
 .card-conteiner:hover{
     transform: scale(1.2);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
+/* Grid em vez de flex-wrap: os 3 cards ficam sempre na mesma linha, com
+   altura igual, e só viram 1 coluna em telas estreitas (nada de 2 + 1). */
 .cards-flex{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 60px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 320px));
     justify-content: center;
+    gap: clamp(48px, 5vw, 80px);
+    padding: 20px;
 }
 .secao-cards{
-    padding: 60px;
+    padding: clamp(24px, 5vw, 60px);
     text-align: center;
 }
 .material-symbols-outlined{
     font-size: 48px;
+}
+
+@media (max-width: 1000px){
+    .cards-flex{
+        grid-template-columns: minmax(0, 320px);
+        gap: 48px;
+    }
+    .card-conteiner:hover{
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 480px){
+    .secao-cards{
+        padding: 1.5rem 0.75rem;
+    }
+    .cards-flex{
+        padding: 10px 0;
+        gap: 24px;
+    }
+    .card-conteiner{
+        box-sizing: border-box;
+        min-height: 0;
+    }
 }
 </style>

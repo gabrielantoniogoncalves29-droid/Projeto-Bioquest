@@ -92,6 +92,16 @@ const taxaAcerto = computed(()=>
 
 )
 
+const circunferenciaAnel = 2 * Math.PI * 38
+
+const deslocamentoAnel = computed(()=>{
+
+    const pct = Math.min(100, Math.max(0, Number(taxaAcerto.value) || 0))
+
+    return circunferenciaAnel * (1 - pct / 100)
+
+})
+
 const tituloProva = computed(()=>
 
     `${detalhes.value?.banca ?? ''} ${detalhes.value?.ano ?? ''}`
@@ -207,7 +217,7 @@ function irParaForum(){
 
     <div class="texto-bloco">
 
-        <div class="titulo-card">Conteúdo</div>
+        <div class="titulo-card">Conteúdo do livro didático</div>
 
         <div class="valor-card">
 
@@ -261,26 +271,39 @@ function irParaForum(){
 
 <div class="secao central">
 
-    <div class="icone-caixa icone-nivel">
+    <div class="anel-percentual">
 
         <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            viewBox="0 0 92 92"
+            width="80"
+            height="80"
         >
 
-            <path d="M3 3v18h18"/>
+            <circle
+                class="anel-fundo"
+                cx="46"
+                cy="46"
+                r="38"
+                fill="none"
+                stroke-width="9"
+            />
 
-            <path d="M7 15v3"/>
-
-            <path d="M12 10v8"/>
-
-            <path d="M17 6v12"/>
+            <circle
+                class="anel-progresso"
+                cx="46"
+                cy="46"
+                r="38"
+                fill="none"
+                stroke-width="9"
+                stroke-linecap="round"
+                :stroke-dasharray="circunferenciaAnel"
+                :stroke-dashoffset="deslocamentoAnel"
+                transform="rotate(-90 46 46)"
+            />
 
         </svg>
+
+        <span class="anel-texto">{{ taxaAcerto }}%</span>
 
     </div>
 
@@ -288,25 +311,7 @@ function irParaForum(){
 
         <div class="titulo-card">Percentual de acertos</div>
 
-        <div class="valor-card">
-
-            <strong class="percentual-numero">{{ taxaAcerto }}%</strong>
-
-            dos estudantes acertaram
-
-        </div>
-
-        <div class="barra">
-
-            <div
-
-                class="preenchimento"
-
-                :style="{ width: taxaAcerto + '%' }"
-
-            ></div>
-
-        </div>
+        <div class="valor-card">dos estudantes acertaram</div>
 
     </div>
 
@@ -617,43 +622,47 @@ function irParaForum(){
 }
 
 
-.percentual-numero{
+.anel-percentual{
 
-    font-size:15px;
+    position:relative;
+
+    flex-shrink:0;
+
+    width:80px;
+
+    height:80px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.anel-fundo{
+
+    stroke:var(--cor-borda-suave);
+
+}
+
+.anel-progresso{
+
+    stroke:var(--cor-primaria);
+
+    transition:stroke-dashoffset .4s ease;
+
+}
+
+.anel-texto{
+
+    position:absolute;
+
+    font-size:16px;
 
     font-weight:700;
 
-    color:var(--cor-texto-principal);
-
-}
-
-.barra{
-
-    width:100%;
-
-    max-width:180px;
-
-    height:6px;
-
-    margin-top:8px;
-
-    background:var(--cor-borda-suave);
-
-    border-radius:999px;
-
-    overflow:hidden;
-
-}
-
-.preenchimento{
-
-    height:100%;
-
-    border-radius:999px;
-
-    background:var(--cor-primaria);
-
-    transition:width .45s ease;
+    color:var(--cor-primaria);
 
 }
 
@@ -845,6 +854,30 @@ function irParaForum(){
 
     }
 
+    .barra-lateral.fechado{
+
+        width:100%;
+
+    }
+
+    .barra-lateral{
+
+        height:auto;
+
+    }
+
+    .painel{
+
+        display:flex !important;
+
+        height:auto;
+
+        overflow-y:visible;
+
+        padding:20px 18px;
+
+    }
+
 }
 
 @media (max-width:480px){
@@ -858,6 +891,44 @@ function irParaForum(){
     .prova{
 
         padding-left:0;
+
+    }
+
+    .prova h2{
+
+        font-size:17px;
+
+    }
+
+    .secao{
+
+        padding:14px 0;
+
+    }
+
+    .secao.central{
+
+        gap:12px;
+
+        padding-left:0;
+
+        padding-right:0;
+
+    }
+
+    .icone-caixa img{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+    .btn-forum{
+
+        width:100%;
+
+        justify-content:center;
 
     }
 

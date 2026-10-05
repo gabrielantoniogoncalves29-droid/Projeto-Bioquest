@@ -134,6 +134,23 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
   const totalQuestoes = computed(() => questoesFiltradas.value.length)
 
+  // Usado somente na ordenação (campo "dificuldade" do card.json).
+  // Menor nível → maior nível: Cognitiva, Conhecimento básico, Conhecimento específico
+  const ORDEM_DIFICULDADE = [
+    'Cognitiva',
+    'Conhecimento básico',
+    'Conhecimento específico'
+  ]
+
+  function posicaoDificuldade(questao) {
+
+    const posicao = ORDEM_DIFICULDADE.indexOf(questao.dificuldade)
+
+    // Questão sem "dificuldade" é tratada como a mais difícil
+    return posicao === -1 ? ORDEM_DIFICULDADE.length : posicao
+
+  }
+
   const questoesOrdenadas = computed(() => {
 
     const filtrosStore = useQuestoesFiltrosStore()
@@ -148,10 +165,10 @@ export const useQuestoesStore = defineStore('questoes', () => {
         return lista.sort((a, b) => (a.ano - b.ano) || (a.serial - b.serial))
 
       case 'maiorDificuldade':
-        return lista.sort((a, b) => (b.nivel - a.nivel) || (a.serial - b.serial))
+        return lista.sort((a, b) => (posicaoDificuldade(b) - posicaoDificuldade(a)) || (a.serial - b.serial))
 
       case 'menorDificuldade':
-        return lista.sort((a, b) => (a.nivel - b.nivel) || (a.serial - b.serial))
+        return lista.sort((a, b) => (posicaoDificuldade(a) - posicaoDificuldade(b)) || (a.serial - b.serial))
 
       default:
         return lista

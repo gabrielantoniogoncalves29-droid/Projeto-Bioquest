@@ -286,7 +286,7 @@ watch(
 
   .resolver-layout.barra-fechada .painel-container{
 
-    display:none;
+    display:block;
 
   }
 
@@ -296,7 +296,21 @@ watch(
 
   .resolver-page{
 
-    padding:12px;
+    padding:8px;
+
+  }
+
+  .resolver-layout,
+  .resolver-layout.barra-fechada{
+
+    gap:12px;
+
+  }
+
+  .painel-container,
+  .questao-container{
+
+    border-radius:12px;
 
   }
 
