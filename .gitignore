@@ -8,15 +8,24 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-.DS_Store
 dist
+.vite
+**/.vscode/*
+!**/.vscode/extensions.json
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+backend/uploads/
 dist-ssr
 coverage
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*
@@ -37,3 +46,6 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+
+
