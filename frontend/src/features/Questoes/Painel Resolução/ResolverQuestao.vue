@@ -1,11 +1,9 @@
 <script setup>
 import { computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-import { buscarQuestaoResolver } from '@/services/resolver'
-import { buscarDetalhesPorId } from '@/services/detalhes'
-import { buscarIdsQuestoes } from '@/services/questoes'
+import { buscarQuestaoPorId, buscarIdsQuestoes } from '@/services/questoes'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useDetalhesStore } from '@/store/resolver/detalhes'
@@ -19,6 +17,7 @@ import PainelResolucao from '@/features/Questoes/Painel Resolução/PainelResolu
 import Header from '@/components/layout/Header.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
@@ -45,24 +44,28 @@ watch(
 
         const id = Number(novoId)
 
-        // Carrega a questão
-        const dadosQuestao = await buscarQuestaoResolver(id)
-        resolver.carregarQuestao(dadosQuestao)
+        painel.limparAlternativa()
 
-        // Carrega os detalhes
-        const detalhes = await buscarDetalhesPorId(id)
-        detalhesStore.carregarDetalhes(detalhes)
+        const [dadosQuestao, ids] = await Promise.all([
+            buscarQuestaoPorId(id),
+            resolver.idsQuestoes.length === 0
+                ? buscarIdsQuestoes()
+                : Promise.resolve(resolver.idsQuestoes)
+        ])
 
-        // Carrega os ids apenas uma vez
-        if (resolver.idsQuestoes.length === 0) {
+        if (Number(route.params.id) !== id) return
 
-            const ids = await buscarIdsQuestoes()
-            resolver.carregarIds(ids)
+        if (!dadosQuestao) {
+
+            router.replace('/questoes')
+
+            return
 
         }
 
-        // Limpa a alternativa selecionada ao trocar de questão
-        painel.limparAlternativa()
+        resolver.carregarQuestao(dadosQuestao)
+        detalhesStore.carregarDetalhes(dadosQuestao)
+        resolver.carregarIds(ids)
 
     },
 

@@ -1,0 +1,152 @@
+:root {
+  --fundo: #f3f6f4;
+  --painel: #ffffff;
+  --borda: #d5ddd8;
+  --texto: #1d2a24;
+  --suave: #5d6b64;
+  --verde: #1f7a4d;
+  --verde-escuro: #165c3a;
+  --vermelho: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--verde-escuro);
+  color: #fff;
+}
+
+.topo h1 { margin: 0; font-size: 1.1rem; }
+.aviso { font-size: .8rem; opacity: .85; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 16px;
+  padding: 16px;
+  align-items: start;
+}
+
+.lista, .editor {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+}
+
+.lista { padding: 12px; position: sticky; top: 12px; max-height: calc(100vh - 24px); display: flex; flex-direction: column; }
+.lista-topo { display: grid; gap: 8px; }
+.contagem { margin: 10px 2px 6px; font-size: .8rem; color: var(--suave); }
+
+#questoes { list-style: none; margin: 0; padding: 0; overflow-y: auto; }
+
+#questoes li button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--borda);
+  padding: 9px 6px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+#questoes li button:hover { background: #eef5f1; }
+#questoes li.ativa button { background: #dff0e6; }
+#questoes .codigo { font-weight: 600; font-size: .85rem; }
+#questoes .meta { display: block; font-size: .75rem; color: var(--suave); }
+#questoes .resumo {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: .8rem;
+  margin-top: 2px;
+}
+
+.editor { padding: 16px 18px 24px; }
+.editor-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.editor-topo h2 { margin: 0; font-size: 1.15rem; }
+.acoes { display: flex; gap: 8px; }
+
+fieldset {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  margin: 16px 0 0;
+  padding: 10px 14px 14px;
+}
+
+legend { padding: 0 6px; font-weight: 600; font-size: .9rem; color: var(--verde-escuro); }
+
+label { display: block; font-size: .82rem; color: var(--suave); margin-top: 10px; }
+label.check { display: flex; align-items: center; gap: 6px; margin: 0; }
+
+input[type=text], input[type=number], input[type=url], input[type=search], input[type=file], select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  font: inherit;
+  color: var(--texto);
+  background: #fff;
+}
+
+textarea { resize: vertical; }
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #8fcfae;
+  border-color: var(--verde);
+}
+
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0 12px; }
+
+.alt-linha { display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 8px; margin-top: 8px; }
+.alt-linha .letra { display: flex; align-items: center; gap: 4px; font-weight: 700; }
+.alt-linha input[type=text] { margin: 0; }
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+  background: #fff;
+  color: var(--texto);
+  cursor: pointer;
+}
+
+button.primario { background: var(--verde); border-color: var(--verde); color: #fff; }
+button.primario:hover { background: var(--verde-escuro); }
+button.perigo { color: var(--vermelho); border-color: var(--vermelho); }
+button.perigo:hover { background: #fcecea; }
+button:disabled { opacity: .6; cursor: wait; }
+
+.mensagem { margin-top: 12px; padding: 10px 12px; border-radius: 6px; font-size: .9rem; }
+.mensagem.ok { background: #dff0e6; color: var(--verde-escuro); }
+.mensagem.erro { background: #fcecea; color: var(--vermelho); }
+
+.imagem-atual { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.imagem-atual img { max-width: 160px; max-height: 110px; border: 1px solid var(--borda); border-radius: 6px; object-fit: contain; background: #fafafa; }
+
+.dica { font-size: .78rem; color: var(--suave); margin: 10px 0 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chips button { padding: 3px 9px; font-size: .78rem; border-radius: 999px; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .lista { position: static; max-height: 360px; }
+}

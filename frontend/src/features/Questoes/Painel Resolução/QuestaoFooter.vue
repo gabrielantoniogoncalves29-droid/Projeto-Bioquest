@@ -4,11 +4,18 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { Info } from 'lucide-vue-next'
 
+import { enviarResposta } from '@/services/questoes'
 import { useResolverStore } from '@/store/resolver/resolver'
+import { useUiStore } from '@/store/resolver/ui'
+import { usePerfilStore } from '@/store/perfil'
 
 const router = useRouter()
 
 const resolver = useResolverStore()
+
+const ui = useUiStore()
+
+const perfil = usePerfilStore()
 
 const {
     questao,
@@ -16,11 +23,40 @@ const {
 
 } = storeToRefs(resolver)
 
-function responder() {
+async function responder() {
 
-    if (!questao.value) return
+    if (!questao.value || !ui.alternativaSelecionada || ui.respondendo) return
 
-    router.push(`/resolver/${questao.value.id}`)
+    const questaoAtual = questao.value
+
+    ui.respondendo = true
+
+    try {
+
+        const resultado = await enviarResposta(
+            questaoAtual.id,
+            ui.alternativaSelecionada
+        )
+
+        if (resolver.questao?.id !== questaoAtual.id) return
+
+        ui.definirResultado(resultado)
+
+        perfil.adicionarQuestaoResolvida(
+            questaoAtual,
+            resultado.correta,
+            resultado.acertos
+        )
+
+    } catch {
+
+        ui.definirResultado(null)
+
+    } finally {
+
+        ui.respondendo = false
+
+    }
 
 }
 

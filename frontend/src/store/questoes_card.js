@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { buscarQuestoes } from '@/services/card'
+import { buscarQuestoes } from '@/services/questoes'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 import { usePerfilStore } from '@/store/perfil.js'
 import { conteudos } from '@/features/Questoes/data/filtros.js'
@@ -18,19 +18,12 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
   }
 
-  function nomesDosSubconteudos(idsSelecionados) {
+  function normalizar(texto) {
 
-    return idsSelecionados
-      .map(idComposto => {
-
-        const [conteudoId, indice] = idComposto.split('-')
-
-        const conteudo = obterConteudo(Number(conteudoId))
-
-        return conteudo?.subconteudos?.[Number(indice)]
-
-      })
-      .filter(Boolean)
+    return String(texto ?? '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
 
   }
 
@@ -39,15 +32,10 @@ export const useQuestoesStore = defineStore('questoes', () => {
     const filtrosStore = useQuestoesFiltrosStore()
     const perfil = usePerfilStore()
 
-    const termo = filtrosStore.termoPesquisa.trim().toLowerCase()
-
-    const nomesSubconteudos = filtrosStore.subconteudosSelecionados.length
-      ? nomesDosSubconteudos(filtrosStore.subconteudosSelecionados)
-      : []
+    const termo = normalizar(filtrosStore.termoPesquisa.trim())
 
     return questoes.value.filter(questao => {
 
-      // Ano
       if (
         filtrosStore.anosSelecionados.length &&
         !filtrosStore.anosSelecionados.includes(questao.ano)
@@ -55,7 +43,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
         return false
       }
 
-      // Nível
       if (
         filtrosStore.niveisSelecionados.length &&
         !filtrosStore.niveisSelecionados.includes(questao.nivel)
@@ -63,7 +50,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
         return false
       }
 
-      // Conteúdo
       if (
         filtrosStore.conteudosSelecionados.length &&
         !filtrosStore.conteudosSelecionados.includes(questao.conteudoId)
@@ -71,7 +57,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
         return false
       }
 
-      // Eixo (derivado do conteúdo da questão)
       if (filtrosStore.eixosSelecionados.length) {
 
         const conteudo = obterConteudo(questao.conteudoId)
@@ -85,15 +70,15 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
       }
 
-      // Subconteúdo
       if (
-        nomesSubconteudos.length &&
-        !nomesSubconteudos.includes(questao.subconteudo)
+        filtrosStore.subconteudosSelecionados.length &&
+        !filtrosStore.subconteudosSelecionados.includes(
+          `${questao.conteudoId}-${questao.subconteudoIndice}`
+        )
       ) {
         return false
       }
 
-      // Estado (respondidas / salvas)
       if (filtrosStore.estadoSelecionado.length) {
 
         const respondida = perfil.questoesResolvidasLista.some(
@@ -117,10 +102,15 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
       }
 
-      // Busca livre (resumo e subconteúdo)
       if (termo) {
 
-        const alvo = `${questao.resumo ?? ''} ${questao.subconteudo ?? ''}`.toLowerCase()
+        const alvo = normalizar([
+          questao.id,
+          questao.resumo,
+          questao.subconteudo,
+          obterConteudo(questao.conteudoId)?.nome,
+          ...(questao.palavrasChave ?? [])
+        ].join(' '))
 
         if (!alvo.includes(termo)) return false
 
@@ -134,8 +124,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
   const totalQuestoes = computed(() => questoesFiltradas.value.length)
 
-  // Usado somente na ordenação (campo "dificuldade" do card.json).
-  // Menor nível → maior nível: Cognitiva, Conhecimento básico, Conhecimento específico
   const ORDEM_DIFICULDADE = [
     'Cognitiva',
     'Conhecimento básico',
@@ -146,7 +134,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
     const posicao = ORDEM_DIFICULDADE.indexOf(questao.dificuldade)
 
-    // Questão sem "dificuldade" é tratada como a mais difícil
     return posicao === -1 ? ORDEM_DIFICULDADE.length : posicao
 
   }

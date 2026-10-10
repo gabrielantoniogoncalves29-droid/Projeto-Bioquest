@@ -17,16 +17,12 @@ export const ETAPAS = {
 
 export const useAuthStore = defineStore("auth", () => {
 
-    // Tela atual
     const etapa = ref(ETAPAS.LOGIN)
 
-    // Compartilhado entre Login e Recuperação
     const email = ref("")
 
-    // Utilizado na confirmação do cadastro
     const emailCadastro = ref("")
 
-    // Futuramente 
     const carregando = ref(false)
 
     function login(){

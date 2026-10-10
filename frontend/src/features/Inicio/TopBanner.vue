@@ -19,7 +19,6 @@
   width: 100%;
   height: 500px;
 
-  /* Cores do gradiente e da máscara (modo claro) */
   --banner-topo: #f8faf982;
   --banner-base: #f8faf9;
   --banner-mascara: transparent;
@@ -48,11 +47,10 @@
   top: 0;
   overflow: hidden;
 }
-/* Modo escuro: gradiente na cor do fundo escuro + máscara preta translúcida */
 [data-tema="escuro"] .banner {
   --banner-topo: #2b2b291a;
   --banner-base: #2b2b29e4;
-  --banner-mascara: rgba(0, 0, 0, 0.249);
+  --banner-mascara: rgba(0, 0, 0, 0.131);
 }
 
   .banner_description{
@@ -73,7 +71,7 @@
   .banner_description h2{
     font-family: sans-serif;
     font-size: 16px;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-primaria-texto);
     text-align: center;
   }
   .banner_description button{
@@ -94,7 +92,6 @@
     background-color: var(--cor-primaria-hover);
   }
 
-/* ===== Responsivo (celular) ===== */
 @media (max-width: 768px){
   .banner{
     height: auto;
@@ -112,7 +109,6 @@
     font-size: 0.95rem;
     margin: 0;
   }
-  /* o <br> do texto atrapalha em telas pequenas: deixa o texto quebrar sozinho */
   .banner_description h1 br,
   .banner_description h2 br{
     display: none;

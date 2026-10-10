@@ -104,7 +104,6 @@
         background-color: rgb(12, 214, 93);
     }
 
-    /* ===== Responsivo (celular) ===== */
     @media (max-width: 768px){
         .container-questoes{
             grid-template-columns: minmax(0, 1fr);

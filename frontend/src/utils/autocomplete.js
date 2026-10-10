@@ -1,46 +1,19 @@
-import palavrasChave from '@/data/palavrasChave.json'
+import { buscarPalavrasChave } from '@/services/palavrasChave'
 
-function normalizar(texto) {
+export async function buscarSugestoes(termo, limite = 6) {
 
-    return texto
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-
-}
-
-/**
- * Retorna sugestões de palavras-chave a partir de um termo digitado.
- * Prioriza palavras que COMEÇAM com o termo, depois as que apenas CONTÊM o termo.
- * Ignora acentos e maiúsculas/minúsculas na comparação.
- */
-export function buscarSugestoes(termo, limite = 6) {
-
-    const consulta = normalizar((termo ?? '').trim())
+    const consulta = (termo ?? '').trim()
 
     if (!consulta) return []
 
-    const comecaCom = []
-    const contem = []
+    try {
 
-    for (const palavra of palavrasChave) {
+        return await buscarPalavrasChave(consulta, limite)
 
-        const normalizada = normalizar(palavra)
+    } catch {
 
-        if (normalizada === consulta) continue
-
-        if (normalizada.startsWith(consulta)) {
-
-            comecaCom.push(palavra)
-
-        } else if (normalizada.includes(consulta)) {
-
-            contem.push(palavra)
-
-        }
+        return []
 
     }
-
-    return [...comecaCom, ...contem].slice(0, limite)
 
 }

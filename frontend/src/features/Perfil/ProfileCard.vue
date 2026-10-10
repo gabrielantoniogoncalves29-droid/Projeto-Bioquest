@@ -41,7 +41,7 @@
                     <input
                         ref="inputArquivo"
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg,image/png,image/webp"
                         class="input-oculto"
                         @change="onArquivoSelecionado"
                     >
@@ -217,23 +217,20 @@ function abrirSeletorDeArquivo() {
 }
 
 
-function onArquivoSelecionado(evento) {
+const TIPOS_ACEITOS = ["image/jpeg", "image/png", "image/webp"]
+const TAMANHO_MAXIMO = 3 * 1024 * 1024
+
+async function onArquivoSelecionado(evento) {
 
     const arquivo = evento.target.files?.[0]
 
+    evento.target.value = ""
+
     if (!arquivo) return
 
-    const leitor = new FileReader()
+    if (!TIPOS_ACEITOS.includes(arquivo.type) || arquivo.size > TAMANHO_MAXIMO) return
 
-    leitor.onload = () => {
-
-        perfil.alterarFoto(leitor.result)
-
-    }
-
-    leitor.readAsDataURL(arquivo)
-
-    evento.target.value = ""
+    await perfil.enviarFoto(arquivo).catch(() => {})
 
 }
 
@@ -274,10 +271,6 @@ function onArquivoSelecionado(evento) {
 }
 
 
-/* ==============================
-   TOPO DO PERFIL
-   ============================== */
-
 .profile-topo{
 
     display:flex;
@@ -304,10 +297,6 @@ function onArquivoSelecionado(evento) {
 
 }
 
-
-/* ==============================
-   AVATAR
-   ============================== */
 
 .avatar-wrapper{
 
@@ -427,10 +416,6 @@ function onArquivoSelecionado(evento) {
 }
 
 
-/* ==============================
-   INFORMAÇÕES DO PERFIL
-   ============================== */
-
 .profile-info{
 
     display:flex;
@@ -479,10 +464,6 @@ function onArquivoSelecionado(evento) {
 
 }
 
-
-/* ==============================
-   BOTÕES
-   ============================== */
 
 .botoes-perfil{
 
@@ -565,10 +546,6 @@ function onArquivoSelecionado(evento) {
 
 }
 
-
-/* ==============================
-   ESTATÍSTICAS
-   ============================== */
 
 .stats-row{
 
@@ -697,10 +674,6 @@ function onArquivoSelecionado(evento) {
 }
 
 
-/* ==============================
-   CARD DE ACERTOS
-   ============================== */
-
 .stat-acertos{
 
     align-items:center;
@@ -758,10 +731,6 @@ function onArquivoSelecionado(evento) {
 
 }
 
-
-/* ==============================
-   RESPONSIVIDADE
-   ============================== */
 
 @media (max-width:768px){
 

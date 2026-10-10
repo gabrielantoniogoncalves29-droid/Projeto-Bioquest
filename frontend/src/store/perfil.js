@@ -1,36 +1,42 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
-import { buscarPerfil, atualizarPerfil } from "@/services/perfil"
+import {
+    buscarPerfil,
+    atualizarPerfil,
+    enviarFotoPerfil,
+    excluirDadosDoPerfil
+} from "@/services/perfil"
+import {
+    salvarQuestaoNoServidor,
+    removerQuestaoSalvaNoServidor,
+    marcarRevisarNoServidor,
+    desmarcarRevisarNoServidor
+} from "@/services/questoes"
 
 export const usePerfilStore = defineStore("perfil", () => {
 
-    // Estado de carregamento
     const carregando = ref(false)
     const carregado = ref(false)
 
-    // Dados do usuário
     const nome = ref("")
     const email = ref("")
     const foto = ref(null)
 
-    // Edição de perfil (controla o modal)
     const editandoPerfil = ref(false)
     const salvandoPerfil = ref(false)
+    const enviandoFoto = ref(false)
+    const erroPerfil = ref("")
 
-    // Exclusão de conta (LGPD)
     const excluindoConta = ref(false)
     const excluindoContaConfirmacao = ref(false)
 
-    // Questões marcadas para revisar
     const questoesRevisarLista = ref([])
 
-    // Questões
     const questoesSalvasLista = ref([])
     const questoesResolvidasLista = ref([])
     const acertos = ref(0)
 
 
-    // Iniciais do nome, usadas como avatar quando não há foto
     const iniciais = computed(() => {
 
         return nome.value
@@ -63,24 +69,34 @@ export const usePerfilStore = defineStore("perfil", () => {
     })
 
 
-    async function carregarPerfil() {
+    async function carregarPerfil(forcar = false) {
 
         if (carregando.value) return
 
+        if (carregado.value && !forcar) return
+
         carregando.value = true
 
-        const dados = await buscarPerfil()
+        try {
 
-        nome.value = dados.nome
-        email.value = dados.email
-        foto.value = dados.foto
+            const dados = await buscarPerfil()
 
-        questoesSalvasLista.value = dados.questoesSalvas
-        questoesResolvidasLista.value = dados.questoesResolvidas
-        acertos.value = dados.acertos
+            nome.value = dados.nome
+            email.value = dados.email
+            foto.value = dados.foto
 
-        carregando.value = false
-        carregado.value = true
+            questoesSalvasLista.value = dados.questoesSalvas
+            questoesResolvidasLista.value = dados.questoesResolvidas
+            questoesRevisarLista.value = dados.questoesRevisar
+            acertos.value = dados.acertos
+
+            carregado.value = true
+
+        } finally {
+
+            carregando.value = false
+
+        }
 
     }
 
@@ -90,8 +106,40 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     }
 
+    async function enviarFoto(arquivo) {
+
+        if (!arquivo || enviandoFoto.value) return
+
+        enviandoFoto.value = true
+
+        try {
+
+            foto.value = await enviarFotoPerfil(arquivo)
+
+        } finally {
+
+            enviandoFoto.value = false
+
+        }
+
+    }
+
+    function resumoDaQuestao(questao) {
+
+        return {
+            id: questao.id,
+            ano: questao.ano,
+            nivel: questao.nivelId ?? questao.nivel,
+            conteudoId: questao.conteudoId,
+            subconteudo: questao.subconteudo,
+            resumo: questao.resumo
+        }
+
+    }
+
     function abrirEdicaoPerfil() {
 
+        erroPerfil.value = ""
         editandoPerfil.value = true
 
     }
@@ -105,18 +153,30 @@ export const usePerfilStore = defineStore("perfil", () => {
     async function salvarEdicaoPerfil({ nome: novoNome, email: novoEmail }) {
 
         salvandoPerfil.value = true
+        erroPerfil.value = ""
 
-        await atualizarPerfil({ nome: novoNome, email: novoEmail })
+        try {
 
-        nome.value = novoNome
-        email.value = novoEmail
+            const dados = await atualizarPerfil({ nome: novoNome, email: novoEmail })
 
-        salvandoPerfil.value = false
-        editandoPerfil.value = false
+            nome.value = dados.nome
+            email.value = dados.email
+
+            editandoPerfil.value = false
+
+        } catch (erro) {
+
+            erroPerfil.value = erro.response?.data?.erro ?? "Não foi possível salvar o perfil"
+
+        } finally {
+
+            salvandoPerfil.value = false
+
+        }
 
     }
 
-    function salvarQuestao(questao) {
+    async function salvarQuestao(questao) {
 
         const jaSalva = questoesSalvasLista.value.some(
             item => item.id === questao.id
@@ -124,19 +184,43 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         if (jaSalva) return
 
-        questoesSalvasLista.value.unshift(questao)
+        const anterior = questoesSalvasLista.value
+
+        questoesSalvasLista.value = [resumoDaQuestao(questao), ...anterior]
+
+        try {
+
+            await salvarQuestaoNoServidor(questao.id)
+
+        } catch {
+
+            questoesSalvasLista.value = anterior
+
+        }
 
     }
 
-    function removerQuestaoSalva(id) {
+    async function removerQuestaoSalva(id) {
 
-        questoesSalvasLista.value = questoesSalvasLista.value.filter(
+        const anterior = questoesSalvasLista.value
+
+        questoesSalvasLista.value = anterior.filter(
             questao => questao.id !== id
         )
 
+        try {
+
+            await removerQuestaoSalvaNoServidor(id)
+
+        } catch {
+
+            questoesSalvasLista.value = anterior
+
+        }
+
     }
 
-    function marcarParaRevisar(questao) {
+    async function marcarParaRevisar(questao) {
 
         const jaMarcada = questoesRevisarLista.value.some(
             item => item.id === questao.id
@@ -144,15 +228,39 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         if (jaMarcada) return
 
-        questoesRevisarLista.value.unshift(questao)
+        const anterior = questoesRevisarLista.value
+
+        questoesRevisarLista.value = [resumoDaQuestao(questao), ...anterior]
+
+        try {
+
+            await marcarRevisarNoServidor(questao.id)
+
+        } catch {
+
+            questoesRevisarLista.value = anterior
+
+        }
 
     }
 
-    function desmarcarParaRevisar(id) {
+    async function desmarcarParaRevisar(id) {
 
-        questoesRevisarLista.value = questoesRevisarLista.value.filter(
+        const anterior = questoesRevisarLista.value
+
+        questoesRevisarLista.value = anterior.filter(
             questao => questao.id !== id
         )
+
+        try {
+
+            await desmarcarRevisarNoServidor(id)
+
+        } catch {
+
+            questoesRevisarLista.value = anterior
+
+        }
 
     }
 
@@ -180,8 +288,17 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         excluindoConta.value = true
 
-        // Simula a chamada ao backend que apaga os dados do usuário
-        await new Promise(resolve => setTimeout(resolve, 600))
+        try {
+
+            await excluirDadosDoPerfil()
+
+        } catch {
+
+            excluindoConta.value = false
+
+            return
+
+        }
 
         nome.value = ""
         email.value = ""
@@ -202,24 +319,24 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         return (
             questoesSalvasLista.value.find(questao => questao.id === id) ||
-            questoesResolvidasLista.value.find(questao => questao.id === id)
+            questoesResolvidasLista.value.find(questao => questao.id === id) ||
+            questoesRevisarLista.value.find(questao => questao.id === id)
         )
 
     }
 
-    function adicionarQuestaoResolvida(questao, acertou = false) {
+    function adicionarQuestaoResolvida(questao, acertou = false, totalAcertos = null) {
 
-        const jaResolvida = questoesResolvidasLista.value.some(
-            item => item.id === questao.id
-        )
+        questoesResolvidasLista.value = [
+            resumoDaQuestao(questao),
+            ...questoesResolvidasLista.value.filter(item => item.id !== questao.id)
+        ]
 
-        if (!jaResolvida) {
+        if (totalAcertos !== null) {
 
-            questoesResolvidasLista.value.unshift(questao)
+            acertos.value = totalAcertos
 
-        }
-
-        if (acertou) {
+        } else if (acertou) {
 
             acertos.value++
 
@@ -239,6 +356,8 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         editandoPerfil,
         salvandoPerfil,
+        enviandoFoto,
+        erroPerfil,
 
         excluindoConta,
         excluindoContaConfirmacao,
@@ -259,6 +378,7 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         carregarPerfil,
         alterarFoto,
+        enviarFoto,
 
         abrirEdicaoPerfil,
         fecharEdicaoPerfil,

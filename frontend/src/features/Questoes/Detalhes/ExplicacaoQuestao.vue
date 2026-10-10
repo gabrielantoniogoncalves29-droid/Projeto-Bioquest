@@ -1,37 +1,13 @@
 <script setup>
 
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import { BookOpenCheck, GraduationCap } from 'lucide-vue-next'
 
-const props = defineProps({
+import { useDetalhesQuestaoStore } from '@/store/detalhes_questao'
 
-    detalhes: {
-        type: Object,
-        default: null
-    },
+const store = useDetalhesQuestaoStore()
 
-    questao: {
-        type: Object,
-        default: null
-    }
-
-})
-
-const teoria = computed(() =>
-
-    props.detalhes?.teoria ?? []
-
-)
-
-const alternativaCorreta = computed(() =>
-
-    props.questao?.alternativas?.find(
-
-        alt => alt.letra === props.questao?.resposta
-
-    )
-
-)
+const { questao, teoria, alternativaCorreta } = storeToRefs(store)
 
 </script>
 
@@ -150,6 +126,8 @@ const alternativaCorreta = computed(() =>
 
 p{
 
+    overflow-wrap:anywhere;
+
     margin:0 0 10px;
 
     font-size:14.5px;
@@ -232,10 +210,46 @@ p:last-child{
 
 @media (max-width:600px){
 
+    .explicacao{
+
+        gap:12px;
+
+    }
+
     .secao-teoria,
     .secao-resolucao{
 
-        padding:18px 16px;
+        padding:16px 14px;
+
+        border-radius:12px;
+
+    }
+
+    .secao-cabecalho{
+
+        margin-bottom:10px;
+
+    }
+
+    .secao-cabecalho h2{
+
+        font-size:16px;
+
+    }
+
+    p{
+
+        font-size:14px;
+
+        line-height:1.65;
+
+    }
+
+    .resposta-correta{
+
+        padding:12px;
+
+        gap:8px;
 
     }
 

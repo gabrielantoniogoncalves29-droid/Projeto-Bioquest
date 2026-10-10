@@ -2,10 +2,11 @@
 import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
 import { Sun, Moon } from 'lucide-vue-next';
 import { useTemaStore } from '@/store/tema.js';
+import { usePerfilStore } from '@/store/perfil.js';
 
 const tema = useTemaStore();
 
-let nome = "Gabriel Antônio";
+const perfil = usePerfilStore();
 
 const aberta = ref(null);
 
@@ -30,6 +31,7 @@ function fecharAoClicarFora(event){
 }
 
 onMounted(() => {
+  perfil.carregarPerfil().catch(() => {});
   document.addEventListener(
     'click',
     fecharAoClicarFora
@@ -76,11 +78,19 @@ onUnmounted(() => {
       id="user_box"
     >
       <img
+        v-if="perfil.foto"
+        class="avatar avatar-foto"
+        :src="perfil.foto"
+        alt="Foto do usuário"
+      >
+      <img
+        v-else
         class="avatar"
         src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        alt="Usuário"
       >
       <p>
-        {{ nome }}
+        {{ perfil.nome }}
       </p>
       <span class="material-icons arrow">
         {{ aberta === 2 ? 'expand_less' : 'expand_more' }}
@@ -284,6 +294,16 @@ margin-left: 10px;
   object-fit: cover;
 }
 
+.avatar.avatar-foto{
+  width: 34px;
+  height: 34px;
+  scale: 1;
+  margin-left: 0;
+  filter: none;
+  border: 2px solid var(--cor-fundo-sutil);
+  box-sizing: border-box;
+}
+
 #user_box p{
   margin: 0;
   font-size: 14px;
@@ -420,14 +440,12 @@ margin-left: 10px;
   }
 }
 
-/* ===== Responsivo ===== */
 @media (max-width: 900px) {
   .header { padding: 0 1rem; }
   .nav a { margin: 0 0.1rem; }
   .user { gap: 12px; }
 }
 
-/* Celular: linha 1 = logo + tema + foto | linha 2 = links como "abas" com icone em cima */
 @media (max-width: 640px) {
   .header {
     flex-wrap: wrap;
@@ -441,7 +459,6 @@ margin-left: 10px;
   .user { gap: 10px; }
   .botao-tema { width: 38px; height: 38px; min-width: 38px; }
 
-  /* botao de perfil so com a foto (sem nome e sem seta) */
   #user_box {
     width: 38px;
     height: 38px;
@@ -453,7 +470,6 @@ margin-left: 10px;
   #user_box .arrow { display: none; }
   .avatar { margin-left: 0; scale: 1.4; }
 
-  /* nav passa para a segunda linha, ocupando toda a largura */
   .nav {
     order: 3;
     width: 100%;
@@ -476,7 +492,6 @@ margin-left: 10px;
   .nav .material-icons { font-size: 24px; transform: none; }
   .nav .material-symbols-outlined { font-size: 24px; }
 
-  /* dropdown nunca passa da largura da tela */
   .menu-dropdown {
     top: 50px;
     width: min(300px, calc(100vw - 2rem));

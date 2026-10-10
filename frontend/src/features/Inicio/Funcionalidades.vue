@@ -57,8 +57,6 @@
     color: var(--cor-primaria-texto);
     overflow-wrap: anywhere;
 }
-/* Grid em vez de flex-wrap: os 4 cards ficam sempre em linha e, quando
-   falta espaço, caem em 2x2 (nunca 3 + 1 sozinho) e depois em 1 coluna. */
 .cards-funcoes{
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 300px));

@@ -7,6 +7,10 @@ export const useUiStore = defineStore('painel', () => {
 
     const alternativaSelecionada = ref(null)
 
+    const respondendo = ref(false)
+
+    const resultado = ref(null)
+
     function alternarBarra() {
         aberto.value = !aberto.value
     }
@@ -17,6 +21,11 @@ export const useUiStore = defineStore('painel', () => {
 
     function limparAlternativa() {
         alternativaSelecionada.value = null
+        resultado.value = null
+    }
+
+    function definirResultado(dados) {
+        resultado.value = dados
     }
 
     return {
@@ -25,11 +34,17 @@ export const useUiStore = defineStore('painel', () => {
 
         alternativaSelecionada,
 
+        respondendo,
+
+        resultado,
+
         alternarBarra,
 
         selecionarAlternativa,
 
-        limparAlternativa
+        limparAlternativa,
+
+        definirResultado
 
     }
 

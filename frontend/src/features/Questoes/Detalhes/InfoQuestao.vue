@@ -1,38 +1,32 @@
 <script setup>
 
 import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
-const props = defineProps({
+import {
+    useDetalhesQuestaoStore,
+    RAIO_ANEL,
+    CIRCUNFERENCIA_ANEL
+} from '@/store/detalhes_questao'
 
-    detalhes: {
-        type: Object,
-        default: null
-    }
+const store = useDetalhesQuestaoStore()
 
-})
+const {
+    detalhes,
+    nomeObjeto,
+    conteudo,
+    nivel,
+    taxaAcerto,
+    deslocamentoAnel
+} = storeToRefs(store)
 
-const objetosEnem = {
+const raioAnel = RAIO_ANEL
 
-    1: "Moléculas, células e tecidos",
-    2: "Hereditariedade e diversidade da vida",
-    3: "Identidade dos seres vivos",
-    4: "Ecologia e ciências ambientais",
-    5: "Origem e evolução da vida",
-    6: "Qualidade de vida das populações humanas"
-
-}
-
-const nomeObjeto = computed(() =>
-
-    objetosEnem[
-        props.detalhes?.objeto?.id
-    ] ?? "Não informado"
-
-)
+const circunferenciaAnel = CIRCUNFERENCIA_ANEL
 
 const imagemObjeto = computed(() => {
 
-    const id = props.detalhes?.objeto?.id
+    const id = detalhes.value?.objeto?.id
 
     if (!id) return ''
 
@@ -45,12 +39,6 @@ const imagemObjeto = computed(() => {
     ).href
 
 })
-
-const conteudo = computed(() =>
-
-    props.detalhes?.conteudo ?? {}
-
-)
 
 const imagemConteudo = computed(() => {
 
@@ -67,28 +55,6 @@ const imagemConteudo = computed(() => {
     ).href
 
 })
-
-const nivel = computed(() =>
-
-    props.detalhes?.nivel ?? 'Não informado'
-
-)
-
-const taxaAcerto = computed(() =>
-
-    props.detalhes?.taxaAcerto ?? 0
-
-)
-
-const raioAnel = 38
-
-const circunferenciaAnel = 2 * Math.PI * raioAnel
-
-const deslocamentoAnel = computed(() =>
-
-    circunferenciaAnel * (1 - taxaAcerto.value / 100)
-
-)
 
 </script>
 
@@ -429,41 +395,55 @@ const deslocamentoAnel = computed(() =>
 
         grid-template-columns:1fr;
 
+        gap:10px;
+
     }
 
     .info-card{
 
-        padding:16px;
+        flex-direction:row;
+
+        align-items:center;
+
+        gap:14px;
+
+        padding:14px 16px;
 
     }
 
     .card-icone,
     .card-icone img{
 
-        width:52px;
+        width:44px;
 
-        height:52px;
+        height:44px;
 
     }
 
     .card-icone svg{
 
-        width:34px;
+        width:30px;
 
-        height:34px;
+        height:30px;
 
     }
 
     .anel-percentual,
     .anel-percentual svg{
 
-        width:64px;
+        width:56px;
 
-        height:64px;
+        height:56px;
 
     }
 
     .anel-texto{
+
+        font-size:13px;
+
+    }
+
+    .card-titulo{
 
         font-size:14px;
 

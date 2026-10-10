@@ -40,8 +40,6 @@
     color: var(--cor-primaria-texto);
     padding: 20px;
     width: 100%;
-    /* altura mínima (e não fixa) para o texto nunca vazar do card
-       quando quebrar em mais linhas */
     min-height: 150px;
     font-family: sans-serif;
     transition: 500ms ease; 
@@ -53,8 +51,6 @@
     transform: scale(1.2);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
-/* Grid em vez de flex-wrap: os 3 cards ficam sempre na mesma linha, com
-   altura igual, e só viram 1 coluna em telas estreitas (nada de 2 + 1). */
 .cards-flex{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 320px));

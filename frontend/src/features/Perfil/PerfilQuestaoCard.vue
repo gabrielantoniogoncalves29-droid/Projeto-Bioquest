@@ -276,7 +276,6 @@ h3 {
 
 }
 
-/* Fallback for browsers without container query support */
 @supports not (container-type: inline-size) {
 
   @media (max-width: 700px) {

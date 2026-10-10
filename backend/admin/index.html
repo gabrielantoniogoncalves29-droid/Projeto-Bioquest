@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioQuest · Painel de questões</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>BioQuest · Painel de questões</h1>
+    <span class="aviso">Ferramenta temporária de cadastro</span>
+  </header>
+
+  <main class="layout">
+    <aside class="lista">
+      <div class="lista-topo">
+        <input id="busca" type="search" placeholder="Buscar por código, conteúdo ou texto">
+        <button id="btn-nova" type="button" class="primario">Nova questão</button>
+      </div>
+      <p id="contagem" class="contagem"></p>
+      <ul id="questoes"></ul>
+    </aside>
+
+    <section class="editor">
+      <form id="form" autocomplete="off">
+        <div class="editor-topo">
+          <h2 id="titulo-form">Nova questão</h2>
+          <div class="acoes">
+            <button id="btn-excluir" type="button" class="perigo" hidden>Excluir</button>
+            <button type="submit" class="primario" id="btn-salvar">Salvar questão</button>
+          </div>
+        </div>
+
+        <div id="mensagem" class="mensagem" role="status" hidden></div>
+
+        <fieldset>
+          <legend>Identificação</legend>
+          <div class="grade">
+            <label>Código
+              <input name="id" type="number" min="1" placeholder="Automático">
+            </label>
+            <label>Ano *
+              <input name="ano" type="number" min="1990" max="2100" required>
+            </label>
+            <label>Banca
+              <input name="banca" type="text" value="Enem">
+            </label>
+            <label>Prova
+              <input name="prova" type="text" placeholder="Prova Azul">
+            </label>
+            <label>Nº da questão
+              <input name="numeroQuestao" type="number" min="1">
+            </label>
+            <label>Taxa de acerto estimada (%)
+              <input name="taxaAcerto" type="number" min="0" max="100" value="0">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Classificação</legend>
+          <div class="grade">
+            <label>Nível *
+              <select name="nivelId" required></select>
+            </label>
+            <label>Conteúdo *
+              <select name="conteudoId" required></select>
+            </label>
+            <label>Subconteúdo *
+              <select name="subconteudoId" required></select>
+            </label>
+            <label>Objeto de conhecimento
+              <select name="objetoId"></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Enunciado</legend>
+          <label>Texto principal *
+            <textarea name="enunciadoTexto" rows="5" required></textarea>
+          </label>
+          <label>Texto complementar (comando da questão)
+            <textarea name="enunciadoComplemento" rows="2"></textarea>
+          </label>
+          <label>Resumo exibido no card (se vazio, é gerado a partir do enunciado)
+            <textarea name="resumo" rows="2"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Imagem</legend>
+          <div id="imagem-atual" class="imagem-atual" hidden>
+            <img id="imagem-previa" alt="">
+            <label class="check"><input type="checkbox" name="removerImagem" value="1"> Remover imagem atual</label>
+          </div>
+          <div class="grade">
+            <label>Enviar arquivo (JPG, PNG, WebP ou GIF, até 5 MB)
+              <input name="imagem" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+            </label>
+            <label>ou endereço (URL) da imagem
+              <input name="imagemUrl" type="url" placeholder="https://...">
+            </label>
+            <label>Texto alternativo
+              <input name="imagemAlt" type="text">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Alternativas</legend>
+          <div id="alternativas"></div>
+          <p class="dica">Marque o círculo da alternativa correta. Deixe em branco as letras que não existirem (mínimo de duas).</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Resolução e teoria</legend>
+          <label>Resolução comentada
+            <textarea name="comentario" rows="4"></textarea>
+          </label>
+          <label>Teoria (um parágrafo por linha)
+            <textarea name="teoria" rows="4"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Palavras-chave</legend>
+          <label>Separe por vírgula ou por linha. Elas alimentam o autocompletar da busca.
+            <textarea name="palavrasChave" rows="3"></textarea>
+          </label>
+          <div id="sugestoes" class="chips"></div>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

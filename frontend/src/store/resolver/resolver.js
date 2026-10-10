@@ -70,8 +70,6 @@ return idsQuestoes.value[
 
 
 
-// próxima questão
-
 const proximaQuestao = computed(()=>{
 
 

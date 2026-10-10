@@ -92,8 +92,6 @@ function avancar(){
     if(!emailValido.value) return
 
 
-    // auth.enviarRecuperacao()
-
     auth.recuperarSenhaConfirmacao()
 
 }

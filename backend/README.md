@@ -1,123 +1,68 @@
 # BioQuest - Backend
 
-API do BioQuest (questões de Biologia do ENEM). Faz o login dos usuários, entrega as questões, registra respostas, questões salvas, comentários e estatísticas. O front fica em `../vue-project`.
+API do BioQuest (Express + SQLite). Entrega as questões, palavras-chave do autocompletar, comentários, perfil/foto e registra respostas, questões salvas e para revisar. Inclui um **painel temporário** (`/admin`) para cadastrar questões.
 
-## Tecnologias
-
-| Biblioteca | Para que serve |
-|---|---|
-| `express` | Servidor e rotas da API |
-| `better-sqlite3` | Banco de dados SQLite |
-| `bcryptjs` | Hash das senhas |
-| `jsonwebtoken` | Token de login (guardado em cookie `httpOnly`) |
-| `cookie-parser` | Leitura dos cookies |
-| `zod` | Validação dos dados recebidos |
-| `helmet` | Cabeçalhos de segurança |
-| `express-rate-limit` | Limite de tentativas (login, recuperar senha) |
-| `multer` | Upload da foto de perfil |
-| `dotenv` | Variáveis de ambiente (`.env`) |
-| `nodemailer` | Envio de e-mails (confirmação e recuperação de senha) |
-| `nodemon` | Reinicia o servidor ao salvar (só em desenvolvimento) |
-
-Requisito: Node.js 20 ou superior.
-
-## Estrutura
-
-```
-backend/
-├── .env                 # segredos (não vai para o Git)
-├── .env.example         # modelo do .env
-├── package.json
-├── db/
-│   ├── schema.sql       # criação das tabelas
-│   ├── seed.js          # popula o banco a partir dos JSONs
-│   └── seed-data/       # card, detalhes, resolver e comentarios (.json)
-├── uploads/fotos/       # fotos de perfil (não vai para o Git)
-└── src/
-    ├── server.js        # inicia o Express
-    ├── db.js            # conexão com o SQLite
-    ├── config.js        # leitura do .env
-    ├── middleware/      # auth, validação, erros
-    ├── routes/          # auth, questoes, perfil, comentarios, estatisticas
-    └── services/        # regras de negócio e SQL
-```
+> Login e usuários ainda não existem: a API usa um usuário demo (id 1) em `src/middleware/usuarioAtual.js`. Quando o login for feito, é só trocar esse middleware.
 
 ## Como rodar
 
 ```bash
 cd backend
 npm install
-cp .env.example .env     # depois edite o .env
-npm run seed             # cria as tabelas e importa as questões
-npm run dev              # API em http://localhost:3000
+cp .env.example .env
+npm run seed        # cria o banco e importa as 8 questões de exemplo
+npm run dev         # API em http://localhost:3000
 ```
 
-Em outro terminal, rode o front (`cd vue-project && npm run dev`). O Vite repassa as chamadas `/api` para a porta 3000 (proxy no `vite.config.js`).
+- Painel de cadastro: http://localhost:3000/admin
+- Teste: `curl http://localhost:3000/api/saude`
+- Front: `cd frontend && npm run dev` (o Vite repassa `/api` e `/uploads` para a porta 3000).
 
-Teste rápido: `curl http://127.0.0.1:3000/api/saude` deve responder `{"ok":true}`.
+`npm run seed` não mexe em um banco que já tem questões. `npm run seed:reset` apaga as questões e reimporta os exemplos.
 
-### Scripts
-
-| Comando | O que faz |
-|---|---|
-| `npm run dev` | Servidor com recarga automática |
-| `npm start` | Servidor para produção |
-| `npm run seed` | Cria o banco e importa os dados |
-
-## Variáveis de ambiente (`.env`)
+## Estrutura
 
 ```
-PORT=3000
-NODE_ENV=development
-DB_PATH=C:/dados/bioquest.db
-JWT_SECRET=troque-por-um-texto-longo-e-aleatorio
-FRONTEND_URL=http://localhost:5173
-SMTP_HOST=
-SMTP_PORT=
-SMTP_USER=
-SMTP_PASS=
+backend/
+├── admin/            painel temporário (HTML/JS/CSS) - pode apagar depois
+├── db/               schema.sql, taxonomia.json, seed.js e seed-data/
+└── src/
+    ├── server.js · app.js · config.js · db.js
+    ├── routes/       questoes, palavrasChave, perfil, admin
+    ├── services/     regras e SQL
+    └── middleware/   erros, upload, adminAuth, usuarioAtual
 ```
 
-> Mantenha o `DB_PATH` **fora do OneDrive**: a sincronização pode travar ou corromper o arquivo do SQLite.
-
-## Banco de dados
-
-Tabelas: `usuarios`, `questoes`, `alternativas`, `respostas`, `questoes_salvas`, `questoes_revisar`, `comentarios`, `tokens`.
-Ao excluir um usuário, os dados dele são apagados em cascata. Taxa de acerto e estatísticas são calculadas a partir de `respostas`.
+Para remover o painel: apague `admin/`, `src/routes/admin.js`, `src/services/adminQuestoes.js` e as linhas do `/admin` em `src/app.js`.
 
 ## Endpoints
 
-Hoje existe apenas `GET /api/saude`. O restante está planejado:
-
 | Rota | Função |
 |---|---|
-| `POST /api/auth/cadastro` | Criar conta |
-| `POST /api/auth/confirmar-email` | Confirmar e-mail |
-| `POST /api/auth/login` · `/logout` | Entrar e sair |
-| `GET /api/auth/me` | Usuário logado |
-| `POST /api/auth/recuperar-senha` · `/redefinir-senha` | Recuperar senha |
-| `GET /api/questoes` · `/ids` · `/:id` | Listar e consultar questões |
-| `GET /api/questoes/:id/enunciado` | Enunciado e alternativas (sem o gabarito) |
-| `GET /api/questoes/:id/detalhes` | Detalhes e teoria |
-| `POST /api/questoes/:id/resposta` | Responder e receber a correção |
-| `PUT` · `DELETE /api/questoes/:id/salvar` | Salvar ou remover |
-| `PUT` · `DELETE /api/questoes/:id/revisar` | Marcar ou desmarcar para revisar |
-| `GET` · `POST /api/questoes/:id/comentarios` | Fórum da questão |
-| `GET` · `PATCH` · `DELETE /api/perfil` | Ver, editar e excluir conta |
-| `POST /api/perfil/foto` | Enviar foto de perfil |
-| `GET /api/estatisticas` | Estatísticas do usuário |
+| `GET /api/questoes` | Cards da lista (com palavras-chave) |
+| `GET /api/questoes/ids` | Ids na ordem de navegação |
+| `GET /api/questoes/:id` | Questão completa **sem gabarito** (usada no resolver e na prévia dos detalhes) |
+| `GET /api/questoes/:id/explicacao` | Gabarito, resolução comentada e teoria |
+| `POST /api/questoes/:id/resposta` | `{ alternativa }` → correção |
+| `PUT/DELETE /api/questoes/:id/salvar` · `/revisar` | Salvar / marcar para revisar |
+| `GET/POST /api/questoes/:id/comentarios` | Fórum |
+| `GET /api/palavras-chave?q=&limite=` | Autocompletar |
+| `GET/PATCH/DELETE /api/perfil` · `POST /api/perfil/foto` | Perfil, foto (campo `foto`), apagar dados |
+| `/admin` · `/admin/api/*` | Painel temporário |
 
-## Segurança
+## Variáveis (`.env`)
 
-- Senhas sempre com hash (`bcryptjs`), nunca em texto puro.
-- SQL com consultas parametrizadas (`?`), sem concatenar texto.
-- Todos os dados recebidos são validados com `zod`.
-- Cookie de login com `httpOnly` e, em produção, `secure`.
-- O gabarito só é enviado depois que o usuário responde.
-- Nunca enviar `.env`, `*.db` ou `uploads/` ao GitHub.
+`PORT`, `DB_PATH`, `UPLOADS_DIR`, `FRONTEND_URL` (origens liberadas no CORS, separadas por vírgula), `ADMIN_ATIVO`, `ADMIN_SENHA`.
+Em produção o painel fica **desligado** a menos que `ADMIN_ATIVO=true`; use sempre `ADMIN_SENHA`.
 
-## Produção
+## Levar para um servidor
 
-- Precisa de um servidor que rode Node **com disco persistente** (VPS ou plataforma com volume). GitHub Pages não executa backend.
-- Use HTTPS, `NODE_ENV=production` e um `JWT_SECRET` forte.
-- Rode com `pm2` ou `systemd` e faça backup periódico do arquivo `.db`.
+1. Servidor com Node e **disco persistente** (VPS ou plataforma com volume). Guarde `DB_PATH` e `UPLOADS_DIR` nesse disco e faça backup.
+2. `NODE_ENV=production`, `FRONTEND_URL=https://SEU-USUARIO.github.io`, HTTPS na frente (nginx/Caddy).
+3. `npm install --omit=dev && npm run seed && npm start` (use `pm2` ou `systemd`).
+4. No front, defina a variável `VITE_API_URL` (no GitHub: Settings → Variables → `VITE_API_URL`) com o endereço da API.
+
+## Banco
+
+`questoes`, `alternativas`, `palavras_chave` (+ ligação), `eixos`/`conteudos`/`subconteudos`/`niveis` (sincronizados de `db/taxonomia.json` ao iniciar), `usuarios`, `respostas`, `questoes_salvas`, `questoes_revisar`, `comentarios`.
+A taxa de acerto da questão usa o valor cadastrado até haver 20 respostas; depois é calculada das respostas reais.

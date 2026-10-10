@@ -1,24 +1,13 @@
 <script setup>
 
-import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import { ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-vue-next'
 
-const props = defineProps({
+import { useDetalhesQuestaoStore } from '@/store/detalhes_questao'
 
-    questao: {
-        type: Object,
-        default: null
-    }
+const store = useDetalhesQuestaoStore()
 
-})
-
-const expandido = ref(false)
-
-const alternativas = computed(() =>
-
-    props.questao?.alternativas ?? []
-
-)
+const { questao, previaExpandida: expandido, alternativas } = storeToRefs(store)
 
 </script>
 
@@ -36,7 +25,7 @@ const alternativas = computed(() =>
         <button
             class="btn-expandir"
             type="button"
-            @click="expandido = !expandido"
+            @click="store.alternarPrevia()"
         >
 
             {{ expandido ? 'Mostrar menos' : 'Ver prévia completa' }}
@@ -311,6 +300,10 @@ transform: translateY(-2px);
 
     flex:1;
 
+    min-width:0;
+
+    overflow-wrap:anywhere;
+
 }
 
 .check{
@@ -327,13 +320,54 @@ transform: translateY(-2px);
 
     .previa{
 
-        padding:18px 16px;
+        padding:16px 14px;
+
+        border-radius:14px;
 
     }
 
     .previa-header{
 
-        flex-wrap:wrap;
+        margin-bottom:14px;
+
+    }
+
+    .previa-header h2{
+
+        font-size:16px;
+
+    }
+
+    .btn-expandir{
+
+        min-height:40px;
+
+        padding:7px 0 7px 8px;
+
+    }
+
+    .texto-principal,
+    .texto-complementar{
+
+        font-size:14px;
+
+        line-height:1.65;
+
+    }
+
+    .alternativas{
+
+        gap:10px;
+
+    }
+
+    .alternativas li{
+
+        gap:10px;
+
+        padding:12px;
+
+        font-size:13.5px;
 
     }
 

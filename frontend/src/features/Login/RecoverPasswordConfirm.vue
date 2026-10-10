@@ -62,8 +62,6 @@ const auth = useAuthStore()
 function reenviar(){
 
 
-    // auth.enviarEmailRecuperacao()
-
     console.log("Reenviando para:", auth.email)
 
 }

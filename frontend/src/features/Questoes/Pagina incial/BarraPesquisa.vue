@@ -83,7 +83,7 @@
 
 <script setup>
 
-import { ref, computed } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 import { buscarSugestoes } from '@/utils/autocomplete.js'
 
@@ -92,11 +92,47 @@ const store = useQuestoesFiltrosStore()
 const mostrarSugestoes = ref(false)
 const indiceAtivo = ref(-1)
 
-const sugestoes = computed(() =>
+const sugestoes = ref([])
 
-    buscarSugestoes(store.termoPesquisa)
+let temporizador = null
+let requisicaoAtual = 0
+
+watch(
+
+    () => store.termoPesquisa,
+
+    (termo) => {
+
+        clearTimeout(temporizador)
+
+        if (!termo.trim()) {
+
+            requisicaoAtual++
+            sugestoes.value = []
+            return
+
+        }
+
+        temporizador = setTimeout(async () => {
+
+            const requisicao = ++requisicaoAtual
+            const lista = await buscarSugestoes(termo)
+
+            if (requisicao === requisicaoAtual) {
+                sugestoes.value = lista
+            }
+
+        }, 200)
+
+    }
 
 )
+
+onUnmounted(() => {
+
+    clearTimeout(temporizador)
+
+})
 
 function aoDigitar() {
 
@@ -117,7 +153,6 @@ function aoFocar() {
 
 function aoDesfocar() {
 
-    // pequeno atraso para o clique (mousedown) na sugestão ser processado antes de fechar a lista
     setTimeout(() => {
 
         mostrarSugestoes.value = false

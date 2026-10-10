@@ -20,7 +20,7 @@ const perfil = usePerfilStore()
 
 onMounted(() => {
 
-  perfil.carregarPerfil()
+  perfil.carregarPerfil(true)
 
 })
 </script>
