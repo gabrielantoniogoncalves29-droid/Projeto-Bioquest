@@ -1,5 +1,6 @@
 <script setup>
-import { computed, watch, ref } from 'vue'
+import { watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import {
     BookOpen,
@@ -9,9 +10,7 @@ import {
     CornerUpLeft
 } from 'lucide-vue-next'
 
-import { buscarDetalhesPorId } from '@/services/detalhes'
-import { buscarQuestaoResolver } from '@/services/resolver'
-import { buscarIdsQuestoes } from '@/services/questoes'
+import { useDetalhesQuestaoStore } from '@/store/detalhes_questao'
 
 import Header from '@/components/layout/Header.vue'
 import InfoQuestao from './InfoQuestao.vue'
@@ -21,35 +20,19 @@ import ForumQuestao from './ForumQuestao.vue'
 
 const route = useRoute()
 const router = useRouter()
+const store = useDetalhesQuestaoStore()
 
-const carregando = ref(true)
-const detalhes = ref(null)
-const questao = ref(null)
-const idsQuestoes = ref([])
+store.reiniciarInterface()
 
-const abaAtiva = ref('explicacao')
-
-const indiceAtual = computed(() =>
-    idsQuestoes.value.indexOf(Number(route.params.id))
-)
-
-const idAnterior = computed(() =>
-    indiceAtual.value > 0
-        ? idsQuestoes.value[indiceAtual.value - 1]
-        : null
-)
-
-const idProximo = computed(() =>
-    indiceAtual.value !== -1 &&
-    indiceAtual.value < idsQuestoes.value.length - 1
-        ? idsQuestoes.value[indiceAtual.value + 1]
-        : null
-)
-
-const posicaoNavegacao = computed(() => ({
-    atual: indiceAtual.value === -1 ? 0 : indiceAtual.value + 1,
-    total: idsQuestoes.value.length
-}))
+const {
+    carregando,
+    questao,
+    detalhes,
+    abaAtiva,
+    idAnterior,
+    idProximo,
+    posicaoNavegacao
+} = storeToRefs(store)
 
 function irParaQuestao() {
     router.push(`/resolver/${route.params.id}`)
@@ -66,27 +49,7 @@ function goback() {
 
 watch(
     () => route.params.id,
-    async (novoId) => {
-        if (!novoId) return
-
-        carregando.value = true
-
-        const id = Number(novoId)
-
-        const [dadosDetalhes, dadosQuestao] = await Promise.all([
-            buscarDetalhesPorId(id),
-            buscarQuestaoResolver(id)
-        ])
-
-        detalhes.value = dadosDetalhes
-        questao.value = dadosQuestao
-
-        if (idsQuestoes.value.length === 0) {
-            idsQuestoes.value = await buscarIdsQuestoes()
-        }
-
-        carregando.value = false
-    },
+    (novoId) => store.carregarQuestao(novoId),
     { immediate: true }
 )
 </script>
@@ -205,15 +168,15 @@ watch(
                 </div>
             </div>
 
-            <PreviaQuestao :questao="questao" />
+            <PreviaQuestao />
 
-            <InfoQuestao :detalhes="detalhes" />
+            <InfoQuestao />
 
             <div class="tabs">
                 <button
                     class="tab"
                     :class="{ ativa: abaAtiva === 'explicacao' }"
-                    @click="abaAtiva = 'explicacao'"
+                    @click="store.definirAba('explicacao')"
                 >
                     <BookOpen :size="16" />
                     Explicação e teoria
@@ -222,23 +185,16 @@ watch(
                 <button
                     class="tab"
                     :class="{ ativa: abaAtiva === 'forum' }"
-                    @click="abaAtiva = 'forum'"
+                    @click="store.definirAba('forum')"
                 >
                     <MessageCircle :size="16" />
                     Comentários e discussões
                 </button>
             </div>
 
-            <ExplicacaoQuestao
-                v-if="abaAtiva === 'explicacao'"
-                :detalhes="detalhes"
-                :questao="questao"
-            />
+            <ExplicacaoQuestao v-if="abaAtiva === 'explicacao'" />
 
-            <ForumQuestao
-                v-else
-                :questao-id="Number(route.params.id)"
-            />
+            <ForumQuestao v-else />
         </div>
         </main>
     </div>
@@ -310,6 +266,8 @@ watch(
 
 .conteudo-container {
     width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
     max-width: 1500px;
     margin: 0 auto;
 
@@ -494,28 +452,50 @@ watch(
     }
 
     .breadcrumb {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
+        gap: 4px 7px;
         font-size: 13px;
+        line-height: 1.5;
     }
 
     .conteudo-container {
-        gap: 20px;
+        gap: 18px;
     }
 
     .cabecalho-questao {
-        gap: 18px;
+        gap: 14px;
     }
 
     .cabecalho-topo {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
+        align-items: stretch;
+        gap: 12px;
+        padding-bottom: 14px;
     }
 
+    .cabecalho-texto {
+        width: 100%;
+    }
+
+    .cabecalho-questao h1 {
+        margin: 0;
+        font-size: 21px;
+    }
+
+    /* barra de navegação com alvos de toque confortáveis */
     .navegacao-questoes {
         width: 100%;
         justify-content: space-between;
+        gap: 8px;
         margin-left: 0;
+    }
+
+    .link-nav {
+        min-width: 44px;
+        min-height: 44px;
+        justify-content: center;
+        border-radius: 10px;
+        background: var(--cor-fundo-sutil);
     }
 
     .link-nav-texto {
@@ -523,24 +503,49 @@ watch(
     }
 
     .cabecalho-corpo {
+        flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
     }
 
-    .cabecalho-questao h1 {
-        font-size: 22px;
+    .rotulo-topo {
+        margin-left: 0;
+        font-size: 14px;
     }
 
     .btn-voltar-questao {
+        min-height: 40px;
         padding: 0;
     }
 
+    /* abas dividem a largura da tela, sem rolagem horizontal */
     .tabs {
-        overflow-x: auto;
+        overflow: visible;
     }
 
     .tab {
-        min-width: 180px;
-        white-space: nowrap;
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 4px;
+        font-size: 13px;
+        line-height: 1.25;
+        text-align: center;
+        min-height: 56px;
+    }
+}
+
+@media (max-width: 360px) {
+    .detalhes-page {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .cabecalho-questao h1 {
+        font-size: 19px;
+    }
+
+    .tab {
+        font-size: 12.5px;
     }
 }
 </style>

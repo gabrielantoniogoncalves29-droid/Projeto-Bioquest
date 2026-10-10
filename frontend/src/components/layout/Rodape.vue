@@ -18,7 +18,7 @@
 
 <style scoped>
 .footer {
-  background-color: var(--cor-primaria-texto);
+  background-color: var(--cor-primaria);
   border-top:1px ;
   color: var(--cor-texto-invertido);
   padding: 15px 30px;

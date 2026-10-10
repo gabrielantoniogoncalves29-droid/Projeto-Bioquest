@@ -93,7 +93,7 @@ function goback(){
     align-items:center;
     background:
         linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
-        url("@/assets/Design sem nome_20260723_125812_0000.png") top/cover no-repeat;
+        url("@/assets/Colagem Científica Vintage em Verde Suave.png") top/cover no-repeat;
 
     overflow:hidden;
 
@@ -208,14 +208,6 @@ function goback(){
 }
 
 @media (max-width:768px){
-
-    .auth-view{
-
-        background:
-            linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-1)),
-            url("@/assets/Design-fundo-grande.jpg") center/cover no-repeat;
-
-    }
 
     .page-header{
 

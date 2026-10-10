@@ -34,9 +34,9 @@
     --cor-primaria-hover: #0a5a40;
     --cor-primaria-texto: #1c4a3d;
 
-    --cor-primaria-translucida-fraca: #0d6b4d33;
-    --cor-primaria-translucida: #0d6b4d55;
-    --cor-primaria-translucida-forte: #0d6b4d99;
+    --cor-primaria-translucida-fraca: #0d6b4d8a;
+    --cor-primaria-translucida: #0d6b4da2;
+    --cor-primaria-translucida-forte: #0d6b4dca;
 
     /* Estado */
     --cor-perigo: #c0392b;
@@ -55,11 +55,11 @@
     --sombra-card: 0 10px 26px rgba(0, 0, 0, 0.05);
 
     /* Efeito vidro (cards translúcidos sobre imagem de fundo) */
-    --cor-fundo-card-vidro: rgba(255, 255, 255, 0.55);
+    --cor-fundo-card-vidro: rgba(255, 255, 255, 0.872);
 
     /* Filtro sobre a foto de fundo da tela de login */
-    --filtro-fundo-login-1: rgba(255, 255, 255, 0.606);
-    --filtro-fundo-login-2: rgba(255, 255, 255, 0.356);
+    --filtro-fundo-login-1: rgba(255, 255, 255, 0.723);
+    --filtro-fundo-login-2: rgba(255, 255, 255, 0.495);
 
     color-scheme: light;
 
@@ -89,9 +89,9 @@
     /* Marca (o MESMO verde do modo claro nos botões/ícones/bordas;
        só o texto solto usa um tom levemente mais claro, senão fica
        ilegível em cima do cinza escuro) */
-    --cor-primaria: #0d6b4d;
+    --cor-primaria: #0a5a40;
     --cor-primaria-hover: #0a5a40;
-    --cor-primaria-texto: #46a37b;
+    --cor-primaria-texto: rgb(238, 241, 244);
 
     --cor-primaria-translucida-fraca: #0d6b4d40;
     --cor-primaria-translucida: #0d6b4d66;

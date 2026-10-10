@@ -52,7 +52,7 @@
 [data-tema="escuro"] .banner {
   --banner-topo: #2b2b291a;
   --banner-base: #2b2b29e4;
-  --banner-mascara: rgba(0, 0, 0, 0.249);
+  --banner-mascara: rgba(0, 0, 0, 0.131);
 }
 
   .banner_description{
@@ -73,7 +73,7 @@
   .banner_description h2{
     font-family: sans-serif;
     font-size: 16px;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-primaria-texto);
     text-align: center;
   }
   .banner_description button{

@@ -1,23 +1,21 @@
 <script setup>
 
-import { ref, watch, nextTick, computed } from 'vue'
+import { ref, nextTick } from 'vue'
+import { storeToRefs } from 'pinia'
 import { Bold, Italic, Underline, List, Send, MessageSquare } from 'lucide-vue-next'
 
-import { buscarComentariosPorQuestao } from '@/services/comentarios'
 import { formatarTexto } from '@/utils/formatoTexto'
+import { useDetalhesQuestaoStore } from '@/store/detalhes_questao'
 
-const props = defineProps({
+const store = useDetalhesQuestaoStore()
 
-    questaoId: {
-        type: [Number, String],
-        default: null
-    }
+const {
+    comentarios,
+    carregandoComentarios: carregando,
+    novoComentario,
+    totalComentarios
+} = storeToRefs(store)
 
-})
-
-const comentarios = ref([])
-const carregando = ref(true)
-const novoComentario = ref("")
 const textareaRef = ref(null)
 
 const ferramentas = [
@@ -28,34 +26,6 @@ const ferramentas = [
     { tipo: 'lista', icone: List, titulo: 'Lista' }
 
 ]
-
-const totalComentarios = computed(() => comentarios.value.length)
-
-watch(
-
-    () => props.questaoId,
-
-    async (id) => {
-
-        if (!id) {
-
-            comentarios.value = []
-            carregando.value = false
-            return
-
-        }
-
-        carregando.value = true
-
-        comentarios.value = await buscarComentariosPorQuestao(id)
-
-        carregando.value = false
-
-    },
-
-    { immediate: true }
-
-)
 
 function aplicarFormatacao(tipo) {
 
@@ -102,25 +72,6 @@ function aplicarFormatacao(tipo) {
         area.setSelectionRange(novaPosicao, novaPosicao)
 
     })
-
-}
-
-function enviarComentario() {
-
-    const texto = novoComentario.value.trim()
-
-    if (!texto) return
-
-    comentarios.value.unshift({
-
-        id: Date.now(),
-        autor: "Você",
-        texto,
-        data: new Date().toISOString().slice(0, 10)
-
-    })
-
-    novoComentario.value = ""
 
 }
 
@@ -172,7 +123,7 @@ function enviarComentario() {
             <button
                 class="btn-enviar"
                 :disabled="!novoComentario.trim()"
-                @click="enviarComentario"
+                @click="store.enviarComentario()"
             >
                 <Send :size="15" />
                 Comentar
@@ -566,7 +517,7 @@ textarea:focus{
     display:flex;
 
     align-items:center;
-
+    margin-right: 8px;
     justify-content:center;
 
     width:38px;
@@ -631,6 +582,8 @@ textarea:focus{
 
 .texto-formatado{
 
+    overflow-wrap:anywhere;
+
     font-size:14.5px;
 
     line-height:1.6;
@@ -673,16 +626,60 @@ textarea:focus{
 
 @media (max-width:600px){
 
-    .nova-mensagem,
+    .nova-mensagem{
+
+        padding:14px;
+
+        border-radius:14px;
+
+    }
+
     .comentario{
 
-        padding:16px;
+        gap:10px;
+
+        padding:14px;
+
+        border-radius:14px;
+
+    }
+
+    .avatar{
+
+        width:32px;
+
+        height:32px;
+
+        min-width:32px;
+
+        font-size:13px;
+
+    }
+
+    .toolbar{
+
+        gap:8px;
+
+    }
+
+    .btn-ferramenta{
+
+        width:40px;
+
+        height:40px;
 
     }
 
     .toolbar-dica{
 
         display:none;
+
+    }
+
+    /* 16px evita o zoom automático do iOS ao focar no campo */
+    textarea{
+
+        font-size:16px;
 
     }
 
@@ -699,6 +696,20 @@ textarea:focus{
         align-self:stretch;
 
         justify-content:center;
+
+        height:44px;
+
+    }
+
+    .vazio{
+
+        padding:28px 16px;
+
+    }
+
+    .texto-formatado{
+
+        font-size:14px;
 
     }
 
