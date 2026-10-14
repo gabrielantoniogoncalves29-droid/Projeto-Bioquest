@@ -1,0 +1,246 @@
+<template>
+
+    <main class="auth-view">
+
+        <header class="page-header">
+
+            <span
+                class="voltar"
+                @click="goback()"
+            >
+                ⟵ Voltar
+            </span>
+
+            <h1>BioQuest</h1>
+
+        </header>
+
+        <div class="slider-wrapper">
+
+            <div
+                class="slider"
+                :style="sliderStyle"
+            >
+
+                <div class="slide">
+                    <LoginCard/>
+                </div>
+
+                <div class="slide">
+                    <RegisterCard/>
+                </div>
+
+                <div class="slide">
+                    <ConfirmEmailCard/>
+                </div>
+
+                <div class="slide">
+                    <RecoverPasswordCard/>
+                </div>
+
+                <div class="slide">
+                    <RecoverPasswordConfirmCard/>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</template>
+
+<script setup>
+
+import { computed } from "vue"
+
+import LoginCard from "@/features/Login/LoginCard.vue"
+import RegisterCard from "@/features/Login/RegisterCard.vue"
+import ConfirmEmailCard from "@/features/Login/ConfirmEmailCard.vue"
+import RecoverPasswordCard from "@/features/Login/RecoverPassword.vue"
+import RecoverPasswordConfirmCard from "@/features/Login/RecoverPasswordConfirm.vue"
+
+import { useAuthStore } from "@/store/auth"
+
+const auth = useAuthStore()
+
+const sliderStyle = computed(() => ({
+
+    width:"500%",
+
+    transform:`translateX(-${auth.etapa * 20}%)`
+
+}))
+
+function goback(){
+
+    window.history.back()
+
+}
+
+</script>
+
+<style scoped>
+
+.auth-view{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:
+        linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
+        url("@/assets/Colagem Científica Vintage em Verde Suave.png") top/cover no-repeat;
+
+    overflow:hidden;
+
+}
+
+.page-header{
+
+    position:absolute;
+
+    top:30px;
+
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    pointer-events:none;
+
+}
+
+.page-header h1{
+
+    margin:0;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:var(--cor-primaria-texto);
+
+    letter-spacing:.5px;
+
+    user-select:none;
+
+    pointer-events:auto;
+
+}
+
+.voltar{
+
+    position:absolute;
+
+    left:22px;
+
+    top:0px;
+
+    color:var(--cor-primaria);
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    user-select:none;
+
+    pointer-events:auto;
+
+}
+
+.voltar:hover{
+
+    transform:translateX(-4px);
+
+}
+
+[data-tema="escuro"] .page-header h1{
+
+    color:var(--cor-texto-principal);
+
+}
+
+[data-tema="escuro"] .voltar{
+
+    color:var(--cor-texto-principal);
+
+}
+
+
+.slider-wrapper{
+
+    width:520px;
+
+    overflow:hidden;
+
+    margin-top:50px;
+}
+
+.slider{
+
+    display:flex;
+
+    will-change:transform;
+
+    transition:transform .45s ease;
+
+}
+
+.slide{
+
+    flex:0 0 20%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+@media (max-width:768px){
+
+    .page-header{
+
+        width:92vw;
+
+        top:22px;
+
+    }
+
+    .page-header h1{
+
+        font-size:40px;
+
+    }
+
+    .voltar{
+
+        font-size:15px;
+
+    }
+
+    .slider-wrapper{
+
+        width:100%;
+
+        max-width:520px;
+
+        padding:0 14px;
+
+        box-sizing:border-box;
+
+    }
+
+}
+
+</style>
