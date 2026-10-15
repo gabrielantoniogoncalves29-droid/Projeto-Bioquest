@@ -10,16 +10,26 @@ const lista = ref(["", "", "01", "02", "03", "04", "05", "06", "07", "08", "09",
 const diaSelecionado = ref(null)
 
 const cardAtual = ref(0)
+const transicaoCard = ref('deslizar-proximo')
 
 function proximoCard() {
-  if (cardAtual.value < 5) {
+  if (cardAtual.value < cards.length - 1) {
+    transicaoCard.value = 'deslizar-proximo'
     cardAtual.value++
   }
 }
 
 function cardAnterior() {
   if (cardAtual.value > 0) {
+    transicaoCard.value = 'deslizar-anterior'
     cardAtual.value--
+  }
+}
+
+function selecionarCard(indice) {
+  if (indice !== cardAtual.value) {
+    transicaoCard.value = indice > cardAtual.value ? 'deslizar-proximo' : 'deslizar-anterior'
+    cardAtual.value = indice
   }
 }
 
@@ -289,20 +299,54 @@ function corProgresso(valor){
             </div>
             <div class="evolucao">
                 <h3 class="tituloCard">CONTINUE ESTUDANDO</h3>
-                <div>
-                    <button class="seta seta-esquerda" @click="cardAnterior">
-                    ‹
-                </button>
-                <div class="card">
-                    <div>
-                        <img :src="cards[cardAtual].icone" :alt="cards[cardAtual].titulo" class="icone-card">
-                        <h3>{{ cards[cardAtual].titulo }}</h3>
-                    </div>
-                    <router-link to="/questoes" class="btn-card">Explorar<span class="material-icons icon">arrow_forward</span></router-link>
+                <div class="evolucao-controles">
+                    <button
+                        class="seta seta-esquerda"
+                        type="button"
+                        aria-label="Ver assunto anterior"
+                        :disabled="cardAtual === 0"
+                        @click="cardAnterior"
+                    >
+                        <span class="material-icons" aria-hidden="true">chevron_left</span>
+                    </button>
+                    <Transition :name="transicaoCard" mode="out-in">
+                        <article :key="cardAtual" class="evolucao-card">
+                            <div class="evolucao-card-conteudo">
+                                <div class="icone-card-wrap">
+                                    <img :src="cards[cardAtual].icone" :alt="''" class="icone-card">
+                                </div>
+                                <div class="evolucao-card-texto">
+                                    <span class="evolucao-etiqueta">ASSUNTO EM DESTAQUE</span>
+                                    <h4>{{ cards[cardAtual].titulo }}</h4>
+                                </div>
+                            </div>
+                            <router-link to="/questoes" class="btn-card">
+                                Explorar assunto
+                                <span class="material-icons icon" aria-hidden="true">arrow_forward</span>
+                            </router-link>
+                        </article>
+                    </Transition>
+                    <button
+                        class="seta seta-direita"
+                        type="button"
+                        aria-label="Ver próximo assunto"
+                        :disabled="cardAtual === cards.length - 1"
+                        @click="proximoCard"
+                    >
+                        <span class="material-icons" aria-hidden="true">chevron_right</span>
+                    </button>
                 </div>
-                <button class="seta seta-direita" @click="proximoCard">
-                    ›
-                </button>
+                <div class="evolucao-paginacao" aria-label="Posição dos assuntos">
+                    <button
+                        v-for="(card, indice) in cards"
+                        :key="card.titulo"
+                        type="button"
+                        class="evolucao-ponto"
+                        :class="{ ativo: indice === cardAtual }"
+                        :aria-label="`Ir para ${card.titulo}`"
+                        :aria-current="indice === cardAtual ? 'step' : undefined"
+                        @click="selecionarCard(indice)"
+                    ></button>
                 </div>
             </div>
         </div>
@@ -312,15 +356,6 @@ function corProgresso(valor){
 
 
 <style>
-    .icone-card{
-        width: 65px;
-        height: 65px;
-        transform: translateX(-10px) translateY(-10px);
-    }
-    .card > div{
-        display: flex;
-        align-items: center;
-    }
     .atividade-semana{
         margin: 45px;
         margin-top: 25px;
@@ -356,111 +391,221 @@ function corProgresso(valor){
     .bolinha.ativo{
        background-color: rgb(44, 112, 71);
     }
-    .card{
-        margin: 40px;
-        width: 260px;
-        height: 170px;
-        position: relative;
-        box-sizing: border-box;
-    }
-    .card h3{
-        margin-bottom: 35px;
-        text-align: left;
-    }
-    .btn-card{
-        display: inline-block;
-        width: 200px;
-        text-decoration: none;
-        border: 1px solid var(--cor-primaria-texto);
-        border-radius: 8px;
-        background-color: var(--cor-primaria);
-        padding: 10px;
-        color: var(--cor-texto-invertido);
-        transition: 500ms ease-in-out;
-        cursor: pointer;
-
-        position: absolute;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .icon{
-        transition: 300ms ease-in-out;
-    }
-    .btn-card:hover{
-        background-color: var(--cor-primaria-hover);
-        .icon{
-            transform: translateX(4px) scale(0.9);
-        }
-    }
     .seta{
-        width: 35px;
-        height: 35px;
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
         border: none;
         border-radius: 50%;
-        font-size: 20px;
+        color: var(--cor-primaria-texto);
+        background-color: var(--cor-fundo-card);
+        box-shadow: 0 3px 12px rgba(20, 48, 37, 0.12);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        position: absolute;
+        z-index: 1;
+        transition: color 180ms ease, background-color 180ms ease, transform 180ms ease, opacity 180ms ease;
     }
-    .seta-esquerda:hover{
-        transform: scale(1.06) translateX(-25px);
+    .seta:hover:not(:disabled){
+        color: var(--cor-texto-invertido);
+        background-color: var(--cor-primaria);
+        transform: scale(1.08);
     }
-    .seta-direita:hover{
-        transform: scale(1.06) translateX(25px);
+    .seta:disabled{
+        opacity: 0.35;
+        cursor: not-allowed;
     }
-    .seta-esquerda {
-        left: 5px;
-        transform: translateX(-25px);
-        transition: 200ms ease-in-out;
-    }
-
-    .seta-direita {
-        right: 5px;
-        transform: translateX(25px);
-        transition: 200ms ease-in-out;
+    .seta:focus-visible,
+    .evolucao-ponto:focus-visible,
+    .btn-card:focus-visible{
+        outline: 3px solid var(--cor-primaria-translucida);
+        outline-offset: 3px;
     }
     .evolucao{
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--cor-borda-suave);
         margin: 50px 40px;
         width: 353px;
-        height: 285px;
-        border-radius: 12px;
+        height: 290px;
+        padding: 20px 16px 16px;
+        border-radius: 16px;
+        background-color: var(--cor-fundo-card);
         font-family: sans-serif;
-        text-align: center;
-        align-items: center;
-        font-size: 16px;
+        align-items: stretch;
     }
-    .evolucao > div{
+    .evolucao-controles{
         display: flex;
         align-items: center;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        height: 200px;
-        width: 300px;
-        margin: 10px;
-        position: relative;
-        transition: 300ms ease;
+        justify-content: space-between;
+        gap: 2px;
+        width: 100%;
+        margin: 12px 0 2px;
     }
-    .evolucao img{
-        width: 110px;
+    .evolucao-card{
+        box-sizing: border-box;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+        height: 210px;
+        padding: 20px;
+        overflow: hidden;
+        border: 1px solid var(--cor-borda-suave);
+        border-radius: 14px;
+        background:
+            radial-gradient(circle at 100% 0, var(--cor-primaria-fundo) 0, transparent 48%),
+            var(--cor-fundo-card);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+    .evolucao-card-conteudo{
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        min-width: 0;
+    }
+    .icone-card-wrap{
+        display: grid;
+        flex: 0 0 68px;
+        width: 68px;
+        height: 68px;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--cor-primaria-fundo);
+    }
+    .icone-card{
+        width: 52px;
+        height: 52px;
+        object-fit: contain;
+    }
+    .evolucao-card-texto{
+        min-width: 0;
+        text-align: left;
+    }
+    .evolucao-etiqueta{
+        color: var(--cor-primaria);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+    .evolucao-card h4{
+        margin: 6px 0 0;
+        color: var(--cor-texto-principal);
+        font-size: 15px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+    .btn-card{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        flex: 0 0 42px;
+        box-sizing: border-box;
+        margin-top: auto;
+        padding: 10px 14px;
+        border: 1px solid var(--cor-primaria);
+        border-radius: 9px;
+        background-color: var(--cor-primaria);
+        color: var(--cor-texto-invertido);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 180ms ease, transform 180ms ease;
+    }
+    .btn-card:hover{
+        background-color: var(--cor-primaria-hover);
+    }
+    .btn-card .icon{
+        transition: transform 180ms ease;
+    }
+    .btn-card:hover .icon{
+        transform: translateX(3px);
+    }
+    .evolucao-paginacao{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        min-height: 12px;
+        margin-top: 2px;
+    }
+    .evolucao-ponto{
+        width: 7px;
+        height: 7px;
         padding: 0;
-        margin: 0;
+        border: 0;
+        border-radius: 999px;
+        background: var(--cor-borda);
+        cursor: pointer;
+        transition: width 220ms ease, background-color 220ms ease, transform 220ms ease;
+    }
+    .evolucao-ponto:hover{
+        transform: scale(1.2);
+    }
+    .evolucao-ponto.ativo{
+        width: 22px;
+        background: var(--cor-primaria);
+    }
+    .deslizar-proximo-enter-active,
+    .deslizar-proximo-leave-active,
+    .deslizar-anterior-enter-active,
+    .deslizar-anterior-leave-active{
+        transition: opacity 200ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .deslizar-proximo-enter-from{
+        opacity: 0;
+        transform: translateX(18px);
+    }
+    .deslizar-proximo-leave-to{
+        opacity: 0;
+        transform: translateX(-18px);
+    }
+    .deslizar-anterior-enter-from{
+        opacity: 0;
+        transform: translateX(-18px);
+    }
+    .deslizar-anterior-leave-to{
+        opacity: 0;
+        transform: translateX(18px);
     }
     .tituloCard{
         font-family: sans-serif;
-        font-size: 16px;
-        color: rgb(28, 75, 47);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--cor-primaria-texto);
         text-align: left;
-        border-bottom: 1px solid #eeeeee;
+        margin: 0;
+        padding: 0 2px 12px;
+        border-bottom: 1px solid var(--cor-borda-suave);
     }
     .evolucao h1{
         color: var(--cor-primaria-texto);
         font-size: 22px;
+    }
+    @media (max-width: 480px){
+        .evolucao{
+            width: calc(100% - 32px);
+            margin: 32px 16px;
+        }
+    }
+    @media (prefers-reduced-motion: reduce){
+        .deslizar-proximo-enter-active,
+        .deslizar-proximo-leave-active,
+        .deslizar-anterior-enter-active,
+        .deslizar-anterior-leave-active,
+        .evolucao-ponto,
+        .seta,
+        .btn-card,
+        .btn-card .icon{
+            transition-duration: 0.01ms;
+        }
     }
     .content{
         display: flex;
