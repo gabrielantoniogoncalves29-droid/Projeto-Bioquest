@@ -1,13 +1,13 @@
 <script setup>
 
 import { storeToRefs } from 'pinia'
-import { BookOpenCheck, GraduationCap } from 'lucide-vue-next'
+import { BookOpenCheck, GraduationCap, Tags } from 'lucide-vue-next'
 
 import { useDetalhesQuestaoStore } from '@/store/detalhes_questao'
 
 const store = useDetalhesQuestaoStore()
 
-const { questao, teoria, alternativaCorreta } = storeToRefs(store)
+const { questao, teoria, palavrasChave, alternativaCorreta } = storeToRefs(store)
 
 </script>
 
@@ -38,6 +38,32 @@ const { questao, teoria, alternativaCorreta } = storeToRefs(store)
             Ainda não temos um resumo de teoria para esta questão.
         </p>
 
+        <div
+            v-if="palavrasChave.length"
+            class="palavras-chave"
+        >
+
+            <div class="palavras-titulo">
+
+                <Tags :size="15" />
+                <h3>Palavras-chave</h3>
+
+            </div>
+
+            <ul class="palavras-lista">
+
+                <li
+                    v-for="palavra in palavrasChave"
+                    :key="palavra"
+                    class="palavra"
+                >
+                    {{ palavra }}
+                </li>
+
+            </ul>
+
+        </div>
+
     </div>
 
     <div
@@ -60,8 +86,17 @@ const { questao, teoria, alternativaCorreta } = storeToRefs(store)
             {{ alternativaCorreta.texto }}
         </p>
 
-        <p class="comentario">
+        <p
+            v-if="questao.comentario"
+            class="comentario"
+        >
             {{ questao.comentario }}
+        </p>
+        <p
+            v-else
+            class="sem-conteudo"
+        >
+            Ainda não temos a resolução comentada desta questão.
         </p>
 
     </div>
@@ -141,6 +176,82 @@ p{
 p:last-child{
 
     margin-bottom:0;
+
+}
+
+.palavras-chave{
+
+    margin-top:18px;
+
+    padding-top:16px;
+
+    border-top:1px solid var(--cor-borda-suave);
+
+}
+
+.palavras-titulo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-bottom:10px;
+
+    color:var(--cor-primaria);
+
+}
+
+.palavras-titulo h3{
+
+    margin:0;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:.04em;
+
+    text-transform:uppercase;
+
+    color:var(--cor-texto-suave);
+
+}
+
+.palavras-lista{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin:0;
+
+    padding:0;
+
+    list-style:none;
+
+}
+
+.palavra{
+
+    padding:5px 12px;
+
+    border:1px solid var(--cor-primaria-translucida-fraca);
+
+    border-radius:999px;
+
+    background:var(--cor-primaria-fundo);
+
+    color:var(--cor-primaria-texto);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    line-height:1.4;
 
 }
 

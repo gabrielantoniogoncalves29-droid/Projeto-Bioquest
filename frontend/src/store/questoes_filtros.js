@@ -1,22 +1,21 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import {
-  anos,
-  niveis,
-  eixos,
-  conteudos,
-  estado
-} from '@/features/Questoes/data/filtros.js'
+import { ref, computed, watch } from 'vue'
+import { useTaxonomiaStore } from '@/store/taxonomia.js'
 
 export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
 
-  const anosOpcoes = anos
-  const niveisOpcoes = niveis
-  const eixosOpcoes = eixos
-  const conteudosOpcoes = conteudos
-  const estadoOpcoes = estado
+  // Opções vindas de GET /api/taxonomia. Todas as seleções guardam IDS:
+  // ano, nível (categorização), eixo (= objeto da matriz), conteúdo (= objeto do
+  // livro), subconteúdo (id estável = conteúdo * 100 + número do C#) e estado.
+  const taxonomia = useTaxonomiaStore()
 
-  const mostrarFiltros = ref(true)
+  const anosOpcoes = computed(() => taxonomia.anos)
+  const niveisOpcoes = computed(() => taxonomia.niveis)
+  const eixosOpcoes = computed(() => taxonomia.eixos)
+  const conteudosOpcoes = computed(() => taxonomia.conteudos)
+  const estadoOpcoes = computed(() => taxonomia.estados)
+
+  const buscaRealizada = ref(false)
   const modoVisualizacao = ref('lista')
   const ordenacao = ref('recentes')
   const termoPesquisa = ref('')
@@ -34,15 +33,15 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
 
     conteudosSelecionados.value.forEach(id => {
 
-      const conteudo = conteudosOpcoes.find(item => item.id === id)
+      const conteudo = conteudosOpcoes.value.find(item => item.id === id)
 
       if (!conteudo) return
 
-      conteudo.subconteudos.forEach((sub, index) => {
+      conteudo.subconteudos.forEach(sub => {
 
         lista.push({
-          id: `${id}-${index}`,
-          nome: sub
+          id: sub.id,
+          nome: sub.nome
         })
 
       })
@@ -50,6 +49,20 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
     })
 
     return lista
+
+  })
+
+  // Desmarcar um conteúdo também descarta os subconteúdos dele que estavam marcados.
+  watch(conteudosSelecionados, () => {
+
+    const validos = new Set(subconteudosDisponiveis.value.map(sub => sub.id))
+    const restantes = subconteudosSelecionados.value.filter(id => validos.has(id))
+
+    if (restantes.length !== subconteudosSelecionados.value.length) {
+
+      subconteudosSelecionados.value = restantes
+
+    }
 
   })
 
@@ -65,12 +78,6 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
     )
 
   })
-
-  function toggleFiltros() {
-
-    mostrarFiltros.value = !mostrarFiltros.value
-
-  }
 
   function definirModoVisualizacao(modo) {
 
@@ -93,6 +100,7 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
     subconteudosSelecionados.value = []
     estadoSelecionado.value = []
     termoPesquisa.value = ''
+    buscaRealizada.value = false
 
   }
 
@@ -104,7 +112,7 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
     conteudosOpcoes,
     estadoOpcoes,
 
-    mostrarFiltros,
+    buscaRealizada,
     modoVisualizacao,
     ordenacao,
     termoPesquisa,
@@ -119,7 +127,6 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
     subconteudosDisponiveis,
     totalFiltrosAtivos,
 
-    toggleFiltros,
     definirModoVisualizacao,
     definirOrdenacao,
     limparFiltros

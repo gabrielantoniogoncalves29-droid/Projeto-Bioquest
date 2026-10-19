@@ -3,9 +3,10 @@ import { ref, computed } from 'vue'
 
 import {
     buscarQuestaoPorId,
-    buscarExplicacao,
-    buscarIdsQuestoes
+    buscarExplicacao
 } from '@/services/questoes'
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useTaxonomiaStore } from '@/store/taxonomia'
 import {
     buscarComentariosPorQuestao,
     enviarComentarioDaQuestao
@@ -29,7 +30,10 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
     const carregando = ref(true)
     const detalhes = ref(null)
     const questao = ref(null)
-    const idsQuestoes = ref([])
+        // Mesmo vetor de navegação do resolver (ordem da lista filtrada na página inicial).
+    const resolver = useResolverStore()
+    const taxonomia = useTaxonomiaStore()
+    const idsQuestoes = computed(() => resolver.idsQuestoes)
     const abaAtiva = ref('explicacao')
 
     const previaExpandida = ref(false)
@@ -74,8 +78,14 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         detalhes.value?.teoria ?? []
     )
 
-    const nomeObjeto = computed(() =>
-        OBJETOS_ENEM[detalhes.value?.objeto?.id] ?? 'Não informado'
+        const nomeObjeto = computed(() =>
+        detalhes.value?.objeto?.nome ??
+        OBJETOS_ENEM[detalhes.value?.objeto?.id] ??
+        'Não informado'
+    )
+
+    const palavrasChave = computed(() =>
+        detalhes.value?.palavrasChave ?? []
     )
 
     const conteudo = computed(() =>
@@ -86,13 +96,17 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         detalhes.value?.nivel ?? 'Não informado'
     )
 
+        // Percentual de acertos congelado até existir login: a API devolve null e a
+    // tela mostra "—" (nunca muda quando o usuário demo responde).
     const taxaAcerto = computed(() =>
-        detalhes.value?.taxaAcerto ?? 0
+        detalhes.value?.taxaAcerto ?? null
     )
 
     const deslocamentoAnel = computed(() =>
-        CIRCUNFERENCIA_ANEL * (1 - taxaAcerto.value / 100)
+        CIRCUNFERENCIA_ANEL * (1 - (taxaAcerto.value ?? 0) / 100)
     )
+
+    const forumAberto = computed(() => taxonomia.config.forumAberto)
 
     const totalComentarios = computed(() => comentarios.value.length)
 
@@ -132,17 +146,15 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         let explicacao = null
 
         try {
-            const [questaoCarregada, explicacaoCarregada, ids] = await Promise.all([
+                        const [questaoCarregada, explicacaoCarregada] = await Promise.all([
                 buscarQuestaoPorId(id),
                 buscarExplicacao(id),
-                idsQuestoes.value.length === 0
-                    ? buscarIdsQuestoes()
-                    : Promise.resolve(idsQuestoes.value)
+                resolver.garantirVetor(id).catch(() => {}),
+                taxonomia.carregar()
             ])
 
             dadosQuestao = questaoCarregada
             explicacao = explicacaoCarregada
-            idsQuestoes.value = ids
         } catch {
             dadosQuestao = null
         }
@@ -181,13 +193,18 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
     async function enviarComentario() {
         const texto = novoComentario.value.trim()
 
-        if (!texto || !questaoId.value) return
+                // Comentar exige login (ainda não existe): o servidor também recusa com 401.
+        if (!texto || !questaoId.value || !forumAberto.value) return
 
-        const criado = await enviarComentarioDaQuestao(questaoId.value, texto)
+        try {
+            const criado = await enviarComentarioDaQuestao(questaoId.value, texto)
 
-        comentarios.value.unshift(criado)
+            comentarios.value.unshift(criado)
 
-        novoComentario.value = ''
+            novoComentario.value = ''
+        } catch {
+            // 401 (sem login) ou falha de rede: o texto digitado é mantido.
+        }
     }
 
     return {
@@ -209,12 +226,14 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         alternativas,
         alternativaCorreta,
         teoria,
+        palavrasChave,
         nomeObjeto,
         conteudo,
         nivel,
         taxaAcerto,
         deslocamentoAnel,
-        totalComentarios,
+                totalComentarios,
+        forumAberto,
 
         carregarQuestao,
         carregarComentarios,

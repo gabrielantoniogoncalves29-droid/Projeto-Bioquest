@@ -1,3 +1,4 @@
+<!--
 <template>
     <section class="Banner">
         <div class="topo">
@@ -37,3 +38,4 @@
         font-size: 18px;
     }
 </style>
+-->

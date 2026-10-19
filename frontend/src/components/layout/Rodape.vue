@@ -18,11 +18,11 @@
 
 <style scoped>
 .footer {
-  background-color: var(--cor-primaria);
+  background-color: var(--cor-rodape-fundo);
   border-top:1px ;
   color: var(--cor-texto-invertido);
   padding: 15px 30px;
-  box-shadow: 0px -4px 6px  rgba(28, 75, 47, 0.456);
+  box-shadow: 0px -4px 6px var(--cor-rodape-sombra);
 }
 
 .footer-content {

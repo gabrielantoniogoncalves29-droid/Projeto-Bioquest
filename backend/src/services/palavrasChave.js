@@ -1,9 +1,9 @@
 import { db } from '../db.js'
 import { normalizar, escaparLike } from '../utils/texto.js'
 
-export function sugerir(termo, limite = 6) {
+export function sugerir(termo, limite = 8) {
   const consulta = normalizar(termo)
-  if (!consulta) return []
+  if (consulta.length < 2) return []
 
   const seguro = escaparLike(consulta)
 
@@ -47,13 +47,13 @@ export function definirPalavrasDaQuestao(questaoId, palavras) {
   `)
   const buscarId = db.prepare('SELECT id FROM palavras_chave WHERE normalizada = ?')
   const ligar = db.prepare(`
-    INSERT OR IGNORE INTO questao_palavras_chave (questao_id, palavra_id) VALUES (?, ?)
+    INSERT OR IGNORE INTO questao_palavras_chave (questao_id, palavra_id, ordem) VALUES (?, ?, ?)
   `)
 
-  for (const { palavra, normalizada } of unicas) {
+  unicas.forEach(({ palavra, normalizada }, ordem) => {
     inserirPalavra.run(palavra, normalizada)
-    ligar.run(questaoId, buscarId.get(normalizada).id)
-  }
+    ligar.run(questaoId, buscarId.get(normalizada).id, ordem)
+  })
 
   limparPalavrasSemUso()
 }
@@ -71,6 +71,6 @@ export function palavrasDaQuestao(questaoId) {
       FROM questao_palavras_chave qp
       JOIN palavras_chave p ON p.id = qp.palavra_id
      WHERE qp.questao_id = ?
-     ORDER BY p.palavra
+     ORDER BY qp.ordem, p.palavra
   `).all(questaoId).map(linha => linha.palavra)
 }

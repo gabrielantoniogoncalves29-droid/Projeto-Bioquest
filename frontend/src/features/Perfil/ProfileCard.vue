@@ -87,6 +87,8 @@
 
         </div>
 
+        <h2 class="titulo-secao">Minhas estatísticas</h2>
+
         <div class="stats-row">
 
             <div class="stat stat-azul">
@@ -237,6 +239,19 @@ async function onArquivoSelecionado(evento) {
 </script>
 
 <style scoped>
+
+.titulo-secao{
+
+    margin:0 0 -6px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--cor-primaria-texto);
+
+}
+
 
 .profile-card{
 

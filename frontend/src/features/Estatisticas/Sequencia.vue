@@ -271,7 +271,7 @@ function corProgresso(valor){
         font-size: 46px;
         color: var(--cor-primaria-texto);
         border-radius: 50%;
-        background-color: rgba(186, 255, 186, 0.5);
+        background-color: var(--cor-sequencia-fundo);
         padding: 10px;
         margin-left: 30px;
         margin-right: 30px;
@@ -420,7 +420,7 @@ function corProgresso(valor){
         border-radius: 50%;
         display: flex;
         color: var(--cor-primaria-texto);
-        background-color: rgba(186, 255, 186, 0.5);
+        background-color: var(--cor-sequencia-fundo);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.3s;

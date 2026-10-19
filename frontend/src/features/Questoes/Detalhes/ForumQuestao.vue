@@ -11,9 +11,10 @@ const store = useDetalhesQuestaoStore()
 
 const {
     comentarios,
-    carregandoComentarios: carregando,
+        carregandoComentarios: carregando,
     novoComentario,
-    totalComentarios
+    totalComentarios,
+    forumAberto
 } = storeToRefs(store)
 
 const textareaRef = ref(null)
@@ -90,6 +91,7 @@ function aplicarFormatacao(tipo) {
                 :key="ferramenta.tipo"
                 type="button"
                 class="btn-ferramenta"
+                :disabled="!forumAberto"
                 :title="ferramenta.titulo"
                 @click="aplicarFormatacao(ferramenta.tipo)"
             >
@@ -105,7 +107,8 @@ function aplicarFormatacao(tipo) {
             ref="textareaRef"
             v-model="novoComentario"
             rows="3"
-            placeholder="Ficou com alguma dúvida sobre essa questão? Pergunte por aqui..."
+            :disabled="!forumAberto"
+            :placeholder="forumAberto ? 'Ficou com alguma dúvida sobre essa questão? Pergunte por aqui...' : 'Faça login para comentar'"
         ></textarea>
 
         <div class="nova-mensagem-rodape">
@@ -122,7 +125,7 @@ function aplicarFormatacao(tipo) {
 
             <button
                 class="btn-enviar"
-                :disabled="!novoComentario.trim()"
+                :disabled="!forumAberto || !novoComentario.trim()"
                 @click="store.enviarComentario()"
             >
                 <Send :size="15" />
@@ -151,7 +154,7 @@ function aplicarFormatacao(tipo) {
         class="vazio"
     >
         <MessageSquare :size="26" />
-        <p>Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+        <p>{{ forumAberto ? 'Nenhum comentário ainda. Seja o primeiro a comentar!' : 'Nenhum comentário ainda.' }}</p>
     </div>
 
     <div

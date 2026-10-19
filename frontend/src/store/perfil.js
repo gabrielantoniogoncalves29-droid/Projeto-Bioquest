@@ -129,10 +129,14 @@ export const usePerfilStore = defineStore("perfil", () => {
         return {
             id: questao.id,
             ano: questao.ano,
-            nivel: questao.nivelId ?? questao.nivel,
+                        nivel: questao.nivelId ?? questao.nivel,
+            objetoId: questao.objetoId ?? questao.objeto?.id ?? null,
             conteudoId: questao.conteudoId,
+            conteudoNome: questao.conteudoNome ?? questao.conteudo?.area?.nome ?? '',
+            subconteudoId: questao.subconteudoId ?? null,
             subconteudo: questao.subconteudo,
-            resumo: questao.resumo
+            resumo: questao.resumo,
+            palavrasChave: questao.palavrasChave ?? []
         }
 
     }

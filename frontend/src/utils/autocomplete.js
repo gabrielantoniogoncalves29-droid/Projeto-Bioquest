@@ -1,6 +1,6 @@
 import { buscarPalavrasChave } from '@/services/palavrasChave'
 
-export async function buscarSugestoes(termo, limite = 6) {
+export async function buscarSugestoes(termo, limite = 8, sinal) {
 
     const consulta = (termo ?? '').trim()
 
@@ -8,7 +8,7 @@ export async function buscarSugestoes(termo, limite = 6) {
 
     try {
 
-        return await buscarPalavrasChave(consulta, limite)
+        return await buscarPalavrasChave(consulta, limite, sinal)
 
     } catch {
 

@@ -41,7 +41,7 @@ const { questao, previaExpandida: expandido, alternativas } = storeToRefs(store)
         class="texto-principal"
         :class="{ clamp: !expandido }"
     >
-        {{ questao.enunciado?.textoPrincipal }}
+        {{ questao.enunciado?.textoPrincipal || 'O enunciado desta questão ainda não foi cadastrado.' }}
     </p>
 
     <p

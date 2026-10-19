@@ -33,6 +33,7 @@ onMounted(() => {
 
 
 <section
+  v-if="filtrosStore.buscaRealizada"
   class="lista-questoes"
   :class="filtrosStore.modoVisualizacao"
 >

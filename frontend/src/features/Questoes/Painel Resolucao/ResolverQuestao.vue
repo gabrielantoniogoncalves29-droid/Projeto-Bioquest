@@ -3,17 +3,18 @@ import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-import { buscarQuestaoPorId, buscarIdsQuestoes } from '@/services/questoes'
+import { buscarQuestaoPorId, buscarMinhaResposta } from '@/services/questoes'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useDetalhesStore } from '@/store/resolver/detalhes'
 import { useUiStore } from '@/store/resolver/ui'
+import { usePerfilStore } from '@/store/perfil'
 
-import HeaderQuestao from '@/features/Questoes/Painel Resolução/HeaderQuestão.vue'
-import Enunciado from '@/features/Questoes/Painel Resolução/Enunciado.vue'
-import AlternativaItem from '@/features/Questoes/Painel Resolução/AlternativaItem.vue'
-import QuestaoFooter from '@/features/Questoes/Painel Resolução/QuestaoFooter.vue'
-import PainelResolucao from '@/features/Questoes/Painel Resolução/PainelResolucao.vue'
+import HeaderQuestao from '@/features/Questoes/Painel Resolucao/HeaderQuestao.vue'
+import Enunciado from '@/features/Questoes/Painel Resolucao/Enunciado.vue'
+import AlternativaItem from '@/features/Questoes/Painel Resolucao/AlternativaItem.vue'
+import QuestaoFooter from '@/features/Questoes/Painel Resolucao/QuestaoFooter.vue'
+import PainelResolucao from '@/features/Questoes/Painel Resolucao/PainelResolucao.vue'
 import Header from '@/components/layout/Header.vue'
 
 const route = useRoute()
@@ -22,6 +23,7 @@ const router = useRouter()
 const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
 const painel = useUiStore()
+const perfil = usePerfilStore()
 
 const { questao } = storeToRefs(resolver)
 
@@ -35,44 +37,77 @@ const classeLayout = computed(() =>
         : 'barra-fechada'
 )
 
+// Pré-carrega em segundo plano a questão (e a imagem) vizinha, para a navegação
+// ser instantânea. Usa o cache de services/questoes.js.
+function precarregar(id) {
+    if (!id) return
+
+    buscarQuestaoPorId(id)
+        .then(dados => {
+            const imagem = dados?.enunciado?.imagem
+            if (imagem) new Image().src = imagem
+        })
+        .catch(() => {})
+}
+
+// Se o usuário já respondeu esta questão antes, restaura o estado respondido.
+async function restaurarResposta(id) {
+    try {
+        const anterior = await buscarMinhaResposta(id)
+
+        if (!anterior || Number(route.params.id) !== id) return
+
+        painel.selecionarAlternativa(anterior.alternativa)
+        painel.definirResultado({
+            correta: anterior.correta,
+            resposta: anterior.resposta,
+            comentario: anterior.comentario
+        })
+    } catch {
+        // sem resposta anterior ou sem rede: a tela fica no estado inicial
+    }
+}
+
 watch(
     () => route.params.id,
-
     async (novoId) => {
-
         if (!novoId) return
 
         const id = Number(novoId)
 
         painel.limparAlternativa()
 
-        const [dadosQuestao, ids] = await Promise.all([
-            buscarQuestaoPorId(id),
-            resolver.idsQuestoes.length === 0
-                ? buscarIdsQuestoes()
-                : Promise.resolve(resolver.idsQuestoes)
-        ])
+        let dadosQuestao = null
 
+        try {
+            ;[dadosQuestao] = await Promise.all([
+                buscarQuestaoPorId(id),
+                resolver.garantirVetor(id).catch(() => {}),
+                perfil.carregarPerfil().catch(() => {})
+            ])
+        } catch {
+            dadosQuestao = null
+        }
+
+        // O usuário já navegou para outra questão enquanto esta carregava.
         if (Number(route.params.id) !== id) return
 
         if (!dadosQuestao) {
-
             router.replace('/questoes')
-
             return
-
         }
 
         resolver.carregarQuestao(dadosQuestao)
         detalhesStore.carregarDetalhes(dadosQuestao)
-        resolver.carregarIds(ids)
 
+        if (dadosQuestao.alternativas.length) restaurarResposta(id)
+
+        precarregar(resolver.proximaQuestao)
+        precarregar(resolver.questaoAnterior)
     },
-
     {
         immediate: true
     }
-
 )
 </script>
 

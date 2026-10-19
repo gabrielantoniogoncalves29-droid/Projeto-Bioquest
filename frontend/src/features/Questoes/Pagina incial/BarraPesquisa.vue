@@ -43,28 +43,6 @@
     <div class="acoes">
 
       <button
-        class="btn-filtro"
-        @click="store.toggleFiltros()"
-      >
-
-        <span class="material-icons">
-
-          {{
-            store.mostrarFiltros
-              ? 'expand_less'
-              : 'expand_more'
-          }}
-
-        </span>
-
-        {{ store.mostrarFiltros
-          ? 'Ocultar filtros'
-          : 'Mostrar filtros'
-        }}
-
-      </button>
-
-      <button
         class="btn-limpar"
         @click="store.limparFiltros()"
       >
@@ -96,6 +74,7 @@ const sugestoes = ref([])
 
 let temporizador = null
 let requisicaoAtual = 0
+let controlador = null
 
 watch(
 
@@ -105,8 +84,10 @@ watch(
 
         clearTimeout(temporizador)
 
-        if (!termo.trim()) {
+        // Cancela a requisição anterior que ainda estiver em andamento.
+        controlador?.abort()
 
+        if (!termo.trim()) {
             requisicaoAtual++
             sugestoes.value = []
             return
@@ -116,7 +97,10 @@ watch(
         temporizador = setTimeout(async () => {
 
             const requisicao = ++requisicaoAtual
-            const lista = await buscarSugestoes(termo)
+
+            controlador = new AbortController()
+
+            const lista = await buscarSugestoes(termo, 8, controlador.signal)
 
             if (requisicao === requisicaoAtual) {
                 sugestoes.value = lista
@@ -129,8 +113,8 @@ watch(
 )
 
 onUnmounted(() => {
-
     clearTimeout(temporizador)
+    controlador?.abort()
 
 })
 
@@ -189,6 +173,8 @@ function aoTeclar(evento) {
         evento.preventDefault()
         selecionarSugestao(sugestoes.value[indiceAtivo.value])
 
+    } else if (evento.key === 'Enter') {
+        mostrarSugestoes.value = false
     } else if (evento.key === 'Escape') {
 
         mostrarSugestoes.value = false
@@ -229,7 +215,6 @@ function aoTeclar(evento) {
   transition: .2s;
 
 }
-.btn-filtro:hover,
 .btn-limpar:hover {
 
   border-color: var(--cor-primaria);
@@ -300,7 +285,7 @@ function aoTeclar(evento) {
 
   border-radius: 12px;
 
-  box-shadow: 0 12px 28px rgba(0,0,0,.08);
+  box-shadow: var(--sombra-popover);
 
   max-height: 260px;
 
@@ -391,7 +376,6 @@ function aoTeclar(evento) {
 }
 
 .btn-buscar,
-.btn-filtro,
 .btn-limpar {
 
   height: 48px;
@@ -418,13 +402,6 @@ function aoTeclar(evento) {
 .btn-buscar:hover {
 
   opacity: .95;
-
-}
-
-.btn-filtro {
-  color: var(--cor-texto-secundario);
-  background: var(--cor-fundo-card);
-  border: none;
 
 }
 
@@ -490,7 +467,6 @@ function aoTeclar(evento) {
 
   }
 
-  .btn-filtro,
   .btn-limpar {
 
     flex: 1 1 auto;

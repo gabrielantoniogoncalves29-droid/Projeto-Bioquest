@@ -1,9 +1,9 @@
 <script setup>
 
 import { computed } from 'vue'
-import { ArrowUpRight } from 'lucide-vue-next'
-import { conteudos } from '@/features/Questoes/data/filtros.js'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
+import { useQuestoesStore } from '@/store/questoes_card.js'
+import { useResolverStore } from '@/store/resolver/resolver.js'
 
 const props = defineProps({
   questao: {
@@ -16,14 +16,19 @@ const filtrosStore = useQuestoesFiltrosStore()
 
 const modo = computed(() => filtrosStore.modoVisualizacao)
 
-const conteudo = computed(()=>{
-  return conteudos.find(c => c.id === props.questao.conteudoId)
-})
+const questoesStore = useQuestoesStore()
+const resolver = useResolverStore()
+
+// Ao clicar em "Resolver", o vetor de navegação é gerado a partir da lista
+// exatamente como está filtrada e ordenada na página (antes de navegar).
+function gerarVetor() {
+  resolver.definirVetor(questoesStore.questoesOrdenadas.map(item => item.id))
+}
 
 const icone = computed(()=>{
 
   return new URL(
-    `../icons/${props.questao.conteudoId}.png`,
+    `../icons/${props.questao.conteudoId ?? 1}.png`,
     import.meta.url
   ).href
 
@@ -58,7 +63,7 @@ const icone = computed(()=>{
     </span>
 
     <span class="meta">
-        {{ conteudo?.nome }}
+        {{ questao.conteudoNome }}
     </span>
 
     <span class="meta">
@@ -84,6 +89,7 @@ const icone = computed(()=>{
         <router-link
           :to="`/resolver/${questao.id}`"
           class="btn"
+          @click="gerarVetor"
         >
 
           Resolver

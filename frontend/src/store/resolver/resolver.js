@@ -1,184 +1,125 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { buscarIdsQuestoes } from '@/services/questoes'
 
+const CHAVE_VETOR = 'bioquest:vetor-navegacao'
 
-export const useResolverStore = defineStore(
-'resolver',
-()=>{
+function lerVetorSalvo() {
 
+  try {
 
-const questao = ref(null)
+    const bruto = JSON.parse(sessionStorage.getItem(CHAVE_VETOR))
 
+    return Array.isArray(bruto) && bruto.every(Number.isInteger) ? bruto : []
 
-const idsQuestoes = ref([])
+  } catch {
 
-const indiceAtual = computed(()=>{
+    return []
 
+  }
 
-if(!questao.value)
-return -1
+}
 
+function gravarVetor(ids) {
 
-return idsQuestoes.value.indexOf(
-    questao.value.id
-)
+  try {
 
+    sessionStorage.setItem(CHAVE_VETOR, JSON.stringify(ids))
 
-})
+  } catch {
 
+    // sessionStorage indisponível: o vetor continua só na memória.
 
-const navegacao = computed(() => ({
+  }
 
-    atual:
-        indiceAtual.value === -1
-            ? 0
-            : indiceAtual.value + 1,
+}
+
+export const useResolverStore = defineStore('resolver', () => {
+
+  const questao = ref(null)
+
+  // Vetor de navegação: ids na ordem da lista filtrada/ordenada da página inicial.
+  // Persistido em sessionStorage para sobreviver a F5 e ao voltar/avançar.
+  const idsQuestoes = ref(lerVetorSalvo())
+
+  function definirVetor(ids) {
+
+    idsQuestoes.value = [...ids]
+    gravarVetor(idsQuestoes.value)
+
+  }
+
+  // Se o id aberto não está no vetor (acesso direto a /resolver/:id, ou vetor
+  // antigo), usa o vetor global por serial como reserva.
+  async function garantirVetor(id) {
+
+    if (idsQuestoes.value.includes(Number(id))) return
+
+    definirVetor(await buscarIdsQuestoes())
+
+  }
+
+  const indiceAtual = computed(() => {
+
+    if (!questao.value) return -1
+
+    return idsQuestoes.value.indexOf(questao.value.id)
+
+  })
+
+  // "x de N": x é a posição da questão no vetor (1 = primeira), não o id.
+  const navegacao = computed(() => ({
+
+    atual: indiceAtual.value === -1 ? 0 : indiceAtual.value + 1,
 
     total: idsQuestoes.value.length
 
-}))
+  }))
 
-function carregarQuestao(dados){
+  const questaoAnterior = computed(() => {
+
+    if (indiceAtual.value <= 0) return null
+
+    return idsQuestoes.value[indiceAtual.value - 1]
+
+  })
+
+  const proximaQuestao = computed(() => {
+
+    if (
+      indiceAtual.value === -1 ||
+      indiceAtual.value >= idsQuestoes.value.length - 1
+    ) return null
+
+    return idsQuestoes.value[indiceAtual.value + 1]
+
+  })
+
+  function carregarQuestao(dados) {
 
     questao.value = dados
 
-}
+  }
 
-function carregarIds(ids){
+  function limpar() {
 
-    idsQuestoes.value = ids
+    questao.value = null
 
-}
+  }
 
-
-const questaoAnterior = computed(()=>{
-
-
-if(indiceAtual.value <= 0)
-return null
-
-
-return idsQuestoes.value[
-    indiceAtual.value - 1
-]
-
-
-})
-
-
-
-
-
-
-const proximaQuestao = computed(()=>{
-
-
-if(
-
-indiceAtual.value === -1 ||
-
-indiceAtual.value >= idsQuestoes.value.length - 1
-
-)
-
-return null
-
-
-
-return idsQuestoes.value[
-
-indiceAtual.value + 1
-
-]
-
-
-})
-
-
-
-
-
-
-function limpar(){
-
-questao.value = null
-
-}
-
-
-
-
-return {
+  return {
 
     questao,
-
     idsQuestoes,
-
     navegacao,
-
-    carregarQuestao,
-
-    carregarIds,
-
     questaoAnterior,
-
     proximaQuestao,
 
+    definirVetor,
+    garantirVetor,
+    carregarQuestao,
     limpar
 
-}
-
-
-
-})
-
-
-
-export const useIndiceStore =
-defineStore(
-'questoes',
-()=>{
-
-
-const questoes = ref([])
-
-
-const questaoAtual = ref(null)
-
-
-
-function carregarQuestoes(lista){
-
- questoes.value = lista
-
-}
-
-
-
-function selecionarQuestao(id){
-
-
-questaoAtual.value =
-questoes.value.find(
- q=>q.id === Number(id)
-)
-
-
-}
-
-
-
-return{
-
-questoes,
-
-questaoAtual,
-
-carregarQuestoes,
-
-selecionarQuestao
-
-}
-
+  }
 
 })

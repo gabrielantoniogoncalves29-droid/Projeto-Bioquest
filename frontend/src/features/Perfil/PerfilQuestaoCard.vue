@@ -1,7 +1,7 @@
 <script setup>
 
 import { computed } from 'vue'
-import { conteudos } from '@/features/Questoes/data/filtros.js'
+import { useTaxonomiaStore } from '@/store/taxonomia.js'
 import { usePerfilStore } from '@/store/perfil'
 
 const props = defineProps({
@@ -15,8 +15,9 @@ const perfil = usePerfilStore()
 
 const questao = computed(() => perfil.obterQuestaoPorId(props.id))
 
-const conteudo = computed(() => {
-  return conteudos.find(c => c.id === questao.value?.conteudoId)
+const taxonomia = useTaxonomiaStore()
+const nomeConteudo = computed(() => {
+  return questao.value?.conteudoNome || taxonomia.nomeDoConteudo(questao.value?.conteudoId)
 })
 
 const icone = computed(() => {
@@ -51,7 +52,7 @@ const icone = computed(() => {
           </span>
 
           <span class="meta">
-            {{ conteudo?.nome }}
+            {{ nomeConteudo }}
           </span>
 
           <span class="meta">

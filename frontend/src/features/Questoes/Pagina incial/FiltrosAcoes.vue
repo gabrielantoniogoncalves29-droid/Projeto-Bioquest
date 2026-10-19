@@ -1,7 +1,14 @@
 <script setup>
 import { useQuestoesStore } from '@/store/questoes_card.js'
+import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
 const store = useQuestoesStore()
+const filtrosStore = useQuestoesFiltrosStore()
+
+function buscar() {
+  filtrosStore.buscaRealizada = true
+  store.carregarQuestoes(true)
+}
 </script>
 <template>
 
@@ -9,7 +16,7 @@ const store = useQuestoesStore()
 
     <button
       class="btn-aplicar"
-      @click="store.carregarQuestoes()"
+      @click="buscar"
     >
 
       <span class="material-icons">

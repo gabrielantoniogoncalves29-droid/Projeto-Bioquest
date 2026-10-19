@@ -107,8 +107,7 @@ const mostrarSenha = ref(false)
 function entrar(){
 
    
-    console.log(email.value)
-    console.log(senha.value)
+    // TODO (login): autenticar com e-mail e senha
 
 }
 
@@ -220,7 +219,7 @@ label{
 
     border-color:var(--cor-primaria);
 
-    box-shadow:0 0 0 4px rgba(45,106,79,.04);
+    box-shadow:0 0 0 4px var(--cor-foco-login);
 
 }
 

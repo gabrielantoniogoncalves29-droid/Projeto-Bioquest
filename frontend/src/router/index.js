@@ -5,7 +5,7 @@ import Estatisticas from '@/pages/Estatisticas.vue';
 import Ajuda from '@/pages/Ajuda.vue';
 import Perfil from '@/pages/Perfil.vue';
 import Login from '@/pages/Login.vue'
-import Resolver from '@/features/Questoes/Painel Resolução/ResolverQuestao.vue';
+import Resolver from '@/features/Questoes/Painel Resolucao/ResolverQuestao.vue';
 import DetalhesQuestao from '@/features/Questoes/Detalhes/DetalhesQuestao.vue';
 const routes = [
 {

@@ -48,10 +48,10 @@ async function responder() {
             resultado.acertos
         )
 
-    } catch {
-
-        ui.definirResultado(null)
-
+        } catch (erro) {
+        ui.definirErro(
+            erro.response?.data?.erro ?? 'Não foi possível enviar a resposta. Tente de novo.'
+        )
     } finally {
 
         ui.respondendo = false
@@ -91,11 +91,38 @@ function saibaMais() {
         Saiba mais sobre a questão
       </button>
 
+      <span
+        v-if="ui.resultado"
+        class="feedback"
+        :class="ui.resultado.correta ? 'feedback-acerto' : 'feedback-erro'"
+      >
+        {{ ui.resultado.correta ? 'Acertou!' : `Errou. A alternativa correta é a ${ui.resultado.resposta}.` }}
+      </span>
+
+      <span
+        v-else-if="ui.erro"
+        class="feedback feedback-erro"
+      >
+        {{ ui.erro }}
+      </span>
+
+      <button
+        v-if="ui.resultado?.comentario"
+        class="btn-saiba-mais"
+        @click="saibaMais"
+      >
+        Ver resolução comentada
+      </button>
+
     </div>
 
     <div class="grupo-direita">
 
-      <button class="btn-responder" @click="responder">
+      <button
+        class="btn-responder"
+        :disabled="!ui.alternativaSelecionada || ui.respondendo || !!ui.resultado"
+        @click="responder"
+      >
         Responder
       </button>
 
@@ -253,6 +280,34 @@ function saibaMais() {
 
     transition: all .15s ease;
 }
+.btn-responder:disabled {
+
+  opacity: .45;
+
+  cursor: not-allowed;
+
+}
+
+.feedback {
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+.feedback-acerto {
+
+  color: var(--cor-acerto);
+
+}
+
+.feedback-erro {
+
+  color: var(--cor-erro);
+
+}
+
 .btn-responder:hover ,
 .btn-proxima:hover {
 

@@ -1,3 +1,4 @@
+<!--
 <template>
     <section>
         <div class="conteiner-perguntas">
@@ -180,3 +181,4 @@
         rotate: 180deg;
     }
 </style>
+-->

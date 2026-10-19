@@ -29,7 +29,6 @@ body {
 }
 
 .topo h1 { margin: 0; font-size: 1.1rem; }
-.aviso { font-size: .8rem; opacity: .85; }
 
 .layout {
   display: grid;
@@ -150,3 +149,46 @@ button:disabled { opacity: .6; cursor: wait; }
   .layout { grid-template-columns: 1fr; }
   .lista { position: static; max-height: 360px; }
 }
+
+.filtros-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filtros-lista select { margin-top: 0; }
+.lista-topo label.check { margin: 0; }
+
+#questoes .pendencias { display: block; font-size: .7rem; color: var(--vermelho); margin-top: 2px; }
+#questoes li.completa .pendencias { color: var(--verde); }
+
+.planilha-dados { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; font-size: .85rem; }
+.planilha-dados dt { color: var(--suave); }
+.planilha-dados dd { margin: 0; }
+
+.abas { display: flex; gap: 6px; flex-wrap: wrap; }
+.abas button { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .35); padding: 6px 14px; }
+.abas button:hover { background: rgba(255, 255, 255, .12); }
+.abas button.ativa { background: #fff; color: var(--verde-escuro); border-color: #fff; font-weight: 600; }
+
+.layout.modo-adicionar { grid-template-columns: 1fr; max-width: 980px; margin: 0 auto; }
+.layout.modo-adicionar .lista { display: none; }
+
+.vista-planilha { padding: 16px; }
+.planilha-filtros { display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 8px; }
+.planilha-filtros input, .planilha-filtros select { margin-top: 0; }
+
+.tabela-caixa { overflow: auto; max-height: calc(100vh - 190px); background: var(--painel); border: 1px solid var(--borda); border-radius: 10px; }
+.tabela { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.tabela th, .tabela td { padding: 7px 10px; border-bottom: 1px solid var(--borda); text-align: left; vertical-align: top; }
+.tabela thead th { position: sticky; top: 0; background: #e8efeb; font-weight: 600; white-space: nowrap; z-index: 1; }
+.tabela thead th[data-ordem] { cursor: pointer; user-select: none; }
+.tabela thead th[data-ordem]:hover { background: #dce7e1; }
+.tabela tbody tr:hover { background: #f3f8f5; }
+.tabela td.num { white-space: nowrap; font-weight: 600; }
+.tabela td.obs { min-width: 180px; }
+.tabela .ok { color: var(--verde); }
+.tabela .falta { color: var(--vermelho); }
+.tabela button { padding: 3px 10px; font-size: .78rem; }
+
+@media (max-width: 900px) {
+  .planilha-filtros { grid-template-columns: 1fr 1fr; }
+  .planilha-filtros input { grid-column: 1 / -1; }
+}
+
+[hidden] { display: none !important; }

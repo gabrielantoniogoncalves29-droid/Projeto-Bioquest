@@ -88,7 +88,7 @@ const nivel = computed(()=>
 
 const taxaAcerto = computed(()=>
 
-    detalhes.value?.taxaAcerto ?? 0
+    detalhes.value?.taxaAcerto ?? null
 
 )
 
@@ -303,7 +303,7 @@ function irParaForum(){
 
         </svg>
 
-        <span class="anel-texto">{{ taxaAcerto }}%</span>
+        <span class="anel-texto">{{ taxaAcerto === null ? '—' : `${taxaAcerto}%` }}</span>
 
     </div>
 

@@ -15,10 +15,21 @@ const selecionada = computed(
     () => ui.alternativaSelecionada
 )
 
+// Depois de responder a escolha fica travada e as cores mostram o resultado.
+const resultado = computed(() => ui.resultado)
+
 function selecionarAlternativa(letra) {
-
+    if (resultado.value) return
     ui.selecionarAlternativa(letra)
+}
 
+// Marcada e correta = verde; marcada e errada = vermelha (e a correta fica verde).
+function ehCorreta(letra) {
+    return !!resultado.value && resultado.value.resposta === letra
+}
+
+function ehErrada(letra) {
+    return !!resultado.value && selecionada.value === letra && resultado.value.resposta !== letra
 }
 
 </script>
@@ -36,11 +47,11 @@ function selecionarAlternativa(letra) {
     :key="alternativa.letra"
 
     class="alternativa"
-
     :class="{
-
-      selecionada: selecionada === alternativa.letra
-
+      selecionada: !resultado && selecionada === alternativa.letra,
+      correta: ehCorreta(alternativa.letra),
+      errada: ehErrada(alternativa.letra),
+      bloqueada: !!resultado
     }"
 
     @click="selecionarAlternativa(alternativa.letra)"
@@ -51,12 +62,10 @@ function selecionarAlternativa(letra) {
     <div
 
       class="letra"
-
       :class="{
-
-        'letra-selecionada':
-        selecionada === alternativa.letra
-
+        'letra-selecionada': !resultado && selecionada === alternativa.letra,
+        'letra-correta': ehCorreta(alternativa.letra),
+        'letra-errada': ehErrada(alternativa.letra)
       }"
 
     >
@@ -191,6 +200,52 @@ function selecionarAlternativa(letra) {
 .letra-selecionada {
 
   background: var(--cor-primaria);
+
+  color: var(--cor-texto-invertido);
+
+}
+
+
+.alternativa.bloqueada,
+.alternativa.bloqueada:hover {
+
+  cursor: default;
+
+}
+
+.alternativa.correta,
+.alternativa.correta:hover {
+
+  background: var(--cor-acerto-fundo);
+
+  border-color: var(--cor-acerto);
+
+}
+
+.alternativa.errada,
+.alternativa.errada:hover {
+
+  background: var(--cor-erro-fundo);
+
+  border-color: var(--cor-erro);
+
+}
+
+.letra.letra-correta {
+
+  background: var(--cor-acerto);
+
+  border-color: var(--cor-acerto);
+
+  color: var(--cor-texto-invertido);
+
+}
+
+.letra.letra-errada {
+
+  background: var(--cor-erro);
+
+  border-color: var(--cor-erro);
 
   color: var(--cor-texto-invertido);
 

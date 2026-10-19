@@ -24,3 +24,15 @@ export function resumirTexto(texto, limite = 280) {
   const ultimoEspaco = corte.lastIndexOf(' ')
   return `${corte.slice(0, ultimoEspaco > 0 ? ultimoEspaco : limite)}…`
 }
+
+// Remove o trecho entre parênteses: "Citoplasma e organelas (Citoplasma)" -> "Citoplasma e organelas".
+export function limparParenteses(texto) {
+  return String(texto ?? '').replace(/\s*\([^)]*\)/g, '').trim()
+}
+
+// Palavras-chave de uma questão da planilha: o conteúdo (sem parênteses)
+// seguido de cada termo das observações, separados SOMENTE por ";" (vírgulas
+// fazem parte do termo, ex.: "Câncer, mitose").
+export function termosDaPlanilha(conteudoNome, observacoes) {
+  return [limparParenteses(conteudoNome), ...listaDeTexto(observacoes, ';')].filter(Boolean)
+}

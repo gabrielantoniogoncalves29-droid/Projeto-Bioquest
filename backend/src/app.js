@@ -7,6 +7,7 @@ import { erroHandler, naoEncontradoHandler } from './middleware/erros.js'
 import questoesRouter from './routes/questoes.js'
 import palavrasChaveRouter from './routes/palavrasChave.js'
 import perfilRouter from './routes/perfil.js'
+import catalogoRouter from './routes/catalogo.js'
 import adminRouter from './routes/admin.js'
 
 export function criarApp() {
@@ -43,6 +44,7 @@ export function criarApp() {
   )
 
   app.use('/api', usuarioAtual)
+  app.use('/api', catalogoRouter)
   app.use('/api/questoes', questoesRouter)
   app.use('/api/palavras-chave', palavrasChaveRouter)
   app.use('/api/perfil', perfilRouter)

@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "seed": "node db/seed.js",
-    "seed:reset": "node db/seed.js --reset"
+    "seed": "node db/importar-planilha.js",
+    "seed:reset": "node db/importar-planilha.js --reset",
+    "exportar": "node db/exportar-questoes.js",
+    "verificar": "node scripts/verificar-api.mjs"
   },
   "keywords": [],
   "author": "",

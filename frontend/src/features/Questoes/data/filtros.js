@@ -1,3 +1,5 @@
+// Dados de reserva: a fonte dos filtros é GET /api/taxonomia (ver store/taxonomia.js).
+// Este arquivo só é usado se a API falhar, além da lista de "estado".
 export const anos = [
   {
     id:2025,
@@ -298,6 +300,14 @@ export const estado = [
   {
     id:2,
     nome:"Salvas"
+  },
+  {
+    id:3,
+    nome:"Marcadas para revisão"
+  },
+  {
+    id:4,
+    nome:"Não respondidas"
   }
 ]
 

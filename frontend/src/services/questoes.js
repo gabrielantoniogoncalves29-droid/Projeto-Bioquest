@@ -28,7 +28,20 @@ function memorizar(mapa, id, buscar) {
 
 }
 
-export function buscarQuestoes() {
+// Descarta os caches em memória (a lista, ids e cada questão), para que edições
+// feitas no /admin apareçam sem recarregar a página.
+export function limparCacheQuestoes() {
+
+  listaEmCache = null
+  idsEmCache = null
+  questoesEmCache.clear()
+  explicacoesEmCache.clear()
+
+}
+
+export function buscarQuestoes(forcar = false) {
+
+  if (forcar) limparCacheQuestoes()
 
   if (listaEmCache) return Promise.resolve(listaEmCache)
 
@@ -118,6 +131,31 @@ export function buscarExplicacao(id) {
     return data
 
   })
+
+}
+
+export async function buscarTaxonomia() {
+
+  const { data } = await api.get('/taxonomia')
+
+  return data
+
+}
+
+export async function buscarConfig() {
+
+  const { data } = await api.get('/config')
+
+  return data
+
+}
+
+// Resposta que o usuário já deu antes (ou null), para restaurar a tela.
+export async function buscarMinhaResposta(id) {
+
+  const { data } = await api.get(`/questoes/${Number(id)}/minha-resposta`)
+
+  return data
 
 }
 
