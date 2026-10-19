@@ -1,21 +1,81 @@
 import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
+
+const CHAVE_ARMAZENAMENTO = 'bioquest-tema'
+const PREFERENCIAS = ['claro', 'escuro', 'sistema']
+
+function lerPreferenciaSalva() {
+
+    try {
+
+        const salva = localStorage.getItem(CHAVE_ARMAZENAMENTO)
+
+        return PREFERENCIAS.includes(salva) ? salva : 'sistema'
+
+    } catch {
+
+        return 'sistema'
+
+    }
+
+}
+
+function gravarPreferencia(valor) {
+
+    try {
+
+        localStorage.setItem(CHAVE_ARMAZENAMENTO, valor)
+
+    } catch {
+
+        return
+
+    }
+
+}
 
 export const useTemaStore = defineStore('tema', () => {
 
-    const temaSalvo = localStorage.getItem('bioquest-tema')
+    const preferencia = ref(lerPreferenciaSalva())
 
-    const tema = ref(temaSalvo === 'escuro' ? 'escuro' : 'claro')
+    const consultaEscuro = typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia('(prefers-color-scheme: dark)')
+        : null
 
-    function aplicarNoDocumento() {
+    const sistemaEscuro = ref(Boolean(consultaEscuro?.matches))
 
-        document.documentElement.setAttribute('data-tema', tema.value)
+    consultaEscuro?.addEventListener?.('change', (evento) => {
+
+        sistemaEscuro.value = evento.matches
+
+    })
+
+    const tema = computed(() => {
+
+        if (preferencia.value === 'sistema') {
+
+            return sistemaEscuro.value ? 'escuro' : 'claro'
+
+        }
+
+        return preferencia.value
+
+    })
+
+    function definirPreferencia(valor) {
+
+        if (PREFERENCIAS.includes(valor)) {
+
+            preferencia.value = valor
+            gravarPreferencia(valor)
+
+        }
 
     }
 
     function alternarTema() {
 
-        tema.value = tema.value === 'claro' ? 'escuro' : 'claro'
+        definirPreferencia(tema.value === 'claro' ? 'escuro' : 'claro')
 
     }
 
@@ -25,8 +85,7 @@ export const useTemaStore = defineStore('tema', () => {
 
         (valor) => {
 
-            localStorage.setItem('bioquest-tema', valor)
-            aplicarNoDocumento()
+            document.documentElement.setAttribute('data-tema', valor)
 
         },
 
@@ -36,7 +95,9 @@ export const useTemaStore = defineStore('tema', () => {
 
     return {
 
+        preferencia,
         tema,
+        definirPreferencia,
         alternarTema
 
     }

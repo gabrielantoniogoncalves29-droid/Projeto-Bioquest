@@ -19,7 +19,6 @@
   width: 100%;
   height: 500px;
 
-  /* Cores do gradiente e da máscara (modo claro) */
   --banner-topo: #f8faf982;
   --banner-base: #f8faf9;
   --banner-mascara: transparent;
@@ -48,11 +47,35 @@
   top: 0;
   overflow: hidden;
 }
-/* Modo escuro: gradiente na cor do fundo escuro + máscara preta translúcida */
 [data-tema="escuro"] .banner {
-  --banner-topo: #2b2b291a;
-  --banner-base: #2b2b29e4;
-  --banner-mascara: rgba(0, 0, 0, 0.131);
+  position: relative;
+  isolation: isolate;
+  background-image: none;
+  background-color: var(--cor-fundo-pagina);
+}
+
+[data-tema="escuro"] .banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url('@/assets/Banner_top_escuro.png') center / cover no-repeat;
+}
+
+[data-tema="escuro"] .banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, .35) 0%, rgba(0, 0, 0, 0) 14%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, var(--cor-fundo-pagina) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, .62) 0%, rgba(0, 0, 0, .5) 55%, rgba(0, 0, 0, .38) 100%);
+}
+
+[data-tema="escuro"] .banner_description h1,
+[data-tema="escuro"] .banner_description h2 {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .55);
 }
 
   .banner_description{
@@ -94,7 +117,6 @@
     background-color: var(--cor-primaria-hover);
   }
 
-/* ===== Responsivo (celular) ===== */
 @media (max-width: 768px){
   .banner{
     height: auto;
@@ -112,7 +134,6 @@
     font-size: 0.95rem;
     margin: 0;
   }
-  /* o <br> do texto atrapalha em telas pequenas: deixa o texto quebrar sozinho */
   .banner_description h1 br,
   .banner_description h2 br{
     display: none;

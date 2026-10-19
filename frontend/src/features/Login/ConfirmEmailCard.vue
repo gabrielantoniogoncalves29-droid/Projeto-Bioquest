@@ -61,7 +61,7 @@ const auth = useAuthStore()
 function reenviarEmail(){
 
 
-    console.log("Reenviando para:", auth.emailCadastro)
+    // TODO (login): reenviar o e-mail de confirmação
 
 }
 
@@ -83,7 +83,7 @@ function reenviarEmail(){
 
     border-radius:18px;
 
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
+    box-shadow:var(--sombra-modal);
 
     backdrop-filter:blur(8px);
 

@@ -1,20 +1,17 @@
-import comentarios from '@/data/comentarios.json'
+import { api } from '@/services/api'
 
+export async function buscarComentariosPorQuestao(id) {
 
-export function buscarComentariosPorQuestao(id){
+  const { data } = await api.get(`/questoes/${Number(id)}/comentarios`)
 
-    return new Promise((resolve) => {
+  return data
 
-        setTimeout(() => {
+}
 
-            const registro = comentarios.find(
-                item => item.questaoId === Number(id)
-            )
+export async function enviarComentarioDaQuestao(id, texto) {
 
-            resolve(registro?.comentarios ? [...registro.comentarios] : [])
+  const { data } = await api.post(`/questoes/${Number(id)}/comentarios`, { texto })
 
-        }, 300)
-
-    })
+  return data
 
 }

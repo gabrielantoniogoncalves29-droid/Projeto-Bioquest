@@ -152,7 +152,7 @@ function irProxima() {
 
       <span class="badge-ano">
 
-        {{ questao.ano }}
+        {{ questao.rotulo }}
 
       </span>
 
@@ -601,7 +601,6 @@ function irProxima() {
 
 }
 
-/* Mobile: navegação em cima; banca + ano à esquerda e salvar/revisar à direita, na mesma linha */
 @container questao (max-width: 760px) {
 
   .header-linha {

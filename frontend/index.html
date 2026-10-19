@@ -2,10 +2,22 @@
 <html lang="">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="public/b__1_-removebg-preview.ico">
+    <link rel="icon" type="image/png" href="/favicon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <meta name="color-scheme" content="light dark">
+    <script>
+      (function () {
+        try {
+          var salvo = localStorage.getItem('bioquest-tema');
+          var escuro = salvo === 'escuro' || (salvo !== 'claro' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-tema', escuro ? 'escuro' : 'claro');
+        } catch (e) {}
+      })();
+    </script>
     <title>BioQuest</title>
   </head>
   <body>

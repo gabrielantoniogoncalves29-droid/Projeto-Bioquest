@@ -24,7 +24,10 @@ function selecionar(valor) {
 
 <template>
 
-<section class="ordenacao">
+<section
+  v-if="filtrosStore.buscaRealizada && !store.carregando && store.totalQuestoes > 0"
+  class="ordenacao"
+>
 
   <div class="resultado">
     <strong>{{ store.totalQuestoes }}</strong>
@@ -291,7 +294,7 @@ function selecionar(valor) {
 
   border-color:var(--cor-primaria);
 
-  box-shadow:0 0 0 3px rgba(13,107,77,.10);
+  box-shadow:0 0 0 3px var(--cor-foco);
 
 }
 
@@ -333,7 +336,7 @@ function selecionar(valor) {
 
   overflow:hidden;
 
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  box-shadow:var(--sombra-popover);
 
   z-index:100;
 
@@ -436,7 +439,7 @@ function selecionar(valor) {
 
     overflow:hidden;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    box-shadow:var(--sombra-popover);
 
     z-index:100;
 

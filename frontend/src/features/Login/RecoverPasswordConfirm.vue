@@ -62,9 +62,7 @@ const auth = useAuthStore()
 function reenviar(){
 
 
-    // auth.enviarEmailRecuperacao()
-
-    console.log("Reenviando para:", auth.email)
+    // TODO (login): reenviar o e-mail de recuperação
 
 }
 

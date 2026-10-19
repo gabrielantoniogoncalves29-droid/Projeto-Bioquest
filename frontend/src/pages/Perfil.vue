@@ -4,7 +4,13 @@
 
     <ProfileCard />
 
-    <QuestionList />
+    <div class="secao-questoes">
+
+      <h2 class="titulo-secao">Minhas questões</h2>
+
+      <QuestionList />
+
+    </div>
 
   </main>
 </template>
@@ -20,7 +26,7 @@ const perfil = usePerfilStore()
 
 onMounted(() => {
 
-  perfil.carregarPerfil()
+  perfil.carregarPerfil(true)
 
 })
 </script>
@@ -54,6 +60,28 @@ onMounted(() => {
     max-width:1600px;
 
     margin:0 auto;
+
+}
+
+.secao-questoes{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.titulo-secao{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--cor-primaria-texto);
 
 }
 

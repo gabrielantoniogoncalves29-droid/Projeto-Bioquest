@@ -101,7 +101,7 @@ async function confirmar() {
     justify-content:center;
     align-items:center;
 
-    background:rgba(15,23,20,0.45);
+    background:var(--cor-overlay);
     backdrop-filter:blur(3px);
 
     z-index:1000;
@@ -133,7 +133,7 @@ async function confirmar() {
 
     border-radius:16px;
 
-    box-shadow:0 16px 40px rgba(0,0,0,.18);
+    box-shadow:var(--sombra-modal);
 
     box-sizing:border-box;
 

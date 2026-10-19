@@ -1,9 +1,6 @@
 <template>
 
-  <div
-    v-show="store.mostrarFiltros"
-    class="painel-filtros"
-  >
+  <div class="painel-filtros">
 
     <div class="coluna">
 
@@ -46,11 +43,8 @@
 
 <script setup>
 
-import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 import FiltrosSubconteudo from './FiltroSubconteudo.vue'
 import FiltrosAccordion from './Filtros.vue'
-
-const store = useQuestoesFiltrosStore()
 
 </script>
 

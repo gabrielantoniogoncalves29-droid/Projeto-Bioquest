@@ -9,30 +9,6 @@ const lista = ref(["", "", "01", "02", "03", "04", "05", "06", "07", "08", "09",
 
 const diaSelecionado = ref(null)
 
-const cardAtual = ref(0)
-const transicaoCard = ref('deslizar-proximo')
-
-function proximoCard() {
-  if (cardAtual.value < cards.length - 1) {
-    transicaoCard.value = 'deslizar-proximo'
-    cardAtual.value++
-  }
-}
-
-function cardAnterior() {
-  if (cardAtual.value > 0) {
-    transicaoCard.value = 'deslizar-anterior'
-    cardAtual.value--
-  }
-}
-
-function selecionarCard(indice) {
-  if (indice !== cardAtual.value) {
-    transicaoCard.value = indice > cardAtual.value ? 'deslizar-proximo' : 'deslizar-anterior'
-    cardAtual.value = indice
-  }
-}
-
 
 function diaVazio(dia){
     return dia === ""
@@ -81,38 +57,6 @@ const atividades = [
     }
 ]
 
-const cards = [
-    {
-        titulo: 'Moléculas, células e tecidos',
-        icone: iconeCitologia
-    },
-
-    {
-        titulo: 'Hereditariedade e diversidade da vida',
-        icone: iconeVirus
-    },
-
-    {
-        titulo: 'Identidade dos seres vivos',
-        icone: iconeBioquimica
-    },
-
-    {
-        titulo: 'Ecologia e Ciências Ambientais',
-        icone: iconeEcologia
-    },
-
-    {
-        titulo: 'Origem e evolução da vida',
-        icone: iconeVirus
-    },
-
-    {
-        titulo: 'Qualidade de vida das populações humanas',
-        icone: iconeEcologia
-    }
-]
-
 function corProgresso(valor){
     if(valor>=60){
         return "rgb(10, 153, 10)"
@@ -130,6 +74,7 @@ function corProgresso(valor){
 
 <template>
     <div class="content">
+        <div>
             <div class="sequencia">
                 <div class="topo">
                     <span class="material-symbols-outlined calendar">calendar_month</span>
@@ -155,7 +100,7 @@ function corProgresso(valor){
                         <li>Sáb</li>
                     </ul>
                     <ul class="lista-datas">
-                        <li v-for="dia in lista" :key="dia"
+                        <li v-for="dia in lista" :key="dia" 
                         @click="selecionado(dia)"
                         :class="{ativo: diaSelecionado === dia}"
                         >
@@ -164,46 +109,21 @@ function corProgresso(valor){
                     </ul>
                 </div>
                 <div class="ofensiva">
-                    <span class="material-icons fire">local_fire_department</span>
-                    <div class="ofensiva-info">
+                <span class="material-icons fire">local_fire_department</span>
+                <div class="ofensiva-info">
                     <h2>Sequência atual</h2>
                     <h1>7 dias</h1>
                     <p>Continue assim</p>
                 </div>
-            </div>
-            <div class="atividade-semana">
-                    <h3>ATIVIDADE DA SEMANA</h3>
-                    <div class="dias-semana">
-                        <div>
-                            <span class="dia">Seg</span>
-                            <span class="bolinha ativo"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Ter</span>
-                            <span class="bolinha"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Qua</span>
-                            <span class="bolinha ativo"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Qui</span>
-                            <span class="bolinha ativo"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Sex</span>
-                            <span class="bolinha ativo"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Sáb</span>
-                            <span class="bolinha"></span>
-                        </div>
-                        <div>
-                            <span class="dia">Dom</span>
-                            <span class="bolinha"></span>
-                        </div>
-                    </div>
                 </div>
+            </div>
+            <div class="ajuda">
+                <span class="material-symbols-outlined">e911_emergency</span>
+                <div class="help">
+                    <p>Para mais informacões acesse <br>a pagina de ajuda</p>
+                    <button type="button">Ajuda</button>
+                </div>
+            </div>
         </div>
         <div class="lado-direito">
             <div class="info-geral">
@@ -233,7 +153,6 @@ function corProgresso(valor){
                     </div>
             </div>
 
-
             <div class="atividades">
                 <div class="atividades-info">
                     <span class="material-symbols-outlined livro">import_contacts</span>
@@ -242,7 +161,6 @@ function corProgresso(valor){
                         <router-link to="/questoes" class="link-questoes">Ver todas as questões <span class="material-icons">arrow_forward</span></router-link>
                     </div>
                 </div>
-
 
                 <div class="conteiner-atividades"
                      v-for="atividade in atividades"
@@ -274,7 +192,6 @@ function corProgresso(valor){
                 </div>
             </div>
 
-
         </div>
         <div class="lado-esquerdo">
             <div class="grafico">
@@ -298,314 +215,87 @@ function corProgresso(valor){
                 </div>
             </div>
             <div class="evolucao">
-                <h3 class="tituloCard">CONTINUE ESTUDANDO</h3>
-                <div class="evolucao-controles">
-                    <button
-                        class="seta seta-esquerda"
-                        type="button"
-                        aria-label="Ver assunto anterior"
-                        :disabled="cardAtual === 0"
-                        @click="cardAnterior"
-                    >
-                        <span class="material-icons" aria-hidden="true">chevron_left</span>
-                    </button>
-                    <Transition :name="transicaoCard" mode="out-in">
-                        <article :key="cardAtual" class="evolucao-card">
-                            <div class="evolucao-card-conteudo">
-                                <div class="icone-card-wrap">
-                                    <img :src="cards[cardAtual].icone" :alt="''" class="icone-card">
-                                </div>
-                                <div class="evolucao-card-texto">
-                                    <span class="evolucao-etiqueta">ASSUNTO EM DESTAQUE</span>
-                                    <h4>{{ cards[cardAtual].titulo }}</h4>
-                                </div>
-                            </div>
-                            <router-link to="/questoes" class="btn-card">
-                                Explorar assunto
-                                <span class="material-icons icon" aria-hidden="true">arrow_forward</span>
-                            </router-link>
-                        </article>
-                    </Transition>
-                    <button
-                        class="seta seta-direita"
-                        type="button"
-                        aria-label="Ver próximo assunto"
-                        :disabled="cardAtual === cards.length - 1"
-                        @click="proximoCard"
-                    >
-                        <span class="material-icons" aria-hidden="true">chevron_right</span>
-                    </button>
-                </div>
-                <div class="evolucao-paginacao" aria-label="Posição dos assuntos">
-                    <button
-                        v-for="(card, indice) in cards"
-                        :key="card.titulo"
-                        type="button"
-                        class="evolucao-ponto"
-                        :class="{ ativo: indice === cardAtual }"
-                        :aria-label="`Ir para ${card.titulo}`"
-                        :aria-current="indice === cardAtual ? 'step' : undefined"
-                        @click="selecionarCard(indice)"
-                    ></button>
-                </div>
+                <img src="@/assets/plant.png" alt="">
+                <h1>Você está evoluindo!</h1>
+                <p>Continue praticando e acompanhe seu progresso.</p>
             </div>
         </div>
     </div>
 
 </template>
 
-
 <style>
-    .atividade-semana{
-        margin: 45px;
-        margin-top: 25px;
-        padding-top: 20px;
-
-
-        border-top: 1px solid #eeeeee;
-    }
-    .atividade-semana h3{
-        font-family: sans-serif;
-        font-size: 16px;
-        color: rgb(28, 75, 47);
-        text-align: left;
-        margin-bottom: 20px;
-    }
-    .dias-semana{
+    .ajuda{
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .dias-semana > div{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-    .bolinha{
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: #e5e5e5;
-    }
-    .bolinha.ativo{
-       background-color: rgb(44, 112, 71);
-    }
-    .seta{
-        flex: 0 0 36px;
-        width: 36px;
-        height: 36px;
-        border: none;
-        border-radius: 50%;
-        color: var(--cor-primaria-texto);
-        background-color: var(--cor-fundo-card);
-        box-shadow: 0 3px 12px rgba(20, 48, 37, 0.12);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
-        transition: color 180ms ease, background-color 180ms ease, transform 180ms ease, opacity 180ms ease;
-    }
-    .seta:hover:not(:disabled){
-        color: var(--cor-texto-invertido);
-        background-color: var(--cor-primaria);
-        transform: scale(1.08);
-    }
-    .seta:disabled{
-        opacity: 0.35;
-        cursor: not-allowed;
-    }
-    .seta:focus-visible,
-    .evolucao-ponto:focus-visible,
-    .btn-card:focus-visible{
-        outline: 3px solid var(--cor-primaria-translucida);
-        outline-offset: 3px;
-    }
-    .evolucao{
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        border: 1px solid var(--cor-borda-suave);
-        margin: 50px 40px;
-        width: 353px;
-        height: 290px;
-        padding: 20px 16px 16px;
-        border-radius: 16px;
-        background-color: var(--cor-fundo-card);
-        font-family: sans-serif;
-        align-items: stretch;
-    }
-    .evolucao-controles{
-        display: flex;
+        border-radius: 12px;
         align-items: center;
-        justify-content: space-between;
-        gap: 2px;
-        width: 100%;
-        margin: 12px 0 2px;
-    }
-    .evolucao-card{
-        box-sizing: border-box;
-        display: flex;
-        flex: 1 1 auto;
-        flex-direction: column;
-        justify-content: space-between;
-        min-width: 0;
-        height: 210px;
-        padding: 20px;
+        text-align: center;
+        margin: 50px;
+        margin-bottom: 0px;
         overflow: hidden;
-        border: 1px solid var(--cor-borda-suave);
-        border-radius: 14px;
-        background:
-            radial-gradient(circle at 100% 0, var(--cor-primaria-fundo) 0, transparent 48%),
-            var(--cor-fundo-card);
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        width: 420px;
+        min-height: 120px;
+        height: fit-content;
+        font-family: sans-serif;
     }
-    .evolucao-card-conteudo{
+    .help {
         display: flex;
-        align-items: center;
-        gap: 13px;
-        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
-    .icone-card-wrap{
-        display: grid;
-        flex: 0 0 68px;
-        width: 68px;
-        height: 68px;
-        place-items: center;
-        border-radius: 16px;
-        background: var(--cor-primaria-fundo);
-    }
-    .icone-card{
-        width: 52px;
-        height: 52px;
-        object-fit: contain;
-    }
-    .evolucao-card-texto{
-        min-width: 0;
+    .help p{
+        margin: 0;
+        color: var(--cor-primaria-texto);
+        font-size: 16px;
         text-align: left;
+        font-weight: bold;
     }
-    .evolucao-etiqueta{
-        color: var(--cor-primaria);
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-    }
-    .evolucao-card h4{
-        margin: 6px 0 0;
-        color: var(--cor-texto-principal);
-        font-size: 15px;
-        line-height: 1.35;
-        overflow-wrap: anywhere;
-    }
-    .btn-card{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        flex: 0 0 42px;
-        box-sizing: border-box;
-        margin-top: auto;
-        padding: 10px 14px;
-        border: 1px solid var(--cor-primaria);
-        border-radius: 9px;
-        background-color: var(--cor-primaria);
+    .help button{
+        font-family: sans-serif;
+        font-size: 14px;
+        width: 75px;
+        height: 35px;
+        border: 0;
+        border-radius: 10px;
+        background-color: var(--cor-primaria-texto);
         color: var(--cor-texto-invertido);
-        font-size: 13px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background-color 180ms ease, transform 180ms ease;
+        cursor: pointer;
+        transition: 500ms ease;
     }
-    .btn-card:hover{
+    .help button:hover{
         background-color: var(--cor-primaria-hover);
     }
-    .btn-card .icon{
-        transition: transform 180ms ease;
-    }
-    .btn-card:hover .icon{
-        transform: translateX(3px);
-    }
-    .evolucao-paginacao{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 7px;
-        min-height: 12px;
-        margin-top: 2px;
-    }
-    .evolucao-ponto{
-        width: 7px;
-        height: 7px;
-        padding: 0;
-        border: 0;
-        border-radius: 999px;
-        background: var(--cor-borda);
-        cursor: pointer;
-        transition: width 220ms ease, background-color 220ms ease, transform 220ms ease;
-    }
-    .evolucao-ponto:hover{
-        transform: scale(1.2);
-    }
-    .evolucao-ponto.ativo{
-        width: 22px;
-        background: var(--cor-primaria);
-    }
-    .deslizar-proximo-enter-active,
-    .deslizar-proximo-leave-active,
-    .deslizar-anterior-enter-active,
-    .deslizar-anterior-leave-active{
-        transition: opacity 200ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .deslizar-proximo-enter-from{
-        opacity: 0;
-        transform: translateX(18px);
-    }
-    .deslizar-proximo-leave-to{
-        opacity: 0;
-        transform: translateX(-18px);
-    }
-    .deslizar-anterior-enter-from{
-        opacity: 0;
-        transform: translateX(-18px);
-    }
-    .deslizar-anterior-leave-to{
-        opacity: 0;
-        transform: translateX(18px);
-    }
-    .tituloCard{
-        font-family: sans-serif;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.06em;
+    .ajuda span{
+        font-size: 46px;
         color: var(--cor-primaria-texto);
-        text-align: left;
+        border-radius: 50%;
+        background-color: var(--cor-sequencia-fundo);
+        padding: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .evolucao{
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        margin: 50px 40px;
+        width: 310px;
+        height: 245px;
+        border-radius: 12px;
+        font-family: sans-serif;
+        text-align: center;
+        align-items: center;
+        font-size: 16px;
+        padding: 20px;
+    }
+    .evolucao img{
+        width: 110px;
+        padding: 0;
         margin: 0;
-        padding: 0 2px 12px;
-        border-bottom: 1px solid var(--cor-borda-suave);
     }
     .evolucao h1{
         color: var(--cor-primaria-texto);
         font-size: 22px;
-    }
-    @media (max-width: 480px){
-        .evolucao{
-            width: calc(100% - 32px);
-            margin: 32px 16px;
-        }
-    }
-    @media (prefers-reduced-motion: reduce){
-        .deslizar-proximo-enter-active,
-        .deslizar-proximo-leave-active,
-        .deslizar-anterior-enter-active,
-        .deslizar-anterior-leave-active,
-        .evolucao-ponto,
-        .seta,
-        .btn-card,
-        .btn-card .icon{
-            transition-duration: 0.01ms;
-        }
     }
     .content{
         display: flex;
@@ -654,7 +344,7 @@ function corProgresso(valor){
         margin-bottom: 0px;
         overflow: hidden;
         width: 420px;
-        min-height: 740px;
+        min-height: 550px;
         height: fit-content;
     }
     .mes{
@@ -730,7 +420,7 @@ function corProgresso(valor){
         border-radius: 50%;
         display: flex;
         color: var(--cor-primaria-texto);
-        background-color: rgba(186, 255, 186, 0.5);
+        background-color: var(--cor-sequencia-fundo);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.3s;

@@ -7,6 +7,14 @@ export const useUiStore = defineStore('painel', () => {
 
     const alternativaSelecionada = ref(null)
 
+    const respondendo = ref(false)
+
+    // { correta, resposta, comentario, acertos } devolvido pelo servidor.
+    const resultado = ref(null)
+
+    // Mensagem amigável quando enviar a resposta falha.
+    const erro = ref('')
+
     function alternarBarra() {
         aberto.value = !aberto.value
     }
@@ -17,6 +25,17 @@ export const useUiStore = defineStore('painel', () => {
 
     function limparAlternativa() {
         alternativaSelecionada.value = null
+        resultado.value = null
+        erro.value = ''
+    }
+
+    function definirResultado(dados) {
+        resultado.value = dados
+        erro.value = ''
+    }
+
+    function definirErro(mensagem) {
+        erro.value = mensagem
     }
 
     return {
@@ -25,11 +44,21 @@ export const useUiStore = defineStore('painel', () => {
 
         alternativaSelecionada,
 
+        respondendo,
+
+        resultado,
+
+        erro,
+
         alternarBarra,
 
         selecionarAlternativa,
 
-        limparAlternativa
+        limparAlternativa,
+
+        definirResultado,
+
+        definirErro
 
     }
 

@@ -92,8 +92,6 @@ function avancar(){
     if(!emailValido.value) return
 
 
-    // auth.enviarRecuperacao()
-
     auth.recuperarSenhaConfirmacao()
 
 }
@@ -202,7 +200,7 @@ label{
 
     border-color:var(--cor-primaria);
 
-    box-shadow:0 0 0 4px rgba(45,106,79,.04);
+    box-shadow:0 0 0 4px var(--cor-foco-login);
 
 }
 

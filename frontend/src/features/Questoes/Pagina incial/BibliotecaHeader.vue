@@ -48,7 +48,6 @@
   color: var(--cor-texto-suave);
 }
 
-/* Tablet */
 @media (max-width: 768px) {
   .header-biblioteca {
     padding: 26px 20px;
@@ -63,7 +62,6 @@
   }
 }
 
-/* Celular */
 @media (max-width: 480px) {
   .header-biblioteca {
     padding: 16px 4px;

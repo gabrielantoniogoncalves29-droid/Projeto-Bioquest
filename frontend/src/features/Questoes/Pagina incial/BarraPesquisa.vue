@@ -43,28 +43,6 @@
     <div class="acoes">
 
       <button
-        class="btn-filtro"
-        @click="store.toggleFiltros()"
-      >
-
-        <span class="material-icons">
-
-          {{
-            store.mostrarFiltros
-              ? 'expand_less'
-              : 'expand_more'
-          }}
-
-        </span>
-
-        {{ store.mostrarFiltros
-          ? 'Ocultar filtros'
-          : 'Mostrar filtros'
-        }}
-
-      </button>
-
-      <button
         class="btn-limpar"
         @click="store.limparFiltros()"
       >
@@ -83,7 +61,7 @@
 
 <script setup>
 
-import { ref, computed } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 import { buscarSugestoes } from '@/utils/autocomplete.js'
 
@@ -92,11 +70,53 @@ const store = useQuestoesFiltrosStore()
 const mostrarSugestoes = ref(false)
 const indiceAtivo = ref(-1)
 
-const sugestoes = computed(() =>
+const sugestoes = ref([])
 
-    buscarSugestoes(store.termoPesquisa)
+let temporizador = null
+let requisicaoAtual = 0
+let controlador = null
+
+watch(
+
+    () => store.termoPesquisa,
+
+    (termo) => {
+
+        clearTimeout(temporizador)
+
+        // Cancela a requisição anterior que ainda estiver em andamento.
+        controlador?.abort()
+
+        if (!termo.trim()) {
+            requisicaoAtual++
+            sugestoes.value = []
+            return
+
+        }
+
+        temporizador = setTimeout(async () => {
+
+            const requisicao = ++requisicaoAtual
+
+            controlador = new AbortController()
+
+            const lista = await buscarSugestoes(termo, 8, controlador.signal)
+
+            if (requisicao === requisicaoAtual) {
+                sugestoes.value = lista
+            }
+
+        }, 200)
+
+    }
 
 )
+
+onUnmounted(() => {
+    clearTimeout(temporizador)
+    controlador?.abort()
+
+})
 
 function aoDigitar() {
 
@@ -117,7 +137,6 @@ function aoFocar() {
 
 function aoDesfocar() {
 
-    // pequeno atraso para o clique (mousedown) na sugestão ser processado antes de fechar a lista
     setTimeout(() => {
 
         mostrarSugestoes.value = false
@@ -154,6 +173,8 @@ function aoTeclar(evento) {
         evento.preventDefault()
         selecionarSugestao(sugestoes.value[indiceAtivo.value])
 
+    } else if (evento.key === 'Enter') {
+        mostrarSugestoes.value = false
     } else if (evento.key === 'Escape') {
 
         mostrarSugestoes.value = false
@@ -194,7 +215,6 @@ function aoTeclar(evento) {
   transition: .2s;
 
 }
-.btn-filtro:hover,
 .btn-limpar:hover {
 
   border-color: var(--cor-primaria);
@@ -265,7 +285,7 @@ function aoTeclar(evento) {
 
   border-radius: 12px;
 
-  box-shadow: 0 12px 28px rgba(0,0,0,.08);
+  box-shadow: var(--sombra-popover);
 
   max-height: 260px;
 
@@ -356,7 +376,6 @@ function aoTeclar(evento) {
 }
 
 .btn-buscar,
-.btn-filtro,
 .btn-limpar {
 
   height: 48px;
@@ -383,13 +402,6 @@ function aoTeclar(evento) {
 .btn-buscar:hover {
 
   opacity: .95;
-
-}
-
-.btn-filtro {
-  color: var(--cor-texto-secundario);
-  background: var(--cor-fundo-card);
-  border: none;
 
 }
 
@@ -455,7 +467,6 @@ function aoTeclar(evento) {
 
   }
 
-  .btn-filtro,
   .btn-limpar {
 
     flex: 1 1 auto;

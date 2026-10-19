@@ -482,7 +482,6 @@ watch(
         font-size: 21px;
     }
 
-    /* barra de navegação com alvos de toque confortáveis */
     .navegacao-questoes {
         width: 100%;
         justify-content: space-between;
@@ -518,7 +517,6 @@ watch(
         padding: 0;
     }
 
-    /* abas dividem a largura da tela, sem rolagem horizontal */
     .tabs {
         overflow: visible;
     }

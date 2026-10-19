@@ -179,7 +179,7 @@ const imagemConteudo = computed(() => {
 
             </svg>
 
-            <span class="anel-texto">{{ taxaAcerto }}%</span>
+            <span class="anel-texto">{{ taxaAcerto === null ? '—' : `${taxaAcerto}%` }}</span>
 
         </div>
 
@@ -399,7 +399,6 @@ const imagemConteudo = computed(() => {
 
     }
 
-    /* no celular, cada card volta a ser uma linha compacta: ícone + texto */
     .info-card{
 
         flex-direction:row;

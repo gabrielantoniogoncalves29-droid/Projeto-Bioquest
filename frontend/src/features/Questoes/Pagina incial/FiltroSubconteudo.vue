@@ -73,18 +73,18 @@
               </div>
 
               <label
-                v-for="(sub, index) in conteudo.subconteudos"
-                :key="index"
+                v-for="sub in conteudo.subconteudos"
+                :key="sub.id"
                 class="opcao"
               >
 
                 <input
                   type="checkbox"
-                  :checked="store.subconteudosSelecionados.includes(`${conteudo.id}-${index}`)"
-                  @change="alternar(`${conteudo.id}-${index}`)"
+                  :checked="store.subconteudosSelecionados.includes(sub.id)"
+                  @change="alternar(sub.id)"
                 >
 
-                {{ sub }}
+                {{ sub.nome }}
 
               </label>
 
@@ -172,10 +172,8 @@ const todosSubconteudosDisponiveis = computed(() => {
 
   gruposDisponiveis.value.forEach(conteudo => {
 
-    conteudo.subconteudos.forEach((_, index) => {
-
-      lista.push(`${conteudo.id}-${index}`)
-
+    conteudo.subconteudos.forEach(sub => {
+      lista.push(sub.id)
     })
 
   })

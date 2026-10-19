@@ -1,14 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-import { buscarDetalhesPorId } from '@/services/detalhes'
-import { buscarQuestaoResolver } from '@/services/resolver'
-import { buscarIdsQuestoes } from '@/services/questoes'
-import { buscarComentariosPorQuestao } from '@/services/comentarios'
-
-// Store da tela "Saiba mais sobre a questão".
-// Substitui todos os props/emits entre DetalhesQuestao, InfoQuestao,
-// PreviaQuestao, ExplicacaoQuestao e ForumQuestao.
+import {
+    buscarQuestaoPorId,
+    buscarExplicacao
+} from '@/services/questoes'
+import { useResolverStore } from '@/store/resolver/resolver'
+import { useTaxonomiaStore } from '@/store/taxonomia'
+import {
+    buscarComentariosPorQuestao,
+    enviarComentarioDaQuestao
+} from '@/services/comentarios'
 
 const OBJETOS_ENEM = {
     1: 'Moléculas, células e tecidos',
@@ -24,24 +26,21 @@ export const CIRCUNFERENCIA_ANEL = 2 * Math.PI * RAIO_ANEL
 
 export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
 
-    // ---------- estado ----------
-
     const questaoId = ref(null)
     const carregando = ref(true)
     const detalhes = ref(null)
     const questao = ref(null)
-    const idsQuestoes = ref([])
+        // Mesmo vetor de navegação do resolver (ordem da lista filtrada na página inicial).
+    const resolver = useResolverStore()
+    const taxonomia = useTaxonomiaStore()
+    const idsQuestoes = computed(() => resolver.idsQuestoes)
     const abaAtiva = ref('explicacao')
 
-    // prévia da questão
     const previaExpandida = ref(false)
 
-    // fórum
     const comentarios = ref([])
     const carregandoComentarios = ref(true)
     const novoComentario = ref('')
-
-    // ---------- navegação entre questões ----------
 
     const indiceAtual = computed(() =>
         idsQuestoes.value.indexOf(Number(questaoId.value))
@@ -65,8 +64,6 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         total: idsQuestoes.value.length
     }))
 
-    // ---------- derivados: prévia / explicação ----------
-
     const alternativas = computed(() =>
         questao.value?.alternativas ?? []
     )
@@ -81,10 +78,14 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         detalhes.value?.teoria ?? []
     )
 
-    // ---------- derivados: cards de informação ----------
+        const nomeObjeto = computed(() =>
+        detalhes.value?.objeto?.nome ??
+        OBJETOS_ENEM[detalhes.value?.objeto?.id] ??
+        'Não informado'
+    )
 
-    const nomeObjeto = computed(() =>
-        OBJETOS_ENEM[detalhes.value?.objeto?.id] ?? 'Não informado'
+    const palavrasChave = computed(() =>
+        detalhes.value?.palavrasChave ?? []
     )
 
     const conteudo = computed(() =>
@@ -95,19 +96,19 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         detalhes.value?.nivel ?? 'Não informado'
     )
 
+        // Percentual de acertos congelado até existir login: a API devolve null e a
+    // tela mostra "—" (nunca muda quando o usuário demo responde).
     const taxaAcerto = computed(() =>
-        detalhes.value?.taxaAcerto ?? 0
+        detalhes.value?.taxaAcerto ?? null
     )
 
     const deslocamentoAnel = computed(() =>
-        CIRCUNFERENCIA_ANEL * (1 - taxaAcerto.value / 100)
+        CIRCUNFERENCIA_ANEL * (1 - (taxaAcerto.value ?? 0) / 100)
     )
 
-    // ---------- derivados: fórum ----------
+    const forumAberto = computed(() => taxonomia.config.forumAberto)
 
     const totalComentarios = computed(() => comentarios.value.length)
-
-    // ---------- ações ----------
 
     async function carregarComentarios(id) {
         if (!id) {
@@ -117,8 +118,18 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         }
 
         carregandoComentarios.value = true
-        comentarios.value = await buscarComentariosPorQuestao(id)
-        carregandoComentarios.value = false
+
+        try {
+            const lista = await buscarComentariosPorQuestao(id)
+
+            if (Number(questaoId.value) === Number(id)) {
+                comentarios.value = lista
+            }
+        } catch {
+            comentarios.value = []
+        } finally {
+            carregandoComentarios.value = false
+        }
     }
 
     async function carregarQuestao(novoId) {
@@ -129,25 +140,42 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         questaoId.value = id
         carregando.value = true
 
-        // o fórum acompanha a questão exibida
         carregarComentarios(id)
 
-        const [dadosDetalhes, dadosQuestao] = await Promise.all([
-            buscarDetalhesPorId(id),
-            buscarQuestaoResolver(id)
-        ])
+        let dadosQuestao = null
+        let explicacao = null
 
-        detalhes.value = dadosDetalhes
-        questao.value = dadosQuestao
+        try {
+                        const [questaoCarregada, explicacaoCarregada] = await Promise.all([
+                buscarQuestaoPorId(id),
+                buscarExplicacao(id),
+                resolver.garantirVetor(id).catch(() => {}),
+                taxonomia.carregar()
+            ])
 
-        if (idsQuestoes.value.length === 0) {
-            idsQuestoes.value = await buscarIdsQuestoes()
+            dadosQuestao = questaoCarregada
+            explicacao = explicacaoCarregada
+        } catch {
+            dadosQuestao = null
+        }
+
+        if (questaoId.value !== id) return
+
+        if (dadosQuestao && explicacao) {
+            detalhes.value = { ...dadosQuestao, teoria: explicacao.teoria }
+            questao.value = {
+                ...dadosQuestao,
+                resposta: explicacao.resposta,
+                comentario: explicacao.comentario
+            }
+        } else {
+            detalhes.value = null
+            questao.value = null
         }
 
         carregando.value = false
     }
 
-    // estado de interface volta ao padrão ao entrar na tela
     function reiniciarInterface() {
         abaAtiva.value = 'explicacao'
         previaExpandida.value = false
@@ -162,19 +190,21 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         previaExpandida.value = !previaExpandida.value
     }
 
-    function enviarComentario() {
+    async function enviarComentario() {
         const texto = novoComentario.value.trim()
 
-        if (!texto) return
+                // Comentar exige login (ainda não existe): o servidor também recusa com 401.
+        if (!texto || !questaoId.value || !forumAberto.value) return
 
-        comentarios.value.unshift({
-            id: Date.now(),
-            autor: 'Você',
-            texto,
-            data: new Date().toISOString().slice(0, 10)
-        })
+        try {
+            const criado = await enviarComentarioDaQuestao(questaoId.value, texto)
 
-        novoComentario.value = ''
+            comentarios.value.unshift(criado)
+
+            novoComentario.value = ''
+        } catch {
+            // 401 (sem login) ou falha de rede: o texto digitado é mantido.
+        }
     }
 
     return {
@@ -196,12 +226,14 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         alternativas,
         alternativaCorreta,
         teoria,
+        palavrasChave,
         nomeObjeto,
         conteudo,
         nivel,
         taxaAcerto,
         deslocamentoAnel,
-        totalComentarios,
+                totalComentarios,
+        forumAberto,
 
         carregarQuestao,
         carregarComentarios,

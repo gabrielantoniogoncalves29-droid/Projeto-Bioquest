@@ -1,13 +1,34 @@
 <script setup>
-import { ref, onMounted, onUnmounted, onBeforeMount } from 'vue';
-import { Sun, Moon } from 'lucide-vue-next';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
+import { Sun, Moon, Monitor, ChevronLeft, Settings, Palette, Check } from 'lucide-vue-next';
 import { useTemaStore } from '@/store/tema.js';
+import { usePerfilStore } from '@/store/perfil.js';
 
 const tema = useTemaStore();
 
-let nome = "Gabriel Antônio";
+const perfil = usePerfilStore();
 
 const aberta = ref(null);
+const configAberta = ref(false);
+const temaAberto = ref(false);
+
+watch(aberta, (valor) => {
+  if (valor !== 2) {
+    configAberta.value = false;
+    temaAberto.value = false;
+  }
+});
+
+function alternarConfig() {
+  configAberta.value = !configAberta.value;
+  if (!configAberta.value) temaAberto.value = false;
+}
+
+const opcoesTema = [
+  { valor: 'claro', nome: 'Claro', icone: Sun },
+  { valor: 'escuro', nome: 'Escuro', icone: Moon },
+  { valor: 'sistema', nome: 'Padrão do sistema', icone: Monitor }
+];
 
 function barra(id){
     if(aberta.value === id){
@@ -30,6 +51,7 @@ function fecharAoClicarFora(event){
 }
 
 onMounted(() => {
+  perfil.carregarPerfil().catch(() => {});
   document.addEventListener(
     'click',
     fecharAoClicarFora
@@ -76,11 +98,19 @@ onUnmounted(() => {
       id="user_box"
     >
       <img
+        v-if="perfil.foto"
+        class="avatar avatar-foto"
+        :src="perfil.foto"
+        alt="Foto do usuário"
+      >
+      <img
+        v-else
         class="avatar"
         src="@/components/icons/account_circle_45dp_E3E3E3_FILL0_wght400_GRAD0_opsz48.png"
+        alt="Usuário"
       >
       <p>
-        {{ nome }}
+        {{ perfil.nome }}
       </p>
       <span class="material-icons arrow">
         {{ aberta === 2 ? 'expand_less' : 'expand_more' }}
@@ -104,11 +134,73 @@ onUnmounted(() => {
     </router-link>
 
 
-    <a >
-      <i class="fa-solid fa-gear"></i>
-      Configurações
-    </a>
-    
+    <div class="item-config">
+
+      <button
+        type="button"
+        class="config-botao"
+        :class="{ aberto: configAberta }"
+        :aria-expanded="configAberta"
+        @click="alternarConfig"
+      >
+        <Settings :size="15" />
+        <span class="config-rotulo">Configurações</span>
+        <ChevronLeft class="config-seta" :size="17" />
+      </button>
+
+      <div
+        v-if="configAberta"
+        class="submenu submenu-config"
+      >
+
+        <div class="item-config">
+
+          <button
+            type="button"
+            class="config-botao"
+            :class="{ aberto: temaAberto }"
+            :aria-expanded="temaAberto"
+            @click="temaAberto = !temaAberto"
+          >
+            <Palette :size="15" />
+            <span class="config-rotulo">Tema padrão</span>
+            <ChevronLeft class="config-seta" :size="17" />
+          </button>
+
+          <div
+            v-if="temaAberto"
+            class="submenu submenu-tema"
+            role="radiogroup"
+            aria-label="Tema padrão"
+          >
+
+            <button
+              v-for="opcao in opcoesTema"
+              :key="opcao.valor"
+              type="button"
+              role="radio"
+              class="config-botao tema-opcao"
+              :class="{ ativa: tema.preferencia === opcao.valor }"
+              :aria-checked="tema.preferencia === opcao.valor"
+              @click="tema.definirPreferencia(opcao.valor)"
+            >
+              <component :is="opcao.icone" :size="15" />
+              <span class="config-rotulo">{{ opcao.nome }}</span>
+              <Check
+                v-if="tema.preferencia === opcao.valor"
+                class="config-seta"
+                :size="16"
+              />
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     <a href="#" class="logout-btn">
       Sair da Conta
     </a>
@@ -128,7 +220,7 @@ onUnmounted(() => {
   align-items: center;
   padding: 0 2rem;
   background: var(--cor-fundo-card);
-  border-bottom: 2px solid rgba(54, 54, 54, 0.086);
+  border-bottom: 2px solid var(--cor-borda-cabecalho);
 }
 
 #logo {
@@ -284,6 +376,16 @@ margin-left: 10px;
   object-fit: cover;
 }
 
+.avatar.avatar-foto{
+  width: 34px;
+  height: 34px;
+  scale: 1;
+  margin-left: 0;
+  filter: none;
+  border: 2px solid var(--cor-fundo-sutil);
+  box-sizing: border-box;
+}
+
 #user_box p{
   margin: 0;
   font-size: 14px;
@@ -303,8 +405,7 @@ margin-left: 10px;
   width: 340px;
   background: var(--cor-fundo-card);
   border-radius: 18px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: var(--sombra-popover);
   padding: 15px;
   z-index: 999;
 }
@@ -359,6 +460,110 @@ margin-left: 10px;
   cursor: pointer;
   transition: .15s;
   text-align: left;
+}
+
+.item-config{
+  position: relative;
+}
+
+.user .config-botao{
+  scale: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 13px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--cor-texto-principal);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.user .config-botao:hover,
+.user .config-botao.aberto{
+  background: var(--cor-fundo-sutil);
+}
+
+.config-botao svg:first-child{
+  color: var(--cor-primaria-texto);
+}
+
+.config-rotulo{
+  flex: 1;
+}
+
+.config-seta{
+  color: var(--cor-texto-suave);
+  transition: transform .2s;
+}
+
+.config-botao.aberto > .config-seta{
+  transform: translateX(-2px);
+  color: var(--cor-primaria-texto);
+}
+
+.submenu{
+  position: absolute;
+  top: -8px;
+  right: calc(100% + 25px);
+  width: 230px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda-suave);
+  border-radius: 14px;
+  box-shadow: var(--sombra-popover);
+  z-index: 1000;
+}
+
+.submenu .submenu-tema{
+  right: calc(100% + 17px);
+}
+
+.user .tema-opcao.ativa{
+  background: var(--cor-primaria-fundo);
+  color: var(--cor-primaria-texto);
+  font-weight: 700;
+}
+
+.tema-opcao.ativa .config-seta{
+  color: var(--cor-primaria-texto);
+}
+
+@media (max-width: 760px){
+  .submenu{
+    position: static;
+    width: auto;
+    margin: 2px 0 4px 14px;
+    padding: 4px;
+    box-shadow: none;
+    border-radius: 10px;
+    background: var(--cor-fundo-sutil);
+  }
+  .submenu .submenu-tema{
+    right: auto;
+  }
+  .config-botao > .config-seta{
+    transform: rotate(-90deg);
+  }
+  .config-botao.aberto > .config-seta{
+    transform: rotate(-90deg) translateX(2px);
+  }
+}
+
+[data-tema="escuro"] .menu-dropdown{
+  border: 1px solid var(--cor-borda);
+}
+
+[data-tema="escuro"] .avatar:not(.avatar-foto){
+  filter: grayscale(1) brightness(.9);
 }
 
 .profile-options i{
@@ -420,14 +625,12 @@ margin-left: 10px;
   }
 }
 
-/* ===== Responsivo ===== */
 @media (max-width: 900px) {
   .header { padding: 0 1rem; }
   .nav a { margin: 0 0.1rem; }
   .user { gap: 12px; }
 }
 
-/* Celular: linha 1 = logo + tema + foto | linha 2 = links como "abas" com icone em cima */
 @media (max-width: 640px) {
   .header {
     flex-wrap: wrap;
@@ -441,7 +644,6 @@ margin-left: 10px;
   .user { gap: 10px; }
   .botao-tema { width: 38px; height: 38px; min-width: 38px; }
 
-  /* botao de perfil so com a foto (sem nome e sem seta) */
   #user_box {
     width: 38px;
     height: 38px;
@@ -453,7 +655,6 @@ margin-left: 10px;
   #user_box .arrow { display: none; }
   .avatar { margin-left: 0; scale: 1.4; }
 
-  /* nav passa para a segunda linha, ocupando toda a largura */
   .nav {
     order: 3;
     width: 100%;
@@ -476,7 +677,6 @@ margin-left: 10px;
   .nav .material-icons { font-size: 24px; transform: none; }
   .nav .material-symbols-outlined { font-size: 24px; }
 
-  /* dropdown nunca passa da largura da tela */
   .menu-dropdown {
     top: 50px;
     width: min(300px, calc(100vw - 2rem));
