@@ -1,0 +1,23 @@
+{
+  "id": 2,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O potencial brasileiro para transformar lixo em \r\nenergia permanece subutilizado — apenas pequena parte \r\ndos resíduos brasileiros é utilizada para gerar energia. \r\nContudo, bons exemplos são os aterros sanitários, \r\nque utilizam a principal fonte de energia ali produzida. \r\nAlguns aterros vendem créditos de carbono com base \r\nno Mecanismo de Desenvolvimento Limpo (MDL), do \r\nProtocolo de Kyoto.",
+  "enunciadoComplemento": "Essa fonte de energia subutilizada, citada no texto, é o:",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "etanol, obtido a partir da decomposição da matéria  orgânica por bactérias.",
+    "B": "gás natural, formado pela ação de fungos  decompositores da matéria orgânica.",
+    "C": "óleo de xisto, obtido pela decomposição da matéria  orgânica pelas bactérias anaeróbias.",
+    "D": "gás metano, obtido pela atividade de bactérias  anaeróbias na decomposição da matéria orgânica.",
+    "E": "gás liquefeito de petróleo, obtido pela decomposição  de vegetais presentes nos restos de comida."
+  },
+  "palavrasChave": [
+    "Problemas ambientais",
+    "Aterro sanitário",
+    "lixo"
+  ]
+}

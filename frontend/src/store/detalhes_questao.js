@@ -30,7 +30,7 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
     const carregando = ref(true)
     const detalhes = ref(null)
     const questao = ref(null)
-        // Mesmo vetor de navegação do resolver (ordem da lista filtrada na página inicial).
+
     const resolver = useResolverStore()
     const taxonomia = useTaxonomiaStore()
     const idsQuestoes = computed(() => resolver.idsQuestoes)

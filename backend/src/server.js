@@ -1,12 +1,13 @@
-import express from 'express'
+import { config } from './config.js'
+import { inicializarBanco } from './db.js'
+import { criarApp } from './app.js'
 
-const app = express()
-app.use(express.json())
+inicializarBanco()
 
-app.get('/api/saude', (req, res) => {
-  res.json({ ok: true })
-})
+criarApp().listen(config.porta, () => {
+  console.log(`API em http://localhost:${config.porta}`)
 
-app.listen(3000, () => {
-  console.log('API em http://localhost:3000')
+  if (config.adminAtivo) {
+    console.log(`Painel de questões em http://localhost:${config.porta}/admin`)
+  }
 })

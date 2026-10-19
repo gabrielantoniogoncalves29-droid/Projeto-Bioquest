@@ -45,7 +45,7 @@ const { questao, teoria, palavrasChave, alternativaCorreta } = storeToRefs(store
 
             <div class="palavras-titulo">
 
-                <Tags :size="15" />
+            
                 <h3>Palavras-chave</h3>
 
             </div>
@@ -207,13 +207,11 @@ p:last-child{
 
     margin:0;
 
-    font-size:13px;
+    font-size:16px;
 
-    font-weight:700;
+    font-weight:600;
 
-    letter-spacing:.04em;
 
-    text-transform:uppercase;
 
     color:var(--cor-texto-suave);
 

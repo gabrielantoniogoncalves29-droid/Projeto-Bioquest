@@ -9,10 +9,8 @@ export const useUiStore = defineStore('painel', () => {
 
     const respondendo = ref(false)
 
-    // { correta, resposta, comentario, acertos } devolvido pelo servidor.
     const resultado = ref(null)
 
-    // Mensagem amigável quando enviar a resposta falha.
     const erro = ref('')
 
     function alternarBarra() {

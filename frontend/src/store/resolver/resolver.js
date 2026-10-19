@@ -28,7 +28,6 @@ function gravarVetor(ids) {
 
   } catch {
 
-    // sessionStorage indisponível: o vetor continua só na memória.
 
   }
 
@@ -37,9 +36,6 @@ function gravarVetor(ids) {
 export const useResolverStore = defineStore('resolver', () => {
 
   const questao = ref(null)
-
-  // Vetor de navegação: ids na ordem da lista filtrada/ordenada da página inicial.
-  // Persistido em sessionStorage para sobreviver a F5 e ao voltar/avançar.
   const idsQuestoes = ref(lerVetorSalvo())
 
   function definirVetor(ids) {
@@ -49,8 +45,6 @@ export const useResolverStore = defineStore('resolver', () => {
 
   }
 
-  // Se o id aberto não está no vetor (acesso direto a /resolver/:id, ou vetor
-  // antigo), usa o vetor global por serial como reserva.
   async function garantirVetor(id) {
 
     if (idsQuestoes.value.includes(Number(id))) return
@@ -67,7 +61,6 @@ export const useResolverStore = defineStore('resolver', () => {
 
   })
 
-  // "x de N": x é a posição da questão no vetor (1 = primeira), não o id.
   const navegacao = computed(() => ({
 
     atual: indiceAtual.value === -1 ? 0 : indiceAtual.value + 1,
