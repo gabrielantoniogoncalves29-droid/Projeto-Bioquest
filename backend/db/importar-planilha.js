@@ -1,18 +1,3 @@
-// Importa as questões da planilha do ENEM (db/seed-data/questoes.json, gerado
-// a partir de dados_enem.xlsx por db/converter_planilha.py) para o banco.
-//
-//   npm run seed         upsert por id: atualiza só as colunas que vêm da
-//                        planilha (ids, nomes, ano, nº, classificação, gabarito,
-//                        observações). Não mexe em enunciado, alternativas,
-//                        imagem, comentário, teoria, resumo nem em palavras-chave
-//                        que já existam.
-//   npm run seed:reset   apaga TODAS as questões (e o que depende delas:
-//                        alternativas, palavras-chave, respostas, salvas,
-//                        revisar, comentários, imagens enviadas) e reimporta.
-//                        O usuário demo é mantido.
-//
-// Depois da planilha, importa também db/questoes/*.json (uma questão por arquivo,
-// geradas pelo painel /admin) e as imagens de db/imagens/.
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'

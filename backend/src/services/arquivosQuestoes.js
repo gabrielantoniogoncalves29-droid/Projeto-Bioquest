@@ -1,11 +1,3 @@
-// Ponte entre o banco (local, fora do Git) e arquivos de texto versionáveis:
-//
-//   db/questoes/0165.json   uma questão por arquivo (o que se edita no painel)
-//   db/imagens/0165.png     a imagem da questão (se houver)
-//
-// O painel exporta sozinho a cada "Salvar"; `npm run seed` importa tudo de volta.
-// Os campos que pertencem à planilha (ano, classificação, gabarito...) NÃO vão nos
-// arquivos das questões da planilha: eles continuam vindo de dados_enem.xlsx.
 import fs from 'node:fs'
 import path from 'node:path'
 import { config } from '../config.js'

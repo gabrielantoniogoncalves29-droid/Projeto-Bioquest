@@ -86,17 +86,12 @@ function saibaMais() {
 
     <div class="grupo-esquerda">
 
-      <button class="btn-saiba-mais" @click="saibaMais">
-       <Info :size="15" />
-        Saiba mais sobre a questão
-      </button>
-
       <span
         v-if="ui.resultado"
         class="feedback"
         :class="ui.resultado.correta ? 'feedback-acerto' : 'feedback-erro'"
       >
-        {{ ui.resultado.correta ? 'Acertou!' : `Errou. A alternativa correta é a ${ui.resultado.resposta}.` }}
+        {{ ui.resultado.correta ? `A alternativa correta é a letra ${ui.resultado.resposta}.` : `A alternativa correta é a letra ${ui.resultado.resposta}.` }}
       </span>
 
       <span
@@ -117,6 +112,11 @@ function saibaMais() {
     </div>
 
     <div class="grupo-direita">
+
+      <button class="btn-saiba-mais" @click="saibaMais">
+       <Info :size="15" />
+        Saiba mais sobre a questão
+      </button>
 
       <button
         class="btn-responder"

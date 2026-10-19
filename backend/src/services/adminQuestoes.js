@@ -11,10 +11,6 @@ import { listaDeTexto } from '../utils/texto.js'
 
 const LETRAS = ['A', 'B', 'C', 'D', 'E']
 
-// No painel NENHUM campo é obrigatório: uma questão pode ser salva só com o código
-// e preenchida depois. Só se validam tipos (número onde é número, URL, tamanho)
-// e a unicidade do código. Campo vazio vira NULL (classificação, gabarito, nº) ou
-// texto vazio.
 const inteiro = (min, max) => z.coerce.number().int().min(min).max(max)
 
 const esquema = z.object({

@@ -1,7 +1,5 @@
 import { db } from '../db.js'
 
-// Taxonomia pública (somente leitura): níveis, eixos (objetos da matriz),
-// conteúdos (objetos do livro) com seus subconteúdos e os anos que existem no banco.
 export function obterTaxonomia() {
   const niveis = db.prepare('SELECT id, nome, dificuldade FROM niveis ORDER BY id').all()
   const eixos = db.prepare('SELECT id, nome FROM eixos ORDER BY id').all()

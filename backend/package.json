@@ -7,9 +7,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed": "node db/importar-planilha.js",
-    "seed:reset": "node db/importar-planilha.js --reset",
-    "exportar": "node db/exportar-questoes.js",
-    "verificar": "node scripts/verificar-api.mjs"
+    "exportar": "node db/exportar-questoes.js"
   },
   "keywords": [],
   "author": "",

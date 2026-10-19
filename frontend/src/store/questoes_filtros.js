@@ -4,9 +4,6 @@ import { useTaxonomiaStore } from '@/store/taxonomia.js'
 
 export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
 
-  // Opções vindas de GET /api/taxonomia. Todas as seleções guardam IDS:
-  // ano, nível (categorização), eixo (= objeto da matriz), conteúdo (= objeto do
-  // livro), subconteúdo (id estável = conteúdo * 100 + número do C#) e estado.
   const taxonomia = useTaxonomiaStore()
 
   const anosOpcoes = computed(() => taxonomia.anos)

@@ -1,5 +1,3 @@
-// Gera db/questoes/*.json (e db/imagens/*) a partir do banco local.
-// Use antes do primeiro commit, ou sempre que quiser regravar tudo.
 import { inicializarBanco } from '../src/db.js'
 import { exportarTodas } from '../src/services/arquivosQuestoes.js'
 

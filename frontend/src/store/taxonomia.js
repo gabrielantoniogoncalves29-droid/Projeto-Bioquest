@@ -3,11 +3,8 @@ import { ref, computed } from 'vue'
 import { buscarTaxonomia, buscarConfig } from '@/services/questoes'
 import * as estaticos from '@/features/Questoes/data/filtros.js'
 
-// Mesma regra do backend: id estável do subconteúdo = objeto do livro * 100 + número do C#.
 const idDoSubconteudo = (conteudoId, numero) => conteudoId * 100 + numero
 
-// Usado só se a API falhar: o arquivo estático (subconteúdos como lista de nomes)
-// é convertido para o mesmo formato da API.
 function taxonomiaEstatica() {
 
   return {

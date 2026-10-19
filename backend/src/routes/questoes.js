@@ -14,7 +14,6 @@ const esquemaResposta = z.object({
   alternativa: z.enum(['A', 'B', 'C', 'D', 'E'])
 })
 
-// "2014,2015" -> [2014, 2015]. Vários valores separados por vírgula; vazio = sem filtro.
 function listaDeInteiros(valor, nome) {
   if (valor === undefined || valor === '') return []
 
@@ -27,8 +26,6 @@ function listaDeInteiros(valor, nome) {
   })
 }
 
-// Query: ?ano=&nivel=&objeto=&conteudo=&subconteudo=&estado=&q=&ordem=
-// (ids separados por vírgula; mesma regra do filtro do front).
 function filtrosDaQuery(query) {
   const ordem = query.ordem === undefined || query.ordem === '' ? undefined : String(query.ordem)
 
@@ -52,7 +49,6 @@ router.get('/', cacheDeLeitura(30), (req, res) => {
   res.json(questoes.listarCards(filtrosDaQuery(req.query), req.usuarioId))
 })
 
-// O resultado depende do usuário quando há "estado"; sem cache compartilhado.
 router.get('/ids', (req, res) => {
   res.set('Cache-Control', 'no-store')
   res.json(questoes.listarIds(filtrosDaQuery(req.query), req.usuarioId))
@@ -106,8 +102,7 @@ router.get('/:id/comentarios', (req, res) => {
   res.json(comentarios.listar(idDaRota(req)))
 })
 
-// Comentar exige login (ainda não existe). O login futuro liga config.forumAberto
-// (FORUM_ABERTO=true) e troca usuarioAtual por um middleware que autentica de verdade.
+// Comentar exige login --> config.forumAberto
 router.post('/:id/comentarios', (req, res) => {
   if (!config.forumAberto) throw naoAutorizado('Faça login para comentar')
 

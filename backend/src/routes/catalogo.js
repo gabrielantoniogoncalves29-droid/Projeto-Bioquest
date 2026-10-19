@@ -9,7 +9,6 @@ router.get('/taxonomia', cacheDeLeitura(60), (req, res) => {
   res.json(obterTaxonomia())
 })
 
-// Flags que o front consulta (o login futuro liga o fórum e a taxa de acerto).
 router.get('/config', (req, res) => {
   res.set('Cache-Control', 'no-store')
   res.json({ forumAberto: config.forumAberto, taxaAcertoAtiva: config.taxaAcertoAtiva })

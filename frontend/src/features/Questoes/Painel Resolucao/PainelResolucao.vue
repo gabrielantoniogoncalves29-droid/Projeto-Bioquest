@@ -401,7 +401,7 @@ function irParaForum(){
     height:100%;
 
     background: var(--cor-fundo-card);
-
+    border-radius: 10px;
     border-left:1px solid var(--cor-borda);
 
     transition:width .35s ease;
@@ -538,7 +538,6 @@ function irParaForum(){
 .icone-caixa{
 
     display:flex;
-
     align-items:center;
 
     justify-content:center;
@@ -566,7 +565,8 @@ function irParaForum(){
 .icone-nivel svg{
 
     width:26px;
-
+    margin-left:15px;
+    margin-right:15px;
     height:26px;
 
 }
@@ -764,7 +764,7 @@ function irParaForum(){
 
     display:flex;
 
-    margin-bottom: 15px;
+    margin-bottom: 25%;
     align-items:center;
 
     justify-content:center;

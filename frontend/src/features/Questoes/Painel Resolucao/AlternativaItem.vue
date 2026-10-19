@@ -15,7 +15,6 @@ const selecionada = computed(
     () => ui.alternativaSelecionada
 )
 
-// Depois de responder a escolha fica travada e as cores mostram o resultado.
 const resultado = computed(() => ui.resultado)
 
 function selecionarAlternativa(letra) {
@@ -23,7 +22,6 @@ function selecionarAlternativa(letra) {
     ui.selecionarAlternativa(letra)
 }
 
-// Marcada e correta = verde; marcada e errada = vermelha (e a correta fica verde).
 function ehCorreta(letra) {
     return !!resultado.value && resultado.value.resposta === letra
 }

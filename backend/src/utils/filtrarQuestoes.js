@@ -1,12 +1,3 @@
-// Filtro, pesquisa e ordenação dos cards de questões.
-//
-// ATENÇÃO: este arquivo é idêntico (byte a byte) a
-// frontend/src/utils/filtrarQuestoes.js. O front filtra no cliente e o backend
-// (GET /api/questoes e /api/questoes/ids) usa a mesma regra, então os dois
-// sempre devolvem o mesmo resultado. Se mudar um, mude o outro.
-//
-// Regras: E entre grupos de filtro, OU dentro de cada grupo. Só ids.
-
 export const ORDENS = ['recentes', 'antigas', 'maiorDificuldade', 'menorDificuldade']
 
 export function normalizar(texto) {

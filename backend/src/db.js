@@ -12,19 +12,13 @@ export const db = new Database(config.dbPath)
 db.pragma('journal_mode = WAL')
 db.pragma('foreign_keys = ON')
 
-// Id estável de um subconteúdo: objeto do livro * 100 + número do C#.
+
 export const idDoSubconteudo = (conteudoId, numero) => conteudoId * 100 + numero
 
-// Versão do schema (PRAGMA user_version). Aumente ao mudar o schema e trate a
-// mudança em migrar().
 const VERSAO_SCHEMA = 1
 
 function migrar(versaoAtual) {
   if (versaoAtual < 1) {
-    // v0 -> v1: as questões passam a vir da planilha (ids 1-183, colunas
-    // opcionais e desnormalizadas, subconteúdos com código C#). O banco antigo
-    // era só de exemplo, então tudo que depende de questões é recriado;
-    // usuários, eixos, níveis e conteúdos são mantidos.
     db.pragma('foreign_keys = OFF')
     db.exec(`
       DROP TABLE IF EXISTS comentarios;
@@ -70,7 +64,6 @@ function sincronizarTaxonomia() {
     taxonomia.eixos.forEach(e => inserirEixo.run(e.id, e.nome.trim()))
     taxonomia.conteudos.forEach(c => {
       inserirConteudo.run(c.id, c.eixoId, c.nome.trim())
-      // A posição no array é o número do C# do Anexo 2 (C1 = primeiro).
       c.subconteudos.forEach((nome, indice) => {
         const numero = indice + 1
         inserirSub.run(idDoSubconteudo(c.id, numero), c.id, numero, `C${numero}`, nome.trim())
@@ -88,7 +81,6 @@ function garantirUsuarioDemo() {
 export function inicializarBanco() {
   const versao = db.pragma('user_version', { simple: true })
 
-  // Em um banco novo (sem tabelas) não há o que migrar: só carimba a versão.
   if (versao < VERSAO_SCHEMA) migrar(versao)
 
   db.exec(fs.readFileSync(path.join(pastaDb, 'schema.sql'), 'utf8'))

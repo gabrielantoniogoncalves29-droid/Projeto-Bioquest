@@ -4,8 +4,6 @@ import { conflito, naoEncontrado, requisicaoInvalida } from '../utils/erros.js'
 import { resumirTexto } from '../utils/texto.js'
 import { filtrarEOrdenar } from '../utils/filtrarQuestoes.js'
 
-// Todos os JOINs são LEFT: uma questão criada em branco no /admin (sem ano,
-// nível, conteúdo...) continua aparecendo na listagem.
 const CARD_SQL = `
   SELECT q.serial, q.id, q.ano,
          q.nivel_id AS nivel, n.dificuldade,
