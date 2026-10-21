@@ -150,7 +150,6 @@ export async function buscarConfig() {
 
 }
 
-// Resposta que o usuário já deu antes (ou null), para restaurar a tela.
 export async function buscarMinhaResposta(id) {
 
   const { data } = await api.get(`/questoes/${Number(id)}/minha-resposta`)

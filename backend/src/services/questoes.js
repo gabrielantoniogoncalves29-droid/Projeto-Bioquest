@@ -21,8 +21,6 @@ const CARD_SQL = `
     LEFT JOIN subconteudos s ON s.id = q.subconteudo_id
 `
 
-// Texto padrão do card quando o resumo está vazio: enunciado, ou o conteúdo da
-// planilha + observações, ou só o código da questão.
 export function resumoDaQuestao({ id, resumo, enunciado, conteudoLivroNome, observacoes, subconteudo }) {
   if (resumo?.trim()) return resumo.trim()
   if (enunciado?.trim()) return resumirTexto(enunciado, 200)
@@ -88,8 +86,7 @@ function idsMarcados(tabela, usuarioId) {
   )
 }
 
-// filtros: { anos, niveis, objetos, conteudos, subconteudos, estados, termo, ordem }
-// (ver utils/filtrarQuestoes.js). Sem "ordem", ordena por serial.
+
 export function listarCards(filtros = {}, usuarioId = config.usuarioDemoId) {
   const cards = montarCards(db.prepare(`${CARD_SQL} ORDER BY q.serial`).all())
 

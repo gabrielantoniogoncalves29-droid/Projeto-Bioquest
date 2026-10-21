@@ -34,12 +34,6 @@ export const config = {
   pastaQuestoes: path.join(raiz, 'db', 'questoes'),
   pastaImagens: path.join(raiz, 'db', 'imagens'),
   usuarioDemoId: 1,
-
-  // Pontos de extensão para quando existir login:
-  //  - forumAberto: libera POST de comentários (FORUM_ABERTO=true). O login deve
-  //    ligar isso e passar a exigir usuário autenticado.
-  //  - taxaAcertoAtiva: liga o cálculo do percentual de acertos por questão
-  //    (services/questoes.js > calcularTaxaAcerto). Só faz sentido com muitos usuários.
   forumAberto: process.env.FORUM_ABERTO === 'true',
   taxaAcertoAtiva: false,
   minRespostasParaTaxa: 20

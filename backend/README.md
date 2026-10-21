@@ -10,8 +10,7 @@ API do BioQuest (Express 5 + SQLite/better-sqlite3 + zod, ES Modules). Entrega a
 cd backend
 npm install
 cp .env.example .env
-npm run seed:reset      # importa as 183 questões da planilha
-npm run dev             # API em http://localhost:3000
+npm run dev            
 ```
 
 - Painel de cadastro: http://localhost:3000/admin — três abas: **Planilha** (tabela com as 183 questões e filtros por ano, objeto, categoria e situação), **Adicionar questão** e **Editar questão** (lista lateral com filtros e navegação entre pendentes)

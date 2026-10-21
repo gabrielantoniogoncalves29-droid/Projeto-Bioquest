@@ -102,7 +102,6 @@ router.get('/:id/comentarios', (req, res) => {
   res.json(comentarios.listar(idDaRota(req)))
 })
 
-// Comentar exige login --> config.forumAberto
 router.post('/:id/comentarios', (req, res) => {
   if (!config.forumAberto) throw naoAutorizado('Faça login para comentar')
 
