@@ -16,7 +16,7 @@ function lerPlanilha() {
   const arquivo = path.join(pasta, 'questoes.json')
 
   if (!fs.existsSync(arquivo)) {
-    console.error('Falta db/seed-data/questoes.json. Gere com: python3 db/converter_planilha.py')
+    console.error('Falta db/seed-data/questoes.json.')
     process.exit(1)
   }
 
