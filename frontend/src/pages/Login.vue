@@ -93,7 +93,7 @@ function goback(){
     align-items:center;
     background:
         linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
-        url("@/assets/Colagem Cientifica Vintage em Verde Suave.png") center/cover no-repeat;
+        url("@/assets/Layout com Espaçamento Igual.png") bottom/cover no-repeat;
 
     overflow:hidden;
 

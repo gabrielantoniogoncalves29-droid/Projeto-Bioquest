@@ -19,8 +19,6 @@ const modo = computed(() => filtrosStore.modoVisualizacao)
 const questoesStore = useQuestoesStore()
 const resolver = useResolverStore()
 
-// Ao clicar em "Resolver", o vetor de navegação é gerado a partir da lista
-// exatamente como está filtrada e ordenada na página (antes de navegar).
 function gerarVetor() {
   resolver.definirVetor(questoesStore.questoesOrdenadas.map(item => item.id))
 }

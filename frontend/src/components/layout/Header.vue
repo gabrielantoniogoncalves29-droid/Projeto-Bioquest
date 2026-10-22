@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue';
-import { Sun, Moon, Monitor, ChevronLeft, Settings, Palette, Check } from 'lucide-vue-next';
+import { Sun, Moon, Monitor, ChevronLeft, Palette, Check, ChevronDown } from 'lucide-vue-next';
 import { useTemaStore } from '@/store/tema.js';
 import { usePerfilStore } from '@/store/perfil.js';
 
@@ -143,7 +143,7 @@ onUnmounted(() => {
         :aria-expanded="configAberta"
         @click="alternarConfig"
       >
-        <Settings :size="15" />
+
         <span class="config-rotulo">Configurações</span>
         <ChevronLeft class="config-seta" :size="17" />
       </button>
@@ -164,7 +164,7 @@ onUnmounted(() => {
           >
             <Palette :size="15" />
             <span class="config-rotulo">Tema padrão</span>
-            <ChevronLeft class="config-seta" :size="17" />
+            <ChevronDown class="config-seta" :size="17" />
           </button>
 
           <div
@@ -523,8 +523,10 @@ margin-left: 10px;
   z-index: 1000;
 }
 
-.submenu .submenu-tema{
-  right: calc(100% + 17px);
+.submenu .submenu-tema {
+  position: absolute;
+  top: calc(100% + 17px);
+  left: 0;
 }
 
 .user .tema-opcao.ativa{
