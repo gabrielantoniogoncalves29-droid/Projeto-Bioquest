@@ -1,0 +1,22 @@
+{
+  "id": 7,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Em um laboratório de genética experimental,\r\nobservou-se que determinada bactéria continha um gene\r\nque conferia resistência a pragas específicas de plantas.\r\nEm vista disso, os pesquisadores procederam de acordo\r\ncom a figura.",
+  "enunciadoComplemento": "Do ponto de vista biotecnológico, como a planta\r\nrepresentada na figura é classificada?",
+  "imagem": "0007.png",
+  "imagemAlt": "Disponível em: http://ciencia.hsw.uol.com.br. Acesso em: 22 nov. 2013 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Clone.",
+    "B": "Híbrida.",
+    "C": "Mutante.",
+    "D": "Adaptada.",
+    "E": "Transgênica."
+  },
+  "palavrasChave": [
+    "Genética e biotecnologia",
+    "Entender o processo de transgenia"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 12,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os parasitoides (misto de parasitas e predadores) são\r\ninsetos diminutos que têm hábitos muito peculiares: suas\r\nlarvas podem se desenvolver dentro do corpo de outros\r\norganismos, como mostra a figura. A forma adulta se\r\nalimenta de pólen e açúcares. Em geral, cada parasitoide\r\nataca hospedeiros de determinada espécie e, por isso,\r\nesses organismos vêm sendo amplamente usados para o\r\ncontrole biológico de pragas agrícolas.",
+  "enunciadoComplemento": "A forma larval do parasitoide assume qual papel nessa\r\ncadeia alimentar?",
+  "imagem": "0012.png",
+  "imagemAlt": "SANTO, M. M. E.; FARIA, M. L. Parasitoides: insetos benéficos e cruéis.\r\nCiência Hoje, v. 49, n. 291, abr. 2012 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Consumidor primário, pois ataca diretamente uma\r\nespécie herbívora.",
+    "B": "Consumidor secundário, pois se alimenta diretamente\r\ndos tecidos da lagarta.",
+    "C": "Organismo heterótrofo de primeira ordem, pois se\r\nalimenta de pólen na fase adulta.",
+    "D": "Organismo heterótrofo de segunda ordem, pois\r\napresenta o maior nível energético na cadeia.",
+    "E": "Decompositor, pois se alimenta de tecidos do interior\r\ndo corpo da lagarta e a leva à morte."
+  },
+  "palavrasChave": [
+    "Cadeias alimentares",
+    "Ciclo de vide de um parasita"
+  ]
+}

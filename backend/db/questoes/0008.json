@@ -1,0 +1,22 @@
+{
+  "id": 8,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Segundo a teoria evolutiva mais aceita hoje, as\r\nmitocôndrias, organelas celulares responsáveis pela\r\nprodução de ATP em células eucariotas, assim como\r\nos cloroplastos, teriam sido originados de procariontes\r\nancestrais que foram incorporados por células mais\r\ncomplexas.",
+  "enunciadoComplemento": "Uma característica da mitocôndria que sustenta essa\r\nteoria é a",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "capacidade de produzir moléculas de ATP.",
+    "B": "presença de parede celular semelhante à de\r\nprocariontes.",
+    "C": "presença de membranas envolvendo e separando a\r\nmatriz mitocondrial do citoplasma.",
+    "D": "capacidade de autoduplicação dada por DNA circular\r\npróprio semelhante ao bacteriano.",
+    "E": "presença de um sistema enzimático eficiente às\r\nreações químicas do metabolismo aeróbio."
+  },
+  "palavrasChave": [
+    "Citoplasma",
+    "Teoria endossimbiótica"
+  ]
+}

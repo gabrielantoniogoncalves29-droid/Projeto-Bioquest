@@ -1,0 +1,22 @@
+{
+  "id": 10,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Um pesquisador percebe que o rótulo de um dos vidros\r\nem que guarda um concentrado de enzimas digestivas\r\nestá ilegível. Ele não sabe qual enzima o vidro contém,\r\nmas desconfia de que seja uma protease gástrica, que\r\nage no estômago digerindo proteínas. Sabendo que a\r\ndigestão no estômago é ácida e no intestino é básica, ele\r\nmonta cinco tubos de ensaio com alimentos diferentes,\r\nadiciona o concentrado de enzimas em soluções com\r\npH determinado e aguarda para ver se a enzima age em\r\nalgum deles.",
+  "enunciadoComplemento": "O tubo de ensaio em que a enzima deve agir para indicar\r\nque a hipótese do pesquisador está correta é aquele que\r\ncontém",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "cubo de batata em solução com pH = 9.",
+    "B": "pedaço de carne em solução com pH = 5.",
+    "C": "clara de ovo cozida em solução com pH = 9.",
+    "D": "porção de macarrão em solução com pH = 5.",
+    "E": "bolinha de manteiga em solução com pH = 9."
+  },
+  "palavrasChave": [
+    "Proteínas",
+    "Conhecimento sobre pH"
+  ]
+}

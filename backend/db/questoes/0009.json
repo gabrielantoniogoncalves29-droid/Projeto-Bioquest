@@ -1,0 +1,22 @@
+{
+  "id": 9,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "No heredograma, os símbolos preenchidos\r\nrepresentam pessoas portadoras de um tipo raro de\r\ndoença genética. Os homens são representados pelos\r\nquadrados e as mulheres, pelos círculos.",
+  "enunciadoComplemento": "Qual é o padrão de herança observado para essa doença?",
+  "imagem": "0009.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Dominante autossômico, pois a doença aparece em\r\nambos os sexos.",
+    "B": "Recessivo ligado ao sexo, pois não ocorre a\r\ntransmissão do pai para os filhos.",
+    "C": "Recessivo ligado ao Y, pois a doença é transmitida\r\ndos pais heterozigotos para os filhos.",
+    "D": "Dominante ligado ao sexo, pois todas as filhas de\r\nhomens afetados também apresentam a doença.",
+    "E": "Codominante autossômico, pois a doença é herdada\r\npelos filhos de ambos os sexos, tanto do pai quanto\r\nda mãe."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Interpretação de heredrograma"
+  ]
+}

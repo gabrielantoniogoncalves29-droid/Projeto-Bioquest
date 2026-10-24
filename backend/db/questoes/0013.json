@@ -1,0 +1,22 @@
+{
+  "id": 13,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Imunobiológicos:\r\ndiferentes formas de produção, diferentes aplicações",
+  "enunciadoComplemento": "Embora sejam produzidos e utilizados em situações\r\ndistintas, os imunobiológicos I e II atuam de forma\r\nsemelhante nos humanos e equinos, pois",
+  "imagem": "0013.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "conferem imunidade passiva.",
+    "B": "transferem células de defesa.",
+    "C": "suprimem a resposta imunológica.",
+    "D": "estimulam a produção de anticorpos.",
+    "E": "desencadeiam a produção de antígenos."
+  },
+  "palavrasChave": [
+    "Sistema imunológico",
+    "Vacinas e soros"
+  ]
+}

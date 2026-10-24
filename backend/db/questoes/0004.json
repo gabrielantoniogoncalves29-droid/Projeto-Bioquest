@@ -1,0 +1,22 @@
+{
+  "id": 4,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Existem bactérias que inibem o crescimento de um fungo causador de doenças no tomateiro, por consumirem o\r\nferro disponível no meio. As bactérias também fazem fixação de nitrogênio, disponibilizam cálcio e produzem auxinas,\r\nsubstâncias que estimulam diretamente o crescimento do tomateiro.",
+  "enunciadoComplemento": "Qual dos processos biológicos mencionados indica uma relação ecológica de competição?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Fixação de nitrogênio para o tomateiro.",
+    "B": "Disponibilização de cálcio para o tomateiro.",
+    "C": "Diminuição da quantidade de ferro disponível para o fungo.",
+    "D": "Liberação de substâncias que inibem o crescimento do fungo.",
+    "E": "Liberação de auxinas que estimulam o crescimento do tomateiro."
+  },
+  "palavrasChave": [
+    "Relações ecológicas",
+    "Interação e conceito de competição"
+  ]
+}
