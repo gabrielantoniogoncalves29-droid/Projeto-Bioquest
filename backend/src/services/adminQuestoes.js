@@ -49,7 +49,6 @@ function mensagemDoErro(issue) {
   return `${nome}: valor inválido`
 }
 
-// Retorna { dados, avisos }. Avisos não impedem salvar.
 export function validar(corpo) {
   const limpo = {}
 
@@ -73,7 +72,6 @@ export function validar(corpo) {
     .map(letra => ({ letra, texto: String(corpo[`alternativa${letra}`] ?? '').trim() }))
     .filter(alt => alt.texto)
 
-  // Consistência de classificação: só avisa (não bloqueia).
   if (dados.subconteudoId !== undefined) {
     const sub = db.prepare('SELECT conteudo_id AS conteudoId FROM subconteudos WHERE id = ?').get(dados.subconteudoId)
 
@@ -97,7 +95,6 @@ export function validar(corpo) {
       ...dados,
       alternativas,
       teoria: listaDeTexto(dados.teoria, /\r?\n/),
-      // Palavras-chave: separadas SOMENTE por ";" (vírgula faz parte do termo).
       palavrasChave: listaDeTexto(dados.palavrasChave, ';')
     }
   }
@@ -202,7 +199,6 @@ export function obterAdmin(id) {
     teoria: JSON.parse(q.teoria),
     alternativas,
     palavrasChave: palavrasDaQuestao(id),
-    // Dados originais da planilha, somente leitura (null em questões criadas no painel).
     planilha: {
       objetoMatrizId, objetoMatrizNome, objetoLivroId, objetoLivroNome,
       conteudoCodigo: conteudoLivroCodigo, conteudoNome: conteudoLivroNome,
@@ -240,7 +236,6 @@ export function criar(corpo, arquivo) {
 
   try {
     const salva = db.transaction(() => {
-      // Novas questões recebem MAX(id)+1 (a planilha ocupa 1-183).
       const id = dados.id
         ?? db.prepare('SELECT COALESCE(MAX(id), 0) + 1 AS id FROM questoes').get().id
 
@@ -301,8 +296,7 @@ export function atualizar(id, corpo, arquivo) {
 
     return obterAdmin(id)
   })()
-
-  // Troca ou remoção: apaga o arquivo antigo do disco (só os enviados pelo painel).
+  
   if (imagem !== atual.imagem) removerArquivoDaImagem(atual.imagem)
 
   return { ...resultado, avisos }

@@ -15,8 +15,6 @@ CREATE TABLE IF NOT EXISTS conteudos (
   nome    TEXT NOT NULL
 );
 
--- id estável = conteudo_id * 100 + numero (ex.: Metabolismo celular C1 = 401).
--- "codigo" é o C# do Anexo 2 do protocolo e é a chave natural (conteudo_id, numero).
 CREATE TABLE IF NOT EXISTS subconteudos (
   id          INTEGER PRIMARY KEY,
   conteudo_id INTEGER NOT NULL REFERENCES conteudos(id) ON DELETE CASCADE,
@@ -34,19 +32,13 @@ CREATE TABLE IF NOT EXISTS usuarios (
   criado_em TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Questões. Quase tudo é opcional: o painel /admin permite salvar uma questão
--- em branco e preencher depois. Nas colunas de classificação (ano, nivel_id,
--- objeto_id, conteudo_id, subconteudo_id) o valor ausente é NULL e todo o
--- backend usa LEFT JOIN, então a listagem nunca quebra.
--- As colunas "objeto_matriz_*", "objeto_livro_*", "conteudo_livro_*",
--- "categorizacao" e "observacoes" são a cópia fiel da planilha (auditoria).
 CREATE TABLE IF NOT EXISTS questoes (
   id                    INTEGER PRIMARY KEY,
   serial                INTEGER NOT NULL UNIQUE,
   ano                   INTEGER,
   banca                 TEXT    NOT NULL DEFAULT 'Enem',
   prova                 TEXT    NOT NULL DEFAULT '',
-  numero_questao        INTEGER,            -- nº no caderno azul de prova
+  numero_questao        INTEGER,           
   nivel_id              INTEGER REFERENCES niveis(id),
   conteudo_id           INTEGER REFERENCES conteudos(id),
   subconteudo_id        INTEGER REFERENCES subconteudos(id),
@@ -56,7 +48,7 @@ CREATE TABLE IF NOT EXISTS questoes (
   enunciado_complemento TEXT    NOT NULL DEFAULT '',
   imagem                TEXT    NOT NULL DEFAULT '',
   imagem_alt            TEXT    NOT NULL DEFAULT '',
-  resposta              TEXT    CHECK (resposta IS NULL OR resposta IN ('A','B','C','D','E')),  -- gabarito
+  resposta              TEXT    CHECK (resposta IS NULL OR resposta IN ('A','B','C','D','E')),
   comentario            TEXT    NOT NULL DEFAULT '',
   teoria                TEXT    NOT NULL DEFAULT '[]',
   taxa_acerto           INTEGER NOT NULL DEFAULT 0 CHECK (taxa_acerto BETWEEN 0 AND 100),
@@ -65,9 +57,9 @@ CREATE TABLE IF NOT EXISTS questoes (
   objeto_matriz_nome    TEXT,
   objeto_livro_id       INTEGER,
   objeto_livro_nome     TEXT,
-  conteudo_livro_codigo TEXT,               -- "C4"
-  conteudo_livro_numero INTEGER,            -- 4
-  conteudo_livro_nome   TEXT,               -- texto original da planilha
+  conteudo_livro_codigo TEXT,             
+  conteudo_livro_numero INTEGER,          
+  conteudo_livro_nome   TEXT,              
   categorizacao         INTEGER CHECK (categorizacao IS NULL OR categorizacao IN (1,2,3)),
   observacoes           TEXT,
 

@@ -115,9 +115,6 @@ export function listarIds(filtros = {}, usuarioId = config.usuarioDemoId) {
   return listarCards(filtros, usuarioId).map(card => card.id)
 }
 
-// Ponto de extensão (login): o percentual de acertos só será exposto quando
-// config.taxaAcertoAtiva for true. Até lá a API devolve null e a tela mostra "—".
-// Usa o valor cadastrado até haver respostas suficientes; depois as respostas reais.
 export function calcularTaxaAcerto(questaoId) {
   const { total, acertos } = db.prepare(`
     SELECT COUNT(*) AS total, COALESCE(SUM(correta), 0) AS acertos
@@ -179,7 +176,6 @@ export function obterQuestao(id) {
       area: { nome: q.conteudoNome, icone: q.conteudoId ? String(q.conteudoId) : '' },
       assunto: { nome: q.subconteudo, codigo: q.subconteudoCodigo }
     },
-    // Dados originais da planilha (somente leitura).
     planilha: {
       objetoMatrizId: q.objetoMatrizId,
       objetoMatrizNome: q.objetoMatrizNome,
@@ -270,7 +266,6 @@ export function responder(usuarioId, questaoId, alternativa) {
   }
 }
 
-// Resposta que o usuário já deu a esta questão (para restaurar a tela), ou null.
 export function respostaDoUsuario(usuarioId, questaoId) {
   garantirQuestao(questaoId)
 

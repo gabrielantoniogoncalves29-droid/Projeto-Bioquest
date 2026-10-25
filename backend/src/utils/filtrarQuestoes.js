@@ -10,8 +10,6 @@ export function normalizar(texto) {
 
 const textosEmCache = new WeakMap()
 
-// Texto pesquisável do card: resumo, subconteúdo, conteúdo, objeto da matriz e
-// palavras-chave (conteúdo + observações da planilha). Id e ano são tratados à parte.
 function textoDoCard(card) {
   let texto = textosEmCache.get(card)
 
@@ -30,8 +28,6 @@ function textoDoCard(card) {
   return texto
 }
 
-// "Todas as palavras precisam casar" (AND). Termo só de dígitos (com ou sem #)
-// casa com o id ou o ano exatos; qualquer termo também casa por trecho de texto.
 function casaComTermo(card, palavras) {
   const texto = textoDoCard(card)
 
@@ -79,7 +75,6 @@ export function filtrarQuestoes(cards, filtros = {}, contexto = {}) {
   })
 }
 
-// Valor ausente (null) vai sempre para o fim, em qualquer direção.
 function comparar(a, b, direcao) {
   const aVazio = a === null || a === undefined
   const bVazio = b === null || b === undefined
@@ -89,7 +84,6 @@ function comparar(a, b, direcao) {
   return direcao * (a - b)
 }
 
-// Desempate determinístico: ano (mais recente primeiro, exceto em "antigas") e depois serial.
 export function ordenarQuestoes(cards, ordem) {
   const lista = [...cards]
   const porSerial = (a, b) => a.serial - b.serial
