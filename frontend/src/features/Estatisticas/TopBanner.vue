@@ -35,7 +35,7 @@ import { ChartNoAxesCombined, Sprout } from 'lucide-vue-next'
   margin: 0;
   padding: 34px clamp(28px, 3.8vw, 58px);
   border: 1px solid rgba(111, 219, 166, .15);
-  background-image:  url('../assets/background.png');
+  background-image:  url('@/assets/background.png');
   background-position:  center;
   color: #fff;
 }

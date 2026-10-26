@@ -136,8 +136,6 @@ function sobrepor(corpo, arquivo) {
   return novo
 }
 
-// Importa db/questoes/*.json para o banco. Devolve { importadas, problemas, orfas }.
-// Se houver qualquer problema nada é gravado (a transação é desfeita).
 export function importarArquivos() {
   if (!fs.existsSync(config.pastaQuestoes)) return { importadas: 0, problemas: [], orfas: [] }
 
