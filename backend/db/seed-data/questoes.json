@@ -198,7 +198,7 @@
  {
   "questaoId": 15,
   "ano": 2015,
-  "numeroCadernoAzul": 47,
+  "numeroCadernoAzul": 46,
   "objetoMatrizId": 3,
   "objetoMatrizNome": "Identidade dos seres vivos",
   "objetoLivroId": 14,
@@ -212,7 +212,7 @@
  {
   "questaoId": 16,
   "ano": 2015,
-  "numeroCadernoAzul": 48,
+  "numeroCadernoAzul": 47,
   "objetoMatrizId": 4,
   "objetoMatrizNome": "Ecologia e ciências ambientais",
   "objetoLivroId": 17,
@@ -226,7 +226,7 @@
  {
   "questaoId": 17,
   "ano": 2015,
-  "numeroCadernoAzul": 49,
+  "numeroCadernoAzul": 48,
   "objetoMatrizId": 1,
   "objetoMatrizNome": "Moléculas, células e tecidos",
   "objetoLivroId": 3,
@@ -282,7 +282,7 @@
  {
   "questaoId": 21,
   "ano": 2015,
-  "numeroCadernoAzul": 64,
+  "numeroCadernoAzul": 66,
   "objetoMatrizId": 2,
   "objetoMatrizNome": "Hereditariedade e diversidade da vida",
   "objetoLivroId": 3,
@@ -296,7 +296,7 @@
  {
   "questaoId": 22,
   "ano": 2015,
-  "numeroCadernoAzul": 66,
+  "numeroCadernoAzul": 67,
   "objetoMatrizId": 3,
   "objetoMatrizNome": "Identidade dos seres vivos",
   "objetoLivroId": 14,
@@ -310,7 +310,7 @@
  {
   "questaoId": 23,
   "ano": 2015,
-  "numeroCadernoAzul": 70,
+  "numeroCadernoAzul": 69,
   "objetoMatrizId": 1,
   "objetoMatrizNome": "Moléculas, células e tecidos",
   "objetoLivroId": 4,
@@ -324,7 +324,7 @@
  {
   "questaoId": 24,
   "ano": 2015,
-  "numeroCadernoAzul": 74,
+  "numeroCadernoAzul": 72,
   "objetoMatrizId": 2,
   "objetoMatrizNome": "Hereditariedade e diversidade da vida",
   "objetoLivroId": 14,
@@ -338,7 +338,7 @@
  {
   "questaoId": 25,
   "ano": 2015,
-  "numeroCadernoAzul": 76,
+  "numeroCadernoAzul": 74,
   "objetoMatrizId": 1,
   "objetoMatrizNome": "Moléculas, células e tecidos",
   "objetoLivroId": 15,
@@ -366,7 +366,7 @@
  {
   "questaoId": 27,
   "ano": 2015,
-  "numeroCadernoAzul": 81,
+  "numeroCadernoAzul": 83,
   "objetoMatrizId": 3,
   "objetoMatrizNome": "Identidade dos seres vivos",
   "objetoLivroId": 13,
@@ -380,7 +380,7 @@
  {
   "questaoId": 28,
   "ano": 2015,
-  "numeroCadernoAzul": 83,
+  "numeroCadernoAzul": 85,
   "objetoMatrizId": 3,
   "objetoMatrizNome": "Identidade dos seres vivos",
   "objetoLivroId": 14,
@@ -394,7 +394,7 @@
  {
   "questaoId": 29,
   "ano": 2015,
-  "numeroCadernoAzul": 84,
+  "numeroCadernoAzul": 87,
   "objetoMatrizId": 1,
   "objetoMatrizNome": "Moléculas, células e tecidos",
   "objetoLivroId": 3,

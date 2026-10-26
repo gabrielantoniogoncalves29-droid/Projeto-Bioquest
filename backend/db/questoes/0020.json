@@ -2,18 +2,18 @@
   "id": 20,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "O nitrogênio é essencial para a vida e o maiorreservatório global desse elemento, na forma de N2,\r\né a atmosfera. Os principais responsáveis por sua\r\nincorporação na matéria orgânica são microrganismos\r\nfixadores de N2, que ocorrem de forma livre ou simbiontes\r\ncom plantas.",
+  "enunciadoComplemento": "Animais garantem suas necessidades metabólicas desse\r\nelemento pela",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "absorção do gás nitrogênio pela respiração.",
+    "B": "ingestão de moléculas de carboidratos vegetais.",
+    "C": " incorporação de nitritos dissolvidos na água\r\nconsumida.",
+    "D": "transferência da matéria orgânica pelas cadeias\r\ntróficas.",
+    "E": "protocooperação com microrganismos fixadores de\r\nnitrogênio."
   },
   "palavrasChave": [
     "Fluxo de energia e matéria",

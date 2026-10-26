@@ -2,18 +2,18 @@
   "id": 29,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "O formato das células de organismos pluricelulares é\r\nextremamente variado. Existem células discoides, como\r\né o caso das hemácias, as que lembram uma estrela,\r\ncomo os neurônios, e ainda algumas alongadas, como as\r\nmusculares.",
+  "enunciadoComplemento": "Em um mesmo organismo, a diferenciação dessas células\r\nocorre por",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "produzirem mutações específicas.",
+    "B": "possuírem DNA mitocondrial diferentes.",
+    "C": "apresentarem conjunto de genes distintos.",
+    "D": "expressarem porções distintas do genoma.",
+    "E": "terem um número distinto de cromossomos."
   },
   "palavrasChave": [
     "Núcleo celular",

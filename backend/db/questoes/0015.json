@@ -2,18 +2,18 @@
   "id": 15,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
-  "imagem": "",
-  "imagemAlt": "",
+  "enunciadoTexto": "Hipoxia ou mal das alturas consiste na diminuição de\r\noxigênio (O2) no sangue arterial do organismo. Por essa\r\nrazão, muitos atletas apresentam mal-estar (dores de\r\ncabeça, tontura, falta de ar etc.) ao praticarem atividade\r\nfísica em altitudes elevadas. Nessas condições, ocorrerá\r\numa diminuição na concentração de hemoglobina\r\noxigenada (HbO2) em equilíbrio no sangue, conforme a\r\nrelação:",
+  "enunciadoComplemento": "A alteração da concentração de hemoglobina oxigenada\r\nno sangue ocorre por causa do(a)",
+  "imagem": "0015.png",
+  "imagemAlt": "Mal da montanha. Disponível em: www.feng.pucrs.br. Acesso em: 11 fev. 2015 (adaptado)",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "elevação da pressão arterial.",
+    "B": "aumento da temperatura corporal.",
+    "C": "redução da temperatura do ambiente.",
+    "D": "queda da pressão parcial de oxigênio.",
+    "E": "diminuição da quantidade de hemácias."
   },
   "palavrasChave": [
     "Sistema circulatório",

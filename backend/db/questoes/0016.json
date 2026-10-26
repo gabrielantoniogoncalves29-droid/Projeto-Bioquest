@@ -2,18 +2,18 @@
   "id": 16,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "A indústria têxtil utiliza grande quantidade de corantes\r\nno processo de tingimento dos tecidos. O escurecimento\r\ndas águas dos rios causado pelo despejo desses\r\ncorantes pode desencadear uma série de problemas no\r\necossistema aquático. ",
+  "enunciadoComplemento": "Considerando esse escurecimento das águas, o impacto\r\nnegativo inicial que ocorre é o(a)",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "eutrofização.",
+    "B": "proliferação de algas.",
+    "C": "inibição da fotossíntese.",
+    "D": "fotodegradação da matéria orgânica. ",
+    "E": "aumento da quantidade de gases dissolvidos."
   },
   "palavrasChave": [
     "Problemas ambientais",

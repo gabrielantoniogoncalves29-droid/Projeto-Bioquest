@@ -2,18 +2,18 @@
   "id": 25,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "A palavra “biotecnologia” surgiu no século XX,\r\nquando o cientista Herbert Boyer introduziu a informação\r\nresponsável pela fabricação da insulina humana em uma\r\nbactéria, para que ela passasse a produzir a substância.",
+  "enunciadoComplemento": "As bactérias modificadas por Herbert Boyer passaram a\r\nproduzir insulina humana porque receberam",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "a sequência de DNA codificante de insulina humana.",
+    "B": "a proteína sintetizada por células humanas.",
+    "C": "um RNA recombinante de insulina humana.",
+    "D": "o RNA mensageiro de insulina humana.",
+    "E": "um cromossomo da espécie humana."
   },
   "palavrasChave": [
     "Genética molecular",

@@ -2,18 +2,18 @@
   "id": 26,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "A definição de queimadura é bem ampla, porém,\r\nbasicamente, é a lesão causada pela ação direta ou\r\nindireta produzida pela transferência de calor para o\r\ncorpo. A sua manifestação varia desde bolhas (flictenas)\r\naté formas mais graves, capazes de desencadear\r\nrespostas sistêmicas proporcionais à gravidade da lesão\r\ne sua respectiva extensão. Muitas vezes, os primeiros\r\nsocorros prestados à vítima, ao invés de ajudar, acabam\r\nagravando ainda mais a situação do paciente.",
+  "enunciadoComplemento": "Ao se deparar com um indivíduo que sofreu queimadura\r\ncom formação de flictena, o procedimento de primeiros\r\nsocorros que deve ser realizado antes de encaminhar o\r\npaciente ao hospital é",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "colocar gelo sobre a flictena para amenizar o ardor.",
+    "B": "utilizar manteiga para evitar o rompimento da flictena.",
+    "C": "passar creme dental para diminuir a ardência da\r\nflictena.",
+    "D": "perfurar a flictena para que a água acumulada seja\r\nliberada.",
+    "E": "cobrir a flictena com gazes molhadas para evitar a\r\ndesidratação."
   },
   "palavrasChave": [
     "Tecido epitelial",

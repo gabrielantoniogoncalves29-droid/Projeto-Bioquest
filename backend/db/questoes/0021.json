@@ -2,18 +2,18 @@
   "id": 21,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "A cariotipagem é um método que analisa células de\r\num indivíduo para determinar seu padrão cromossômico.\r\nEssa técnica consiste na montagem fotográfica, em\r\nsequência, dos pares de cromossomos e permite identificar\r\num indivíduo normal (46, XX ou 46, XY) ou com alguma\r\nalteração cromossômica. A investigação do cariótipo\r\nde uma criança do sexo masculino com alterações\r\nmorfológicas e comprometimento cognitivo verificou que\r\nela apresentava fórmula cariotípica 47, XY, +18.",
+  "enunciadoComplemento": "A alteração cromossômica da criança pode ser\r\nclassificada como",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "estrutural, do tipo deleção.",
+    "B": "numérica, do tipo euploidia.",
+    "C": "numérica, do tipo poliploidia.",
+    "D": "estrutural, do tipo duplicação.",
+    "E": "numérica, do tipo aneuploidia."
   },
   "palavrasChave": [
     "Núcleo celular",

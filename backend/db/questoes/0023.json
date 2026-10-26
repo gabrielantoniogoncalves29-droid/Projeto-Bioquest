@@ -2,18 +2,18 @@
   "id": 23,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
-  "imagem": "",
+  "enunciadoTexto": "Normalmente, as células do organismo humano\r\nrealizam a respiração aeróbica, na qual o consumo de uma\r\nmolécula de glicose gera 38 moléculas de ATP. Contudo,\r\nem condições anaeróbicas, o consumo de uma molécula\r\nde glicose pelas células é capaz de gerar apenas duas\r\nmoléculas de ATP.",
+  "enunciadoComplemento": "Qual curva representa o perfil de consumo de glicose,\r\npara manutenção da homeostase de uma célula que\r\ninicialmente está em uma condição anaeróbica e é\r\nsubmetida a um aumento gradual da concentração\r\nde oxigênio?",
+  "imagem": "0023.png",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "E": "5"
   },
   "palavrasChave": [
     "Respiração aeróbica",

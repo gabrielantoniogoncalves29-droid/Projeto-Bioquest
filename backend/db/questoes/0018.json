@@ -2,18 +2,18 @@
   "id": 18,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "Um importante princípio da biologia, relacionado à\r\ntransmissão de caracteres e à embriogênese humana,\r\nfoi quebrado com a descoberta do microquimerismo\r\nfetal. Microquimerismo é o nome dado ao fenômeno\r\nbiológico referente a uma pequena população de células\r\nou DNA presente em um indivíduo, mas derivada de um\r\norganismo geneticamente distinto. Investigando-se a\r\npresença do cromossomo Y, foi revelado que diversos\r\ntecidos de mulheres continham células masculinas.\r\nA análise do histórico médico revelou uma correlação\r\nextremamente curiosa: apenas as mulheres que antes\r\ntiveram filhos homens apresentaram microquimerismo\r\nmasculino. Essa correlação levou à interpretação de que\r\nexiste uma troca natural entre células do feto e maternas\r\ndurante a gravidez.",
+  "enunciadoComplemento": "O princípio contestado com essa descoberta, relacionado\r\nao desenvolvimento do corpo humano, é o de que",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "o fenótipo das nossas células pode mudar por\r\ninfluência do meio ambiente.",
+    "B": "a dominância genética determina a expressão de\r\nalguns genes.",
+    "C": "as mutações genéticas introduzem variabilidade no\r\ngenoma.",
+    "D": "as mitocôndrias e o seu DNA provêm do gameta\r\nmaterno.",
+    "E": "as nossas células corporais provêm de um único\r\nzigoto."
   },
   "palavrasChave": [
     "Desenvolvimento embrionário",

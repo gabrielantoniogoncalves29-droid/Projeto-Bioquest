@@ -2,18 +2,18 @@
   "id": 19,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "Alimentos em conserva são frequentemente\r\narmazenados em latas metálicas seladas, fabricadas com\r\num material chamado folha de flandres, que consiste de\r\numa chapa de aço revestida com uma fina camada de\r\nestanho, metal brilhante e de difícil oxidação. É comum\r\nque a superfície interna seja ainda revestida por uma\r\ncamada de verniz à base de epóxi, embora também\r\nexistam latas sem esse revestimento, apresentando uma\r\ncamada de estanho mais espessa.",
+  "enunciadoComplemento": "Comprar uma lata de conserva amassada no\r\nsupermercado é desaconselhável porque o amassado\r\npode",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "alterar a pressão no interior da lata, promovendo a\r\ndegradação acelerada do alimento.",
+    "B": "romper a camada de estanho, permitindo a corrosão\r\ndo ferro e alterações do alimento.",
+    "C": "prejudicar o apelo visual da embalagem, apesar de\r\nnão afetar as propriedades do alimento.",
+    "D": "romper a camada de verniz, fazendo com que o metal\r\ntóxico estanho contamine o alimento.",
+    "E": "desprender camadas de verniz, que se dissolverão no\r\nmeio aquoso, contaminando o alimento."
   },
   "palavrasChave": [
     "Evidências evolutivas",

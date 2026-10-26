@@ -2,18 +2,18 @@
   "id": 28,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
-  "imagem": "",
-  "imagemAlt": "",
+  "enunciadoTexto": "Entre os anos de 1028 e 1038, Alhazen (Ibn al-Haytham;\r\n965-1040 d.C.) escreveu sua principal obra, o Livro da\r\nÓptica, que, com base em experimentos, explicava o\r\nfuncionamento da visão e outros aspectos da ótica, por\r\nexemplo, o funcionamento da câmara escura. O livro foi\r\ntraduzido e incorporado aos conhecimentos científicos\r\nocidentais pelos europeus. Na figura, retirada dessa obra,\r\né representada a imagem invertida de edificações em um\r\ntecido utilizado como anteparo.",
+  "enunciadoComplemento": "Se fizermos uma analogia entre a ilustração e o olho\r\nhumano, o tecido corresponde ao(à)",
+  "imagem": "0028.png",
+  "imagemAlt": "ZEWAIL, A. H. Micrographia of the twenty-first century: from camera obscura to 4D microscopy.\r\nPhilosophical Transactions of the Royal Society A, v. 368, 2010 (adaptado).",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "íris.",
+    "B": "retina.",
+    "C": "pupila.",
+    "D": "córnea.",
+    "E": "cristalino."
   },
   "palavrasChave": [
     "Sistema sensorial",

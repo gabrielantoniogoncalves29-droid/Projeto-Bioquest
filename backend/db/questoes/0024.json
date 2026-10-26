@@ -2,18 +2,18 @@
   "id": 24,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "Tanto a febre amarela quanto a dengue são doenças\r\ncausadas por vírus do grupo dos arbovírus, pertencentes\r\nao gênero Flavivirus, existindo quatro sorotipos para\r\no vírus causador da dengue. A transmissão de ambas\r\nacontece por meio da picada de mosquitos, como o\r\nAedes aegypti. Entretanto, embora compartilhem essas\r\ncaracterísticas, hoje somente existe vacina, no Brasil, para\r\na febre amarela e nenhuma vacina efetiva para a dengue.",
+  "enunciadoComplemento": "Esse fato pode ser atribuído à",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "maior taxa de mutação do vírus da febre amarela do\r\nque do vírus da dengue.",
+    "B": "alta variabilidade antigênica do vírus da dengue em\r\nrelação ao vírus da febre amarela.",
+    "C": "menor adaptação do vírus da dengue à população\r\nhumana do que do vírus da febre amarela.",
+    "D": "presença de dois tipos de ácidos nucleicos no vírus da\r\ndengue e somente um tipo no vírus da febre amarela.",
+    "E": "baixa capacidade de indução da resposta imunológica\r\npelo vírus da dengue em relação ao da febre amarela."
   },
   "palavrasChave": [
     "Sistema imunológico",

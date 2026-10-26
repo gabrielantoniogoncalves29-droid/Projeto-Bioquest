@@ -2,18 +2,18 @@
   "id": 22,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "Durante uma expedição, um grupo de estudantes\r\nperdeu-se de seu guia. Ao longo do dia em que esse\r\ngrupo estava perdido, sem água e debaixo de sol, os\r\nestudantes passaram a sentir cada vez mais sede.\r\nConsequentemente, o sistema excretor desses indivíduos\r\nteve um acréscimo em um dos seus processos funcionais.",
+  "enunciadoComplemento": "Nessa situação o sistema excretor dos estudantes",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "aumentou a filtração glomerular.",
+    "B": "produziu maior volume de urina.",
+    "C": "produziu urina com menos ureia.",
+    "D": "produziu urina com maior concentração de sais.",
+    "E": "reduziu a reabsorção de glicose e aminoácidos."
   },
   "palavrasChave": [
     "Sistema urinário",
