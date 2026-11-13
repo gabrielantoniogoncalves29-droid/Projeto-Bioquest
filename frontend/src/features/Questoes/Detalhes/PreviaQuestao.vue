@@ -59,15 +59,27 @@ const { questao, previaExpandida: expandido, alternativas } = storeToRefs(store)
         <li
             v-for="alternativa in alternativas"
             :key="alternativa.letra"
-            :class="{ correta: alternativa.letra === questao.resposta }"
+            :class="{ correta: questao.liberada && alternativa.letra === questao.resposta }"
         >
 
             <span class="letra">{{ alternativa.letra }}</span>
 
-            <span class="texto">{{ alternativa.texto }}</span>
+            <span class="texto">
+
+                <span v-if="alternativa.texto">{{ alternativa.texto }}</span>
+
+                <img
+                    v-if="alternativa.imagem"
+                    class="imagem-alternativa"
+                    :src="alternativa.imagem"
+                    :alt="alternativa.texto || `Alternativa ${alternativa.letra}`"
+                    loading="lazy"
+                >
+
+            </span>
 
             <CheckCircle2
-                v-if="alternativa.letra === questao.resposta"
+                v-if="questao.liberada && alternativa.letra === questao.resposta"
                 :size="18"
                 class="check"
             />
@@ -285,6 +297,38 @@ transform: translateY(-2px);
     font-size:12.5px;
 
     font-weight:700;
+
+}
+
+.texto{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    min-width:0;
+
+}
+
+.imagem-alternativa{
+
+    display:block;
+
+    max-width:100%;
+
+    max-height:240px;
+
+    object-fit:contain;
+
+    align-self:flex-start;
+
+    padding:4px;
+
+    border-radius:6px;
+
+    background:#fff;
 
 }
 

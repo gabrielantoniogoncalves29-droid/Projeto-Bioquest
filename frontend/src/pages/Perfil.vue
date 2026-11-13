@@ -1,10 +1,14 @@
 <template>
-  <Header/>
-  <main class="perfil-page">
+  <div>
+    <Header/>
+    <main class="perfil-page">
 
     <div class="perfil-container">
 
-      <h1 class="perfil-titulo">Meu Perfil</h1>
+      <div class="perfil-topo-linha">
+        <h1 class="perfil-titulo">Meu Perfil</h1>
+        <BotaoAjuda secao="perfil" />
+      </div>
 
       <ProfileCard />
 
@@ -37,7 +41,8 @@
 
     </div>
 
-  </main>
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -47,6 +52,7 @@ import ProfileCard from "@/features/Perfil/ProfileCard.vue"
 import MeusDadosTab from "@/features/Perfil/MeusDadosTab.vue"
 import QuestionList from "@/features/Perfil/QuestionList.vue"
 import ResetarBancoTab from "@/features/Perfil/ResetarBancoTab.vue"
+import BotaoAjuda from "@/features/Ajuda/BotaoAjuda.vue"
 import { usePerfilStore } from "@/store/perfil"
 
 const perfil = usePerfilStore()
@@ -82,13 +88,21 @@ onMounted(() => {
     flex-direction:column;
 }
 
-.perfil-titulo{
-    margin:0;
+.perfil-topo-linha{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
     padding-bottom:18px;
+    border-bottom:1px solid var(--cor-borda);
+}
+
+.perfil-titulo{
+    margin-left: 30px !important;
+    margin: 0;
     font-size:24px;
     font-weight:700;
     color:var(--cor-texto-principal);
-    border-bottom:1px solid var(--cor-borda);
 }
 
 .abas{
@@ -134,21 +148,63 @@ onMounted(() => {
     padding-top:28px;
 }
 
-@media (max-width:768px){
-
-    .perfil-page{
-        padding:20px 14px 40px;
+@media (max-width:820px){
+    .abas{
+        display:grid;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:8px;
+        margin-top:4px;
+        padding-bottom:12px;
+        border-bottom:0;
     }
-
-    .perfil-titulo{
-        font-size:21px;
-    }
-
     .aba{
-        padding:14px 18px;
+        min-height:48px;
+        padding:10px 12px;
+        margin-bottom:0;
+        border:1px solid var(--cor-borda);
+        border-radius:12px;
+        background:var(--cor-fundo-card);
         font-size:14px;
+        line-height:1.3;
+        text-align:center;
+        white-space:normal;
     }
-
+    .aba.ativa{
+        background:var(--cor-primaria-fundo);
+        border-color:var(--cor-primaria);
+    }
+    .aba.perigo{
+        grid-column:1 / -1;
+    }
+    .aba.perigo.ativa{
+        background:var(--cor-perigo-fundo);
+        border-color:var(--cor-perigo);
+    }
+    .aba:focus-visible{
+        outline:2px solid var(--cor-primaria);
+        outline-offset:2px;
+    }
+    .aba-conteudo{
+        padding-top:16px;
+    }
 }
-
+@media (max-width:768px){
+    .perfil-page{
+        padding:20px 24px 40px;
+    }
+    .perfil-titulo{
+        margin-left:0 !important;
+        font-size:22px;
+    }
+}
+@media (max-width:599px){
+    .perfil-page{
+        padding-inline:20px;
+    }
+}
+@media (max-width:429px){
+    .perfil-page{
+        padding-inline:16px;
+    }
+}
 </style>

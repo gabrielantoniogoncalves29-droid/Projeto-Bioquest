@@ -1,16 +1,49 @@
 import path from 'node:path'
 import express, { Router } from 'express'
+import rateLimit from 'express-rate-limit'
 import { config } from '../config.js'
 import { adminAuth } from '../middleware/adminAuth.js'
-import { uploadImagemQuestao } from '../middleware/upload.js'
+import { uploadImagensDaQuestao, conferirImagem } from '../middleware/upload.js'
 import * as admin from '../services/adminQuestoes.js'
 import { listarTodas } from '../services/palavrasChave.js'
 import { exportarQuestao, exportarTodas, removerArquivosDaQuestao } from '../services/arquivosQuestoes.js'
 import { idDaRota } from '../utils/params.js'
+import { criarLimite } from '../middleware/limites.js'
+import { registrarInfo, registrarAviso, contextoDaRequisicao } from '../utils/log.js'
 
 const router = Router()
 
-router.use(adminAuth)
+const limitarAdmin = criarLimite({ nome: 'admin', janelaMs: 15 * 60 * 1000, max: config.limiteAdmin })
+
+const limitarFalhasAdmin = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  skipSuccessfulRequests: true,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { erro: 'Muitas tentativas. Tente novamente em alguns minutos.' }
+})
+
+router.use(limitarAdmin, limitarFalhasAdmin, adminAuth)
+
+router.use((req, res, next) => {
+  if (req.method !== 'GET') {
+    res.on('finish', () => registrarInfo('admin_acao', { ...contextoDaRequisicao(req), status: res.statusCode }))
+  }
+
+  next()
+})
+
+router.use((req, res, next) => {
+  const origem = req.headers.origin
+
+  if (req.method !== 'GET' && origem && new URL(origem).host !== req.headers.host) {
+    registrarAviso('admin_origem_negada', { ...contextoDaRequisicao(req), origem })
+    return res.status(403).json({ erro: 'Origem não permitida' })
+  }
+
+  next()
+})
 
 router.use('/api', (req, res, next) => {
   res.set('Cache-Control', 'no-store')
@@ -43,12 +76,12 @@ function comExportacao(salva) {
   }
 }
 
-router.post('/api/questoes', uploadImagemQuestao.single('imagem'), (req, res) => {
-  res.status(201).json(comExportacao(admin.criar(req.body, req.file)))
+router.post('/api/questoes', uploadImagensDaQuestao, conferirImagem, (req, res) => {
+  res.status(201).json(comExportacao(admin.criar(req.body, req.files ?? {})))
 })
 
-router.put('/api/questoes/:id', uploadImagemQuestao.single('imagem'), (req, res) => {
-  res.json(comExportacao(admin.atualizar(idDaRota(req), req.body, req.file)))
+router.put('/api/questoes/:id', uploadImagensDaQuestao, conferirImagem, (req, res) => {
+  res.json(comExportacao(admin.atualizar(idDaRota(req), req.body, req.files ?? {})))
 })
 
 router.delete('/api/questoes/:id', (req, res) => {

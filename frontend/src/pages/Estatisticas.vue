@@ -11,6 +11,7 @@ import Rodape from '../components/layout/Rodape.vue'
     <div class="stats-page__inner">
       <TopBanner />
       <Sequencia />
+  
     </div>
   </div>
   <Rodape />

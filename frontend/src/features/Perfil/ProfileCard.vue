@@ -126,21 +126,31 @@ const perfil = usePerfilStore()
 }
 
 @media (max-width:640px){
-
     .profile-card{
-        flex-direction:column;
-        text-align:center;
+        gap:16px;
+        padding:16px 0 12px;
     }
-
-    .profile-info{
-        align-items:center;
-        text-align:center;
+    .avatar-wrapper,
+    .avatar-img,
+    .avatar-iniciais{
+        width:64px;
+        height:64px;
     }
-
+    .avatar-iniciais{
+        font-size:22px;
+    }
     .profile-info h2{
+        font-size:18px;
         white-space:normal;
+        overflow-wrap:anywhere;
     }
-
+    .email{
+        align-items:flex-start;
+        overflow-wrap:anywhere;
+    }
+    .email svg{
+        flex:0 0 auto;
+        margin-top:4px;
+    }
 }
-
 </style>

@@ -213,7 +213,6 @@ async function confirmar() {
     color:var(--cor-texto-suave);
 }
 
-/* três cards lado a lado */
 .grade{
     display:grid;
     grid-template-columns:repeat(3, minmax(0, 1fr));
@@ -317,7 +316,6 @@ async function confirmar() {
     cursor:not-allowed;
 }
 
-/* excluir conta */
 .excluir{
     display:flex;
     align-items:center;

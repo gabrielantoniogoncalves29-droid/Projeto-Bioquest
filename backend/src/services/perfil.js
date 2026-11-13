@@ -4,11 +4,21 @@ import { z } from 'zod'
 import { db } from '../db.js'
 import { config } from '../config.js'
 import { cardsPorIds } from './questoes.js'
-import { conflito, naoEncontrado, requisicaoInvalida } from '../utils/erros.js'
+import { confirmarIdentidade, criarTokenDeEmail, enviarLinkDeNovoEmail, esquemas } from './auth.js'
+import { emailDisponivel } from './email.js'
+import { validar } from '../utils/params.js'
+import { conflito, indisponivel, naoEncontrado, requisicaoInvalida } from '../utils/erros.js'
 
-const esquemaPerfil = z.object({
-  nome: z.string().trim().min(2, 'Informe o nome').max(80),
-  email: z.string().trim().toLowerCase().email('E-mail inválido').max(120)
+const esquemaNome = z.object({ nome: esquemas.nome })
+
+const esquemaNovoEmail = z.object({
+  novoEmail: esquemas.email.shape.email,
+  senha: z.string().max(200).optional()
+})
+
+const esquemaExclusao = z.object({
+  senha: z.string().max(200).optional(),
+  confirmacao: z.string()
 })
 
 function idsDe(tabela, usuarioId) {
@@ -23,7 +33,7 @@ function idsDe(tabela, usuarioId) {
 
 function obterUsuario(usuarioId) {
   const usuario = db.prepare(`
-    SELECT id, nome, email, foto FROM usuarios WHERE id = ?
+    SELECT id, nome, email, foto, senha_hash FROM usuarios WHERE id = ?
   `).get(usuarioId)
 
   if (!usuario) throw naoEncontrado('Usuário não encontrado')
@@ -48,6 +58,7 @@ export function obterPerfil(usuarioId) {
     nome: usuario.nome,
     email: usuario.email,
     foto: usuario.foto,
+    temSenha: Boolean(usuario.senha_hash),
     acertos,
     questoesSalvas: cardsPorIds(idsDe('questoes_salvas', usuarioId)),
     questoesResolvidas: cardsPorIds(idsDe('respostas', usuarioId)),
@@ -55,30 +66,28 @@ export function obterPerfil(usuarioId) {
   }
 }
 
-export function atualizarPerfil(usuarioId, dados) {
-  const resultado = esquemaPerfil.safeParse(dados)
-
-  if (!resultado.success) {
-    throw requisicaoInvalida(
-      resultado.error.issues[0].message,
-      resultado.error.issues.map(i => ({ campo: i.path.join('.'), mensagem: i.message }))
-    )
-  }
-
-  const { nome, email } = resultado.data
-
-  const emUso = db.prepare(`
-    SELECT 1 FROM usuarios WHERE email = ? AND id <> ?
-  `).get(email, usuarioId)
-
-  if (emUso) throw conflito('Este e-mail já está em uso')
+export function atualizarNome(usuarioId, dados) {
+  const { nome } = validar(esquemaNome, dados)
 
   obterUsuario(usuarioId)
+  db.prepare('UPDATE usuarios SET nome = ? WHERE id = ?').run(nome, usuarioId)
 
-  db.prepare('UPDATE usuarios SET nome = ?, email = ? WHERE id = ?')
-    .run(nome, email, usuarioId)
+  return { nome }
+}
 
-  return { nome, email }
+export async function solicitarNovoEmail(usuarioId, tokenEmitidoEm, dados) {
+  const { novoEmail, senha } = validar(esquemaNovoEmail, dados)
+  const usuario = obterUsuario(usuarioId)
+
+  if (!emailDisponivel()) throw indisponivel('O envio de e-mails não está configurado neste servidor')
+
+  await confirmarIdentidade(usuarioId, tokenEmitidoEm, senha)
+
+  if (novoEmail === usuario.email) throw requisicaoInvalida('Este já é o seu e-mail')
+
+  if (db.prepare('SELECT 1 FROM usuarios WHERE email = ?').get(novoEmail)) throw conflito('Este e-mail já está em uso')
+
+  await enviarLinkDeNovoEmail(novoEmail, criarTokenDeEmail(usuarioId, 'alterar_email', { novoEmail }))
 }
 
 export function salvarFoto(usuarioId, nomeArquivo) {
@@ -91,14 +100,37 @@ export function salvarFoto(usuarioId, nomeArquivo) {
   return { foto: caminho }
 }
 
-export function excluirDados(usuarioId) {
-  const usuario = obterUsuario(usuarioId)
-
+export function limparRespostas(usuarioId) {
   db.transaction(() => {
     db.prepare('DELETE FROM respostas WHERE usuario_id = ?').run(usuarioId)
-    db.prepare('DELETE FROM questoes_salvas WHERE usuario_id = ?').run(usuarioId)
-    db.prepare('DELETE FROM questoes_revisar WHERE usuario_id = ?').run(usuarioId)
-    db.prepare('UPDATE usuarios SET foto = NULL WHERE id = ?').run(usuarioId)
+    db.prepare('DELETE FROM tentativas WHERE usuario_id = ?').run(usuarioId)
+  })()
+}
+
+export function limparSalvas(usuarioId) {
+  db.prepare('DELETE FROM questoes_salvas WHERE usuario_id = ?').run(usuarioId)
+}
+
+export function limparRevisar(usuarioId) {
+  db.prepare('DELETE FROM questoes_revisar WHERE usuario_id = ?').run(usuarioId)
+}
+
+export async function excluirConta(usuarioId, tokenEmitidoEm, dados) {
+  const { senha, confirmacao } = validar(esquemaExclusao, dados)
+  const usuario = obterUsuario(usuarioId)
+
+  if (confirmacao.trim().toLowerCase() !== usuario.email) {
+    throw requisicaoInvalida('Digite o e-mail da conta para confirmar a exclusão')
+  }
+
+  await confirmarIdentidade(usuarioId, tokenEmitidoEm, senha)
+
+  db.transaction(() => {
+    db.prepare(`
+      UPDATE comentarios SET usuario_id = NULL, autor = 'Usuário removido' WHERE usuario_id = ?
+    `).run(usuarioId)
+
+    db.prepare('DELETE FROM usuarios WHERE id = ?').run(usuarioId)
   })()
 
   removerArquivoDaFoto(usuario.foto)

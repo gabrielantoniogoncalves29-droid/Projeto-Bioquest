@@ -11,7 +11,7 @@ router.get('/taxonomia', cacheDeLeitura(60), (req, res) => {
 
 router.get('/config', (req, res) => {
   res.set('Cache-Control', 'no-store')
-  res.json({ forumAberto: config.forumAberto, taxaAcertoAtiva: config.taxaAcertoAtiva })
+  res.json({ forumAberto: config.forumAberto, taxaAcertoAtiva: config.taxaAcertoAtiva, googleClientId: config.googleClientId || null })
 })
 
 export default router

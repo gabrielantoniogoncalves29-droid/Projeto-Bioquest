@@ -68,6 +68,9 @@
   }
   .footer a {
     margin-left: 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 }
 </style>

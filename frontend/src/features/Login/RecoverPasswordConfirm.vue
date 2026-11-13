@@ -30,16 +30,28 @@
             Caso não encontre a mensagem, verifique sua caixa de spam.
         </p>
 
+        <p
+            v-if="mensagem"
+            class="mensagem"
+            :class="mensagemErro ? 'erro' : 'sucesso'"
+            role="alert"
+        >
+            {{ mensagem }}
+        </p>
+
         <button
+            type="button"
             class="primary-button"
+            :disabled="enviando || restante > 0"
             @click="reenviar"
         >
 
-            Reenviar e-mail
+            {{ enviando ? "Enviando..." : restante > 0 ? `Reenviar em ${restante}s` : "Reenviar e-mail" }}
 
         </button>
 
         <button
+            type="button"
             class="secondary-button"
             @click="auth.login()"
         >
@@ -54,15 +66,49 @@
 
 <script setup>
 
+import { ref } from "vue"
 import { MailCheck } from "lucide-vue-next"
 import { useAuthStore } from "@/store/auth"
+import { solicitarRecuperacaoSenha } from "@/services/auth"
+import { mensagemDeErro } from "@/services/api"
+import { useContagemRegressiva } from "@/utils/contagem"
 
 const auth = useAuthStore()
 
-function reenviar(){
+const enviando = ref(false)
+const mensagem = ref("")
+const mensagemErro = ref(false)
 
+const { restante, iniciar } = useContagemRegressiva(60)
 
-    // TODO (login): reenviar o e-mail de recuperação
+async function reenviar(){
+
+    if (enviando.value || restante.value > 0) return
+
+    enviando.value = true
+    mensagem.value = ""
+
+    try {
+
+        const resposta = await solicitarRecuperacaoSenha(auth.email)
+
+        mensagemErro.value = false
+
+        mensagem.value = resposta.mensagem
+
+        iniciar()
+
+    } catch (falha) {
+
+        mensagemErro.value = true
+
+        mensagem.value = mensagemDeErro(falha, "Não foi possível reenviar o e-mail agora.")
+
+    } finally {
+
+        enviando.value = false
+
+    }
 
 }
 
@@ -306,6 +352,47 @@ h2{
 
 [data-tema="escuro"] .secondary-button{
     color:var(--cor-primaria-texto);
+}
+
+.primary-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+.mensagem{
+
+    margin:0 0 12px;
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.mensagem.erro{
+
+    color:var(--cor-erro);
+
+}
+
+.mensagem.sucesso{
+
+    color:var(--cor-acerto);
+
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.continue-button:focus-visible,
+.back-button:focus-visible{
+
+    outline:2px solid var(--cor-primaria);
+
+    outline-offset:2px;
+
 }
 
 </style>

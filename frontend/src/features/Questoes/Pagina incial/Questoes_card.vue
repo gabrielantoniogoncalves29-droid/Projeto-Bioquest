@@ -292,94 +292,124 @@ h3{
 
 @media (max-width:768px){
 
-  .card{
-    padding:16px;
-  }
-
+  .card,
   .card.lista,
   .card.grade{
+    display:block;
+    min-height:0;
     padding:16px;
+    border-radius:12px;
   }
 
-  .left{
-    flex-direction:row;
-    flex-wrap:wrap;
-    align-items:flex-start;
+  .card:hover{
+    transform:none;
+    box-shadow:none;
+  }
+
+  .left,
+  .card.lista .left,
+  .card.grade .left{
+    display:grid;
+    grid-template-columns:44px minmax(0, 1fr);
+    grid-template-areas:
+      "icone meta"
+      "resumo resumo"
+      "acao acao";
+    align-items:center;
+    gap:12px;
   }
 
   .content{
-    flex:1 1 0;
-    min-width:0;
+    display:contents;
   }
 
-  .actions{
-    margin:6px 0 0;
-    width:100%;
-    flex-basis:100%;
-  }
-
-  .btn{
-    height:42px;
-  }
-
-  .btn-saiba-mais{
-    width:100%;
-    height:36px;
-  }
-  .icon{
-    display:none;
-  }
+  .icon,
   .card.lista .icon,
   .card.grade .icon{
-    width:56px;
-    height:56px;
-  }
-
-}
-
-@media (max-width:480px){
-
-  .card{
-    padding:14px;
-    border-radius: 10px;
-  }
-  .icon{
-    display:none;
-  }
-  .card.lista,
-  .card.grade{
-    min-height: auto;
-    padding:14px;
-  }
-
-  .card.lista .icon,
-  .card.grade .icon{
+    display:block;
+    grid-area:icone;
     width:44px;
     height:44px;
   }
 
+  .top,
   .card.lista .top,
   .card.grade .top{
-    gap:12px;
-    row-gap: 6px;
-    margin-bottom:10px;
-    padding-bottom:8px;
+    grid-area:meta;
+    gap:2px 10px;
+    margin:0;
+    padding:0;
+    border-bottom:0;
+    min-width:0;
   }
 
-  h3{
-    font-size:14px !important;
-  }
-
-  .year{
-    font-size:13px;
-  }
-
-  .meta{
-    font-size:12px;
-  }
-
-  .btn{
+  .year,
+  .card.lista .year{
     font-size:14px;
+  }
+
+  .meta,
+  .card.lista .meta{
+    font-size:13px;
+    line-height:1.35;
+  }
+
+  h3,
+  .card.lista h3,
+  .card.grade h3{
+    grid-area:resumo;
+    font-size:15px;
+    line-height:1.55;
+    -webkit-line-clamp:4;
+    padding-top:12px;
+    border-top:1px solid var(--cor-borda-suave);
+  }
+
+  .actions{
+    grid-area:acao;
+    margin:0;
+    width:100%;
+  }
+
+  .btn,
+  .card.lista .btn,
+  .card.grade .btn{
+    width:100%;
+    height:44px;
+    font-size:15px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .card,
+  .card.lista,
+  .card.grade{
+    padding:14px;
+  }
+
+  .left,
+  .card.lista .left,
+  .card.grade .left{
+    grid-template-columns:40px minmax(0, 1fr);
+    gap:10px;
+  }
+
+  .icon,
+  .card.lista .icon,
+  .card.grade .icon{
+    width:40px;
+    height:40px;
+  }
+
+}
+
+@media (prefers-reduced-motion:reduce){
+
+  .card,
+  .btn{
+    transition:none;
   }
 
 }

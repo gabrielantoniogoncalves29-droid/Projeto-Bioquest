@@ -9,3 +9,17 @@ export function idDaRota(req, nome = 'id') {
 
   return valor
 }
+
+export function validar(esquema, dados) {
+  const resultado = esquema.safeParse(dados ?? {})
+
+  if (!resultado.success) {
+    const problemas = resultado.error.issues
+    throw requisicaoInvalida(
+      problemas[0].message,
+      problemas.map(p => ({ campo: p.path.join('.'), mensagem: p.message }))
+    )
+  }
+
+  return resultado.data
+}

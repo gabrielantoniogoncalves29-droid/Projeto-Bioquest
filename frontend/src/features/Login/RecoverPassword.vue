@@ -11,7 +11,7 @@
 
         <div class="field">
 
-            <label>E-mail</label>
+            <label for="rec-email">E-mail</label>
 
             <div
                 class="input-container"
@@ -24,9 +24,14 @@
                 />
 
                 <input
+                    id="rec-email"
                     v-model.trim="email"
                     type="email"
+                    name="email"
+                    autocomplete="email"
                     placeholder="Digite seu e-mail"
+                    :disabled="enviando"
+                    @keyup.enter="avancar"
                 >
 
             </div>
@@ -41,17 +46,27 @@
 
         </div>
 
+        <p
+            v-if="erro"
+            class="mensagem erro"
+            role="alert"
+        >
+            {{ erro }}
+        </p>
+
         <button
+            type="button"
             class="continue-button"
-            :disabled="!emailValido"
+            :disabled="!emailValido || enviando"
             @click="avancar"
         >
 
-            Avançar
+            {{ enviando ? "Enviando..." : "Avançar" }}
 
         </button>
 
         <button
+            type="button"
             class="back-button"
             @click="auth.login()"
         >
@@ -66,10 +81,12 @@
 
 <script setup>
 
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { Mail } from "lucide-vue-next"
 
 import { useAuthStore } from "@/store/auth"
+import { solicitarRecuperacaoSenha } from "@/services/auth"
+import { mensagemDeErro } from "@/services/api"
 
 const auth = useAuthStore()
 
@@ -87,12 +104,31 @@ const emailValido = computed(() =>
 
 )
 
-function avancar(){
+const enviando = ref(false)
+const erro = ref("")
 
-    if(!emailValido.value) return
+async function avancar(){
 
+    if(!emailValido.value || enviando.value) return
 
-    auth.recuperarSenhaConfirmacao()
+    enviando.value = true
+    erro.value = ""
+
+    try {
+
+        await solicitarRecuperacaoSenha(email.value)
+
+        auth.recuperarSenhaConfirmacao()
+
+    } catch (falha) {
+
+        erro.value = mensagemDeErro(falha, "Não foi possível enviar o e-mail agora.")
+
+    } finally {
+
+        enviando.value = false
+
+    }
 
 }
 
@@ -377,6 +413,39 @@ input[type="password"]::-webkit-textfield-decoration-container{
 [data-tema="escuro"] .back-button,
 [data-tema="escuro"] .feedback.success{
     color:var(--cor-primaria-texto);
+}
+
+.mensagem{
+
+    margin:0 0 12px;
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.mensagem.erro{
+
+    color:var(--cor-erro);
+
+}
+
+.mensagem.sucesso{
+
+    color:var(--cor-acerto);
+
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.continue-button:focus-visible,
+.back-button:focus-visible{
+
+    outline:2px solid var(--cor-primaria);
+
+    outline-offset:2px;
+
 }
 
 </style>

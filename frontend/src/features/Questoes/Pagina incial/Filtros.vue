@@ -391,43 +391,56 @@ function selecionarTodos() {
 }
 
 @media (max-width: 768px) {
-
   .cabecalho {
-
-    padding: 14px;
-
+    min-height: 56px;
+    padding: 8px 14px;
+    font-family: inherit;
+    text-align: left;
   }
-
   .nome {
-
-    font-size: 14px;
-
+    font-size: 15px;
   }
-
+  .resumo {
+    font-size: 13px;
+  }
   .conteudo {
-
-    padding: 14px;
-
+    padding: 12px;
   }
-
+  .grupo {
+    padding: 8px;
+  }
+  .lista-opcoes {
+    max-height: none;
+    overflow: visible;
+    margin-top: 8px;
+  }
+  .opcao {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .opcao input {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+  }
+  .destaque {
+    margin-bottom: 8px;
+  }
+  .cabecalho:focus-visible,
+  .opcao:has(input:focus-visible) {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+  }
 }
 
-@media (max-width: 480px) {
-
-  .lista-opcoes {
-
-    max-height: 260px;
-
+@media (prefers-reduced-motion: reduce) {
+  .accordion-enter-active,
+  .accordion-leave-active,
+  .cabecalho {
+    transition: none;
   }
-
-  .opcao {
-
-    font-size: 14px;
-
-    padding: 10px 8px;
-
-  }
-
 }
 
 </style>

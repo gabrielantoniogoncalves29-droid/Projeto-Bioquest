@@ -1,12 +1,4 @@
-export const ORDENS = ['recentes', 'antigas', 'maiorDificuldade', 'menorDificuldade']
-
-export function normalizar(texto) {
-  return String(texto ?? '')
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .trim()
-}
+import { normalizar } from './texto.js'
 
 const textosEmCache = new WeakMap()
 
@@ -73,41 +65,4 @@ export function filtrarQuestoes(cards, filtros = {}, contexto = {}) {
     if (palavras.length && !casaComTermo(card, palavras)) return false
     return true
   })
-}
-
-function comparar(a, b, direcao) {
-  const aVazio = a === null || a === undefined
-  const bVazio = b === null || b === undefined
-
-  if (aVazio || bVazio) return aVazio === bVazio ? 0 : aVazio ? 1 : -1
-
-  return direcao * (a - b)
-}
-
-export function ordenarQuestoes(cards, ordem) {
-  const lista = [...cards]
-  const porSerial = (a, b) => a.serial - b.serial
-
-  switch (ordem) {
-    case 'recentes':
-      return lista.sort((a, b) => comparar(a.ano, b.ano, -1) || porSerial(a, b))
-
-    case 'antigas':
-      return lista.sort((a, b) => comparar(a.ano, b.ano, 1) || porSerial(a, b))
-
-    case 'maiorDificuldade':
-      return lista.sort((a, b) =>
-        comparar(a.nivel, b.nivel, -1) || comparar(a.ano, b.ano, -1) || porSerial(a, b))
-
-    case 'menorDificuldade':
-      return lista.sort((a, b) =>
-        comparar(a.nivel, b.nivel, 1) || comparar(a.ano, b.ano, -1) || porSerial(a, b))
-
-    default:
-      return lista.sort(porSerial)
-  }
-}
-
-export function filtrarEOrdenar(cards, filtros = {}, contexto = {}) {
-  return ordenarQuestoes(filtrarQuestoes(cards, filtros, contexto), filtros.ordem)
 }

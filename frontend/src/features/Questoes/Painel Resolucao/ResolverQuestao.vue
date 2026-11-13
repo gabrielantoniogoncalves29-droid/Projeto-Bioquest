@@ -9,6 +9,7 @@ import { useResolverStore } from '@/store/resolver/resolver'
 import { useDetalhesStore } from '@/store/resolver/detalhes'
 import { useUiStore } from '@/store/resolver/ui'
 import { usePerfilStore } from '@/store/perfil'
+import { useAuthStore } from '@/store/auth'
 
 import HeaderQuestao from '@/features/Questoes/Painel Resolucao/HeaderQuestao.vue'
 import Enunciado from '@/features/Questoes/Painel Resolucao/Enunciado.vue'
@@ -24,6 +25,7 @@ const resolver = useResolverStore()
 const detalhesStore = useDetalhesStore()
 const painel = useUiStore()
 const perfil = usePerfilStore()
+const auth = useAuthStore()
 
 const { questao } = storeToRefs(resolver)
 
@@ -37,8 +39,6 @@ const classeLayout = computed(() =>
         : 'barra-fechada'
 )
 
-// Pré-carrega em segundo plano a questão (e a imagem) vizinha, para a navegação
-// ser instantânea. Usa o cache de services/questoes.js.
 function precarregar(id) {
     if (!id) return
 
@@ -50,8 +50,17 @@ function precarregar(id) {
         .catch(() => {})
 }
 
-// Se o usuário já respondeu esta questão antes, restaura o estado respondido.
 async function restaurarResposta(id) {
+    const sessao = painel.respostaSessao(id)
+
+    if (sessao) {
+        painel.selecionarAlternativa(sessao.alternativa)
+        painel.definirResultado(sessao.resultado)
+        return
+    }
+
+    if (!auth.autenticado) return
+
     try {
         const anterior = await buscarMinhaResposta(id)
 
@@ -64,7 +73,6 @@ async function restaurarResposta(id) {
             comentario: anterior.comentario
         })
     } catch {
-        // sem resposta anterior ou sem rede: a tela fica no estado inicial
     }
 }
 
@@ -89,7 +97,6 @@ watch(
             dadosQuestao = null
         }
 
-        // O usuário já navegou para outra questão enquanto esta carregava.
         if (Number(route.params.id) !== id) return
 
         if (!dadosQuestao) {
@@ -120,12 +127,13 @@ watch(
 
 <div class="breadcrumb">
 
-<span
+<button
+    type="button"
     class="voltar"
     @click="goback()"
 >
     ⟵ Voltar
-</span>
+</button>
 
 <span class="separator">|</span>
 
@@ -242,6 +250,11 @@ watch(
 }
 
 .voltar {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
   color: var(--cor-primaria);
   font-weight: 600;
   cursor: pointer;
@@ -253,7 +266,7 @@ watch(
 
 .separator,
 .separator-barra {
-  color: var(--cor-borda);
+  color: var(--cor-primaria);
 }
 
 .resolver-layout {
@@ -306,62 +319,42 @@ watch(
 }
 
 @media (max-width:900px){
-
   .resolver-page{
-
-    padding:16px;
-
+    padding:16px 20px 32px;
   }
-
   .resolver-layout,
   .resolver-layout.barra-fechada{
-
     grid-template-columns: minmax(0,1fr);
-
     gap:16px;
-
   }
-
   .resolver-layout.barra-fechada .painel-container{
-
     display:block;
-
   }
-
+  .breadcrumb{
+    flex-wrap:nowrap;
+    overflow:hidden;
+    gap:8px;
+    margin-bottom:12px;
+    font-size:14px;
+  }
+  .voltar{
+    display:inline-flex;
+    align-items:center;
+    flex:0 0 auto;
+    min-height:44px;
+  }
+  .link-crumb{
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
 }
 
-@media (max-width:480px){
-
+@media (max-width:429px){
   .resolver-page{
-
-    padding:8px;
-
+    padding-inline:16px;
   }
-
-  .resolver-layout,
-  .resolver-layout.barra-fechada{
-
-    gap:12px;
-
-  }
-
-  .painel-container,
-  .questao-container{
-
-    border-radius:12px;
-
-  }
-
-  .breadcrumb{
-
-    font-size:12.5px;
-
-    gap:5px;
-
-    margin-bottom:16px;
-
-  }
-
 }
 
 </style>

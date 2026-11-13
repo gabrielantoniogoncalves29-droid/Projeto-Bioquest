@@ -105,6 +105,7 @@
 import { ref } from "vue"
 import { X, KeyRound, MailCheck } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
+import { mensagemDeErro } from "@/services/api"
 
 const emit = defineEmits(["fechar"])
 
@@ -133,9 +134,10 @@ async function enviar() {
 
         enviado.value = true
 
-    } catch {
+        } catch (falha) {
 
-        erro.value = "Não foi possível enviar o e-mail agora. Tente novamente."
+        erro.value = mensagemDeErro(falha, "Não foi possível enviar o e-mail agora. Tente novamente.")
+
 
     } finally {
 
@@ -315,4 +317,15 @@ h2{
 
 }
 
+
+@media (max-width:480px){
+  .overlay{ padding:16px; align-items:flex-end; }
+  .card{ max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px); overflow-y:auto; padding:24px 20px 20px; }
+  .fechar{ top:8px; right:8px; width:44px; height:44px; }
+  .acoes{ flex-direction:column-reverse; }
+  .acoes button{ min-height:48px; font-size:15px; }
+  input, .campo{ font-size:16px; }
+  .input-container{ min-height:48px; }
+  .campo{ height:48px; }
+}
 </style>

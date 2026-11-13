@@ -7,7 +7,10 @@
             @click.self="fechar"
         >
 
-            <div class="card">
+            <div
+                class="card"
+                @keydown.enter="avancarComEnter($event, nome.trim() && email.trim() ? salvar : null)"
+            >
 
                 <button
                     class="fechar"
@@ -100,6 +103,7 @@
 import { ref } from "vue"
 import { User, Mail, X } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
+import { avancarComEnter } from "@/utils/teclado"
 
 const perfil = usePerfilStore()
 
@@ -407,4 +411,15 @@ input::placeholder{
 
 }
 
+
+@media (max-width:480px){
+  .overlay{ padding:16px; align-items:flex-end; }
+  .card{ max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px); overflow-y:auto; padding:24px 20px 20px; }
+  .fechar{ top:8px; right:8px; width:44px; height:44px; }
+  .acoes{ flex-direction:column-reverse; }
+  .acoes button{ min-height:48px; font-size:15px; }
+  input, .campo{ font-size:16px; }
+  .input-container{ min-height:48px; }
+  .campo{ height:48px; }
+}
 </style>

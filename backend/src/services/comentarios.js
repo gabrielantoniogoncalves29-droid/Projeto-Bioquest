@@ -7,7 +7,8 @@ const COMENTARIO_SQL = `
          COALESCE(u.nome, c.autor) AS autor,
          c.texto,
          substr(c.criado_em, 1, 10) AS data,
-         c.curtidas
+         c.curtidas,
+         u.foto AS foto
     FROM comentarios c
     LEFT JOIN usuarios u ON u.id = c.usuario_id
 `
@@ -25,7 +26,7 @@ export function listar(questaoId) {
 export function criar(usuarioId, questaoId, texto) {
   garantirQuestao(questaoId)
 
-  const limpo = String(texto ?? '').trim()
+  const limpo = String(texto ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim()
 
   if (!limpo) throw requisicaoInvalida('O comentário não pode ficar vazio')
   if (limpo.length > 2000) throw requisicaoInvalida('O comentário passou de 2000 caracteres')

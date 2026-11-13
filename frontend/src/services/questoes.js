@@ -6,7 +6,6 @@ let idsEmCache = null
 let idsPendente = null
 
 const questoesEmCache = new Map()
-const explicacoesEmCache = new Map()
 
 function memorizar(mapa, id, buscar) {
 
@@ -28,14 +27,11 @@ function memorizar(mapa, id, buscar) {
 
 }
 
-// Descarta os caches em memória (a lista, ids e cada questão), para que edições
-// feitas no /admin apareçam sem recarregar a página.
 export function limparCacheQuestoes() {
 
   listaEmCache = null
   idsEmCache = null
   questoesEmCache.clear()
-  explicacoesEmCache.clear()
 
 }
 
@@ -107,7 +103,11 @@ export function buscarQuestaoPorId(id) {
         enunciado: {
           ...data.enunciado,
           imagem: urlMidia(data.enunciado.imagem)
-        }
+        },
+        alternativas: (data.alternativas ?? []).map(alternativa => ({
+          ...alternativa,
+          imagem: urlMidia(alternativa.imagem)
+        }))
       }
 
     } catch (erro) {
@@ -122,15 +122,11 @@ export function buscarQuestaoPorId(id) {
 
 }
 
-export function buscarExplicacao(id) {
+export async function buscarExplicacao(id) {
 
-  return memorizar(explicacoesEmCache, Number(id), async () => {
+  const { data } = await api.get(`/questoes/${Number(id)}/explicacao`)
 
-    const { data } = await api.get(`/questoes/${Number(id)}/explicacao`)
-
-    return data
-
-  })
+  return data
 
 }
 
@@ -161,6 +157,14 @@ export async function buscarMinhaResposta(id) {
 export async function enviarResposta(id, alternativa) {
 
   const { data } = await api.post(`/questoes/${Number(id)}/resposta`, { alternativa })
+
+  return data
+
+}
+
+export async function corrigirSemConta(id, alternativa) {
+
+  const { data } = await api.post(`/questoes/${Number(id)}/corrigir`, { alternativa })
 
   return data
 

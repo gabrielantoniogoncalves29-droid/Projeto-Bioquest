@@ -13,7 +13,7 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
   const estadoOpcoes = computed(() => taxonomia.estados)
 
   const buscaRealizada = ref(false)
-  const modoVisualizacao = ref('lista')
+  const modoVisualizacao = ref('grade')
   const ordenacao = ref('recentes')
   const termoPesquisa = ref('')
 
@@ -49,7 +49,6 @@ export const useQuestoesFiltrosStore = defineStore('questoesFiltros', () => {
 
   })
 
-  // Desmarcar um conteúdo também descarta os subconteúdos dele que estavam marcados.
   watch(conteudosSelecionados, () => {
 
     const validos = new Set(subconteudosDisponiveis.value.map(sub => sub.id))

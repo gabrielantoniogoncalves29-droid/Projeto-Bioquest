@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS alternativas (
   questao_id INTEGER NOT NULL REFERENCES questoes(id) ON DELETE CASCADE,
   letra      TEXT    NOT NULL CHECK (letra IN ('A','B','C','D','E')),
   texto      TEXT    NOT NULL,
+  imagem     TEXT    NOT NULL DEFAULT '',
   PRIMARY KEY (questao_id, letra)
 );
 
@@ -131,3 +132,29 @@ CREATE TABLE IF NOT EXISTS comentarios (
 );
 
 CREATE INDEX IF NOT EXISTS idx_comentarios_questao ON comentarios(questao_id);
+
+CREATE TABLE IF NOT EXISTS tokens_usuario (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+  tipo       TEXT    NOT NULL CHECK (tipo IN ('confirmar_email', 'redefinir_senha', 'alterar_email')),
+  hash       TEXT    NOT NULL UNIQUE,
+  dados      TEXT,
+  expira_em  TEXT    NOT NULL,
+  usado_em   TEXT,
+  criado_em  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_tokens_usuario ON tokens_usuario(usuario_id, tipo);
+
+CREATE TABLE IF NOT EXISTS tentativas (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario_id    INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+  questao_id    INTEGER NOT NULL REFERENCES questoes(id) ON DELETE CASCADE,
+  alternativa   TEXT    NOT NULL,
+  correta       INTEGER NOT NULL CHECK (correta IN (0,1)),
+  respondida_em TEXT    NOT NULL DEFAULT (datetime('now')),
+  origem        TEXT    NOT NULL DEFAULT 'registro' CHECK (origem IN ('registro', 'migracao'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_tentativas_usuario ON tentativas(usuario_id, respondida_em);
+CREATE INDEX IF NOT EXISTS idx_tentativas_questao ON tentativas(questao_id);

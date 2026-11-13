@@ -19,7 +19,7 @@ function removerImagensExportadas(id) {
   if (!fs.existsSync(config.pastaImagens)) return
 
   fs.readdirSync(config.pastaImagens)
-    .filter(nome => nome.startsWith(`${rotulo(id)}.`))
+    .filter(nome => nome.startsWith(`${rotulo(id)}.`) || nome.startsWith(`${rotulo(id)}-`))
     .forEach(nome => fs.rmSync(path.join(config.pastaImagens, nome), { force: true }))
 }
 
@@ -59,6 +59,27 @@ export function exportarQuestao(id) {
     saida.imagemUrl = q.imagem
   }
 
+  const alternativasLocais = {}
+  const alternativasRemotas = {}
+
+  for (const [letra, imagem] of Object.entries(q.alternativasImagens)) {
+    const origem = path.join(config.uploadsDir, 'questoes', path.basename(imagem))
+
+    if (imagem.startsWith('/uploads/questoes/')) {
+      if (!fs.existsSync(origem)) continue
+
+      const nome = `${rotulo(id)}-${letra}${path.extname(origem).toLowerCase()}`
+      fs.mkdirSync(config.pastaImagens, { recursive: true })
+      fs.copyFileSync(origem, path.join(config.pastaImagens, nome))
+      alternativasLocais[letra] = nome
+    } else {
+      alternativasRemotas[letra] = imagem
+    }
+  }
+
+  if (Object.keys(alternativasLocais).length) saida.alternativasImagem = alternativasLocais
+  if (Object.keys(alternativasRemotas).length) saida.alternativasImagemUrl = alternativasRemotas
+
   fs.mkdirSync(config.pastaQuestoes, { recursive: true })
   fs.writeFileSync(arquivoJson(id), `${JSON.stringify(saida, null, 2)}\n`, 'utf8')
 
@@ -80,7 +101,7 @@ function temConteudoEditado(q) {
 
   return Boolean(
     q.resumo || q.enunciadoTexto || q.enunciadoComplemento || q.imagem || q.comentario ||
-    q.teoria.length || Object.keys(q.alternativas).length ||
+    q.teoria.length || Object.keys(q.alternativas).length || Object.keys(q.alternativasImagens).length ||
     JSON.stringify(padrao) !== JSON.stringify(atuais)
   )
 }
@@ -142,6 +163,7 @@ export function importarArquivos() {
   const nomes = fs.readdirSync(config.pastaQuestoes).filter(n => /^\d+\.json$/.test(n)).sort()
   const problemas = []
   const idsDosArquivos = new Set()
+  const arquivosParaRemover = []
   let importadas = 0
 
   const aplicar = db.transaction(() => {
@@ -175,7 +197,33 @@ export function importarArquivos() {
         }
 
         const atual = obterAdmin(id)
-        const { dados } = validar(sobrepor(corpoDoBanco(atual), arquivo))
+
+        let imagensAlternativas = atual.alternativasImagens
+
+        if ('alternativasImagem' in arquivo || 'alternativasImagemUrl' in arquivo) {
+          imagensAlternativas = {}
+
+          for (const letra of LETRAS) {
+            const nomeDoArquivo = arquivo.alternativasImagem?.[letra]
+            const endereco = arquivo.alternativasImagemUrl?.[letra]
+
+            if (nomeDoArquivo) {
+              const origem = path.join(config.pastaImagens, path.basename(nomeDoArquivo))
+
+              if (!fs.existsSync(origem)) throw new Error(`imagem "${nomeDoArquivo}" não encontrada em db/imagens`)
+
+              fs.mkdirSync(path.join(config.uploadsDir, 'questoes'), { recursive: true })
+              fs.copyFileSync(origem, path.join(config.uploadsDir, 'questoes', path.basename(origem)))
+              imagensAlternativas[letra] = `/uploads/questoes/${path.basename(origem)}`
+            } else if (endereco) {
+              if (!/^https?:\/\//i.test(endereco)) throw new Error(`endereço inválido para a imagem da alternativa ${letra}`)
+
+              imagensAlternativas[letra] = endereco
+            }
+          }
+        }
+
+        const { dados } = validar(sobrepor(corpoDoBanco(atual), arquivo), { atuais: imagensAlternativas })
 
         let imagem = atual.imagem
 
@@ -199,7 +247,13 @@ export function importarArquivos() {
         gravarAlternativas(id, dados.alternativas)
         definirPalavrasDaQuestao(id, dados.palavrasChave)
 
-        if (imagem !== atual.imagem) removerArquivoDaImagem(atual.imagem)
+        if (imagem !== atual.imagem) arquivosParaRemover.push(atual.imagem)
+
+        const imagensFinais = {}
+        dados.alternativas.filter(alt => alt.imagem).forEach(alt => { imagensFinais[alt.letra] = alt.imagem })
+
+        const mantidas = new Set(Object.values(imagensFinais))
+        Object.values(atual.alternativasImagens).filter(imagem => !mantidas.has(imagem)).forEach(imagem => arquivosParaRemover.push(imagem))
 
         importadas++
       } catch (erro) {
@@ -212,6 +266,7 @@ export function importarArquivos() {
 
   try {
     aplicar()
+    arquivosParaRemover.forEach(imagem => removerArquivoDaImagem(imagem))
   } catch (erro) {
     if (!problemas.length) throw erro
     importadas = 0

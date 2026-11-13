@@ -116,6 +116,11 @@ input:focus, select:focus, textarea:focus {
 .alt-linha { display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 8px; margin-top: 8px; }
 .alt-linha .letra { display: flex; align-items: center; gap: 4px; font-weight: 700; }
 .alt-linha input[type=text] { margin: 0; }
+.alt-bloco { margin-bottom: 10px; }
+.alt-imagem { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 0 44px; font-size: 13px; }
+.alt-atual { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; }
+.alt-atual img { max-width: 120px; max-height: 80px; border: 1px solid var(--borda); border-radius: 6px; object-fit: contain; background: #fafafa; }
+@media (max-width: 640px) { .alt-imagem { grid-template-columns: 1fr; margin-left: 0; } }
 
 button {
   font: inherit;

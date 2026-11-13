@@ -14,8 +14,18 @@ const {
         carregandoComentarios: carregando,
     novoComentario,
     totalComentarios,
-    forumAberto
+    forumAberto,
+    podeComentar,
+    precisaLogin
 } = storeToRefs(store)
+
+const fotosComErro = ref(new Set())
+
+function marcarFotoComErro(id) {
+
+    fotosComErro.value = new Set(fotosComErro.value).add(id)
+
+}
 
 const textareaRef = ref(null)
 
@@ -91,7 +101,7 @@ function aplicarFormatacao(tipo) {
                 :key="ferramenta.tipo"
                 type="button"
                 class="btn-ferramenta"
-                :disabled="!forumAberto"
+                :disabled="!podeComentar"
                 :title="ferramenta.titulo"
                 @click="aplicarFormatacao(ferramenta.tipo)"
             >
@@ -107,9 +117,19 @@ function aplicarFormatacao(tipo) {
             ref="textareaRef"
             v-model="novoComentario"
             rows="3"
-            :disabled="!forumAberto"
-            :placeholder="forumAberto ? 'Ficou com alguma dúvida sobre essa questão? Pergunte por aqui...' : 'Faça login para comentar'"
+            :disabled="!podeComentar"
+            :placeholder="precisaLogin ? 'Entre na sua conta para comentar' : forumAberto ? 'Ficou com alguma dúvida sobre essa questão? Pergunte por aqui... (Ctrl+Enter para enviar)' : 'O fórum está fechado no momento'"
+            @keydown.ctrl.enter.prevent="store.enviarComentario()"
+            @keydown.meta.enter.prevent="store.enviarComentario()"
         ></textarea>
+
+        <p
+            v-if="precisaLogin"
+            class="aviso-login"
+        >
+            <router-link :to="{ name: 'Login', query: { redirect: $route.fullPath } }">Entre na sua conta</router-link>
+            para comentar. Ler os comentários continua liberado.
+        </p>
 
         <div class="nova-mensagem-rodape">
 
@@ -121,18 +141,26 @@ function aplicarFormatacao(tipo) {
                 ></span>
             </span>
 
-            <span v-else></span>
+                        <span v-else></span>
 
             <button
                 class="btn-enviar"
-                :disabled="!forumAberto || !novoComentario.trim()"
+                :disabled="!podeComentar || !novoComentario.trim() || store.enviandoComentario"
                 @click="store.enviarComentario()"
             >
                 <Send :size="15" />
                 Comentar
             </button>
 
-        </div>
+                </div>
+
+        <p
+            v-if="store.erroComentario"
+            class="erro-comentario"
+            role="alert"
+        >
+            {{ store.erroComentario }}
+        </p>
 
     </div>
 
@@ -154,7 +182,7 @@ function aplicarFormatacao(tipo) {
         class="vazio"
     >
         <MessageSquare :size="26" />
-        <p>{{ forumAberto ? 'Nenhum comentário ainda. Seja o primeiro a comentar!' : 'Nenhum comentário ainda.' }}</p>
+        <p>{{ podeComentar ? 'Nenhum comentário ainda. Seja o primeiro a comentar!' : 'Nenhum comentário ainda.' }}</p>
     </div>
 
     <div
@@ -172,8 +200,19 @@ function aplicarFormatacao(tipo) {
             class="comentario"
         >
 
-            <div class="avatar">
-                {{ comentario.autor?.[0] ?? '?' }}
+            <div class="comentario-avatar">
+                <img
+                    v-if="comentario.foto && !fotosComErro.has(comentario.id)"
+                    class="avatar-foto"
+                    :src="comentario.foto"
+                    :alt="`Foto de ${comentario.autor}`"
+                    referrerpolicy="no-referrer"
+                    loading="lazy"
+                    @error="marcarFotoComErro(comentario.id)"
+                >
+                <template v-else>
+                    {{ comentario.autor?.[0] ?? '?' }}
+                </template>
             </div>
 
             <div class="corpo">
@@ -515,7 +554,41 @@ textarea:focus{
 
 }
 
-.avatar{
+.avatar-foto{
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.aviso-login{
+
+    margin:8px 0 0;
+
+    font-size:13px;
+
+    color:var(--cor-texto-secundario);
+
+}
+
+.aviso-login a{
+
+    color:var(--cor-primaria);
+
+    font-weight:600;
+
+}
+
+.comentario-avatar{
+
+    overflow:hidden;
 
     display:flex;
 
@@ -523,15 +596,15 @@ textarea:focus{
     margin-right: 8px;
     justify-content:center;
 
-    width:38px;
+    width:60px;
 
-    height:38px;
+    height:60px;
 
     min-width:38px;
 
     border-radius:50%;
 
-    background:var(--cor-primaria);
+    background:var(--cor-primaria-hover);
 
     color: var(--cor-texto-invertido);
 
@@ -647,7 +720,7 @@ textarea:focus{
 
     }
 
-    .avatar{
+    .comentario-avatar{
 
         width:32px;
 
@@ -714,6 +787,16 @@ textarea:focus{
         font-size:14px;
 
     }
+
+}
+
+.erro-comentario{
+
+    margin:8px 0 0;
+
+    font-size:13px;
+
+    color:var(--cor-erro);
 
 }
 

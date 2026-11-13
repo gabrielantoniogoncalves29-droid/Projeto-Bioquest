@@ -18,8 +18,12 @@
             Sua conta foi criada com sucesso.
         </p>
 
-        <p class="description">
+        <p v-if="auth.emailEnviado" class="description">
             Enviamos um e-mail de confirmação para:
+        </p>
+
+        <p v-else class="description">
+            Envie o link de confirmação para:
         </p>
 
         <div class="email">
@@ -33,14 +37,26 @@
             Caso não encontre o e-mail, verifique a caixa de spam.
         </p>
 
+        <p
+            v-if="mensagem"
+            class="mensagem"
+            :class="mensagemErro ? 'erro' : 'sucesso'"
+            role="alert"
+        >
+            {{ mensagem }}
+        </p>
+
         <button
+            type="button"
             class="primary-button"
+            :disabled="enviando || restante > 0"
             @click="reenviarEmail"
         >
-            Reenviar e-mail
+            {{ enviando ? "Enviando..." : restante > 0 ? `Reenviar em ${restante}s` : auth.emailEnviado ? "Reenviar e-mail" : "Enviar e-mail" }}
         </button>
 
         <button
+            type="button"
             class="secondary-button"
             @click="auth.login()"
         >
@@ -52,16 +68,54 @@
 
 <script setup>
 
+import { ref } from "vue"
+
 import { MailCheck } from "lucide-vue-next"
 
 import { useAuthStore } from "@/store/auth"
 
+import { reenviarConfirmacao } from "@/services/auth"
+
+import { mensagemDeErro } from "@/services/api"
+
+import { useContagemRegressiva } from "@/utils/contagem"
+
 const auth = useAuthStore()
 
-function reenviarEmail(){
+const enviando = ref(false)
+const mensagem = ref("")
+const mensagemErro = ref(false)
 
+const { restante, iniciar } = useContagemRegressiva(60)
 
-    // TODO (login): reenviar o e-mail de confirmação
+async function reenviarEmail(){
+
+    if (enviando.value || restante.value > 0) return
+
+    enviando.value = true
+    mensagem.value = ""
+
+    try {
+
+        const resposta = await reenviarConfirmacao(auth.emailCadastro)
+
+        mensagemErro.value = false
+
+        mensagem.value = resposta.mensagem
+
+        iniciar()
+
+    } catch (falha) {
+
+        mensagemErro.value = true
+
+        mensagem.value = mensagemDeErro(falha, "Não foi possível reenviar o e-mail agora.")
+
+    } finally {
+
+        enviando.value = false
+
+    }
 
 }
 
@@ -297,6 +351,47 @@ h2{
 
 [data-tema="escuro"] .secondary-button{
     color:var(--cor-primaria-texto);
+}
+
+.primary-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+.mensagem{
+
+    margin:0 0 12px;
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.mensagem.erro{
+
+    color:var(--cor-erro);
+
+}
+
+.mensagem.sucesso{
+
+    color:var(--cor-acerto);
+
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.continue-button:focus-visible,
+.back-button:focus-visible{
+
+    outline:2px solid var(--cor-primaria);
+
+    outline-offset:2px;
+
 }
 
 </style>

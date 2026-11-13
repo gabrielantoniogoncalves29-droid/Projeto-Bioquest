@@ -13,6 +13,10 @@ const LETRAS = ['A', 'B', 'C', 'D', 'E']
 
 const inteiro = (min, max) => z.coerce.number().int().min(min).max(max)
 
+const enderecoDaImagem = z.string().trim().regex(/^https?:\/\//i, 'A URL da imagem deve começar com http:// ou https://').optional()
+
+const PASTA_PUBLICA = '/uploads/questoes/'
+
 const esquema = z.object({
   id: inteiro(1, 999999999).optional(),
   ano: inteiro(1990, 2100).optional(),
@@ -27,7 +31,8 @@ const esquema = z.object({
   enunciadoTexto: z.string().trim().default(''),
   enunciadoComplemento: z.string().trim().default(''),
   imagemAlt: z.string().trim().max(300).default(''),
-  imagemUrl: z.string().trim().regex(/^https?:\/\//i, 'A URL da imagem deve começar com http:// ou https://').optional(),
+  imagemUrl: enderecoDaImagem,
+  ...Object.fromEntries(LETRAS.map(letra => [`imagemUrlAlternativa${letra}`, enderecoDaImagem])),
   resposta: z.enum(LETRAS).optional(),
   comentario: z.string().trim().default(''),
   teoria: z.string().default(''),
@@ -44,12 +49,27 @@ function mensagemDoErro(issue) {
   const campo = issue.path[0]
   const nome = NOMES_DOS_CAMPOS[campo] ?? campo
 
-  if (campo === 'imagemUrl') return issue.message
+  if (String(campo).startsWith('imagemUrl')) return issue.message
 
   return `${nome}: valor inválido`
 }
 
-export function validar(corpo) {
+export function imagensDasAlternativas(corpo, dados, atuais = {}, arquivos = {}) {
+  const imagens = {}
+
+  for (const letra of LETRAS) {
+    const arquivo = arquivos[`imagemAlternativa${letra}`]?.[0]
+
+    if (arquivo) imagens[letra] = `${PASTA_PUBLICA}${arquivo.filename}`
+    else if (corpo?.[`removerImagemAlternativa${letra}`] === '1') imagens[letra] = ''
+    else if (dados[`imagemUrlAlternativa${letra}`]) imagens[letra] = dados[`imagemUrlAlternativa${letra}`]
+    else imagens[letra] = atuais[letra] ?? ''
+  }
+
+  return imagens
+}
+
+export function validar(corpo, { atuais = {}, arquivos = {} } = {}) {
   const limpo = {}
 
   for (const [chave, valor] of Object.entries(corpo ?? {})) {
@@ -68,9 +88,11 @@ export function validar(corpo) {
   const dados = resultado.data
   const avisos = []
 
+  const imagens = imagensDasAlternativas(corpo, dados, atuais, arquivos)
+
   const alternativas = LETRAS
-    .map(letra => ({ letra, texto: String(corpo[`alternativa${letra}`] ?? '').trim() }))
-    .filter(alt => alt.texto)
+    .map(letra => ({ letra, texto: String(corpo?.[`alternativa${letra}`] ?? '').trim(), imagem: imagens[letra] }))
+    .filter(alt => alt.texto || alt.imagem)
 
   if (dados.subconteudoId !== undefined) {
     const sub = db.prepare('SELECT conteudo_id AS conteudoId FROM subconteudos WHERE id = ?').get(dados.subconteudoId)
@@ -101,7 +123,7 @@ export function validar(corpo) {
 }
 
 export function removerArquivoDaImagem(imagem) {
-  if (!imagem || !imagem.startsWith('/uploads/questoes/')) return
+  if (!imagem || !imagem.startsWith(PASTA_PUBLICA)) return
 
   fs.rmSync(
     path.join(config.uploadsDir, 'questoes', path.basename(imagem)),
@@ -113,10 +135,32 @@ export function gravarAlternativas(questaoId, alternativas) {
   db.prepare('DELETE FROM alternativas WHERE questao_id = ?').run(questaoId)
 
   const inserir = db.prepare(`
-    INSERT INTO alternativas (questao_id, letra, texto) VALUES (?, ?, ?)
+    INSERT INTO alternativas (questao_id, letra, texto, imagem) VALUES (?, ?, ?, ?)
   `)
 
-  alternativas.forEach(alt => inserir.run(questaoId, alt.letra, alt.texto))
+  alternativas.forEach(alt => inserir.run(questaoId, alt.letra, alt.texto, alt.imagem ?? ''))
+}
+
+export function imagensDasAlternativasNoBanco(questaoId) {
+  const imagens = {}
+
+  db.prepare("SELECT letra, imagem FROM alternativas WHERE questao_id = ? AND imagem <> ''")
+    .all(questaoId)
+    .forEach(alt => { imagens[alt.letra] = alt.imagem })
+
+  return imagens
+}
+
+export function removerImagensSubstituidas(antigas, novas) {
+  const mantidas = new Set(Object.values(novas))
+
+  Object.values(antigas).forEach(imagem => {
+    if (imagem && !mantidas.has(imagem)) removerArquivoDaImagem(imagem)
+  })
+}
+
+function descartarEnvios(arquivos) {
+  Object.values(arquivos ?? {}).flat().forEach(arquivo => removerArquivoDaImagem(`${PASTA_PUBLICA}${arquivo.filename}`))
 }
 
 export function taxonomia() {
@@ -187,9 +231,13 @@ export function obterAdmin(id) {
   if (!q) throw naoEncontrado('Questão não encontrada')
 
   const alternativas = {}
-  db.prepare('SELECT letra, texto FROM alternativas WHERE questao_id = ?')
+  const alternativasImagens = {}
+  db.prepare('SELECT letra, texto, imagem FROM alternativas WHERE questao_id = ?')
     .all(id)
-    .forEach(alt => { alternativas[alt.letra] = alt.texto })
+    .forEach(alt => {
+      alternativas[alt.letra] = alt.texto
+      if (alt.imagem) alternativasImagens[alt.letra] = alt.imagem
+    })
 
   const { objetoMatrizId, objetoMatrizNome, objetoLivroId, objetoLivroNome,
     conteudoLivroCodigo, conteudoLivroNome, categorizacao, observacoes, ...resto } = q
@@ -198,6 +246,7 @@ export function obterAdmin(id) {
     ...resto,
     teoria: JSON.parse(q.teoria),
     alternativas,
+    alternativasImagens,
     palavrasChave: palavrasDaQuestao(id),
     planilha: {
       objetoMatrizId, objetoMatrizNome, objetoLivroId, objetoLivroNome,
@@ -221,18 +270,19 @@ export const valoresEditaveis = (dados, imagem) => [
   dados.resposta ?? null, dados.comentario, JSON.stringify(dados.teoria)
 ]
 
-export function criar(corpo, arquivo) {
+export function criar(corpo, arquivos = {}) {
   let validado
 
   try {
-    validado = validar(corpo)
+    validado = validar(corpo, { arquivos })
   } catch (erro) {
-    if (arquivo) removerArquivoDaImagem(`/uploads/questoes/${arquivo.filename}`)
+    descartarEnvios(arquivos)
     throw erro
   }
 
   const { dados, avisos } = validado
-  const imagem = arquivo ? `/uploads/questoes/${arquivo.filename}` : (dados.imagemUrl ?? '')
+  const arquivo = arquivos.imagem?.[0]
+  const imagem = arquivo ? `${PASTA_PUBLICA}${arquivo.filename}` : (dados.imagemUrl ?? '')
 
   try {
     const salva = db.transaction(() => {
@@ -257,47 +307,60 @@ export function criar(corpo, arquivo) {
 
     return { ...salva, avisos }
   } catch (erro) {
-    if (arquivo) removerArquivoDaImagem(imagem)
+    descartarEnvios(arquivos)
     throw erro
   }
 }
 
-export function atualizar(id, corpo, arquivo) {
+export function atualizar(id, corpo, arquivos = {}) {
   const atual = db.prepare('SELECT imagem FROM questoes WHERE id = ?').get(id)
 
   if (!atual) {
-    if (arquivo) removerArquivoDaImagem(`/uploads/questoes/${arquivo.filename}`)
+    descartarEnvios(arquivos)
     throw naoEncontrado('Questão não encontrada')
   }
+
+  const imagensAnteriores = imagensDasAlternativasNoBanco(id)
 
   let validado
 
   try {
-    validado = validar(corpo)
+    validado = validar(corpo, { atuais: imagensAnteriores, arquivos })
   } catch (erro) {
-    if (arquivo) removerArquivoDaImagem(`/uploads/questoes/${arquivo.filename}`)
+    descartarEnvios(arquivos)
     throw erro
   }
 
   const { dados, avisos } = validado
 
+  const arquivo = arquivos.imagem?.[0]
+
   let imagem = atual.imagem
 
-  if (arquivo) imagem = `/uploads/questoes/${arquivo.filename}`
+  if (arquivo) imagem = `${PASTA_PUBLICA}${arquivo.filename}`
   else if (corpo.removerImagem === '1') imagem = ''
   else if (dados.imagemUrl) imagem = dados.imagemUrl
 
-  const resultado = db.transaction(() => {
-    db.prepare(`UPDATE questoes SET ${COLUNAS_EDITAVEIS}, atualizado_em = datetime('now') WHERE id = ?`)
-      .run(...valoresEditaveis(dados, imagem), id)
+  let resultado
 
-    gravarAlternativas(id, dados.alternativas)
-    definirPalavrasDaQuestao(id, dados.palavrasChave)
+  try {
+    resultado = db.transaction(() => {
+      db.prepare(`UPDATE questoes SET ${COLUNAS_EDITAVEIS}, atualizado_em = datetime('now') WHERE id = ?`)
+        .run(...valoresEditaveis(dados, imagem), id)
 
-    return obterAdmin(id)
-  })()
-  
+      gravarAlternativas(id, dados.alternativas)
+      definirPalavrasDaQuestao(id, dados.palavrasChave)
+
+      return obterAdmin(id)
+    })()
+  } catch (erro) {
+    descartarEnvios(arquivos)
+    throw erro
+  }
+
   if (imagem !== atual.imagem) removerArquivoDaImagem(atual.imagem)
+
+  removerImagensSubstituidas(imagensAnteriores, resultado.alternativasImagens)
 
   return { ...resultado, avisos }
 }
@@ -305,6 +368,8 @@ export function atualizar(id, corpo, arquivo) {
 export function excluir(id) {
   const atual = db.prepare('SELECT imagem FROM questoes WHERE id = ?').get(id)
   if (!atual) throw naoEncontrado('Questão não encontrada')
+
+  const imagensAlternativas = imagensDasAlternativasNoBanco(id)
 
   db.transaction(() => {
     db.prepare('DELETE FROM questoes WHERE id = ?').run(id)
@@ -315,4 +380,5 @@ export function excluir(id) {
   })()
 
   removerArquivoDaImagem(atual.imagem)
+  Object.values(imagensAlternativas).forEach(imagem => removerArquivoDaImagem(imagem))
 }

@@ -253,8 +253,9 @@ h3 {
   }
 
   h3 {
-    font-size: 13px;
-    -webkit-line-clamp: 2;
+    font-size: 14.5px;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
   }
 
   .year {
@@ -262,7 +263,7 @@ h3 {
   }
 
   .meta {
-    font-size: 11px;
+    font-size: 12.5px;
   }
 
   .actions {
@@ -270,9 +271,9 @@ h3 {
   }
 
   .btn {
-    height: 30px;
-    padding: 0 10px;
-    font-size: 12px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
   }
 
 }

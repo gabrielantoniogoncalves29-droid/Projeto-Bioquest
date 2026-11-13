@@ -1,33 +1,49 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+
 import { storeToRefs } from 'pinia'
+
 import { useRouter } from 'vue-router'
+
 import { ArrowUpRight } from 'lucide-vue-next'
 
 import { useResolverStore } from '@/store/resolver/resolver'
+
 import { useDetalhesStore } from '@/store/resolver/detalhes'
+
 import { useUiStore } from '@/store/resolver/ui'
 
 const router = useRouter()
 
 const resolver = useResolverStore()
+
 const detalhesStore = useDetalhesStore()
+
 const painel = useUiStore()
 
 const { aberto } = storeToRefs(painel)
+
 const { questao } = storeToRefs(resolver)
+
 const { detalheAtual: detalhes } = storeToRefs(detalhesStore)
 
 const copiado = ref(false)
+
 const linkQuestao = ref(window.location.href)
+
 const objetosEnem = {
 
     1:"Moléculas, células e tecidos",
+
     2:"Hereditariedade e diversidade da vida",
+
     3:"Identidade dos seres vivos",
+
     4:"Ecologia e ciências ambientais",
+
     5:"Origem e evolução da vida",
+
     6:"Qualidade de vida das populações humanas"
 
 }
@@ -35,7 +51,9 @@ const objetosEnem = {
 const nomeObjeto = computed(()=>
 
     objetosEnem[
+
         detalhes.value?.objeto?.id
+
     ] ?? "Não informado"
 
 )
@@ -45,6 +63,7 @@ const imagemObjeto = computed(()=>{
     const id = detalhes.value?.objeto?.id
 
     if(!id)
+
         return ''
 
     return new URL(
@@ -68,6 +87,7 @@ const imagemConteudo = computed(()=>{
     const icone = conteudo.value?.area?.icone
 
     if(!icone)
+
         return ''
 
     return new URL(
@@ -123,7 +143,9 @@ const numeroQuestao = computed(()=>
 async function copiarLink(){
 
     await navigator.clipboard.writeText(
+
         window.location.href
+
     )
 
     copiado.value = true
@@ -149,15 +171,20 @@ function irParaForum(){
 <template>
 
 <div
+
     class="barra-lateral"
+
     :class="{ fechado: !aberto }"
+
 >
 
 <div
-    v-show="aberto"
-    class="painel"
->
 
+    v-show="aberto"
+
+    class="painel"
+
+>
 
 <div class="secao prova">
 
@@ -170,7 +197,6 @@ function irParaForum(){
     <h2>{{ tituloProva }}</h2>
 
 </div>
-
 
 <div class="secao central">
 
@@ -197,7 +223,6 @@ function irParaForum(){
     </div>
 
 </div>
-
 
 <div class="secao central">
 
@@ -233,18 +258,24 @@ function irParaForum(){
 
 </div>
 
-
 <div class="secao central">
 
     <div class="icone-caixa icone-nivel">
 
         <svg
+
             viewBox="0 0 24 24"
+
             fill="none"
+
             stroke="currentColor"
+
             stroke-width="1.8"
+
             stroke-linecap="round"
+
             stroke-linejoin="round"
+
         >
 
             <path d="M9 18h6"/>
@@ -267,38 +298,58 @@ function irParaForum(){
 
 </div>
 
-
-
 <div class="secao central">
 
     <div class="anel-percentual">
 
         <svg
+
             viewBox="0 0 92 92"
+
             width="80"
+
             height="80"
+
         >
 
             <circle
+
                 class="anel-fundo"
+
                 cx="46"
+
                 cy="46"
+
                 r="38"
+
                 fill="none"
+
                 stroke-width="9"
+
             />
 
             <circle
+
                 class="anel-progresso"
+
                 cx="46"
+
                 cy="46"
+
                 r="38"
+
                 fill="none"
+
                 stroke-width="9"
+
                 stroke-linecap="round"
+
                 :stroke-dasharray="circunferenciaAnel"
+
                 :stroke-dashoffset="deslocamentoAnel"
+
                 transform="rotate(-90 46 46)"
+
             />
 
         </svg>
@@ -317,21 +368,21 @@ function irParaForum(){
 
 </div>
 
-
 <div class="secao central">
 
     <button
+
         class="btn-forum"
+
         @click="irParaForum"
+
     >
 
-        
         Ver detalhes completos <ArrowUpRight :size="16"  />
 
     </button>
 
 </div>
-
 
 <div class="secao sem-borda link-final">
 
@@ -362,14 +413,23 @@ function irParaForum(){
         >
 
             <svg
+
                 width="15"
+
                 height="15"
+
                 viewBox="0 0 24 24"
+
                 fill="none"
+
                 stroke="currentColor"
+
                 stroke-width="2"
+
                 stroke-linecap="round"
+
                 stroke-linejoin="round"
+
             >
 
                 <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12z" fill="currentColor" stroke="none"/>
@@ -392,20 +452,23 @@ function irParaForum(){
 
 </template>
 
-
 <style scoped>
 
 .barra-lateral{
 
-    width:380px;
-    height:100%;
+    width:340px;
+    flex:0 0 340px;
+    min-width:0;
+    min-height:0;
+    height:auto;
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
 
-    background: var(--cor-fundo-card);
-    border-radius: 10px;
+    background:var(--cor-fundo-card);
+    border-radius:10px;
     border-left:1px solid var(--cor-borda);
-
-    transition:width .35s ease;
-
+    transition:width .35s ease, flex-basis .35s ease;
     overflow:hidden;
 
 }
@@ -413,13 +476,16 @@ function irParaForum(){
 .barra-lateral.fechado{
 
     width:55px;
+    flex-basis:55px;
 
 }
 
 .painel{
 
+    flex:1 1 auto;
+    min-height:0;
+    min-width:0;
     height:100%;
-
     overflow-y:auto;
 
     padding:24px 22px;
@@ -429,7 +495,6 @@ function irParaForum(){
     flex-direction:column;
 
 }
-
 
 .secao{
 
@@ -460,7 +525,6 @@ function irParaForum(){
     color:var(--cor-texto-secundario);
 
 }
-
 
 .prova{
 
@@ -520,7 +584,6 @@ function irParaForum(){
 
 }
 
-
 .secao.central{
 
     display:flex;
@@ -538,6 +601,7 @@ function irParaForum(){
 .icone-caixa{
 
     display:flex;
+
     align-items:center;
 
     justify-content:center;
@@ -565,8 +629,11 @@ function irParaForum(){
 .icone-nivel svg{
 
     width:26px;
+
     margin-left:15px;
+
     margin-right:15px;
+
     height:26px;
 
 }
@@ -597,19 +664,35 @@ function irParaForum(){
 
 }
 
-.valor-card{
+.valor-card {
 
-    font-size:14px;
+    font-size: 14px;
 
-    color:var(--cor-texto-suave);
+    color: var(--cor-texto-suave);
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:6px;
+    flex-wrap: wrap;
 
-    flex-wrap:wrap;
+    gap: 4px 8px;
+
+    min-width: 0;
+
+}
+
+.valor-card span {
+
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+
+}
+
+.valor-card .seta {
+
+    flex-shrink: 0;
 
 }
 
@@ -620,7 +703,6 @@ function irParaForum(){
     font-weight:600;
 
 }
-
 
 .anel-percentual{
 
@@ -666,10 +748,10 @@ function irParaForum(){
 
 }
 
-
 .link-container{
 
     display:flex;
+
     align-items:center;
 
     gap:8px;
@@ -764,7 +846,8 @@ function irParaForum(){
 
     display:flex;
 
-    margin-bottom: 25%;
+    margin-bottom:15px;
+
     align-items:center;
 
     justify-content:center;
@@ -796,6 +879,7 @@ function irParaForum(){
 .btn-forum:hover{
 
     transform: scale(1.02);
+
 }
 
 [data-tema="escuro"] .btn-forum{
@@ -803,7 +887,6 @@ function irParaForum(){
     color:var(--cor-texto-principal);
 
 }
-
 
 .painel::-webkit-scrollbar{
 
@@ -831,12 +914,12 @@ function irParaForum(){
 
 }
 
-
 @media (max-width:1200px){
 
     .barra-lateral{
 
         width:290px;
+        flex-basis:290px;
 
     }
 
@@ -847,6 +930,8 @@ function irParaForum(){
     .barra-lateral{
 
         width:100%;
+        flex:0 0 auto;
+        align-self:auto;
 
         border-left:none;
 
@@ -857,6 +942,7 @@ function irParaForum(){
     .barra-lateral.fechado{
 
         width:100%;
+        flex-basis:auto;
 
     }
 
@@ -933,7 +1019,7 @@ function irParaForum(){
     }
 
     .link-container{
-        
+
         flex-direction:column;
 
         align-items:stretch;
@@ -948,4 +1034,15 @@ function irParaForum(){
 
 }
 
+@media (max-width:480px){
+    .input-link{
+        min-height:44px;
+        font-size:16px;
+    }
+    .botao-copiar,
+    .btn-forum{
+        justify-content:center;
+        min-height:44px;
+    }
+}
 </style>

@@ -40,7 +40,6 @@ export const useTaxonomiaStore = defineStore('taxonomia', () => {
   const anos = computed(() => dados.value.anos.map(ano => ({ id: ano, nome: String(ano) })))
   const estados = estaticos.estado
 
-  // Carrega uma vez e reaproveita (a API é a fonte; o arquivo estático é só reserva).
   function carregar() {
 
     if (carregada.value) return Promise.resolve()

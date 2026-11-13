@@ -2,12 +2,15 @@
 import { useQuestoesStore } from '@/store/questoes_card.js'
 import { useQuestoesFiltrosStore } from '@/store/questoes_filtros.js'
 
+const emit = defineEmits(['buscou'])
+
 const store = useQuestoesStore()
 const filtrosStore = useQuestoesFiltrosStore()
 
 function buscar() {
   filtrosStore.buscaRealizada = true
   store.carregarQuestoes(true)
+  emit('buscou')
 }
 </script>
 <template>

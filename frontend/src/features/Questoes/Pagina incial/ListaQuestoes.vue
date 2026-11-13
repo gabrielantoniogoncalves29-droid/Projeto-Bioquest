@@ -125,53 +125,42 @@ v-for="questao in questoes"
 @media(max-width:768px){
 
   .lista-questoes{
-
-    padding:12px;
-
+    padding:0;
+    border-top:0;
+    background:transparent;
   }
 
-
+  .lista-questoes.lista,
   .lista-questoes.grade{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
 
-    grid-template-columns:1fr;
-
+  .loading,
+  .empty{
+    padding:32px 16px;
+    font-size:15px;
+    line-height:1.5;
   }
 
 }
-
-@media(max-width:480px){
-
-  .lista-questoes{
-
-    padding:10px;
-
-  }
-
-  .lista-questoes.lista {
-
-    gap: 8px;
-
-  }
-
-  .resultado-acoes {
-
-    padding: 6px 10px;
-
-  }
-
-}
-
-
 
 .loading,
 .empty {
-
+ 
+  grid-column:1 / -1;
+ 
+  width:100%;
+ 
+  box-sizing:border-box;
+ 
   text-align:center;
-
+ 
   padding:40px;
-
+ 
   color:var(--cor-texto-suave);
-
+ 
 }
 
 .resultado-acoes{

@@ -28,8 +28,34 @@ export async function enviarFotoPerfil(arquivo) {
 
 }
 
-export async function excluirDadosDoPerfil() {
+export async function excluirDadosDoPerfil({ senha, confirmacao }) {
 
-  await api.delete('/perfil')
+  await api.delete('/perfil', { data: { senha, confirmacao } })
+
+}
+
+export async function solicitarTrocaDeEmail({ novoEmail, senha }) {
+
+  const { data } = await api.post('/perfil/email', { novoEmail, senha })
+
+  return data
+
+}
+
+export function apagarRespostas() {
+
+  return api.delete('/perfil/respostas')
+
+}
+
+export function apagarSalvas() {
+
+  return api.delete('/perfil/salvas')
+
+}
+
+export function apagarRevisar() {
+
+  return api.delete('/perfil/revisar')
 
 }
