@@ -1,0 +1,23 @@
+{
+  "id": 163,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O esquema representa um experimento feito com\r\ncélulas do protozoário Amoeba proteus. Nele, um grupo\r\nde células foi tratado com a droga citocalasina B, enquanto\r\noutro grupo não foi tratado, servindo como controle.\r\nO formato e o movimento das células tratadas foram\r\ncomprometidos.",
+  "enunciadoComplemento": "Qual componente celular foi afetado pela droga utilizada\r\nno experimento?",
+  "imagem": "0163.png",
+  "imagemAlt": "SADAVA, D. et al. Vida: a ciência da biologia — volume I: célula e hereditariedade. Porto Alegre: Artmed, 2009 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Vacúolos.",
+    "B": "Mitocôndrias.",
+    "C": "Microfilamentos.",
+    "D": "Material genético.",
+    "E": "Membrana plasmática."
+  },
+  "palavrasChave": [
+    "Citoplasma",
+    "Citoesqueleto",
+    "Microfilamentos"
+  ]
+}

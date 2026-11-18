@@ -1,0 +1,24 @@
+{
+  "id": 172,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A produção de vacinas exige uma sequência de procedimentos,\r\nalém do cumprimento estrito de verificações de segurança.\r\nNo esquema, estão demonstradas as etapas básicas realizadas\r\npara a fabricação de uma vacina utilizando a tecnologia tradicional\r\ne o efeito dela no organismo.",
+  "enunciadoComplemento": "O antígeno utilizado na vacina causa um efeito protetor contra\r\no vírus porque",
+  "imagem": "0172.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "mata o vírus pela ligação.",
+    "B": "aglutina o vírus por associação.",
+    "C": "contém imunoglobulinas de defesa.",
+    "D": "induz a produção de proteínas neutralizadoras.",
+    "E": "mantém a quantidade de anticorpos preexistentes."
+  },
+  "palavrasChave": [
+    "Sistema imunológico",
+    "Vacina",
+    "Antígeno",
+    "anticorpo"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 75,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Considere, em um fragmento ambiental, uma árvore matriz com frutos (M) e outras cinco que produziram flores\r\ne são apenas doadoras de pólen (DP1, DP2, DP3, DP4 e DP5). Foi excluída a capacidade de autopolinização das\r\nárvores. Os genótipos da matriz, da semente (S1) e das prováveis fontes de pólen foram obtidos pela análise de dois\r\nlocos (loco A e loco B) de marcadores de DNA, conforme a figura.",
+  "enunciadoComplemento": "A progênie S1 recebeu o pólen de qual doadora?.",
+  "imagem": "0075.png",
+  "imagemAlt": "COLLEVATTI, R. G.; TELLES, M. P.; SOARES, T. N. Dispersão do pólen entre pequizeiros: uma atividade para a genética do ensino superior. Genética na Escola, n. 1, 2013 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "DP1",
+    "B": "DP2",
+    "C": "DP3",
+    "D": "DP4",
+    "E": "DP5"
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Genes",
+    "hereditariedade"
+  ]
+}

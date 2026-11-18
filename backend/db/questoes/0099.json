@@ -1,0 +1,22 @@
+{
+  "id": 99,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Pesquisadores dos Estados Unidos desenvolveram\r\numa nova técnica, que utiliza raios de luz infravermelha\r\n(invisíveis a olho nu) para destruir tumores. Primeiramente,\r\no paciente recebe uma injeção com versões modificadas\r\nde anticorpos que têm a capacidade de “grudar” apenas\r\nnas células cancerosas. Sozinhos, eles não fazem nada\r\ncontra o tumor. Entretanto, esses anticorpos estão ligados\r\na uma molécula, denominada IR700, que funcionará como\r\numa “microbomba”, que irá destruir o câncer. Em seguida, o\r\npaciente recebe raios infravermelhos. Esses raios penetram\r\nno corpo e chegam até a molécula IR700, que é ativada e\r\nlibera uma substância que ataca a célula cancerosa.",
+  "enunciadoComplemento": "Com base nas etapas de desenvolvimento, o nome\r\napropriado para a técnica descrita é:",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Radioterapia.",
+    "B": "Cromoterapia.",
+    "C": "Quimioterapia.",
+    "D": "Fotoimunoterapia.",
+    "E": "Terapia magnética."
+  },
+  "palavrasChave": [
+    "Genética e biotecnologia",
+    "Tratamento contra o câncer"
+  ]
+}

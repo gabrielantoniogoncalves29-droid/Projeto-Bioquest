@@ -1,0 +1,23 @@
+{
+  "id": 88,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A poluição radioativa compreende mais de\r\n200 nuclídeos, sendo que, do ponto de vista de impacto\r\nambiental, destacam-se o césio-137 e o estrôncio-90.\r\nA maior contribuição de radionuclídeos antropogênicos\r\nno meio marinho ocorreu durante as décadas de 1950\r\ne 1960, como resultado dos testes nucleares realizados\r\nna atmosfera. O estrôncio-90 pode se acumular nos\r\norganismos vivos e em cadeias alimentares e, em\r\nrazão de sua semelhança química, pode participar no\r\nequilíbrio com carbonato e substituir o cálcio em diversos\r\nprocessos biológicos.",
+  "enunciadoComplemento": "Ao entrar numa cadeia alimentar da qual o homem\r\nfaz parte, em qual tecido do organismo humano o\r\nestrôncio-90 será acumulado predominantemente?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Cartilaginoso.",
+    "B": "Sanguíneo.",
+    "C": "Muscular.",
+    "D": "Nervoso.",
+    "E": "Ósseo."
+  },
+  "palavrasChave": [
+    "Água e sais minerais",
+    "Cálcio",
+    "ossos"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 100,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Aranhas, escorpiões, carrapatos e ácaros são\r\nrepresentantes da classe dos Aracnídeos. Esses animais\r\nsão terrestres em sua grande maioria e ocupam os mais\r\nvariados hábitats, tais como montanhas altas, pântanos,\r\ndesertos e solos arenosos. Podem ter sido os primeiros\r\nrepresentantes do filo Arthropoda a habitar a terra seca.",
+  "enunciadoComplemento": "A característica que justifica o sucesso adaptativo desse\r\ngrupo na ocupação do ambiente terrestre é a presença de",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "quelíceras e pedipalpos que coordenam o movimento corporal.",
+    "B": "excreção de ácido úrico que confere estabilidade ao pH corporal.",
+    "C": "exoesqueleto constituído de quitina que auxilia no controle hídrico corporal.",
+    "D": "circulação sanguínea aberta que impede a desidratação dos tecidos corporais.",
+    "E": "sistema nervoso ganglionar que promove a coordenação central do movimento corporal."
+  },
+  "palavrasChave": [
+    "Características dos animais",
+    "Exoesqueleto",
+    "artrópodes"
+  ]
+}

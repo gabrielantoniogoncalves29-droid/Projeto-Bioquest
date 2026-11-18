@@ -1,0 +1,23 @@
+{
+  "id": 131,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Na figura está representado o mosaicismo em função\r\nda inativação aleatória de um dos cromossomos X, que\r\nocorre em todas as mulheres sem alterações patológicas.",
+  "enunciadoComplemento": "Entre mulheres heterozigotas para doenças determinadas\r\npor genes recessivos ligados ao sexo, essa inativação\r\ntem como consequência a ocorrência de",
+  "imagem": "0131.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "pleiotropia.",
+    "B": "mutação gênica.",
+    "C": "interação gênica.",
+    "D": "penetrância incompleta.",
+    "E": "expressividade variável."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "cromossomo X",
+    "hereditariedade"
+  ]
+}

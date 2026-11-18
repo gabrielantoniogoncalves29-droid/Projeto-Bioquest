@@ -1,0 +1,23 @@
+{
+  "id": 147,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A biorremediação designa tratamentos que usam\r\norganismos para reduzir a quantidade de substâncias\r\ntóxicas no ambiente ou degradá-las em substâncias\r\nnão tóxicas ou de menor toxicidade. Uma planta aquática,\r\no aguapé, tem sido utilizada para a biorremediação de\r\nambientes contaminados por metais tóxicos. Sabe-se\r\nque esses poluentes serão captados para dentro do\r\ncorpo do vegetal.",
+  "enunciadoComplemento": "Dentro do corpo do vegetal, esses contaminantes serão",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "digeridos por enzimas.",
+    "B": "acumulados nos tecidos.",
+    "C": "eliminados pelos estômatos.",
+    "D": "metabolizados por glândulas.",
+    "E": "utilizados como fonte energética."
+  },
+  "palavrasChave": [
+    "Problemas ambientais",
+    "Biorremediação",
+    "poluição"
+  ]
+}

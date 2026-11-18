@@ -1,0 +1,24 @@
+{
+  "id": 132,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os ursos, por não apresentarem uma hibernação\r\nverdadeira, acordam por causa da presença de\r\ntermogenina, uma proteína mitocondrial que impede a\r\nchegada dos prótons até a ATP sintetase, gerando calor.\r\nEsse calor é importante para aquecer o organismo,\r\npermitindo seu despertar.",
+  "enunciadoComplemento": "Em qual etapa do metabolismo energético celular a\r\ntermogenina interfere?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Glicólise.",
+    "B": "Fermentação lática.",
+    "C": "Ciclo do ácido cítrico.",
+    "D": "Oxidação do piruvato.",
+    "E": "Fosforilação oxidativa."
+  },
+  "palavrasChave": [
+    "Respiração aeróbica",
+    "Mitocôndria",
+    "ATP",
+    "fosforilação oxidativa"
+  ]
+}

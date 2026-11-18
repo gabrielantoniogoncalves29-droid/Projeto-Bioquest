@@ -1,0 +1,22 @@
+{
+  "id": 60,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Uma das estratégias para conservação de alimentos\r\né o salgamento, adição de cloreto de sódio (NaCl),\r\nhistoricamente utilizado por tropeiros, vaqueiros e\r\nsertanejos para conservar carnes de boi, porco e peixe.",
+  "enunciadoComplemento": "O que ocorre com as células presentes nos alimentos\r\npreservados com essa técnica?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "O sal adicionado diminui a concentração de solutos em seu interior.",
+    "B": "O sal adicionado desorganiza e destrói suas membranas plasmáticas.",
+    "C": "A adição de sal altera as propriedades de suas membranas plasmáticas.",
+    "D": "Os íons Na+ e Cl− provenientes da dissociação do sal entram livremente nelas.",
+    "E": "A grande concentração de sal no meio extracelular provoca a saída de água de dentro delas."
+  },
+  "palavrasChave": [
+    "Membrana plasmática",
+    "Osmose"
+  ]
+}

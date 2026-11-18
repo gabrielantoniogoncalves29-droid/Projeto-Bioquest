@@ -1,0 +1,23 @@
+{
+  "id": 82,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Um alimento orgânico deve apresentar em sua\r\nembalagem o selo de uma instituição certificadora,\r\ngarantindo ao consumidor que, além de ser um alimento\r\nisento de agrotóxicos, também é produzido com técnicas\r\nplanejadas e controladas. A técnica de produção desses\r\nalimentos causa menor impacto aos recursos naturais,\r\ncontribuindo para melhorar a qualidade de vida das\r\npessoas.",
+  "enunciadoComplemento": "Nesse sistema de produção de alimentos vegetais, o\r\ncontrole de insetos é manejado por meio do(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "prática de adubação verde.",
+    "B": "emprego da compostagem.",
+    "C": "controle da irrigação do solo.",
+    "D": "utilização de predadores naturais.",
+    "E": "uso de sementes inoculadas com Rhizobium."
+  },
+  "palavrasChave": [
+    "Cadeias alimentares",
+    "Controle Biológico",
+    "Produção orgânica"
+  ]
+}

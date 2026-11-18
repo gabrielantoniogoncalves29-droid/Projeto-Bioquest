@@ -1,0 +1,17 @@
+{
+  "id": 58,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A reação em cadeia da polimerase (PCR, na sigla em\r\ninglês) é uma técnica de biologia molecular que permite\r\nreplicação in vitro do DNA de forma rápida. Essa técnica\r\nsurgiu na década de 1980 e permitiu avanços científicos\r\nem todas as áreas de investigação genômica. A dupla\r\nhélice é estabilizada por ligações hidrogênio, duas entre\r\nas bases adenina (A) e timina (T) e três entre as bases\r\nguanina (G) e citosina (C). Inicialmente, para que o DNA\r\npossa ser replicado, a dupla hélice precisa ser totalmente\r\ndesnaturada (desenrolada) pelo aumento da temperatura,\r\nquando são desfeitas as ligações hidrogênio entre as\r\ndiferentes bases nitrogenadas.",
+  "enunciadoComplemento": "Qual dos segmentos de DNA será o primeiro a desnaturar\r\ntotalmente durante o aumento da temperatura na reação\r\nde PCR?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {},
+  "palavrasChave": [
+    "Genética molecular",
+    "Bases nitrogenadas",
+    "pontes de hidrogênio"
+  ]
+}

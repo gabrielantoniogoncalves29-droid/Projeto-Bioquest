@@ -1,0 +1,23 @@
+{
+  "id": 56,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Para se adequar às normas ambientais atuais, as\r\nconstrutoras precisam prever em suas obras a questão\r\ndo uso de materiais de modo a minimizar os impactos\r\ncausados no local. Entre esses materiais está o chamado\r\nconcregrama ou pisograma, que é um tipo de revestimento\r\ncomposto por peças de concreto com áreas vazadas,\r\npreenchidas com solo gramado. As figuras apresentam\r\nessas duas formas de piso feitos de concreto.",
+  "enunciadoComplemento": "A utilização desse tipo de piso em uma obra tem o objetivo\r\nde evitar, no solo, a",
+  "imagem": "0056.png",
+  "imagemAlt": "PONTES, K. L. F. Estudo de caso de um protótipo experimental [...]. Disponível em: http://monografias.poli.ufrj.br. Acesso em: 9 maio 2017 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "impermeabilização.",
+    "B": "diminuição da temperatura.",
+    "C": "acumulação de matéria orgânica.",
+    "D": "alteração do pH.",
+    "E": "salinização."
+  },
+  "palavrasChave": [
+    "Problemas ambientais",
+    "Ciclo da água",
+    "infiltração"
+  ]
+}

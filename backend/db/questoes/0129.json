@@ -1,0 +1,22 @@
+{
+  "id": 129,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Antimicrobianos são substâncias naturais ou sintéticas que têm capacidade de matar ou inibir o crescimento de\r\nmicrorganismos. A tabela apresenta uma lista de antimicrobianos hipotéticos, bem como suas ações e efeitos sobre\r\no metabolismo microbiano.",
+  "enunciadoComplemento": "Qual dos antimicrobianos deve ser utilizado para curar uma infecção causada por um fungo sem afetar as bactérias\r\nda microbiota normal do organismo?",
+  "imagem": "0129.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "E": "5"
+  },
+  "palavrasChave": [
+    "Características das bactérias",
+    "Células eucariontes e procariontes"
+  ]
+}

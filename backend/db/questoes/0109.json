@@ -1,0 +1,23 @@
+{
+  "id": 109,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O rompimento da barragem de rejeitos de mineração no município mineiro de Mariana e o derramamento de produtos tóxicos nas águas do Rio Doce, ocorridos em 2015, ainda têm consequências para os organismos que habitam o Parque Nacional Marinho de Abrolhos, localizado a mais de 1 000 quilômetros de distância. Esse desastre ambiental afetou o fitoplâncton, as esponjas, as algas macroscópicas, os peixes herbívoros e os golfinhos.",
+  "enunciadoComplemento": "Concentrações mais elevadas dos compostos citados são encontradas em:",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Esponjas.",
+    "B": "Golfinhos.",
+    "C": "Fitoplâncton.",
+    "D": "Peixes herbívoros.",
+    "E": "Algas macroscópicas."
+  },
+  "palavrasChave": [
+    "Cadeias alimentares",
+    "Bioacumulação",
+    "biomagnificação"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 47,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os medicamentos são rotineiramente utilizados pelo\r\nser humano com o intuito de diminuir ou, por muitas vezes,\r\ncurar possíveis transtornos de saúde. Os antibióticos são\r\ngrupos de fármacos inseridos no tratamento de doenças\r\ncausadas por bactérias.",
+  "enunciadoComplemento": "Na terapêutica das doenças mencionadas, alguns desses\r\nfármacos atuam",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "ativando o sistema imunológico do hospedeiro.",
+    "B": "interferindo na cascata bioquímica da inflamação.",
+    "C": "removendo as toxinas sintetizadas pelas bactérias.",
+    "D": "combatendo as células hospedeiras das bactérias.",
+    "E": "danificando estruturas específicas da célula bacteriana."
+  },
+  "palavrasChave": [
+    "Características das bactérias",
+    "Funcionamento dos antibióticos"
+  ]
+}

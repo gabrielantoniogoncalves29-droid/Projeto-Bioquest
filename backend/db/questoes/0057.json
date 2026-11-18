@@ -1,0 +1,23 @@
+{
+  "id": 57,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A Mata Atlântica caracteriza-se por uma grande diversidade de epífitas, como as bromélias. Essas plantas estão\r\nadaptadas a esse ecossistema e conseguem captar luz, água e nutrientes mesmo vivendo sobre as árvores.",
+  "enunciadoComplemento": "Essas espécies captam água do(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "organismo das plantas vizinhas.",
+    "B": "solo através de suas longas raízes.",
+    "C": "chuva acumulada entre suas folhas.",
+    "D": "seiva bruta das plantas hospedeiras.",
+    "E": "comunidade que vive em seu interior."
+  },
+  "palavrasChave": [
+    "Relações ecológicas",
+    "Plantas epífitas",
+    "comensalismo"
+  ]
+}

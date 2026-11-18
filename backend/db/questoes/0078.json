@@ -1,0 +1,23 @@
+{
+  "id": 78,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A esquistossomose (barriga-dʼágua) caracteriza-se\r\npela inflamação do fígado e do baço causada pelo verme\r\nSchistosoma mansoni (esquistossomo). O contágio\r\nocorre depois que larvas do verme são liberadas na\r\nágua pelo caramujo do gênero Biomphalaria, seu\r\nhospedeiro intermediário, e penetram na pele humana.\r\nApós o diagnóstico, o tratamento tradicional utiliza\r\nmedicamentos por via oral para matar o parasita dentro\r\ndo corpo. Uma nova estratégia terapêutica baseia-se na\r\nutilização de uma vacina, feita a partir de uma proteína\r\nextraída do verme, que induz o organismo humano a\r\nproduzir anticorpos para combater e prevenir a doença.",
+  "enunciadoComplemento": "Uma vantagem da vacina em relação ao tratamento\r\ntradicional é que ela poderá",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "impedir a penetração do parasita pela pele.",
+    "B": "eliminar o caramujo para que não haja contágio.",
+    "C": "impedir o acesso do esquistossomo especificamente para o fígado.",
+    "D": "eliminar o esquistossomo antes que ocorra contato com o organismo.",
+    "E": "eliminar o esquistossomo dentro do organismo antes da manifestação de sintomas."
+  },
+  "palavrasChave": [
+    "Sistema imunológico",
+    "Vacina",
+    "esquistossomose"
+  ]
+}

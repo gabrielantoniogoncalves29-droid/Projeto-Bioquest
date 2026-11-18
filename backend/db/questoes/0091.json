@@ -1,0 +1,23 @@
+{
+  "id": 91,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Uma cozinheira colocou sal a mais no feijão que\r\nestava cozinhando. Para solucionar o problema, ela\r\nacrescentou batatas cruas e sem tempero dentro da\r\npanela. Quando terminou de cozinhá-lo, as batatas\r\nestavam salgadas, porque absorveram parte do caldo\r\ncom excesso de sal. Finalmente, ela adicionou água\r\npara completar o caldo do feijão.",
+  "enunciadoComplemento": "O sal foi absorvido pelas batatas por",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "osmose, por envolver apenas o transporte do solvente.",
+    "B": "fagocitose, porque o sal transportado é uma substância sólida.",
+    "C": "exocitose, uma vez que o sal foi transportado da água para a batata.",
+    "D": "pinocitose, porque o sal estava diluído na água quando foi transportado.",
+    "E": "difusão, porque o transporte ocorreu a favor do gradiente de concentração."
+  },
+  "palavrasChave": [
+    "Membrana plasmática",
+    "Difusão",
+    "transporte passivo"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 124,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Entre as diversas técnicas para diagnóstico da\r\ncovid-19, destaca-se o teste genético. Considerando as\r\ndiferentes variantes e cargas virais, um exemplo é a PCR,\r\nreação efetuada por uma enzima do tipo polimerase.\r\nEssa técnica permite identificar, com confiabilidade, o\r\nmaterial genético do SARS-CoV-2, um vírus de RNA.\r\nPara comprovação da infecção por esse coronavírus, são\r\ncoletadas amostras de secreções do indivíduo. Uma etapa\r\nque antecede a reação de PCR precisa ser realizada para\r\npermitir a amplificação do material genético do vírus.",
+  "enunciadoComplemento": "Essa etapa deve ser realizada para",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "concentrar o RNA viral para otimizar a técnica.",
+    "B": "identificar nas amostras anticorpos anti-SARS-CoV-2.",
+    "C": "proliferar o vírus em culturas, aumentando a carga viral.",
+    "D": "purificar ácidos nucleicos virais, facilitando a ação da enzima.",
+    "E": "obter moléculas de cDNAviral por meio da transcrição reversa."
+  },
+  "palavrasChave": [
+    "Genética e biotecnologia",
+    "PCR",
+    "Retrovírus"
+  ]
+}

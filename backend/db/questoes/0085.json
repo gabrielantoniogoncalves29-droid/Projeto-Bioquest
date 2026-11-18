@@ -1,0 +1,23 @@
+{
+  "id": 85,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Com base nos experimentos de plantas de Mendel, foram estabelecidos três princípios básicos, que são\r\nconhecidos como leis da uniformidade, segregação e distribuição independente. A lei da distribuição independente\r\nrefere-se ao fato de que os membros de pares diferentes de genes segregam-se independentemente, uns dos\r\noutros, para a prole.",
+  "enunciadoComplemento": "Hoje, sabe-se que isso nem sempre é verdade. Por quê?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "A distribuição depende do caráter de dominância ou recessividade do gene.",
+    "B": "Os organismos nem sempre herdam cada um dos genes de cada um dos genitores.",
+    "C": "As alterações cromossômicas podem levar a falhas na segregação durante a meiose.",
+    "D": "Os genes localizados fisicamente próximos no mesmo cromossomo tendem a ser herdados juntos.",
+    "E": "O cromossomo que contém dois determinados genes pode não sofrer a disjunção na primeira fase da meiose."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Genes",
+    "hereditariedade"
+  ]
+}

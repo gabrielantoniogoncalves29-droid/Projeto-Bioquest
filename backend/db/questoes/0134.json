@@ -1,0 +1,23 @@
+{
+  "id": 134,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os resultados de um ensaio clínico randomizado na Indonésia apontaram uma redução de 77% dos casos de\r\ndengue nas áreas que receberam o mosquito Aedes aegypti infectado com a bactéria Wolbachia. Trata-se da mesma\r\ntécnica utilizada no Brasil pelo Método Wolbachia, iniciativa conduzida pela Fundação Oswaldo Cruz — Fiocruz. Essa\r\nbactéria induz a redução da carga viral no mosquito e, consequentemente, o número de casos de dengue na área,\r\nsendo repassada por meio do cruzamento entre os insetos. Como essa bactéria é um organismo intracelular e o vírus\r\ntambém precisa entrar nas células para se reproduzir, ambos necessitarão de recursos comuns.",
+  "enunciadoComplemento": "Essa tecnologia utilizada no combate à dengue consiste na",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "predação do vírus pela bactéria.",
+    "B": "esterilização de mosquitos infectados.",
+    "C": "alteração no genótipo do mosquito pela bactéria.",
+    "D": "competição do vírus e da bactéria no hospedeiro.",
+    "E": "inserção de material genético do vírus na bactéria."
+  },
+  "palavrasChave": [
+    "Vírus e saúde humana",
+    "competição",
+    "Dengue"
+  ]
+}

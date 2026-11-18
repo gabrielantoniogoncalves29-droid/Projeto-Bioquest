@@ -1,0 +1,23 @@
+{
+  "id": 55,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A distrofia muscular Duchenne (DMD) é uma doença\r\ncausada por uma mutação em um gene localizado no\r\ncromossomo X. Pesquisadores estudaram uma família\r\nna qual gêmeas monozigóticas eram portadoras de um\r\nalelo mutante recessivo para esse gene (heterozigóticas).\r\nO interessante é que uma das gêmeas apresentava\r\no fenótipo relacionado ao alelo mutante, isto é, DMD,\r\nenquanto a sua irmã apresentava fenótipo normal.",
+  "enunciadoComplemento": "A diferença na manifestação da DMD entre as gêmeas\r\npode ser explicada pela",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "dominância incompleta do alelo mutante em relação ao alelo normal.",
+    "B": "falha na separação dos cromossomos X no momento da separação dos dois embriões.",
+    "C": "recombinação cromossômica em uma divisão celular embrionária anterior à separação dos dois embriões.",
+    "D": "inativação aleatória de um dos cromossomos X em fase posterior à divisão que resulta nos dois embriões.",
+    "E": "origem paterna do cromossomo portador do alelo mutante em uma das gêmeas e origem materna na outra."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Herança ligado ao X",
+    "cromossomo X"
+  ]
+}

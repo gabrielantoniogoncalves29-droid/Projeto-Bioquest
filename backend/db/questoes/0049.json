@@ -1,0 +1,22 @@
+{
+  "id": 49,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A classificação biológica proposta por Whittaker\r\npermite distinguir cinco grandes linhas evolutivas\r\nutilizando, como critérios de classificação, a organização\r\ncelular e o modo de nutrição. Woese e seus colaboradores,\r\ncom base na comparação das sequências que codificam\r\no RNA ribossômico dos seres vivos, estabeleceram\r\nrelações de ancestralidade entre os grupos e concluíram\r\nque os procariontes do reino Monera não eram um grupo\r\ncoeso do ponto de vista evolutivo.",
+  "enunciadoComplemento": "A diferença básica nas classificações citadas é que a\r\nmais recente se baseia fundamentalmente em",
+  "imagem": "0049.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "tipos de células.",
+    "B": "aspectos ecológicos.",
+    "C": "relações filogenéticas.",
+    "D": "propriedades fisiológicas.",
+    "E": "características morfológicas."
+  },
+  "palavrasChave": [
+    "Fluxo de energia e matéria",
+    "Etapas do ciclo do nitrogênio"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": 76,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Insetos podem apresentar três tipos de desenvolvimento.\r\nUm deles, a holometabolia (desenvolvimento completo),\r\né constituído pelas fases de ovo, larva, pupa e adulto\r\nsexualmente maduro, que ocupam diversos hábitats.\r\nOs insetos com holometabolia pertencem às ordens mais\r\nnumerosas em termos de espécies conhecidas.",
+  "enunciadoComplemento": "Esse tipo de desenvolvimento está relacionado a um\r\nmaior número de espécies em razão da",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "proteção na fase de pupa, favorecendo a sobrevivência de adultos férteis.",
+    "B": "produção de muitos ovos, larvas e pupas, aumentando o número de adultos.",
+    "C": "exploração de diferentes nichos, evitando a competição entre as fases da vida.",
+    "D": "ingestão de alimentos em todas as fases de vida, garantindo o surgimento do adulto.",
+    "E": "utilização do mesmo alimento em todas as fases, otimizando a nutrição do organismo."
+  },
+  "palavrasChave": [
+    "Conceitos de Ecologia",
+    "Nicho ecológico",
+    "competição",
+    "insetos"
+  ]
+}

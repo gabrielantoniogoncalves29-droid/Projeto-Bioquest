@@ -1,0 +1,24 @@
+{
+  "id": 127,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "As células da epiderme da folha da Tradescantia\r\npallida purpurea, uma herbácea popularmente conhecida\r\ncomo trapoeraba-roxa, contém um vacúolo onde se\r\nencontra um pigmento que dá a coloração arroxeada a\r\nesse tecido. Em um experimento, um corte da epiderme\r\nde uma folha da trapoeraba-roxa foi imerso em ambiente\r\nhipotônico e, logo em seguida, foi colocado em uma\r\nlâmina e observado em microscópio óptico.",
+  "enunciadoComplemento": "Durante a observação desse corte, foi possível identificar o(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "acúmulo do solvente com fragmentação da organela.",
+    "B": "rompimento da membrana celular com liberação do citosol.",
+    "C": "aumento do vacúolo com diluição do pigmento no seu interior.",
+    "D": "quebra da parede celular com extravasamento do pigmento.",
+    "E": "murchamento da célula com expulsão do pigmento do vacúolo."
+  },
+  "palavrasChave": [
+    "Membrana plasmática",
+    "Osmose",
+    "hipotônico",
+    "hipertônico"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 86,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Na família Retroviridae encontram-se diversos vírus\r\nque infectam aves e mamíferos, sendo caracterizada\r\npela produção de DNA a partir de uma molécula de RNA.\r\nAlguns retrovírus infectam exclusivamente humanos,\r\nnão necessitando de outros hospedeiros, reservatórios\r\nou vetores biológicos. As infecções ocasionadas\r\npor esses vírus vêm causando mortes e grandes\r\nprejuízos ao desenvolvimento social e econômico.\r\nNesse contexto, pesquisadores têm produzido\r\nmedicamentos que contribuem para o tratamento\r\ndessas doenças.",
+  "enunciadoComplemento": "Que avanços tecnológicos têm contribuído para o\r\ntratamento dessas infecções virais?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Melhoria dos métodos de controle dos vetores desses vírus.",
+    "B": "Fabricação de soros mutagênicos para combate desses vírus.",
+    "C": "Investimento da indústria em equipamentos de proteção individual.",
+    "D": "Produção de vacinas que evitam a infecção das células hospedeiras.",
+    "E": "Desenvolvimento de antirretrovirais que dificultam a reprodução desses vírus."
+  },
+  "palavrasChave": [
+    "Reprodução dos vírus",
+    "Retrovírus",
+    "doenças"
+  ]
+}

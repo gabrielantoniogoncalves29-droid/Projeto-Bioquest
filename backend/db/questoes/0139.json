@@ -1,0 +1,23 @@
+{
+  "id": 139,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Um garoto comprou vários abacates na feira, mas\r\ndescobriu que eles não estavam maduros o suficiente\r\npara serem consumidos. Sua mãe recomendou que\r\nele colocasse os abacates em um recipiente fechado,\r\npois isso aceleraria seu amadurecimento. Com certa\r\ndúvida, o garoto realizou esta experiência: colocou\r\nalguns abacates no recipiente e deixou os demais em\r\numa fruteira aberta. Surpreendendo-se, ele percebeu\r\nque os frutos que estavam no recipiente fechado\r\namadureceram mais rapidamente.",
+  "enunciadoComplemento": "A aceleração desse processo é causada por",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "acúmulo de gás etileno.",
+    "B": "redução da umidade do ar.",
+    "C": "aumento da concentração de CO2.",
+    "D": "diminuição da intensidade luminosa.",
+    "E": "isolamento do contato com O2  atmosférico."
+  },
+  "palavrasChave": [
+    "Fisiologia das angiospermas",
+    "Etileno",
+    "fitormônios"
+  ]
+}

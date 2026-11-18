@@ -2,18 +2,18 @@
   "id": 32,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "Um jovem suspeita que não é filho biológico de\r\nseus pais, pois descobriu que o seu tipo sanguíneo é\r\nO Rh negativo, o de sua mãe é B Rh positivo e de\r\nseu pai é A Rh positivo.",
+  "enunciadoComplemento": "A condição genotípica que possibilita que ele seja\r\nrealmente filho biológico de seus pais é que",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "o pai e a mãe sejam heterozigotos para o sistema sanguíneo ABO e para o fator Rh.",
+    "B": "o pai e a mãe sejam heterozigotos para o sistema sanguíneo ABO e homozigotos para o fator Rh.",
+    "C": "o pai seja homozigoto para as duas características e a mãe heterozigota para as duas características.",
+    "D": "o pai seja homozigoto para as duas características e a mãe heterozigota para o sistema ABO e homozigota para o fator Rh.",
+    "E": "o pai seja homozigoto para o sistema ABO e heterozigoto para o fator Rh e a mãe homozigota para as duas características."
   },
   "palavrasChave": [
     "Genética clássica",

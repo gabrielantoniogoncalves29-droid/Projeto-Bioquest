@@ -1,0 +1,23 @@
+{
+  "id": 133,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "No processo de captação da luz pelo olho para a\r\nformação de imagens estão envolvidas duas estruturas\r\ncelulares: os cones e os bastonetes. Os cones são sensíveis\r\nà energia dos fótons, e os bastonetes, à quantidade de\r\nfótons incidentes. A energia dos fótons que compõem\r\nos raios luminosos está associada à sua frequência, e a\r\nintensidade, ao número de fótons incidentes.",
+  "enunciadoComplemento": "Um animal que tem bastonetes mais sensíveis irá",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "apresentar daltonismo.",
+    "B": "perceber cores fora do espectro do visível.",
+    "C": "enxergar bem em ambientes mal iluminados.",
+    "D": "necessitar de mais luminosidade para enxergar.",
+    "E": "fazer uma pequena distinção de cores em ambientes iluminados."
+  },
+  "palavrasChave": [
+    "Sistema sensorial",
+    "Cones e bastonetes",
+    "interpretação"
+  ]
+}

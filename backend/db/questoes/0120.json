@@ -1,0 +1,23 @@
+{
+  "id": 120,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A deficiência de lipase ácida lisossômica é uma doença hereditária associada a um gene do cromossomo 10. Os pais dos pacientes podem não saber que são portadores dos genes da doença até o nascimento do primeiro filho afetado. Quando ambos os progenitores são portadores, existe uma chance, em quatro, de que seu bebê possa nascer com essa doença.",
+  "enunciadoComplemento": "Essa é uma doença hereditária de caráter",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "recessivo.",
+    "B": "dominante.",
+    "C": "codominante.",
+    "D": "poligênico.",
+    "E": "polialélico."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Genes recessivos",
+    "hereditariedade"
+  ]
+}

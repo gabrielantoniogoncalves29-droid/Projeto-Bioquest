@@ -1,0 +1,23 @@
+{
+  "id": 128,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Em 2002, foi publicado um artigo científico que\r\nrelacionava alterações na produção de hormônios sexuais\r\nde sapos machos expostos à atrazina, um herbicida, com\r\no desenvolvimento anômalo de seus caracteres sexuais\r\nprimários e secundários. Entre os animais sujeitos à\r\ncontaminação, observaram-se casos de hermafroditismo\r\ne desmasculinização da laringe. O estudo em questão\r\ncomparou a concentração de um hormônio específico\r\nno sangue de machos expostos ao agrotóxico com a de\r\noutros machos e fêmeas que não o foram (controles).\r\nOs resultados podem ser vistos na figura.",
+  "enunciadoComplemento": "Com base nas informações do texto, qual é o hormônio\r\ncujas concentrações estão representadas na figura?",
+  "imagem": "0128.png",
+  "imagemAlt": "HAYES, T. B. et al. Hermaphroditic, Demasculinized Frogs After Exposure to the Herbicide Atrazine at Low Ecologically Relevant Doses. Proceedings of the National Academy of Sciences, n. 8, 2002 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Estrogênio.",
+    "B": "Feromônio.",
+    "C": "Testosterona.",
+    "D": "Somatotrofina.",
+    "E": "Hormônio folículo estimulante."
+  },
+  "palavrasChave": [
+    "Sistema endócrino",
+    "Testosterona",
+    "interpretação"
+  ]
+}

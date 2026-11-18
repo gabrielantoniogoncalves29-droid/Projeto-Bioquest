@@ -1,0 +1,23 @@
+{
+  "id": 149,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A síndrome de Down é uma alteração genética associada à trissomia do cromossomo 21, ou seja, o indivíduo possui\r\ntrês cromossomos 21 e não um par, como é normal. Isso ocorre pela união de um gameta contendo um cromossomo 21\r\ncom um gameta possuidor de dois cromossomos 21. Embora, normalmente, as mulheres com a síndrome sejam\r\nestéreis, em 2008, no interior de São Paulo, uma delas deu à luz uma menina sem a síndrome de Down.\r\n\r\nSabendo disso, um jovem casal, ambos com essa síndrome, procura um médico especialista para aconselhamento\r\ngenético porque querem ter um bebê.",
+  "enunciadoComplemento": "O médico informa ao casal que, com relação ao cromossomo 21, os zigotos formados serão",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "todos normais.",
+    "B": "todos tetrassômicos.",
+    "C": "apenas normais ou tetrassômicos.",
+    "D": "apenas trissômicos ou tetrassômicos.",
+    "E": "normais, trissômicos ou tetrassômicos."
+  },
+  "palavrasChave": [
+    "Divisão celular",
+    "Síndrome de Down",
+    "meiose"
+  ]
+}

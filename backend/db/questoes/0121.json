@@ -1,0 +1,24 @@
+{
+  "id": 121,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "De acordo com a Organização Mundial da Saúde,\r\na filariose e a leishmaniose são consideradas doenças\r\ntropicais infecciosas e constituem uma preocupação para\r\na saúde pública por ser alto o índice de mortalidade a\r\nelas associado.",
+  "enunciadoComplemento": "Uma medida profilática comum a essas duas doenças é o(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "incineração do lixo orgânico.",
+    "B": "construção de rede de esgoto.",
+    "C": "uso de vermífugo pela população.",
+    "D": "controle das populações dos vetores.",
+    "E": "consumo de carnes vermelhas bem cozidas."
+  },
+  "palavrasChave": [
+    "Características dos animais",
+    "Vetor",
+    "filariose",
+    "Leishmaniose"
+  ]
+}

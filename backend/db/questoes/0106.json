@@ -1,0 +1,23 @@
+{
+  "id": 106,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O polvo mimético apresenta padrões cromáticos e comportamentos curiosos. Frequentemente, altera a orientação de seus tentáculos, assemelhando-se a diferentes animais. As imagens 1, 3 e 5 mostram polvos mimetizando, respectivamente, um peixe-linguado (2), um peixe-leão (4) e uma serpente-marinha (6).",
+  "enunciadoComplemento": "Do ponto de vista evolutivo, a capacidade apresentada se\r\nestabeleceu porque os polvos",
+  "imagem": "0106.png",
+  "imagemAlt": "NORMAN, M. D.; FINN, J.; TREGENZA, T. Dynamic mimicry in an Indo-Malayan octopus. In: Proceedings of the Royal Society B: Biological Sciences, n. 268, out. 2001. Disponível em: www.researchgate.net. Acesso em: 15 mar. 2014 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Originaram-se do mesmo ancestral que esses animais.",
+    "B": "Passaram por mutações semelhantes às desses organismos.",
+    "C": "Observaram esses animais em seus nichos ecológicos.",
+    "D": "Resultaram de convergência adaptativa com essas espécies.",
+    "E": "Sobreviveram às pressões seletivas com esses comportamentos."
+  },
+  "palavrasChave": [
+    "Síntese evolutiva",
+    "Mimetismo",
+    "seleção natural"
+  ]
+}

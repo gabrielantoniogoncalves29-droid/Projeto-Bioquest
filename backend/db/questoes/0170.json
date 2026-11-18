@@ -1,0 +1,24 @@
+{
+  "id": 170,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os funcionários de um zoológico observaram um aumento\r\nna taxa de mortalidade de aves aquáticas por afogamento.\r\nUm grupo de biólogos analisou o comportamento das aves por\r\nvárias semanas e observou que elas apresentavam dificuldade\r\nde flutuação, por causa do encharcamento das penas com água.",
+  "enunciadoComplemento": "O aumento na taxa de mortalidade dessas aves estava associado\r\na uma redução na",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "dilatação do papo.",
+    "B": "reposição de penas das asas.",
+    "C": "secreção da glândula uropigial.",
+    "D": "formação da membrana natatória.",
+    "E": "largura das cavidades de ossos pneumáticos."
+  },
+  "palavrasChave": [
+    "Características dos animais",
+    "Aves",
+    "penas",
+    "óleo"
+  ]
+}

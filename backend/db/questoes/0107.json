@@ -1,0 +1,24 @@
+{
+  "id": 107,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A sequência de nucleotídeos do RNA mensageiro\r\npresentes em um gene de um fungo, constituída de sete\r\ncódons, está escrita a seguir.\r\n\r\nPesquisadores submeteram a sequência a mutações independentes. Sabe-se que os códons UAG e UAA são terminais, ou seja, indicam a interrupção da tradução.",
+  "enunciadoComplemento": "Qual mutação produzirá a menor proteína?",
+  "imagem": "0107.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Deleção de G no códon 3.",
+    "B": "Substituição de C por U no códon 4.",
+    "C": "Substituição de G por C no códon 6.",
+    "D": "Substituição de A por G no códon 7.",
+    "E": "Deleção dos dois primeiros nucleotídeos no códon 5."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "RNA",
+    "códons",
+    "mutação"
+  ]
+}

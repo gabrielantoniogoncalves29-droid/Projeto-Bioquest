@@ -1,0 +1,23 @@
+{
+  "id": 183,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O ácido úsnico é retirado de liquens e foi testado contra\r\ndiversas espécies, conforme o quadro.",
+  "enunciadoComplemento": "O ácido úsnico mostrou-se mais indicado para o controle da",
+  "imagem": "0183.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "esquistossomose.",
+    "B": "febre amarela.",
+    "C": "coqueluche.",
+    "D": "tuberculose.",
+    "E": "dengue."
+  },
+  "palavrasChave": [
+    "Características dos animais",
+    "esquistossomose",
+    "caramujo"
+  ]
+}

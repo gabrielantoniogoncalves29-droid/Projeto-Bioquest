@@ -1,0 +1,23 @@
+{
+  "id": 138,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "As aves apresentam dois tipos de músculos em seus\r\ncorpos: vermelhos e brancos. Aves migratórias como garças,\r\ngansos e patos selvagens têm os músculos vermelhos bem\r\ndesenvolvidos, com ampla rede de vasos sanguíneos.",
+  "enunciadoComplemento": "Nas viagens por grandes distâncias, tais músculos são\r\nfundamentais, pois favorecem o(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "execução de manobras.",
+    "B": "metabolismo corpóreo elevado.",
+    "C": "manutenção da aerodinâmica.",
+    "D": "deslocamento a grandes velocidades.",
+    "E": "capacidade de voo em grandes altitudes."
+  },
+  "palavrasChave": [
+    "Sistema circulatório",
+    "Mioglobina",
+    "fibras musculares"
+  ]
+}

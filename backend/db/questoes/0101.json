@@ -1,0 +1,23 @@
+{
+  "id": 101,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Pesquisadores coletaram amostras de água de um\r\nrio em pontos diferentes, distantes alguns quilômetros\r\num do outro. Ao longo do rio, há locais de águas limpas,\r\ncomo também locais que recebem descarga de esgoto\r\nde área urbana, e locais onde há decomposição ativa\r\ncom ausência de peixes. Os pesquisadores analisaram\r\ndois parâmetros: oxigênio dissolvido (OD) e demanda\r\nbioquímica de oxigênio (DBO) em cada ponto de coleta\r\nde água, obtendo o gráfico:\r\n\r\nO OD é proveniente da atmosfera e da fotossíntese\r\nque ocorre no curso-d’água e sua concentração é\r\nfunção das variáveis físicas, químicas e bioquímicas\r\nlocais. A DBO é a quantidade de oxigênio consumido\r\npor microrganismos em condições aeróbicas para\r\ndegradar uma determinada quantidade de matéria\r\norgânica, durante um período de tempo, numa\r\ntemperatura de incubação específica.",
+  "enunciadoComplemento": "Qual ponto de amostragem da água do rio está mais\r\npróximo ao local em que o rio recebe despejo de esgoto?",
+  "imagem": "0101.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "E": "5"
+  },
+  "palavrasChave": [
+    "Problemas ambientais",
+    "interpretação",
+    "poluição ambiental"
+  ]
+}

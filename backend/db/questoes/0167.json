@@ -1,0 +1,22 @@
+{
+  "id": 167,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Indústrias farmacêuticas e instituições científicas têm\r\ntrabalhado no desenvolvimento de diferentes vacinas\r\ncontra a covid-19. Em algumas dessas vacinas, a principal\r\nestrutura antigênica é uma proteína de superfície viral\r\nchamada espícula (spike, em inglês). Essa proteína só\r\nexiste em coronavírus, incluindo o SARS-CoV-2. Ela se\r\nliga a receptores de membrana específicos das células\r\nhumanas por um mecanismo do tipo “chave-fechadura”.\r\nDessa forma, os vírus entram nas células, podendo se\r\nmultiplicar e acarretar a doença.",
+  "enunciadoComplemento": "Nessas vacinas, essa proteína viral induz a",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "produção de anticorpos específicos contra os vírus.",
+    "B": "imunidade passiva contra o desenvolvimento da doença.",
+    "C": "alteração genômica para formação da memória imunológica.",
+    "D": "neutralização direta dos vírus presentes na circulação sanguínea.",
+    "E": "modificação dos receptores de membrana específicos para o vírus."
+  },
+  "palavrasChave": [
+    "Sistema imunológico",
+    "Vacinas"
+  ]
+}

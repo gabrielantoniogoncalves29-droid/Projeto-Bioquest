@@ -1,0 +1,24 @@
+{
+  "id": 154,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Uma agricultora, com a intenção de comercializar o\r\nmilho recém-colhido, testou uma forma de preservar o\r\nsabor adocicado do seu produto. O melhor resultado foi\r\nobtido quando ela imergiu as espigas em água fervente\r\ndurante alguns minutos e, em seguida, em água gelada.\r\nCom esse procedimento, parte da glicose do milho não foi\r\ntransformada em amido, mantendo o seu sabor adocicado.",
+  "enunciadoComplemento": "Utilizando esse procedimento, o sabor foi conservado\r\nporque houve",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "desnaturação enzimática pela alta temperatura.",
+    "B": "conversão de nutrientes pela redução de temperatura.",
+    "C": "degradação das reservas nutritivas pelo choque térmico.",
+    "D": "impedimento da entrada de oxigênio pela fervura da água.",
+    "E": "desidratação dos grãos por causa da alteração da temperatura."
+  },
+  "palavrasChave": [
+    "Proteínas",
+    "Desnaturação",
+    "proteína",
+    "enzima"
+  ]
+}

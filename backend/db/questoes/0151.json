@@ -1,0 +1,23 @@
+{
+  "id": 151,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Avaliação de substâncias genotóxicas\r\n\r\nO ensaio de micronúcleos é um teste de avaliação de\r\ngenotoxicidade que associa a presença de micronúcleos\r\n(pequenos núcleos que aparecem próximo aos núcleos\r\ndas células) com lesões genéticas. Os micronúcleos são\r\nfragmentos de DNA encapsulados, provenientes do fuso\r\nmitótico durante a divisão celular.",
+  "enunciadoComplemento": "Os micronúcleos se originam dos(as)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "nucléolos.",
+    "B": "lisossomos.",
+    "C": "ribossomos.",
+    "D": "mitocôndrias.",
+    "E": "cromossomos."
+  },
+  "palavrasChave": [
+    "Núcleo celular",
+    "DNA",
+    "cromossomos"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 95,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Uma população (momento A) sofre isolamento\r\nem duas subpopulações (momento B) por um fator de\r\nisolamento (I). Passado um tempo, essas subpopulações\r\napresentam características fenotípicas e genotípicas que\r\nas distinguem (momento C), representadas na figura\r\npelas tonalidades de cor. O posterior desaparecimento\r\ndo fator de isolamento I pode levar, no momento D, às\r\nsituações D1 e D2.",
+  "enunciadoComplemento": "A representação indica que, no momento D, na situação",
+  "imagem": "0095.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "D1 ocorre um novo fator de isolamento geográfico.",
+    "B": "D1 existe uma única população distribuída em gradiente.",
+    "C": "D1 ocorrem duas populações separadas por isolamento reprodutivo.",
+    "D": "D2 coexistem duas populações com características fenotípicas distintas.",
+    "E": "D2 foram preservadas as mesmas características fenotípicas da população original A."
+  },
+  "palavrasChave": [
+    "Genética de populações",
+    "Especiação",
+    "isolamento reprodutivo"
+  ]
+}

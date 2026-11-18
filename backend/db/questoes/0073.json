@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A utilização de extratos de origem natural tem\r\nrecebido a atenção de pesquisadores em todo o mundo,\r\nprincipalmente nos países em desenvolvimento que\r\nsão altamente acometidos por doenças infecciosas e\r\nparasitárias. Um bom exemplo dessa utilização são os\r\nprodutos de origem botânica que combatem insetos.",
+  "enunciadoComplemento": "O uso desses produtos pode auxiliar no controle da",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "esquistossomose.",
+    "B": "leptospirose.",
+    "C": "leishmaniose.",
+    "D": "hanseníase.",
+    "E": "aids."
+  },
+  "palavrasChave": [
+    "Protozoonose",
+    "Protozoário",
+    "Leishmaniose"
+  ]
+}

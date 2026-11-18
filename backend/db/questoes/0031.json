@@ -2,18 +2,18 @@
   "id": 31,
   "origem": "planilha",
   "resumo": "",
-  "enunciadoTexto": "",
-  "enunciadoComplemento": "",
+  "enunciadoTexto": "O paclitaxel é um triterpeno poli-hidroxilado que foi\r\noriginalmente isolado da casca de Taxus brevifolia, árvore\r\nde crescimento lento e em risco de extinção, mas agora\r\né obtido por rota química semissintética. Esse fármaco\r\né utilizado como agente quimioterápico no tratamento\r\nde tumores de ovário, mama e pulmão. Seu mecanismo\r\nde ação antitumoral envolve sua ligação à tubulina\r\ninterferindo com a função dos microtúbulos.",
+  "enunciadoComplemento": "De acordo com a ação antitumoral descrita, que função\r\ncelular é diretamente afetada pelo paclitaxel?",
   "imagem": "",
   "imagemAlt": "",
   "comentario": "",
   "teoria": [],
   "alternativas": {
-    "A": "",
-    "B": "",
-    "C": "",
-    "D": "",
-    "E": ""
+    "A": "Divisão celular.",
+    "B": "Transporte passivo.",
+    "C": "Equilíbrio osmótico.",
+    "D": "Geração de energia.",
+    "E": "Síntese de proteínas."
   },
   "palavrasChave": [
     "Citoplasma",

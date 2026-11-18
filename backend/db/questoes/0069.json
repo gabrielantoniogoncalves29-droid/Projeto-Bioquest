@@ -1,0 +1,23 @@
+{
+  "id": 69,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Um estudante relatou que o mapeamento do DNA da\r\ncevada foi quase todo concluído e seu código genético\r\ndesvendado. Chamou atenção para o número de genes\r\nque compõem esse código genético e que a semente da\r\ncevada, apesar de pequena, possui um genoma mais\r\ncomplexo que o humano, sendo boa parte desse código\r\nconstituída de sequências repetidas. Nesse contexto,\r\no conceito de código genético está abordado de forma\r\nequivocada.",
+  "enunciadoComplemento": "Cientificamente esse conceito é definido como",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "trincas de nucleotídeos que codificam os aminoácidos.",
+    "B": "localização de todos os genes encontrados em um genoma.",
+    "C": "codificação de sequências repetidas presentes em um genoma.",
+    "D": "conjunto de todos os RNAs mensageiros transcritos em um organismo.",
+    "E": "todas as sequências de pares de bases presentes em um organismo."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "Código genético",
+    "Bases nitrogenadas"
+  ]
+}

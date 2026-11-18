@@ -1,0 +1,24 @@
+{
+  "id": 83,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A eritropoetina (EPO) é um hormônio endógeno\r\nsecretado pelos rins que influencia a maturação dos\r\neritrócitos. Suas formas recombinantes, sintetizadas\r\nem laboratório, têm sido usadas por alguns atletas em\r\nesportes de resistência na busca por melhores resultados.\r\nNo entanto, a administração da EPO recombinante no\r\nesporte foi proibida pelo Comitê Olímpico Internacional\r\ne seu uso considerado doping.",
+  "enunciadoComplemento": "Uma influência que esse doping poderá exercer na\r\nmelhoria da capacidade física desses atletas está\r\nrelacionada ao transporte de",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "lipídios, para aumento do gasto calórico.",
+    "B": "ATP, para aumento da síntese hormonal.",
+    "C": "oxigênio, para aumento da produção de ATP.",
+    "D": "proteínas, para aumento da massa muscular.",
+    "E": "vitamina C, para aumento da integridade dos vasos sanguíneos."
+  },
+  "palavrasChave": [
+    "Sistema circulatório",
+    "Hemácias",
+    "ATP",
+    "oxigênio"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 54,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Visando explicar uma das propriedades da\r\nmembrana plasmática, fusionou-se uma célula de\r\ncamundongo com uma célula humana, formando uma\r\ncélula híbrida. Em seguida, com o intuito de marcar as\r\nproteínas de membrana, dois anticorpos foram inseridos\r\nno experimento, um específico para as proteínas de\r\nmembrana do camundongo e outro para as proteínas de\r\nmembrana humana. Os anticorpos foram visualizados ao\r\nmicroscópio por meio de fluorescência de cores diferentes.",
+  "enunciadoComplemento": "A mudança observada da etapa 3 para a etapa 4 do\r\nexperimento ocorre porque as proteínas",
+  "imagem": "0054.png",
+  "imagemAlt": "ALBERTS, B. et al. Biologia molecular da célula. Porto Alegre: Artes Médicas, 1997 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "movimentam-se livremente no plano da bicamada lipídica.",
+    "B": "permanecem confinadas em determinadas regiões da bicamada.",
+    "C": "auxiliam o deslocamento dos fosfolipídios da membrana plasmática.",
+    "D": "são mobilizadas em razão da inserção de anticorpos.",
+    "E": "são bloqueadas pelos anticorpos."
+  },
+  "palavrasChave": [
+    "Membrana plasmática",
+    "Proteínas",
+    "membrana celular"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 103,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Uma população encontra-se em equilíbrio genético\r\nquanto ao sistema ABO, em que 25% dos indivíduos\r\npertencem ao grupo O e 16%, ao grupo A homozigotos.\r\nConsiderando que: p = frequência de IA; q = frequência\r\nde IB; e r = frequência de i, espera-se encontrar:",
+  "enunciadoComplemento": "A porcentagem de doadores compatíveis para alguém do\r\ngrupo B nessa população deve ser de",
+  "imagem": "0103.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "11%.",
+    "B": "19%.",
+    "C": "26%.",
+    "D": "36%.",
+    "E": "60%."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Grupos sanguíneos",
+    "sistema ABO"
+  ]
+}

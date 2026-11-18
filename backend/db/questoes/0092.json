@@ -1,0 +1,23 @@
+{
+  "id": 92,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O “The Kidney Project” é um projeto realizado por\r\ncientistas que pretendem desenvolver um rim biônico\r\nque executará a maioria das funções biológicas\r\ndo órgão. O rim biônico possuirá duas partes que\r\nincorporam recentes avanços de nanotecnologia,\r\nfiltração de membrana e biologia celular. Esse projeto\r\nsignificará uma grande melhoria na qualidade de vida\r\npara aquelas pessoas que dependem da hemodiálise\r\npara sobrevivência.",
+  "enunciadoComplemento": "O dispositivo criado promoverá diretamente a",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "remoção de ureia.",
+    "B": "excreção de lipídios.",
+    "C": "síntese de vasopressina.",
+    "D": "transformação de amônia.",
+    "E": "fabricação de aldosterona."
+  },
+  "palavrasChave": [
+    "Sistema urinário",
+    "Hemodiálise",
+    "excretas nitrogenadas"
+  ]
+}

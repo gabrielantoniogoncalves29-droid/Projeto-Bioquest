@@ -1,0 +1,23 @@
+{
+  "id": 150,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A produção de ATP depende do gradiente de prótons gerado pela cadeia respiratória. Nessas reações, os elétrons\r\nprovenientes da oxidação do NADH em NAD+ percorrem a cadeia até chegarem à citocromo c oxidase reduzindo o\r\nFe3+ a Fe2+. O oxigênio atua como aceptor final desses elétrons formando água. O cianeto é uma espécie química\r\naltamente tóxica que tem grande afinidade pelo Fe3+. Quando células são expostas ao cianeto, ele se liga ao sítio de\r\nFe3+ da citocromo c oxidase, impedindo a sua conversão em Fe2+ e bloqueando a cadeia respiratória.",
+  "enunciadoComplemento": "Esse bloqueio aumenta a concentração celular de",
+  "imagem": "0150.png",
+  "imagemAlt": "ALBERTS, B. et al. Biologia molecular da célula. Porto Alegre: Artmed, 2010 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "ATP.",
+    "B": "água.",
+    "C": "NADH.",
+    "D": "dióxido de carbono.",
+    "E": "citocromo c oxidase."
+  },
+  "palavrasChave": [
+    "Respiração aeróbica",
+    "interpretação",
+    "Produção de ATP"
+  ]
+}

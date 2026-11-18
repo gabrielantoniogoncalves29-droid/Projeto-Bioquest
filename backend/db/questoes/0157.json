@@ -1,0 +1,24 @@
+{
+  "id": 157,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Com base em testes realizados em ratos, concluiu-se\r\nque os compostos nitrosos são substâncias mutagênicas,\r\nou seja, produzem mutações nas células e possivelmente\r\ncâncer. Esses compostos podem ser obtidos pela reação\r\nentre o nitrito de sódio, que é um conservante adicionado\r\nàs carnes, e o ácido clorídrico. O ácido nitroso produzido\r\nirá reagir com compostos nitrogenados, como as aminas,\r\ndando origem aos compostos nitrosos.",
+  "enunciadoComplemento": "Em qual órgão esse processo será iniciado?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Rim.",
+    "B": "Fígado.",
+    "C": "Intestino.",
+    "D": "Pâncreas.",
+    "E": "Estômago."
+  },
+  "palavrasChave": [
+    "Sistema digestório",
+    "Ácido clorídrico",
+    "pH",
+    "estômago"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": 50,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A figura mostra o funcionamento de uma estação híbrida de geração de eletricidade movida a energia eólica e\r\nbiogás. Essa estação possibilita que a energia gerada no parque eólico seja armazenada na forma de gás hidrogênio,\r\nusado no fornecimento de energia para a rede elétrica comum e para abastecer células a combustível.",
+  "enunciadoComplemento": "Mesmo com ausência de ventos por curtos períodos, essa estação continua abastecendo a cidade onde está\r\ninstalada, pois o(a)",
+  "imagem": "0050.png",
+  "imagemAlt": "Disponível em: www.enertrag.com. Acesso em: 24 abr. 2015 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "planta mista de geração de energia realiza eletrólise para enviar energia à rede de distribuição elétrica.",
+    "B": "hidrogênio produzido e armazenado é utilizado na combustão com o biogás para gerar calor e eletricidade.",
+    "C": "conjunto de turbinas continua girando com a mesma velocidade, por inércia, mantendo a eficiência anterior.",
+    "D": "combustão da mistura biogás-hidrogênio gera diretamente energia elétrica adicional para a manutenção da estação.",
+    "E": "planta mista de geração de energia é capaz de utilizar todo o calor fornecido na combustão para a geração de eletricidade."
+  },
+  "palavrasChave": [
+    "Classificação dos seres vivos",
+    "Classificação",
+    "domínios",
+    "reinos"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 53,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os botos-cinza (Sotalia guianensis), mamíferos da\r\nfamília dos golfinhos, são excelentes indicadores da\r\npoluição das áreas em que vivem, pois passam toda a\r\nsua vida — cerca de 30 anos — na mesma região. Além\r\ndisso, a espécie acumula mais contaminantes em seu\r\norganismo, como o mercúrio, do que outros animais da\r\nsua cadeia alimentar.",
+  "enunciadoComplemento": "Os botos-cinza acumulam maior concentração dessas\r\nsubstâncias porque",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "são animais herbívoros.",
+    "B": "são animais detritívoros.",
+    "C": "são animais de grande porte.",
+    "D": "digerem o alimento lentamente.",
+    "E": "estão no topo da cadeia alimentar."
+  },
+  "palavrasChave": [
+    "Cadeias alimentares",
+    "Bioacumulação",
+    "biomagnificação"
+  ]
+}

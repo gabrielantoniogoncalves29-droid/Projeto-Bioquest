@@ -1,0 +1,22 @@
+{
+  "id": 79,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "No quadro estão apresentadas informações sobre duas estratégias de sobrevivência que podem ser adotadas\r\npor algumas espécies de seres vivos.",
+  "enunciadoComplemento": "Na recuperação de uma área desmatada deveriam ser reintroduzidas primeiramente as espécies que adotam qual\r\nestratégia?",
+  "imagem": "0079.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Estratégia 1, pois essas espécies produzem descendentes pequenos, o que diminui a competição com outras espécies.",
+    "B": "Estratégia 2, pois essas espécies têm uma longa duração da vida, o que favorece a produção de muitos descendentes.",
+    "C": "Estratégia 1, pois essas espécies apresentam um elevado potencial biótico, o que facilita a rápida recolonização da área desmatada.",
+    "D": "Estratégia 2, pois essas espécies estão adaptadas a hábitats mais estáveis, o que corresponde ao ambiente de uma área desmatada.",
+    "E": "Estratégia 2, pois essas espécies apresentam um tamanho populacional constante, o que propicia uma recolonização mais estável da área desmatada."
+  },
+  "palavrasChave": [
+    "Sucessão ecológica",
+    "Organismos prioneiros"
+  ]
+}

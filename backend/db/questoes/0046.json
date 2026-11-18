@@ -1,0 +1,22 @@
+{
+  "id": 46,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Os seres vivos mantêm constantes trocas de matéria\r\ncom o ambiente mediante processos conhecidos como\r\nciclos biogeoquímicos. O esquema representa um dos\r\nciclos que ocorrem nos ecossistemas.",
+  "enunciadoComplemento": "O esquema apresentado corresponde ao ciclo\r\nbiogeoquímico do(a)",
+  "imagem": "0046.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "água.",
+    "B": "fósforo.",
+    "C": "enxofre.",
+    "D": "carbono.",
+    "E": "nitrogênio."
+  },
+  "palavrasChave": [
+    "Fluxo de energia e matéria",
+    "Ciclo do Carbono"
+  ]
+}

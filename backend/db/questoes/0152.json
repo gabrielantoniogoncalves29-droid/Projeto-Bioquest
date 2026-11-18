@@ -1,0 +1,24 @@
+{
+  "id": 152,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O desenvolvimento da biotecnologia e da clonagem\r\ngênica em procariotos fez com que a produção de proteínas\r\nse tornasse mais intensa, rápida e econômica. Para a\r\nprodução de hormônios, enzimas e proteínas de resistência\r\na drogas, uma variação da técnica de reação em cadeia\r\npela polimerase (PCR, na sigla em inglês) utiliza a enzima\r\ntranscriptase reversa (RT-PCR), que sintetiza moléculas\r\nde DNA complementares a partir de fitas de RNA.",
+  "enunciadoComplemento": "Nesse contexto, essa técnica é importante para detectar\r\ngenes",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "expressos.",
+    "B": "plasmidiais.",
+    "C": "bacterianos.",
+    "D": "dominantes.",
+    "E": "autossômicos."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "RNA",
+    "transcrição",
+    "Genes"
+  ]
+}

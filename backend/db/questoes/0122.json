@@ -1,0 +1,24 @@
+{
+  "id": 122,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A Agência Nacional de Vigilância Sanitária (Anvisa)\r\naprovou um produto de terapia gênica no país, indicado\r\npara o tratamento da distrofia hereditária da retina. O\r\nprocedimento é recomendado para crianças acima de\r\n12 meses e adultos com perda de visão causada pela\r\nmutação do gene humano RPE65. O produto, elaborado\r\npor engenharia genética, é composto por um vírus, no qual\r\nfoi inserida uma cópia do gene normal humano RPE65\r\npara corrigir o funcionamento das células da retina.",
+  "enunciadoComplemento": "O sucesso dessa terapia advém do fato de que o produto\r\nfavorecerá a",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "correção do código genético para a tradução da proteína.",
+    "B": "alteração do RNA ribossômico ligado à síntese da proteína.",
+    "C": "produção de mutações benéficas para a correção do problema.",
+    "D": "liberação imediata da proteína normal na região ocular humana.",
+    "E": "expressão do gene responsável pela produção da enzima normal."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "Vírus",
+    "Genes",
+    "Proteínas"
+  ]
+}

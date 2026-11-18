@@ -1,0 +1,22 @@
+{
+  "id": 36,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Suponha que uma doença desconhecida esteja\r\ndizimando um rebanho bovino de uma cidade e alguns\r\nveterinários tenham conseguido isolar o agente causador\r\nda doença, verificando que se trata de um ser unicelular\r\ne procarionte.",
+  "enunciadoComplemento": "Para combater a doença, os veterinários devem\r\nadministrar, nos bovinos contaminados,",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "vacinas.",
+    "B": "antivirais.",
+    "C": "fungicidas.",
+    "D": "vermífugos.",
+    "E": "antibióticos."
+  },
+  "palavrasChave": [
+    "Bacteriose",
+    "Bactérias e antibióticos"
+  ]
+}

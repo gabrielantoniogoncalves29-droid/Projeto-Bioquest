@@ -1,0 +1,24 @@
+{
+  "id": 141,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A leishmaniose visceral é uma zoonose causada por\r\num protozoário do gênero Leishmania que é encontrado em\r\ndiversos tecidos. Ela é transmitida ao homem de forma\r\nindireta, por vetores do ambiente doméstico. O cão é\r\nconsiderado um importante hospedeiro desse protozoário,\r\npodendo ou não apresentar os sintomas da doença, como\r\nperda de peso, anemia, ferimentos na pele, diarreia,\r\nconjuntivite e insuficiência renal. Em uma região que\r\nsofre com alta incidência dessa doença, uma campanha\r\ndo centro de zoonoses buscou verificar a presença desse\r\nprotozoário nos cães para tentar controlar a doença.",
+  "enunciadoComplemento": "Em qual material biológico dos cães a presença desse\r\nprotozoário representa risco de transmissão dessa zoonose?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Urina.",
+    "B": "Saliva.",
+    "C": "Fezes.",
+    "D": "Sangue.",
+    "E": "Secreção ocular."
+  },
+  "palavrasChave": [
+    "Protozoonose",
+    "Leishmaniose",
+    "Vetor",
+    "hospedeiro"
+  ]
+}

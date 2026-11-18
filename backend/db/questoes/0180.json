@@ -1,0 +1,23 @@
+{
+  "id": 180,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Golden Rice, ou arroz dourado, é uma variedade de arroz\r\nenriquecida em betacaroteno, precursor da vitamina A.\r\nFoi desenvolvida para ajudar a combater a doença decorrente\r\nda deficiência dessa vitamina. Para a obtenção dessa variedade\r\nde arroz, foram utilizados métodos de engenharia genética.",
+  "enunciadoComplemento": "Esse alimento contribui para diminuir a carência associada a\r\nqual doença?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Hemofilia.",
+    "B": "Escorbuto.",
+    "C": "Raquitismo.",
+    "D": "Cegueira noturna.",
+    "E": "Anemia perniciosa."
+  },
+  "palavrasChave": [
+    "Vitaminas",
+    "Vitamina A",
+    "cegueira noturna"
+  ]
+}

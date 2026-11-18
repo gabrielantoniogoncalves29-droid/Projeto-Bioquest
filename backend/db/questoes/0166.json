@@ -1,0 +1,24 @@
+{
+  "id": 166,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Utilizando-se um mesmo meio nutritivo, três gêneros\r\nbacterianos diferentes foram submetidos ao cultivo em\r\ntubos de ensaio. Após certo período de crescimento da\r\ncultura bacteriana em condições físico-químicas ideais,\r\nobservou-se que o padrão de distribuição das células\r\n(representadas por pontos na figura) ao longo dos tubos\r\nera diferente em cada um dos casos.",
+  "enunciadoComplemento": "Em relação ao metabolismo energético, os microrganismos\r\npresentes nos tubos 1, 2 e 3 são classificados,\r\nrespectivamente, como",
+  "imagem": "0166.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "anaeróbio facultativo, anaeróbio estrito e aeróbio estrito.",
+    "B": "anaeróbio facultativo, aeróbio estrito e anaeróbio estrito.",
+    "C": "aeróbio estrito, anaeróbio estrito e anaeróbio facultativo.",
+    "D": "anaeróbio estrito, aeróbio estrito e anaeróbio facultativo.",
+    "E": "aeróbio estrito, anaeróbio facultativo e anaeróbio estrito."
+  },
+  "palavrasChave": [
+    "Características das bactérias",
+    "Bacteria",
+    "Respiração aeróbica",
+    "respiração anaeróbica"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": 145,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A tecnologia de vacinas de RNA mensageiro (RNAm)\r\né investigada há anos. Avanços científicos em genética\r\nmolecular permitiram desenvolver uma vacina para\r\ncontrole da pandemia da covid-19 causada pelo vírus de\r\nRNA SARS-CoV-2. A vacina de RNAm tem sequências\r\nde genes do vírus. Entretanto, por ser muito instável, o\r\nRNAm deve ser recoberto por uma capa de lipídios que\r\nevita sua degradação e favorece sua ação. Dessa forma,\r\no RNAm desempenhará sua função específica atuando\r\nno mesmo compartimento celular de sempre.",
+  "enunciadoComplemento": "A imunização produzida por esse tipo de vacina é\r\nalcançada por meio da",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "estimulação de leucócitos induzida pela capa lipídica contendo RNAm.",
+    "B": "atuação do RNAm como sequestrador do vírus para o meio extracelular.",
+    "C": "tradução do RNAm em proteína viral, desencadeando a resposta antigênica.",
+    "D": "competição entre o RNAm vacinal e o RNA viral pelos sítios dos ribossomos.",
+    "E": "incorporação do RNAm viral ao genoma do hospedeiro, gerando novo fenótipo."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "Vacinas",
+    "RNAm",
+    "Proteínas"
+  ]
+}

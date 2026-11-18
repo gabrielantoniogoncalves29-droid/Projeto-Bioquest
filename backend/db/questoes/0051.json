@@ -1,0 +1,23 @@
+{
+  "id": 51,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A epilação a laser (popularmente conhecida como\r\ndepilação a laser) consiste na aplicação de uma fonte de luz\r\npara aquecer e causar uma lesão localizada e controlada\r\nnos folículos capilares. Para evitar que outros tecidos sejam\r\ndanificados, selecionam-se comprimentos de onda que são\r\nabsorvidos pela melanina presente nos pelos, mas que não\r\nafetam a oxi-hemoglobina do sangue e a água dos tecidos\r\nda região em que o tratamento será aplicado. A figura\r\nmostra como é a absorção de diferentes comprimentos de\r\nonda pela melanina, oxi-hemoglobina e água.",
+  "enunciadoComplemento": "Qual é o comprimento de onda, em nm, ideal para a\r\nepilação a laser?",
+  "imagem": "0051.png",
+  "imagemAlt": "MACEDO, F. S.; MONTEIRO, E. O. Epilação com laser e luz intensa pulsada. Revista Brasileira de Medicina. Disponível em: www.moreirajr.com.br.  Acesso em: 4 set. 2015 (adapta",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "400",
+    "B": "700",
+    "C": "1100",
+    "D": "900",
+    "E": "500"
+  },
+  "palavrasChave": [
+    "Sistema circulatório",
+    "Plaquetas",
+    "hemofilia."
+  ]
+}

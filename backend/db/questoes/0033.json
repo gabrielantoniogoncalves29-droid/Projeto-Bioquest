@@ -1,0 +1,22 @@
+{
+  "id": 33,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Em 1950, Erwin Chargaff e colaboradores estudavam\r\na composição química do DNA e observaram que a\r\nquantidade de adenina (A) é igual à de timina (T), e a\r\nquantidade de guanina (G) é igual à de citosina (C) na\r\ngrande maioria das duplas fitas de DNA. Em outras\r\npalavras, esses cientistas descobriram que o total de\r\npurinas (A + G) e o total de pirimidinas (C + T) eram iguais.\r\nUm professor trabalhou esses conceitos em sala de aula\r\ne apresentou como exemplo uma fita simples de DNA\r\ncom 20 adeninas, 25 timinas, 30 guaninas e 25 citosinas.",
+  "enunciadoComplemento": "Qual a quantidade de cada um dos nucleotídeos, quando\r\nconsiderada a dupla fita de DNA formada pela fita simples\r\nexemplificada pelo professor?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Adenina: 20; Timina: 25; Guanina: 25; Citosina: 30.",
+    "B": "Adenina: 25; Timina: 20; Guanina: 45; Citosina: 45.",
+    "C": "Adenina: 45; Timina: 45; Guanina: 55; Citosina: 55.",
+    "D": "Adenina: 50; Timina: 50; Guanina: 50; Citosina: 50.",
+    "E": "Adenina: 55; Timina: 55; Guanina: 45; Citosina: 45."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "Combinação nos nucleotídeos"
+  ]
+}

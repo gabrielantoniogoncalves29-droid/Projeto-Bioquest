@@ -1,0 +1,23 @@
+{
+  "id": 84,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Na piscicultura, costumam-se usar larvas de\r\nArtemia (crustáceo) para alimentar larvas de peixes.\r\nOvos de Artemia são colocados em garrafas com água\r\nsalgada e, sob condições ótimas de temperatura, luz e\r\noxigênio, eles eclodem, liberando suas larvas, também\r\nconhecidas como náuplios. Para recolher os náuplios,\r\ncoloca-se uma lâmpada branca fluorescente na boca da\r\ngarrafa e estes começam a subir em direção ao gargalo.",
+  "enunciadoComplemento": "Esse comportamento das artêmias é chamado de",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "geotropismo positivo.",
+    "B": "fototropismo positivo.",
+    "C": "hidrotropismo negativo.",
+    "D": "termotropismo negativo.",
+    "E": "quimiotropismo negativo."
+  },
+  "palavrasChave": [
+    "Conceitos de Ecologia",
+    "Fototropismo",
+    "Peixes"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 87,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A fluidez da membrana celular é caracterizada pela\r\ncapacidade de movimento das moléculas componentes\r\ndessa estrutura. Os seres vivos mantêm essa\r\npropriedade de duas formas: controlando a temperatura\r\ne/ou alterando a composição lipídica da membrana.\r\nNeste último aspecto, o tamanho e o grau de insaturação\r\ndas caudas hidrocarbônicas dos fosfolipídios, conforme\r\nrepresentados na figura, influenciam significativamente\r\na fluidez. Isso porque quanto maior for a magnitude das\r\ninterações entre os fosfolipídios, menor será a fluidez da\r\nmembrana.",
+  "enunciadoComplemento": "Qual das bicamadas lipídicas apresentadas possui\r\nmaior fluidez?",
+  "imagem": "0087.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "I",
+    "B": "II",
+    "C": "III",
+    "D": "IV",
+    "E": "V"
+  },
+  "palavrasChave": [
+    "Membrana plasmática",
+    "Fosfolipídeos",
+    "ácidos graxos"
+  ]
+}

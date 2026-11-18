@@ -1,0 +1,25 @@
+{
+  "id": 168,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A fitorremediação é uma técnica que utiliza plantas para a remediação de ambientes contaminados. A descontaminação\r\nde solos pode ocorrer por descarte, absorção e metabolização, imobilização, extração ou volatilização do poluente,\r\nconforme representado na figura.",
+  "enunciadoComplemento": "O método que retira o mercúrio de uma área contaminada, impedindo sua entrada na cadeia alimentar, é a",
+  "imagem": "0168.png",
+  "imagemAlt": "LUIZ, E. P. Avaliação dos métodos de fitorremediação [...] na remoção de chumbo, cobre e zinco. São Paulo: UFABC, 2016 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "fitoestabilização, ficando o mercúrio disponível sob a superfície das raízes das plantas.",
+    "B": "fitovolatilização, permitindo a retirada do mercúrio por plantas e a sua transferência para uma forma volátil.",
+    "C": "fitodegradação, com a degradação do mercúrio promovida por enzimas, contidas nas raízes, formando espécies menos tóxicas.",
+    "D": "fitoestimulação, com a remoção do mercúrio pela ação de microrganismos presentes nas raízes que absorvem e imobilizam o metal.",
+    "E": "fitoextração, em que as plantas que acumulam o mercúrio são cultivadas nesses locais, e a biomassa rica no metal é retirada após o crescimento."
+  },
+  "palavrasChave": [
+    "Problemas ambientais",
+    "Biorremediação",
+    "descontaminação ambiental",
+    "poluição",
+    "solos"
+  ]
+}

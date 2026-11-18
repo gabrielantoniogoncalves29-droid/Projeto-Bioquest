@@ -1,0 +1,23 @@
+{
+  "id": 59,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A retina é um tecido sensível à luz, localizado na parte\r\nposterior do olho, onde ocorre o processo de formação\r\nde imagem. Nesse tecido, encontram-se vários tipos\r\ncelulares específicos. Um desses tipos celulares são os\r\ncones, os quais convertem os diferentes comprimentos\r\nde onda da luz visível em sinais elétricos, que são\r\ntransmitidos pelo nervo óptico até o cérebro.",
+  "enunciadoComplemento": "Em relação à visão, a degeneração desse tipo celular irá",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "comprometer a capacidade de visão em cores.",
+    "B": "impedir a projeção dos raios luminosos na retina.",
+    "C": "provocar a formação de imagens invertidas na retina.",
+    "D": "causar dificuldade de visualização de objetos próximos.",
+    "E": "acarretar a perda da capacidade de alterar o diâmetro da pupila."
+  },
+  "palavrasChave": [
+    "Sistema sensorial",
+    "Olho humano",
+    "retina"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 61,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "A terapia celular tem sido amplamente divulgada\r\ncomo revolucionária, por permitir a regeneração de\r\ntecidos a partir de células novas. Entretanto, a técnica\r\nde se introduzirem novas células em um tecido, para o\r\ntratamento de enfermidades em indivíduos, já era aplicada\r\nrotineiramente em hospitais.",
+  "enunciadoComplemento": "A que técnica refere-se o texto?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Vacina.",
+    "B": "Biópsia.",
+    "C": "Hemodiálise.",
+    "D": "Quimioterapia.",
+    "E": "Transfusão de sangue."
+  },
+  "palavrasChave": [
+    "Genética clássica",
+    "Transfusão de sangue"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 37,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O eletrocardiograma, exame utilizado para avaliar\r\no estado do coração de um paciente, trata-se do\r\nregistro da atividade elétrica do coração ao longo de\r\num certo intervalo de tempo. A figura representa o\r\neletrocardiograma de um paciente adulto, descansado,\r\nnão fumante, em um ambiente com temperatura\r\nagradável. Nessas condições, é considerado normal um\r\nritmo cardíaco entre 60 e 100 batimentos por minuto.",
+  "enunciadoComplemento": "Com base no eletrocardiograma apresentado, identifica-se\r\nque a frequência cardíaca do paciente é",
+  "imagem": "0037.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "normal.",
+    "B": "acima do valor ideal.",
+    "C": "abaixo do valor ideal.",
+    "D": "próxima do limite inferior.",
+    "E": "próxima do limite superior."
+  },
+  "palavrasChave": [
+    "Sistema circulatório",
+    "Análise de eletrocardiograma"
+  ]
+}

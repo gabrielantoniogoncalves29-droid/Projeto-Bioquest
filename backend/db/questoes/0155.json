@@ -1,0 +1,24 @@
+{
+  "id": 155,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "As autoridades sanitárias brasileiras têm se preocupado\r\nmuito nos últimos anos com o aumento da ocorrência\r\nde doenças transmitidas por mosquitos, principalmente\r\narboviroses como chikungunya e zika, que se tornaram\r\nepidêmicas ou endêmicas em áreas urbanas. Parte de\r\numa análise da relação entre a urbanização e a incidência\r\ndessas doenças está representada no fluxograma.",
+  "enunciadoComplemento": "Nesse contexto, como a urbanização está causando\r\nriscos à saúde humana?",
+  "imagem": "0155.png",
+  "imagemAlt": "ALMEIDA, L. S.; COTA, A. L. S.; RODRIGUES, D. F. Saneamento, arboviroses e determinantes ambientais: impactos na saúde urbana. Ciência & Saúde Coletiva, v. 25, n. 10, 2020 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Disseminando verminoses.",
+    "B": "Causando a eutrofização de lagoas.",
+    "C": "Aumentando a chance de contato com coliformes.",
+    "D": "Diminuindo a população de predadores aquáticos.",
+    "E": "Aproximando as pessoas das áreas de ocorrência de mosquitos."
+  },
+  "palavrasChave": [
+    "Vírus e saúde humana",
+    "Vetor",
+    "mosquito",
+    "saúde"
+  ]
+}

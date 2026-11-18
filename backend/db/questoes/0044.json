@@ -1,0 +1,22 @@
+{
+  "id": 44,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O ambiente marinho pode ser contaminado\r\ncom rejeitos radioativos provenientes de testes com\r\narmas nucleares. Os materiais radioativos podem se\r\nacumular nos organismos. Por exemplo, o estrôncio-90\r\né quimicamente semelhante ao cálcio e pode substituir\r\nesse elemento nos processos biológicos.\r\nUm pesquisador analisou as seguintes amostras\r\ncoletadas em uma região marinha próxima a um local\r\nque manipula o estrôncio radioativo: coluna vertebral\r\nde tartarugas, concha de moluscos, endoesqueleto de\r\nouriços-do-mar, sedimento de recife de corais e tentáculos\r\nde polvo.",
+  "enunciadoComplemento": "Em qual das amostras analisadas a radioatividade foi\r\nmenor?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Concha de moluscos.",
+    "B": "Tentáculos de polvo.",
+    "C": "Sedimento de recife de corais.",
+    "D": "Coluna vertebral de tartarugas.",
+    "E": "Endoesqueleto de ouriços-do-mar."
+  },
+  "palavrasChave": [
+    "Características dos animais",
+    "Fisiologia e composição dos seres vivos"
+  ]
+}

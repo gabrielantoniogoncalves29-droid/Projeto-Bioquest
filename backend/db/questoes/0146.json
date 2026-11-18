@@ -1,0 +1,24 @@
+{
+  "id": 146,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Na fertilização in vitro, espermatozoides são adicionados\r\naos gametas femininos retirados de uma mulher. Após o\r\nperíodo de incubação, a fecundação é favorecida pela ação\r\nde enzimas. Em um procedimento realizado, observou-se\r\nque nenhum dos gametas femininos foi fertilizado e,\r\nposteriormente, verificou-se que havia sido adicionado,\r\nequivocadamente, um coquetel de inibidores das enzimas do\r\nacrossomo, no lugar de um dos nutrientes constituintes do\r\nmeio de cultura.",
+  "enunciadoComplemento": "O coquetel de inibidores impediu o(a)",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "formação do pronúcleo masculino.",
+    "B": "início da divisão mitótica do zigoto.",
+    "C": "término da segunda divisão meiótica do ovócito.",
+    "D": "passagem do espermatozoide pela corona radiata e zona pelúcida.",
+    "E": "fusão das membranas plasmáticas do ovócito e do espermatozoide."
+  },
+  "palavrasChave": [
+    "Reprodução humana",
+    "Fecundação",
+    "acrossoma",
+    "enzimas"
+  ]
+}

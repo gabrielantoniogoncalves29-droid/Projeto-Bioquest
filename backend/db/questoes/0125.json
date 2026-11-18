@@ -1,0 +1,23 @@
+{
+  "id": 125,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Diversas substâncias são empregadas com a intenção\r\nde incrementar o desempenho esportivo de atletas de\r\nalto nível. O chamado doping sanguíneo, por exemplo,\r\npela utilização da eritropoietina, é proibido pelas principais\r\nfederações de esportes no mundo. A eritropoietina é um\r\nhormônio produzido pelos rins e fígado e sua principal ação\r\né regular o processo de eritropoiese. Seu uso administrado\r\nintravenosamente em quantidades superiores àquelas\r\npresentes naturalmente no organismo permite que o\r\nindivíduo aumente a sua capacidade de realização de\r\nexercícios físicos.",
+  "enunciadoComplemento": "Esse tipo de doping está diretamente relacionado ao\r\naumento da",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "frequência cardíaca.",
+    "B": "capacidade pulmonar.",
+    "C": "massa muscular do indivíduo.",
+    "D": "atividade anaeróbica da musculatura.",
+    "E": "taxa de transporte de oxigênio pelo sangue."
+  },
+  "palavrasChave": [
+    "Sistema circulatório",
+    "Hemácias",
+    "medula óssea"
+  ]
+}

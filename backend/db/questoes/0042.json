@@ -1,0 +1,22 @@
+{
+  "id": 42,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Em um hospital, acidentalmente, uma funcionária\r\nficou exposta a alta quantidade de radiação liberada\r\npor um aparelho de raios X em funcionamento.\r\nPosteriormente, ela engravidou e seu filho nasceu com\r\ngrave anemia. Foi verificado que a criança apresentava\r\na doença devido à exposição anterior da mãe à radiação.",
+  "enunciadoComplemento": "O que justifica, nesse caso, o aparecimento da anemia\r\nna criança?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "A célula-ovo sofreu uma alteração genética.",
+    "B": "As células somáticas da mãe sofreram uma mutação.",
+    "C": "A célula gamética materna que foi fecundada sofreu uma mutação.",
+    "D": "As hemácias da mãe que foram transmitidas à criança não eram normais.",
+    "E": "As células hematopoiéticas sofreram alteração do número de cromossomos."
+  },
+  "palavrasChave": [
+    "Genética molecular",
+    "Mutações gênicas por exposição à radiação"
+  ]
+}

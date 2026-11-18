@@ -1,0 +1,23 @@
+{
+  "id": 160,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O Cerrado e a Amazônia abrigam grande número de\r\nserpentes popularmente conhecidas como cobras-corais.\r\nNa Amazônia predominam as corais-verdadeiras, que\r\nsão peçonhentas, enquanto no Cerrado prevalecem as\r\nfalsas-corais, que não possuem peçonha. Essas espécies\r\napresentam um padrão de coloração muito semelhante.\r\nEssa similaridade traz uma vantagem tanto para as corais\r\nfalsas como para as verdadeiras.\r\n\r\nNas fotografias, são apresentados exemplos dessas\r\nserpentes: uma coral-verdadeira e uma falsa-coral.",
+  "enunciadoComplemento": "Qual é a vantagem dessa similaridade para as falsas-corais?",
+  "imagem": "0160.png",
+  "imagemAlt": "SILVA, L. C.; COTTA, G. A.; RESENDE, F. C. Cobra-coral: aplicativo educativo para reconhecimento das cobras-corais do estado de Minas Gerais, Brasil. Herpetologia Brasileira, n. 1, 2021 (adaptado).",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Facilita a captura de presas.",
+    "B": "Diminui a competição por recursos.",
+    "C": "Possibilita a geração de indivíduos híbridos.",
+    "D": "Reduz a possibilidade de sofrerem predação.",
+    "E": "Otimiza o encontro de parceiros reprodutivos."
+  },
+  "palavrasChave": [
+    "Relações ecológicas",
+    "seleção natural",
+    "adaptação"
+  ]
+}

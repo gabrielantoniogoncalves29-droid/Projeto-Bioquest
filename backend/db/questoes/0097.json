@@ -1,0 +1,23 @@
+{
+  "id": 97,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Na indústria farmacêutica, é muito comum o emprego\r\nde substâncias de revestimento em medicamentos de uso\r\noral, pois trazem uma série de benefícios como alteração de\r\nsabor em medicamentos que tenham gosto ruim, melhoria\r\nda assimilação do composto, entre outras ações. Alguns\r\ncompostos poliméricos à base do polissacarídeo celulose\r\nsão utilizados para garantir que o fármaco somente seja\r\nliberado quando em contato com soluções aquosas cujo pH\r\nse encontre próximo da faixa da neutralidade.",
+  "enunciadoComplemento": "Qual é a finalidade do uso desse revestimento à base de\r\ncelulose?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Diminuir a absorção do princípio ativo no intestino.",
+    "B": "Impedir que o fármaco seja solubilizado no intestino.",
+    "C": "Garantir que o fármaco não seja afetado pelas secreções gástricas.",
+    "D": "Permitir a liberação do princípio ativo pela ação das amilases salivares.",
+    "E": "Facilitar a liberação do fármaco pela ação dos sais biliares sobre o revestimento."
+  },
+  "palavrasChave": [
+    "Sistema digestório",
+    "pH",
+    "suco gástrico"
+  ]
+}

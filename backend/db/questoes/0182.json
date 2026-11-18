@@ -1,0 +1,22 @@
+{
+  "id": 182,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Plantas e algas realizam fotossíntese oxigênica para\r\nsíntese de matéria orgânica e, para isso, utilizam trifosfato de\r\nadenosina (ATP) e nicotinamida adenina dinucleotídeo fosfato\r\nreduzido (NADPH). Já algumas bactérias fotossintetizantes\r\nnão apresentam cloroplasto e clorofila, mas um pigmento\r\ndenominado bacterioclorofila. Esses procariotos realizam a\r\nfotossíntese anoxigênica, um processo de síntese de matéria\r\norgânica utilizando o gás carbônico (CO2) e o gás sulfídrico (H2S).",
+  "enunciadoComplemento": "Na fotossíntese oxigênica, qual composto desempenha função\r\nanáloga à do H2S?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "ATP.",
+    "B": "NADPH.",
+    "C": "Oxigênio.",
+    "D": "Clorofila.",
+    "E": "Água."
+  },
+  "palavrasChave": [
+    "Fisiologia das angiospermas",
+    "fotossíntese"
+  ]
+}

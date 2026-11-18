@@ -1,0 +1,23 @@
+{
+  "id": 115,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Com o objetivo de identificar a melhor espécie produtora de madeira para construção (com resistência mecânica e à degradação), foram analisadas as estruturas anatômicas de cinco espécies, conforme o quadro.",
+  "enunciadoComplemento": "Qual espécie corresponde ao objetivo proposto?",
+  "imagem": "0115.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "E": "5"
+  },
+  "palavrasChave": [
+    "Anatomia das angiospermas",
+    "Xilema",
+    "caule"
+  ]
+}

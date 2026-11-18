@@ -1,0 +1,22 @@
+{
+  "id": 105,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "Em uma pesquisa estão sendo testados\r\ncinco quimioterápicos quanto à sua capacidade\r\nantitumoral. No entanto, para o tratamento de\r\npacientes, sabe-se que é necessário verificar também\r\no quanto cada composto agride células normais. Para o\r\nexperimento, partiu-se de cultivos de células tumorais\r\n(colunas escuras na figura) e células normais (colunas\r\nclaras) com o mesmo número de células iniciais.\r\nDois grupos-controle não receberam quimioterápicos:\r\ncontrole de células tumorais (CT) e de células normais\r\n(CN). As colunas I, II, III, IV e V correspondem aos\r\ngrupos tratados com os cinco compostos. O número de\r\ncélulas viáveis após os tratamentos está representado\r\npelas colunas.",
+  "enunciadoComplemento": "Qual quimioterápico deve ser escolhido para tratamento\r\ndesse tipo de tumor?",
+  "imagem": "0105.png",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "I",
+    "B": "II",
+    "C": "III",
+    "D": "IV",
+    "E": "V"
+  },
+  "palavrasChave": [
+    "Genética e biotecnologia",
+    "Análise da eficácia de quimioterápicos"
+  ]
+}

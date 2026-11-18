@@ -1,0 +1,23 @@
+{
+  "id": 135,
+  "origem": "planilha",
+  "resumo": "",
+  "enunciadoTexto": "O protozoário Trypanosoma cruzi, causador da\r\ndoença de Chagas, pode ser a nova arma da medicina\r\ncontra o câncer. Pesquisadores brasileiros conseguiram\r\ncriar uma vacina contra a doença usando uma variação\r\ndo protozoário incapaz de desencadear a patologia (não\r\npatogênico). Para isso, realizaram uma modificação\r\ngenética criando um T. cruzi capaz de produzir também\r\nmoléculas fabricadas pelas células tumorais. Quando\r\no organismo inicia o combate ao protozoário, entra em\r\ncontato também com a molécula tumoral, que passa a ser\r\nvista também pelo sistema imune como um indicador de\r\ncélulas do protozoário. Depois de induzidas as defesas,\r\nestas passam a destruir todas as células com a molécula\r\ntumoral, como se lutassem apenas contra o protozoário.",
+  "enunciadoComplemento": "Qual o mecanismo utilizado no experimento para enganar\r\nas células de defesa, fazendo com que ataquem o tumor?",
+  "imagem": "",
+  "imagemAlt": "",
+  "comentario": "",
+  "teoria": [],
+  "alternativas": {
+    "A": "Autoimunidade.",
+    "B": "Hipersensibilidade.",
+    "C": "Ativação da resposta inata.",
+    "D": "Apresentação de antígeno específico.",
+    "E": "Desencadeamento de processo anti-inflamatório."
+  },
+  "palavrasChave": [
+    "Sistema imunológico",
+    "Antígeno",
+    "anticorpo"
+  ]
+}
