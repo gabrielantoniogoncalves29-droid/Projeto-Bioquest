@@ -2,7 +2,7 @@ import { db } from '../db.js'
 import { config } from '../config.js'
 import { conflito, naoEncontrado, requisicaoInvalida } from '../utils/erros.js'
 import { resumirTexto } from '../utils/texto.js'
-import { filtrarEOrdenar } from '../utils/filtrarQuestoes.js'
+import { filtrarQuestoes } from '../utils/filtrarQuestoes.js'
 
 const CARD_SQL = `
   SELECT q.serial, q.id, q.ano,
@@ -87,10 +87,10 @@ function idsMarcados(tabela, usuarioId) {
 }
 
 
-export function listarCards(filtros = {}, usuarioId = config.usuarioDemoId) {
+export function listarCards(filtros = {}, usuarioId = null) {
   const cards = montarCards(db.prepare(`${CARD_SQL} ORDER BY q.serial`).all())
 
-  const contexto = filtros.estados?.length
+  const contexto = filtros.estados?.length && usuarioId
     ? {
         respondidas: idsMarcados('respostas', usuarioId),
         salvas: idsMarcados('questoes_salvas', usuarioId),
@@ -98,7 +98,11 @@ export function listarCards(filtros = {}, usuarioId = config.usuarioDemoId) {
       }
     : {}
 
-  return filtrarEOrdenar(cards, filtros, contexto)
+  return filtrarQuestoes(cards, filtros, contexto)
+}
+
+export function listarIds() {
+  return db.prepare('SELECT id FROM questoes ORDER BY serial').all().map(linha => linha.id)
 }
 
 export function cardsPorIds(ids) {
@@ -109,10 +113,6 @@ export function cardsPorIds(ids) {
   const porId = new Map(montarCards(linhas).map(card => [card.id, card]))
 
   return ids.map(id => porId.get(id)).filter(Boolean)
-}
-
-export function listarIds(filtros = {}, usuarioId = config.usuarioDemoId) {
-  return listarCards(filtros, usuarioId).map(card => card.id)
 }
 
 export function calcularTaxaAcerto(questaoId) {
@@ -152,9 +152,8 @@ export function obterQuestao(id) {
 
   if (!q) throw naoEncontrado('Questão não encontrada')
 
-  // Sem gabarito: ele só sai em /explicacao e na correção (/resposta).
   const alternativas = db.prepare(`
-    SELECT letra, texto FROM alternativas WHERE questao_id = ? ORDER BY letra
+    SELECT letra, texto, imagem FROM alternativas WHERE questao_id = ? ORDER BY letra
   `).all(id)
 
   return {
@@ -199,16 +198,24 @@ export function obterQuestao(id) {
   }
 }
 
-export function obterExplicacao(id) {
+export function obterExplicacao(id, usuarioId = null) {
   const q = db.prepare(`
     SELECT resposta, comentario, teoria FROM questoes WHERE id = ?
   `).get(id)
 
   if (!q) throw naoEncontrado('Questão não encontrada')
 
+  const semAlternativas = !db.prepare('SELECT 1 FROM alternativas WHERE questao_id = ?').get(id)
+
+  const jaRespondeu = usuarioId !== null
+    && Boolean(db.prepare('SELECT 1 FROM respostas WHERE usuario_id = ? AND questao_id = ?').get(usuarioId, id))
+
+  const liberada = jaRespondeu || semAlternativas
+
   return {
-    resposta: q.resposta,
-    comentario: q.comentario,
+    liberada,
+    resposta: liberada ? q.resposta : null,
+    comentario: liberada ? q.comentario : '',
     teoria: JSON.parse(q.teoria)
   }
 }
@@ -218,7 +225,7 @@ export function garantirQuestao(id) {
   if (!existe) throw naoEncontrado('Questão não encontrada')
 }
 
-export function responder(usuarioId, questaoId, alternativa) {
+function avaliarResposta(questaoId, alternativa) {
   const q = db.prepare(`
     SELECT resposta, comentario FROM questoes WHERE id = ?
   `).get(questaoId)
@@ -243,20 +250,42 @@ export function responder(usuarioId, questaoId, alternativa) {
 
   if (!existe) throw requisicaoInvalida('Alternativa inexistente para esta questão')
 
+  return q
+}
+
+export function corrigirSemConta(questaoId, alternativa) {
+  const q = avaliarResposta(questaoId, alternativa)
+
+  return {
+    correta: alternativa === q.resposta,
+    resposta: q.resposta,
+    comentario: q.comentario
+  }
+}
+
+export function responder(usuarioId, questaoId, alternativa) {
+  const q = avaliarResposta(questaoId, alternativa)
+
   const correta = alternativa === q.resposta ? 1 : 0
 
-  db.prepare(`
-    INSERT INTO respostas (usuario_id, questao_id, alternativa, correta)
-    VALUES (?, ?, ?, ?)
-    ON CONFLICT(usuario_id, questao_id) DO UPDATE SET
-      alternativa = excluded.alternativa,
-      correta = excluded.correta,
-      atualizado_em = datetime('now')
-  `).run(usuarioId, questaoId, alternativa, correta)
+  const acertos = db.transaction(() => {
+    db.prepare(`
+      INSERT INTO respostas (usuario_id, questao_id, alternativa, correta)
+      VALUES (?, ?, ?, ?)
+      ON CONFLICT(usuario_id, questao_id) DO UPDATE SET
+        alternativa = excluded.alternativa,
+        correta = excluded.correta,
+        atualizado_em = datetime('now')
+    `).run(usuarioId, questaoId, alternativa, correta)
 
-  const { acertos } = db.prepare(`
-    SELECT COUNT(*) AS acertos FROM respostas WHERE usuario_id = ? AND correta = 1
-  `).get(usuarioId)
+    db.prepare(`
+      INSERT INTO tentativas (usuario_id, questao_id, alternativa, correta) VALUES (?, ?, ?, ?)
+    `).run(usuarioId, questaoId, alternativa, correta)
+
+    return db.prepare(`
+      SELECT COUNT(*) AS acertos FROM respostas WHERE usuario_id = ? AND correta = 1
+    `).get(usuarioId).acertos
+  })()
 
   return {
     correta: correta === 1,

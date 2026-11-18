@@ -11,8 +11,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
   const questoes = ref([])
   const carregando = ref(false)
 
-  // Filtro, pesquisa e ordenação usam a mesma regra do backend
-  // (utils/filtrarQuestoes.js), sempre por ids.
   const questoesFiltradas = computed(() => {
 
     const filtrosStore = useQuestoesFiltrosStore()
@@ -40,8 +38,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
   const totalQuestoes = computed(() => questoesFiltradas.value.length)
 
-  // Lista exatamente como aparece na página inicial (filtrada e ordenada).
-  // É dela que sai o vetor de navegação do resolver.
   const questoesOrdenadas = computed(() => {
 
     const filtrosStore = useQuestoesFiltrosStore()
@@ -56,7 +52,6 @@ export const useQuestoesStore = defineStore('questoes', () => {
 
     try {
 
-      // Taxonomia e perfil (para o filtro de estado) carregam junto com a lista.
       const [lista] = await Promise.all([
         buscarQuestoes(forcar),
         useTaxonomiaStore().carregar(),

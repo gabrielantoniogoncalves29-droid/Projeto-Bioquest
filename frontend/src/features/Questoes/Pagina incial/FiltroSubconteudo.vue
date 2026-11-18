@@ -437,43 +437,45 @@ const todosSelecionados = computed(() => {
 @media (max-width: 768px) {
 
   .cabecalho {
-
-    padding: 12px 14px;
-
+    min-height: 56px;
+    padding: 8px 14px;
+    font-family: inherit;
+    text-align: left;
   }
 
   .conteudo {
-
-    padding: 14px;
-
+    padding: 12px;
   }
 
   .lista-subconteudos {
-
-    max-height: 400px;
-
+    max-height: none;
+    overflow: visible;
   }
 
-}
-
-@media (max-width: 480px) {
-
   .opcao {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
 
-    font-size: 14px;
-
-    padding: 10px 8px;
-
+  .opcao input {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
   }
 
   .nome-conteudo {
-
     font-size: 14px;
+    line-height: 1.35;
+  }
 
+  .cabecalho:focus-visible {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
   }
 
 }
-
 
 [data-tema="escuro"] .nome-conteudo{
   color: var(--cor-primaria-texto);

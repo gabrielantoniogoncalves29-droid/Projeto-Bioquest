@@ -4,8 +4,14 @@ import {
     buscarPerfil,
     atualizarPerfil,
     enviarFotoPerfil,
-    excluirDadosDoPerfil
+    excluirDadosDoPerfil,
+    solicitarTrocaDeEmail,
+    apagarRespostas,
+    apagarSalvas,
+    apagarRevisar
 } from "@/services/perfil"
+import { solicitarRecuperacaoSenha } from "@/services/auth"
+import { lerToken, mensagemDeErro } from "@/services/api"
 import {
     salvarQuestaoNoServidor,
     removerQuestaoSalvaNoServidor,
@@ -21,6 +27,8 @@ export const usePerfilStore = defineStore("perfil", () => {
     const nome = ref("")
     const email = ref("")
     const foto = ref(null)
+    const temSenha = ref(true)
+    const emailPendente = ref("")
 
     const editandoPerfil = ref(false)
     const salvandoPerfil = ref(false)
@@ -29,6 +37,7 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     const excluindoConta = ref(false)
     const excluindoContaConfirmacao = ref(false)
+    const erroExclusao = ref("")
 
     const questoesRevisarLista = ref([])
 
@@ -71,6 +80,8 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     async function carregarPerfil(forcar = false) {
 
+        if (!lerToken()) return
+
         if (carregando.value) return
 
         if (carregado.value && !forcar) return
@@ -84,6 +95,7 @@ export const usePerfilStore = defineStore("perfil", () => {
             nome.value = dados.nome
             email.value = dados.email
             foto.value = dados.foto
+            temSenha.value = dados.temSenha
 
             questoesSalvasLista.value = dados.questoesSalvas
             questoesResolvidasLista.value = dados.questoesResolvidas
@@ -97,6 +109,27 @@ export const usePerfilStore = defineStore("perfil", () => {
             carregando.value = false
 
         }
+
+    }
+
+    function limpar() {
+
+        nome.value = ""
+        email.value = ""
+        foto.value = null
+        temSenha.value = true
+        emailPendente.value = ""
+        erroPerfil.value = ""
+        erroExclusao.value = ""
+
+        questoesSalvasLista.value = []
+        questoesResolvidasLista.value = []
+        questoesRevisarLista.value = []
+        acertos.value = 0
+
+        editandoPerfil.value = false
+        excluindoContaConfirmacao.value = false
+        carregado.value = false
 
     }
 
@@ -154,29 +187,76 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     }
 
-    async function salvarEdicaoPerfil({ nome: novoNome, email: novoEmail }) {
+    async function salvarEdicaoPerfil({ nome: novoNome, email: novoEmail, senha }) {
 
         salvandoPerfil.value = true
         erroPerfil.value = ""
+        emailPendente.value = ""
 
         try {
 
-            const dados = await atualizarPerfil({ nome: novoNome, email: novoEmail })
+            if (novoNome !== nome.value) {
 
-            nome.value = dados.nome
-            email.value = dados.email
+                const dados = await atualizarPerfil({ nome: novoNome })
+
+                nome.value = dados.nome
+
+            }
+
+            if (novoEmail.toLowerCase() !== email.value.toLowerCase()) {
+
+                await solicitarTrocaDeEmail({ novoEmail, senha: temSenha.value ? senha : undefined })
+
+                emailPendente.value = novoEmail
+
+            }
 
             editandoPerfil.value = false
 
+            return true
+
         } catch (erro) {
 
-            erroPerfil.value = erro.response?.data?.erro ?? "Não foi possível salvar o perfil"
+            erroPerfil.value = mensagemDeErro(erro, "Não foi possível salvar o perfil")
+
+            return false
 
         } finally {
 
             salvandoPerfil.value = false
 
         }
+
+    }
+
+    async function solicitarRedefinicaoSenha() {
+
+        await solicitarRecuperacaoSenha(email.value)
+
+    }
+
+    async function resetarResolvidas() {
+
+        await apagarRespostas()
+
+        questoesResolvidasLista.value = []
+        acertos.value = 0
+
+    }
+
+    async function resetarSalvas() {
+
+        await apagarSalvas()
+
+        questoesSalvasLista.value = []
+
+    }
+
+    async function resetarRevisar() {
+
+        await apagarRevisar()
+
+        questoesRevisarLista.value = []
 
     }
 
@@ -278,6 +358,7 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     function abrirExclusaoConta() {
 
+        erroExclusao.value = ""
         excluindoContaConfirmacao.value = true
 
     }
@@ -288,34 +369,30 @@ export const usePerfilStore = defineStore("perfil", () => {
 
     }
 
-    async function excluirConta() {
+    async function excluirConta({ senha, confirmacao }) {
 
         excluindoConta.value = true
+        erroExclusao.value = ""
 
         try {
 
-            await excluirDadosDoPerfil()
+            await excluirDadosDoPerfil({ senha: temSenha.value ? senha : undefined, confirmacao })
 
-        } catch {
+        } catch (erro) {
+
+            erroExclusao.value = mensagemDeErro(erro, "Não foi possível excluir a conta")
+
+            return false
+
+        } finally {
 
             excluindoConta.value = false
 
-            return
-
         }
 
-        nome.value = ""
-        email.value = ""
-        foto.value = null
+        limpar()
 
-        questoesSalvasLista.value = []
-        questoesResolvidasLista.value = []
-        questoesRevisarLista.value = []
-        acertos.value = 0
-
-        carregado.value = false
-        excluindoConta.value = false
-        excluindoContaConfirmacao.value = false
+        return true
 
     }
 
@@ -356,6 +433,8 @@ export const usePerfilStore = defineStore("perfil", () => {
         nome,
         email,
         foto,
+        temSenha,
+        emailPendente,
         iniciais,
 
         editandoPerfil,
@@ -365,6 +444,7 @@ export const usePerfilStore = defineStore("perfil", () => {
 
         excluindoConta,
         excluindoContaConfirmacao,
+        erroExclusao,
 
         questoesSalvas,
         questoesResolvidas,
@@ -381,12 +461,17 @@ export const usePerfilStore = defineStore("perfil", () => {
         totalRevisar,
 
         carregarPerfil,
+        limpar,
         alterarFoto,
         enviarFoto,
 
         abrirEdicaoPerfil,
         fecharEdicaoPerfil,
         salvarEdicaoPerfil,
+        solicitarRedefinicaoSenha,
+        resetarResolvidas,
+        resetarSalvas,
+        resetarRevisar,
 
         salvarQuestao,
         removerQuestaoSalva,

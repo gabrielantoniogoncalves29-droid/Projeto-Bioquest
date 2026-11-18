@@ -2,7 +2,6 @@
 
     <div class="dados">
 
-        <!-- INFORMAÇÕES PESSOAIS -->
         <section class="painel">
 
             <header class="painel-topo">
@@ -74,7 +73,10 @@
 
                 </div>
 
-                <div class="campos">
+                <div
+                    class="campos"
+                    @keydown.enter="avancarComEnter($event, podeSalvar ? salvar : null)"
+                >
 
                     <div class="field">
 
@@ -111,13 +113,31 @@
 
                             <input
                                 id="campo-email"
-                                v-model="email"
+                                                                v-model="email"
                                 type="email"
                                 placeholder="Digite seu e-mail"
                             >
-
                         </div>
+                    </div>
 
+                    <div
+                        v-if="emailAlterado && perfil.temSenha"
+                        class="field"
+                    >
+                        <label for="campo-senha-atual">Senha atual</label>
+                        <div class="input-container">
+                            <Lock
+                                class="icon"
+                                :size="18"
+                            />
+                            <input
+                                id="campo-senha-atual"
+                                v-model="senhaAtual"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Confirme sua senha para trocar o e-mail"
+                            >
+                        </div>
                     </div>
 
                 </div>
@@ -126,12 +146,20 @@
 
             <footer class="painel-rodape">
 
+                                <span
+                    v-if="perfil.erroPerfil"
+                    class="msg msg-erro"
+                    role="alert"
+                >
+                    {{ perfil.erroPerfil }}
+                </span>
                 <span
-                    v-if="salvoComSucesso"
+                    v-else-if="salvoComSucesso"
                     class="msg msg-ok"
+                    role="status"
                 >
                     <Check :size="15" />
-                    Alterações salvas
+                    {{ perfil.emailPendente ? `Salvo. Enviamos um link de confirmação para ${perfil.emailPendente}; o e-mail só muda depois da confirmação.` : "Alterações salvas" }}
                 </span>
 
                 <button
@@ -156,7 +184,6 @@
 
         </section>
 
-        <!-- SEGURANÇA -->
         <section class="painel">
 
             <header class="painel-topo">
@@ -206,6 +233,7 @@
 import { ref, computed, watch } from "vue"
 import { User, Mail, Camera, Check, Lock, KeyRound } from "lucide-vue-next"
 import { usePerfilStore } from "@/store/perfil"
+import { avancarComEnter } from "@/utils/teclado"
 import RedefinirSenhaModal from "@/features/Perfil/RedefinirSenhaModal.vue"
 
 const perfil = usePerfilStore()
@@ -219,8 +247,6 @@ const erroFoto = ref("")
 const salvoComSucesso = ref(false)
 const alterandoSenha = ref(false)
 
-/* Preenche os campos quando o perfil termina de carregar,
-   sem sobrescrever o que o usuário já começou a digitar. */
 watch(
     () => [perfil.nome, perfil.email],
     ([novoNome, novoEmail], [antigoNome, antigoEmail]) => {
@@ -232,22 +258,31 @@ watch(
     }
 )
 
+const senhaAtual = ref("")
+
+const emailAlterado = computed(() =>
+    email.value.trim().toLowerCase() !== (perfil.email || "").toLowerCase()
+)
+
 const alterado = computed(() =>
     nome.value.trim() !== (perfil.nome || "") ||
-    email.value.trim() !== (perfil.email || "")
+    emailAlterado.value
 )
 
 const podeSalvar = computed(() =>
     alterado.value &&
     !perfil.salvandoPerfil &&
     nome.value.trim() &&
-    email.value.trim()
+    email.value.trim() &&
+    (!emailAlterado.value || !perfil.temSenha || senhaAtual.value)
 )
 
 function descartar() {
 
-    nome.value = perfil.nome || ""
+        nome.value = perfil.nome || ""
     email.value = perfil.email || ""
+    senhaAtual.value = ""
+    perfil.erroPerfil = ""
 
 }
 
@@ -255,14 +290,21 @@ async function salvar() {
 
     salvoComSucesso.value = false
 
-    await perfil.salvarEdicaoPerfil({
+        const ok = await perfil.salvarEdicaoPerfil({
         nome: nome.value.trim(),
-        email: email.value.trim()
+        email: email.value.trim(),
+        senha: senhaAtual.value
     })
+
+    if (!ok) return
+
+    senhaAtual.value = ""
+    email.value = perfil.email || ""
+    nome.value = perfil.nome || ""
 
     salvoComSucesso.value = true
 
-    setTimeout(() => { salvoComSucesso.value = false }, 3000)
+    setTimeout(() => { salvoComSucesso.value = false }, perfil.emailPendente ? 8000 : 3000)
 
 }
 
@@ -318,7 +360,6 @@ async function onArquivoSelecionado(evento) {
     gap:20px;
 }
 
-/* painéis */
 .painel{
     background:var(--cor-fundo-card);
     border:1px solid var(--cor-borda);
@@ -361,7 +402,6 @@ async function onArquivoSelecionado(evento) {
     background:var(--cor-fundo-sutil);
 }
 
-/* foto */
 .bloco-foto{
     display:flex;
     align-items:center;
@@ -419,7 +459,6 @@ async function onArquivoSelecionado(evento) {
     color:var(--cor-texto-fraco);
 }
 
-/* campos lado a lado */
 .campos{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -475,7 +514,6 @@ input::placeholder{
     color:var(--cor-texto-fraco);
 }
 
-/* senha */
 .linha-senha{
     display:flex;
     align-items:center;
@@ -513,7 +551,6 @@ input::placeholder{
     color:var(--cor-texto-fraco);
 }
 
-/* botões */
 .btn-primario,
 .btn-secundario{
     display:inline-flex;

@@ -107,7 +107,65 @@ function montarAlternativas() {
     texto.placeholder = `Texto da alternativa ${letra}`
 
     linha.append(rotulo, texto)
-    caixa.append(linha)
+
+    const imagem = document.createElement('div')
+    imagem.className = 'alt-imagem'
+
+    const atual = document.createElement('div')
+    atual.className = 'alt-atual'
+    atual.dataset.altAtual = letra
+    atual.hidden = true
+
+    const previa = document.createElement('img')
+    previa.alt = `Imagem da alternativa ${letra}`
+
+    const remover = document.createElement('label')
+    remover.className = 'check'
+
+    const marcar = document.createElement('input')
+    marcar.type = 'checkbox'
+    marcar.name = `removerImagemAlternativa${letra}`
+    marcar.value = '1'
+
+    remover.append(marcar, ' Remover imagem atual')
+    atual.append(previa, remover)
+
+    const arquivoLabel = document.createElement('label')
+    arquivoLabel.append(`Imagem da alternativa ${letra} (arquivo)`)
+
+    const arquivo = document.createElement('input')
+    arquivo.type = 'file'
+    arquivo.name = `imagemAlternativa${letra}`
+    arquivo.accept = 'image/jpeg,image/png,image/webp,image/gif'
+    arquivoLabel.append(arquivo)
+
+    const urlLabel = document.createElement('label')
+    urlLabel.append('ou endereço (URL)')
+
+    const url = document.createElement('input')
+    url.type = 'url'
+    url.name = `imagemUrlAlternativa${letra}`
+    url.placeholder = 'https://...'
+    urlLabel.append(url)
+
+    imagem.append(atual, arquivoLabel, urlLabel)
+
+    const bloco = document.createElement('div')
+    bloco.className = 'alt-bloco'
+    bloco.append(linha, imagem)
+
+    caixa.append(bloco)
+  })
+}
+
+function mostrarImagensDasAlternativas(imagens = {}) {
+  letras.forEach(letra => {
+    const atual = document.querySelector(`[data-alt-atual="${letra}"]`)
+    const endereco = imagens[letra]
+
+    atual.hidden = !endereco
+
+    if (endereco) atual.querySelector('img').src = endereco
   })
 }
 
@@ -127,6 +185,7 @@ function novaQuestao() {
   tituloEl.textContent = 'Nova questão'
   btnExcluir.hidden = true
   imagemAtual.hidden = true
+  mostrarImagensDasAlternativas()
   form.elements.id.disabled = false
   planilhaEl.hidden = true
   form.banca.value = 'Enem'
@@ -166,6 +225,8 @@ function preencherForm(q) {
   letras.forEach(letra => {
     form[`alternativa${letra}`].value = q.alternativas[letra] ?? ''
   })
+
+  mostrarImagensDasAlternativas(q.alternativasImagens)
 
   form.resposta.value = q.resposta ?? ''
   mostrarPlanilha(q.planilha)
@@ -282,8 +343,6 @@ function renderizarLista() {
   renderizarPlanilha()
 }
 
-// Navegação "pendente": percorre a lista completa (por código) pulando as questões
-// que já têm enunciado e alternativas.
 function proximaPendente(direcao) {
   const ordenadas = [...questoes].sort((a, b) => a.id - b.id)
   const posicao = ordenadas.findIndex(q => q.id === editandoId)
@@ -534,7 +593,6 @@ async function iniciar() {
   preencherSelect(form.conteudoId, taxonomia.conteudos, '', '—')
   preencherSelect(form.objetoId, taxonomia.eixos, '', '—')
 
-  // O objeto da matriz é independente do conteúdo do livro: não é sincronizado.
   form.conteudoId.addEventListener('change', () => {
     atualizarSubconteudos(form.conteudoId.value)
   })

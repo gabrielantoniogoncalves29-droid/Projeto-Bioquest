@@ -10,6 +10,13 @@ import { importarArquivos } from '../src/services/arquivosQuestoes.js'
 const pasta = path.join(path.dirname(fileURLToPath(import.meta.url)), 'seed-data')
 const reset = process.argv.includes('--reset')
 
+if (reset) {
+  if (config.producao || !process.argv.includes('--confirmo-apagar-tudo')) {
+    console.error('--reset apaga dados e foi bloqueado. Use apenas em desenvolvimento: npm run seed -- --reset --confirmo-apagar-tudo')
+    process.exit(1)
+  }
+}
+
 inicializarBanco()
 
 function lerPlanilha() {
@@ -68,6 +75,10 @@ function limparTudo() {
     SELECT imagem FROM questoes WHERE imagem LIKE '/uploads/questoes/%'
   `).all()
 
+  const imagensDasAlternativas = db.prepare(`
+    SELECT imagem FROM alternativas WHERE imagem LIKE '/uploads/questoes/%'
+  `).all()
+
   db.exec(`
     DELETE FROM comentarios;
     DELETE FROM respostas;
@@ -79,7 +90,7 @@ function limparTudo() {
     DELETE FROM questoes;
   `)
 
-  imagens.forEach(({ imagem }) => {
+  ;[...imagens, ...imagensDasAlternativas].forEach(({ imagem }) => {
     fs.rmSync(path.join(config.uploadsDir, 'questoes', path.basename(imagem)), { force: true })
   })
 }
@@ -185,6 +196,14 @@ if (problemas.length) {
   console.error(`Importação cancelada: ${problemas.length} linha(s) com problema.`)
   problemas.forEach(p => console.error(`  - ${p}`))
   process.exit(1)
+}
+
+if (reset) {
+  const pasta = path.join(path.dirname(config.dbPath), 'backups')
+  fs.mkdirSync(pasta, { recursive: true })
+  const copia = path.join(pasta, `bioquest-antes-do-reset-${new Date().toISOString().replace(/[:.]/g, '-')}.db`)
+  db.exec(`VACUUM INTO '${copia.replace(/'/g, "''")}'`)
+  console.log(`Backup criado em ${copia}`)
 }
 
 const resultado = db.transaction(() => {

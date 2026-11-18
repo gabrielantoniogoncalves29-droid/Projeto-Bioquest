@@ -7,6 +7,9 @@ import Perfil from '@/pages/Perfil.vue';
 import Login from '@/pages/Login.vue'
 import Resolver from '@/features/Questoes/Painel Resolucao/ResolverQuestao.vue';
 import DetalhesQuestao from '@/features/Questoes/Detalhes/DetalhesQuestao.vue';
+import NaoEncontrada from '@/pages/NaoEncontrada.vue'
+import { useAuthStore } from '@/store/auth'
+import { destinoSeguro } from '@/utils/destino'
 const routes = [
 {
     path: '/',
@@ -21,7 +24,8 @@ const routes = [
 {
     path: '/estatisticas',
     name: 'Estatisticas',
-    component: Estatisticas
+    component: Estatisticas,
+    meta: { requerLogin: true }
 },
 {
     path: '/ajuda',
@@ -31,29 +35,71 @@ const routes = [
 {
     path: '/perfil',
     name: 'Perfil',
-    component: Perfil
+    component: Perfil,
+    meta: { requerLogin: true }
 },
 {
     path: '/login',
     name: 'Login',
-    component: Login  
+    component: Login
 },
 {
-    path:'/resolver/:id',
+    path: '/confirmar-email',
+    name: 'ConfirmarEmail',
+    component: Login
+},
+{
+    path: '/redefinir-senha',
+    name: 'RedefinirSenha',
+    component: Login
+},
+{
+    path:'/resolver/:id(\\d+)',
     name:'Resolver',
     component: Resolver
 },
 {
-    path:'/resolver/:id/detalhes',
+    path:'/resolver/:id(\\d+)/detalhes',
     name:'DetalhesQuestao',
     component: DetalhesQuestao
+},
+{
+    path: '/:caminho(.*)*',
+    name: 'NaoEncontrada',
+    component: NaoEncontrada
 }
 
 ]
 
 const router = createRouter({
     history: createWebHistory('/Projeto-Bioquest/'),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (to.hash) {
+            return { el: to.hash, top: 16, behavior: 'smooth' }
+        }
+        return savedPosition ?? undefined
+    }
+})
+
+router.beforeEach(async to => {
+
+    const auth = useAuthStore()
+
+    await auth.iniciar()
+
+    if (to.meta.requerLogin && !auth.autenticado) {
+
+        return { name: 'Login', query: { redirect: to.fullPath } }
+
+    }
+
+    if (to.name === 'Login' && auth.autenticado) {
+
+        return destinoSeguro(to.query.redirect)
+
+    }
+
 })
 
 export default router

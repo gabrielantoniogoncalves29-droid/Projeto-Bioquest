@@ -5,8 +5,11 @@ import {
     buscarQuestaoPorId,
     buscarExplicacao
 } from '@/services/questoes'
+import { mensagemDeErro } from '@/services/api'
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useTaxonomiaStore } from '@/store/taxonomia'
+import { useAuthStore } from '@/store/auth'
+import { useUiStore } from '@/store/resolver/ui'
 import {
     buscarComentariosPorQuestao,
     enviarComentarioDaQuestao
@@ -26,6 +29,9 @@ export const CIRCUNFERENCIA_ANEL = 2 * Math.PI * RAIO_ANEL
 
 export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
 
+    const enviandoComentario = ref(false)
+    const erroComentario = ref('')
+
     const questaoId = ref(null)
     const carregando = ref(true)
     const detalhes = ref(null)
@@ -33,6 +39,8 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
 
     const resolver = useResolverStore()
     const taxonomia = useTaxonomiaStore()
+    const auth = useAuthStore()
+    const painel = useUiStore()
     const idsQuestoes = computed(() => resolver.idsQuestoes)
     const abaAtiva = ref('explicacao')
 
@@ -96,8 +104,6 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         detalhes.value?.nivel ?? 'Não informado'
     )
 
-        // Percentual de acertos congelado até existir login: a API devolve null e a
-    // tela mostra "—" (nunca muda quando o usuário demo responde).
     const taxaAcerto = computed(() =>
         detalhes.value?.taxaAcerto ?? null
     )
@@ -107,6 +113,10 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
     )
 
     const forumAberto = computed(() => taxonomia.config.forumAberto)
+
+    const precisaLogin = computed(() => !auth.autenticado)
+
+    const podeComentar = computed(() => Boolean(forumAberto.value) && auth.autenticado)
 
     const totalComentarios = computed(() => comentarios.value.length)
 
@@ -163,10 +173,15 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
 
         if (dadosQuestao && explicacao) {
             detalhes.value = { ...dadosQuestao, teoria: explicacao.teoria }
+
+            const sessao = auth.autenticado ? null : painel.respostaSessao(id)
+            const liberada = Boolean(explicacao.liberada || sessao)
+
             questao.value = {
                 ...dadosQuestao,
-                resposta: explicacao.resposta,
-                comentario: explicacao.comentario
+                liberada,
+                resposta: explicacao.resposta ?? sessao?.resultado.resposta ?? null,
+                comentario: explicacao.comentario || sessao?.resultado.comentario || ''
             }
         } else {
             detalhes.value = null
@@ -191,10 +206,12 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
     }
 
     async function enviarComentario() {
-        const texto = novoComentario.value.trim()
+                const texto = novoComentario.value.trim()
 
-                // Comentar exige login (ainda não existe): o servidor também recusa com 401.
-        if (!texto || !questaoId.value || !forumAberto.value) return
+        if (!texto || !questaoId.value || !podeComentar.value || enviandoComentario.value) return
+
+        enviandoComentario.value = true
+        erroComentario.value = ''
 
         try {
             const criado = await enviarComentarioDaQuestao(questaoId.value, texto)
@@ -202,8 +219,10 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
             comentarios.value.unshift(criado)
 
             novoComentario.value = ''
-        } catch {
-            // 401 (sem login) ou falha de rede: o texto digitado é mantido.
+                } catch (erro) {
+            erroComentario.value = mensagemDeErro(erro, 'Não foi possível enviar o comentário.')
+        } finally {
+            enviandoComentario.value = false
         }
     }
 
@@ -217,7 +236,9 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         previaExpandida,
         comentarios,
         carregandoComentarios,
-        novoComentario,
+                novoComentario,
+        enviandoComentario,
+        erroComentario,
 
         indiceAtual,
         idAnterior,
@@ -234,6 +255,8 @@ export const useDetalhesQuestaoStore = defineStore('detalhesQuestao', () => {
         deslocamentoAnel,
                 totalComentarios,
         forumAberto,
+        podeComentar,
+        precisaLogin,
 
         carregarQuestao,
         carregarComentarios,

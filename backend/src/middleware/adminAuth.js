@@ -1,5 +1,6 @@
 import crypto from 'node:crypto'
 import { config } from '../config.js'
+import { registrarAviso } from '../utils/log.js'
 
 function iguais(a, b) {
   const ha = crypto.createHash('sha256').update(a).digest()
@@ -8,11 +9,9 @@ function iguais(a, b) {
 }
 
 export function adminAuth(req, res, next) {
-  if (!config.adminAtivo) {
+  if (!config.adminAtivo || !config.adminSenha) {
     return res.status(404).json({ erro: 'Rota não encontrada' })
   }
-
-  if (!config.adminSenha) return next()
 
   const cabecalho = req.headers.authorization || ''
   const [tipo, credencial] = cabecalho.split(' ')
@@ -23,6 +22,7 @@ export function adminAuth(req, res, next) {
     if (iguais(senha, config.adminSenha)) return next()
   }
 
+  registrarAviso('admin_auth_falha', { ip: req.ip, rota: req.path })
   res.set('WWW-Authenticate', 'Basic realm="BioQuest Admin", charset="UTF-8"')
   res.status(401).send('Autenticação necessária')
 }

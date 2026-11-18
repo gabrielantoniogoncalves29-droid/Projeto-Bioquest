@@ -4,10 +4,11 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { Info } from 'lucide-vue-next'
 
-import { enviarResposta } from '@/services/questoes'
+import { enviarResposta, corrigirSemConta } from '@/services/questoes'
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useUiStore } from '@/store/resolver/ui'
 import { usePerfilStore } from '@/store/perfil'
+import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
 
@@ -16,6 +17,8 @@ const resolver = useResolverStore()
 const ui = useUiStore()
 
 const perfil = usePerfilStore()
+
+const auth = useAuthStore()
 
 const {
     questao,
@@ -33,20 +36,29 @@ async function responder() {
 
     try {
 
-        const resultado = await enviarResposta(
-            questaoAtual.id,
-            ui.alternativaSelecionada
-        )
+        const alternativa = ui.alternativaSelecionada
+
+        const resultado = auth.autenticado
+            ? await enviarResposta(questaoAtual.id, alternativa)
+            : await corrigirSemConta(questaoAtual.id, alternativa)
 
         if (resolver.questao?.id !== questaoAtual.id) return
 
         ui.definirResultado(resultado)
 
-        perfil.adicionarQuestaoResolvida(
-            questaoAtual,
-            resultado.correta,
-            resultado.acertos
-        )
+        if (auth.autenticado) {
+
+            perfil.adicionarQuestaoResolvida(
+                questaoAtual,
+                resultado.correta,
+                resultado.acertos
+            )
+
+        } else {
+
+            ui.guardarRespostaSessao(questaoAtual.id, alternativa, resultado)
+
+        }
 
         } catch (erro) {
         ui.definirErro(
@@ -86,19 +98,22 @@ function saibaMais() {
 
     <div class="grupo-esquerda">
 
-      <span
-        v-if="ui.resultado"
-        class="feedback"
-        :class="ui.resultado.correta ? 'feedback-acerto' : 'feedback-erro'"
-      >
-        {{ ui.resultado.correta ? `A alternativa correta é a letra ${ui.resultado.resposta}.` : `A alternativa correta é a letra ${ui.resultado.resposta}.` }}
-      </span>
+
 
       <span
-        v-else-if="ui.erro"
+        v-if="ui.erro"
         class="feedback feedback-erro"
       >
         {{ ui.erro }}
+      </span>
+
+      <span
+        v-if="ui.resultado && !auth.autenticado"
+        class="feedback aviso-sem-conta"
+      >
+        Sua resposta não foi salva.
+        <router-link :to="{ name: 'Login', query: { redirect: $route.fullPath } }">Entre na sua conta</router-link>
+        para guardar seu progresso.
       </span>
 
       <button
@@ -108,15 +123,15 @@ function saibaMais() {
       >
         Ver resolução comentada
       </button>
-
-    </div>
-
-    <div class="grupo-direita">
-
       <button class="btn-saiba-mais" @click="saibaMais">
        <Info :size="15" />
         Saiba mais sobre a questão
       </button>
+    </div>
+
+    <div class="grupo-direita">
+
+
 
       <button
         class="btn-responder"
@@ -296,6 +311,22 @@ function saibaMais() {
 
 }
 
+.aviso-sem-conta {
+
+  font-weight: 500;
+
+  color: var(--cor-texto-secundario);
+
+}
+
+.aviso-sem-conta a {
+
+  color: var(--cor-primaria);
+
+  font-weight: 600;
+
+}
+
 .feedback-acerto {
 
   color: var(--cor-acerto);
@@ -316,90 +347,57 @@ function saibaMais() {
 }
 
 @container questao (max-width:760px){
-
   .acoes-direita{
-
     flex-direction: column-reverse;
     align-items: stretch;
-
+    row-gap: 12px;
+    padding: 16px;
   }
-
-  .btn-saiba-mais{
-      display:none;
-}
-  .grupo-direita,
+  .grupo-direita{
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 10px;
+  }
   .grupo-esquerda{
-
-    justify-content: space-between;
-    gap: 14px;
-
-  }
-
-  .btn-prox,
-  .btn-responder,
-  .btn-saiba-mais{
-
-    flex: 1;
-    text-align: center;
-
-  }
-
-  .btn-responder{
-
-    padding: 10px 20px;
-
-  }
-
-}
-
-@container questao (max-width:420px){
-
-  .acoes-direita{
-
-    padding: 14px 16px;
-
-  }
-  .btn-saiba-mais{
-      display:none;
-}
-  .btn-prox,
-  .btn-saiba-mais{
-
-    font-size: 12.5px;
-    padding: 9px 10px;
-
-  }
-
-}
-
-@media (max-width:600px){
-
-  .acoes-direita{
-
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: stretch;
-
+    gap: 8px;
   }
-
-  .grupo-direita,
-  .grupo-esquerda{
-
-    justify-content: space-between;
-    gap: 14px;
-
-  }
-  .btn-saiba-mais{
-      display:none;
-}
-  .btn-prox,
   .btn-responder,
-  .btn-saiba-mais{
-
-    flex: 1;
+  .btn-prox{
+    min-height: 48px;
+    padding: 0 12px;
+    font-size: 15px;
     text-align: center;
-
   }
-
+  .btn-saiba-mais{
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--cor-borda);
+    background: var(--cor-fundo-card);
+    font-size: 14px;
+    white-space: normal;
+    text-align: center;
+  }
+  .feedback{
+    line-height: 1.5;
+  }
 }
 
+.btn-responder:focus-visible,
+.btn-prox:focus-visible,
+.btn-saiba-mais:focus-visible{
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .btn-responder,
+  .btn-prox,
+  .btn-saiba-mais{
+    transition: none;
+  }
+}
 </style>

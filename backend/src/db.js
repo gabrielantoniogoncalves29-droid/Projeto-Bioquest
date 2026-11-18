@@ -15,26 +15,72 @@ db.pragma('foreign_keys = ON')
 
 export const idDoSubconteudo = (conteudoId, numero) => conteudoId * 100 + numero
 
-const VERSAO_SCHEMA = 1
+const VERSAO_SCHEMA = 3
+
+function colunaExiste(tabela, coluna) {
+  return db.prepare(`PRAGMA table_info(${tabela})`).all().some(c => c.name === coluna)
+}
+
+function adicionarColuna(tabela, coluna, definicao) {
+  if (!colunaExiste(tabela, coluna)) {
+    db.exec(`ALTER TABLE ${tabela} ADD COLUMN ${coluna} ${definicao}`)
+  }
+}
+
+const migracoes = {
+  1() {},
+
+  2() {
+    adicionarColuna('usuarios', 'senha_hash', 'TEXT')
+    adicionarColuna('usuarios', 'email_confirmado', 'INTEGER NOT NULL DEFAULT 0')
+    adicionarColuna('usuarios', 'google_sub', 'TEXT')
+    adicionarColuna('usuarios', 'tokens_validos_desde', 'INTEGER NOT NULL DEFAULT 0')
+
+    db.exec(`
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_usuarios_google_sub
+        ON usuarios(google_sub) WHERE google_sub IS NOT NULL
+    `)
+
+    db.exec(`
+      INSERT INTO tentativas (usuario_id, questao_id, alternativa, correta, respondida_em, origem)
+      SELECT r.usuario_id, r.questao_id, r.alternativa, r.correta, r.atualizado_em, 'migracao'
+        FROM respostas r
+       WHERE NOT EXISTS (
+         SELECT 1 FROM tentativas t
+          WHERE t.usuario_id = r.usuario_id AND t.questao_id = r.questao_id
+       )
+    `)
+  },
+
+  3() {
+    adicionarColuna('alternativas', 'imagem', "TEXT NOT NULL DEFAULT ''")
+  }
+}
+
+function bancoJaTemDados() {
+  return Boolean(
+    db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'usuarios'").get()
+  )
+}
+
+function fazerBackup(versaoAtual) {
+  const pasta = config.backupsDir
+  fs.mkdirSync(pasta, { recursive: true })
+
+  const carimbo = new Date().toISOString().replace(/[:.]/g, '-')
+  const destino = path.join(pasta, `bioquest-v${versaoAtual}-antes-da-v${VERSAO_SCHEMA}-${carimbo}.db`)
+
+  db.exec(`VACUUM INTO '${destino.replace(/'/g, "''")}'`)
+  console.log(`Backup do banco criado em ${destino}`)
+}
 
 function migrar(versaoAtual) {
-  if (versaoAtual < 1) {
-    db.pragma('foreign_keys = OFF')
-    db.exec(`
-      DROP TABLE IF EXISTS comentarios;
-      DROP TABLE IF EXISTS respostas;
-      DROP TABLE IF EXISTS questoes_salvas;
-      DROP TABLE IF EXISTS questoes_revisar;
-      DROP TABLE IF EXISTS questao_palavras_chave;
-      DROP TABLE IF EXISTS palavras_chave;
-      DROP TABLE IF EXISTS alternativas;
-      DROP TABLE IF EXISTS questoes;
-      DROP TABLE IF EXISTS subconteudos;
-    `)
-    db.pragma('foreign_keys = ON')
+  for (let versao = versaoAtual + 1; versao <= VERSAO_SCHEMA; versao++) {
+    db.transaction(() => {
+      migracoes[versao]()
+      db.pragma(`user_version = ${versao}`)
+    })()
   }
-
-  db.pragma(`user_version = ${VERSAO_SCHEMA}`)
 }
 
 function sincronizarTaxonomia() {
@@ -72,18 +118,14 @@ function sincronizarTaxonomia() {
   })()
 }
 
-function garantirUsuarioDemo() {
-  db.prepare(`
-    INSERT OR IGNORE INTO usuarios (id, nome, email) VALUES (?, ?, ?)
-  `).run(config.usuarioDemoId, 'Gabriel Antônio', 'gabriel@email.com')
-}
-
 export function inicializarBanco() {
   const versao = db.pragma('user_version', { simple: true })
 
-  if (versao < VERSAO_SCHEMA) migrar(versao)
+  if (versao < VERSAO_SCHEMA && bancoJaTemDados()) fazerBackup(versao)
 
   db.exec(fs.readFileSync(path.join(pastaDb, 'schema.sql'), 'utf8'))
+
+  if (versao < VERSAO_SCHEMA) migrar(versao)
+
   sincronizarTaxonomia()
-  garantirUsuarioDemo()
 }

@@ -1,6 +1,7 @@
 <script setup>
 
 import { computed } from 'vue'
+import { Check } from 'lucide-vue-next'
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useUiStore } from '@/store/resolver/ui'
 
@@ -74,11 +75,31 @@ function ehErrada(letra) {
 
 
 
-    <span>
+    <div class="corpo-alternativa">
 
-      {{ alternativa.texto }}
+      <span v-if="alternativa.texto">
 
-    </span>
+        {{ alternativa.texto }}
+
+      </span>
+
+      <img
+        v-if="alternativa.imagem"
+        class="imagem-alternativa"
+        :src="alternativa.imagem"
+        :alt="alternativa.texto || `Alternativa ${alternativa.letra}`"
+        loading="lazy"
+      >
+
+    </div>
+
+    <Check
+      v-if="ehCorreta(alternativa.letra) && (resultado && selecionada === alternativa.letra)"
+      class="icone-correta"
+      :size="24"
+      :stroke-width="2.25"
+      aria-label="Alternativa correta"
+    />
 
 
 
@@ -250,48 +271,120 @@ function ehErrada(letra) {
 }
 
 
-@container questao (max-width:420px){
+.alternativa span {
+  flex: 1;
+}
 
-  .alternativas-container{
+.corpo-alternativa {
 
-    padding:12px 14px;
-    gap:6px;
+  flex: 1;
 
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+}
+
+.imagem-alternativa {
+
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 280px;
+
+  object-fit: contain;
+
+  align-self: flex-start;
+
+  padding: 4px;
+
+  border-radius: 6px;
+
+  background: #fff;
+
+}
+
+.icone-correta {
+
+  flex-shrink: 0;
+  margin-left: auto;
+
+  color: var(--cor-acerto);
+
+  animation: icone-pop .35s cubic-bezier(.34, 1.56, .64, 1) both;
+
+}
+
+@keyframes icone-pop {
+
+  from {
+    opacity: 0;
+    transform: scale(.4) rotate(-20deg);
   }
 
-  .alternativa{
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
 
-    padding:9px 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .icone-correta {
+    animation: none;
+  }
+
+}
+
+@container questao (max-width:760px){
+  .alternativas-container{
+    padding:16px;
     gap:10px;
-
   }
-
-  .alternativa span{
-
-    font-size:13.5px;
-
-  }
-
-  .letra{
-
-    width:26px;
-    height:26px;
-    min-width:26px;
-    font-size:12px;
-
-  }
-
-}
-
-@media (max-width:480px){
-
-  .alternativas-container{
-
+  .alternativa{
+    align-items:flex-start;
+    min-height:52px;
     padding:12px 14px;
-    gap:6px;
-
+    gap:12px;
   }
-
+  .letra{
+    width:32px;
+    height:32px;
+    min-width:32px;
+    font-size:14px;
+  }
+  .corpo-alternativa{
+    padding-top:4px;
+  }
+  .alternativa span{
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .icone-correta{
+    margin-top:4px;
+  }
+  .imagem-alternativa{
+    max-height:none;
+    height:auto;
+  }
 }
-
+@container questao (max-width:340px){
+  .alternativas-container{
+    padding:12px;
+  }
+  .alternativa{
+    padding:10px 12px;
+    gap:10px;
+  }
+}
+.alternativa:focus-visible{
+  outline:2px solid var(--cor-primaria);
+  outline-offset:2px;
+}
 </style>

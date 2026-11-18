@@ -183,81 +183,40 @@ const enunciado = computed(
 }
 
 @container questao (max-width:760px){
-
   .enunciado-container{
-
     grid-template-columns:1fr;
-    padding:18px;
-    gap:18px;
-
+    padding:20px 16px;
+    gap:20px;
   }
-
   .imagem-container{
-
-    height:240px;
-
+    height:auto;
+    display:flex;
+    justify-content:center;
   }
-
-}
-
-@container questao (max-width:420px){
-
-  .enunciado-container{
-
-    padding:14px;
-
+  .imagem-container img{
+    width:auto;
+    max-width:100%;
+    height:auto;
   }
-
   .texto-container h2{
-
-    font-size:1rem;
-
+    font-size:1.0625rem;
+    line-height:1.65;
+    margin-bottom:12px;
   }
-
   .texto-container p{
-
-    font-size:.9rem;
-
+    font-size:1rem;
+    line-height:1.7;
   }
-
-  .imagem-container{
-
-    height:190px;
-
-  }
-
 }
-
-@media (max-width:1100px){
-
+@container questao (max-width:340px){
   .enunciado-container{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .imagem-container{
-
-    height:240px;
-
-  }
-
-}
-
-@media (max-width:480px){
-  .enunciado-container{
-    padding:14px;
-    gap:14px;
-  }
-  .imagem-container{
-    height:190px;
+    padding:16px 12px;
   }
   .texto-container h2{
     font-size:1rem;
   }
   .texto-container p{
-    font-size:.9rem;
+    font-size:.9375rem;
   }
 }
-
 </style>

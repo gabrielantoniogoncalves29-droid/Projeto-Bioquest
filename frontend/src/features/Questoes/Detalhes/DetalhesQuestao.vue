@@ -60,18 +60,19 @@ watch(
 
         <main class="detalhes-page">
         <div class="breadcrumb">
-            <span
+            <button
+                type="button"
                 class="voltar"
                 @click="goback()"
             >
                 ← Voltar
-            </span>
+            </button>
 
             <span class="separator">|</span>
 
             <router-link
                 to="/questoes"
-                class="link-crumb"
+                class="link-crumb crumb-secundario"
             >
                 Biblioteca de Questões
             </router-link>
@@ -163,12 +164,14 @@ watch(
                         @click="irParaQuestao"
                     >
                         <CornerUpLeft :size="16" />
-                        Voltar para a questão
+                        Voltar para página de resolução
                     </button>
                 </div>
             </div>
 
-            <PreviaQuestao />
+
+                <PreviaQuestao />
+
 
             <InfoQuestao />
 
@@ -243,6 +246,15 @@ watch(
     text-decoration: none;
 }
 
+.voltar,
+.link-acao {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
 .voltar {
     color: var(--cor-primaria);
     font-weight: 600;
@@ -255,7 +267,7 @@ watch(
 
 .separator,
 .separator-barra {
-    color: var(--cor-borda);
+    color: var(--cor-primaria);
 }
 
 .loading {
@@ -298,7 +310,7 @@ watch(
     font-size: 15px;
     font-weight: 600;
     color: var(--cor-primaria);
-    margin-left: 10px;
+    margin-left: 40px;
 }
 
 .navegacao-questoes {
@@ -351,14 +363,23 @@ watch(
 .cabecalho-texto {
     min-width: 0;
     font-size: 15px;
+    padding-left: 18px;
 }
 
 .cabecalho-questao h1 {
     margin: 0 0 7px;
     font-size: 28px;
     line-height: 1.2;
+    letter-spacing: -0.45px;
     font-weight: 700;
     color: var(--cor-texto-principal);
+}
+
+.previa-area {
+    width: calc(100% - 36px);
+    max-width: 1400px;
+    min-width: 0;
+    margin-inline: auto;
 }
 
 .subtitulo {
@@ -378,7 +399,7 @@ watch(
     align-items: center;
     gap: 7px;
     flex-shrink: 0;
-
+    margin-right: 20px;
     border: none;
     background: none;
     padding: 4px 0;
@@ -433,6 +454,10 @@ watch(
 }
 
 @media (max-width: 900px) {
+    .previa-area {
+        width: calc(100% - 20px);
+    }
+
     .detalhes-page {
         padding: 20px 24px 40px;
     }
@@ -448,14 +473,35 @@ watch(
 
 @media (max-width: 600px) {
     .detalhes-page {
-        padding: 14px 12px 32px;
+        padding: 12px 16px 32px;
     }
 
     .breadcrumb {
-        margin-bottom: 18px;
-        gap: 4px 7px;
-        font-size: 13px;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        margin-bottom: 12px;
+        gap: 8px;
+        font-size: 14px;
         line-height: 1.5;
+    }
+
+    .breadcrumb .voltar,
+    .breadcrumb .link-acao {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .breadcrumb .crumb-secundario,
+    .breadcrumb .separator {
+        display: none;
+    }
+
+    .breadcrumb .link-crumb {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .conteudo-container {
@@ -474,6 +520,11 @@ watch(
     }
 
     .cabecalho-texto {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .previa-area {
         width: 100%;
     }
 
@@ -534,8 +585,8 @@ watch(
 
 @media (max-width: 360px) {
     .detalhes-page {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .cabecalho-questao h1 {

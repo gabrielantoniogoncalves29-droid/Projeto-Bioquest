@@ -18,10 +18,6 @@
                     <X :size="18" />
                 </button>
 
-                <div class="icone-alerta">
-                    <AlertTriangle :size="26" />
-                </div>
-
                 <h2>{{ titulo }}</h2>
 
                 <p class="subtitulo">
@@ -67,7 +63,7 @@
 
 <script setup>
 
-import { X, AlertTriangle } from "lucide-vue-next"
+import { X } from "lucide-vue-next"
 
 const props = defineProps({
     titulo: { type: String, required: true },
@@ -239,4 +235,15 @@ h2{
 
 }
 
+
+@media (max-width:480px){
+  .overlay{ padding:16px; align-items:flex-end; }
+  .card{ max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px); overflow-y:auto; padding:24px 20px 20px; }
+  .fechar{ top:8px; right:8px; width:44px; height:44px; }
+  .acoes{ flex-direction:column-reverse; }
+  .acoes button{ min-height:48px; font-size:15px; }
+  input, .campo{ font-size:16px; }
+  .input-container{ min-height:48px; }
+  .campo{ height:48px; }
+}
 </style>

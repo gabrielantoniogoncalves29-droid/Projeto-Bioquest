@@ -509,21 +509,25 @@ function selecionar(valor) {
 
   .ordenacao {
 
-    flex-direction: column;
+    flex-direction: row;
 
-    align-items: stretch;
+    flex-wrap: wrap;
 
-    margin: 0px 20px;
+    align-items: center;
 
-    gap: 12px;
+    justify-content: space-between;
+
+    margin: 0;
+
+    gap: 8px 12px;
 
   }
 
   .direita {
 
-    width: 100%;
+    flex: 1 1 220px;
 
-    justify-content: space-between;
+    justify-content: flex-end;
 
     gap: 12px;
 
@@ -535,6 +539,8 @@ function selecionar(valor) {
 
     min-width: 0;
 
+    justify-content: flex-end;
+
   }
 
   .custom-select {
@@ -545,11 +551,19 @@ function selecionar(valor) {
 
     min-width: 0;
 
+    max-width: 280px;
+
   }
 
   .view-buttons {
 
     display: none;
+
+  }
+
+  .select-btn {
+
+    min-height: 44px;
 
   }
 
@@ -563,31 +577,19 @@ function selecionar(valor) {
 
   }
 
+  .option {
+
+    min-height: 44px;
+
+  }
+
 }
 
 @media (max-width: 480px) {
 
-  .ordenacao {
-
-    margin: 0px;
-
-  }
-
-  .ordenar-por {
-
-    gap: 6px;
-
-  }
-
   .ordenar-por label {
 
     font-size: 13px;
-
-  }
-
-  .select-btn {
-
-    height: 42px;
 
   }
 

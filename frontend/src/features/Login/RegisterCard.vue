@@ -3,9 +3,11 @@
 
     <h2>Criar uma conta</h2>
 
+    <form novalidate @submit.prevent="criarConta" @keydown.enter="avancarComEnter">
+
     <div class="field">
 
-      <label>Nome</label>
+      <label for="cad-nome">Nome</label>
 
       <div
         class="input-container"
@@ -14,9 +16,14 @@
         <User class="icon" :size="20"/>
 
         <input
+          id="cad-nome"
           v-model.trim="nome"
           type="text"
+          name="nome"
+          autocomplete="name"
+          maxlength="80"
           placeholder="Digite seu nome"
+          :disabled="enviando"
         >
 
       </div>
@@ -33,7 +40,7 @@
 
     <div class="field">
 
-      <label>E-mail</label>
+      <label for="cad-email">E-mail</label>
 
       <div
         class="input-container"
@@ -43,9 +50,14 @@
         <Mail class="icon" :size="20"/>
 
         <input
+          id="cad-email"
           v-model.trim="email"
           type="email"
+          name="email"
+          autocomplete="email"
+          maxlength="120"
           placeholder="Digite seu e-mail"
+          :disabled="enviando"
         >
 
       </div>
@@ -62,7 +74,7 @@
 
     <div class="field">
 
-      <label>Senha</label>
+      <label for="cad-senha">Senha</label>
 
       <div
         class="input-container"
@@ -72,13 +84,20 @@
         <Lock class="icon" :size="20"/>
 
         <input
+          id="cad-senha"
           v-model="senha"
           :type="mostrarSenha ? 'text' : 'password'"
+          name="nova-senha"
+          autocomplete="new-password"
+          maxlength="72"
           placeholder="Crie uma senha"
+          :disabled="enviando"
         >
 
         <button
+          type="button"
           class="eye-button"
+          :aria-label="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
           @click="mostrarSenha = !mostrarSenha"
         >
           <Eye v-if="!mostrarSenha" :size="18"/>
@@ -91,14 +110,14 @@
         class="feedback"
         :class="{ success: senhaValida }"
       >
-        {{ senhaValida ? "✔ Senha válida" : "Mínimo de 5 caracteres" }}
+        {{ senhaValida ? "✔ Senha válida" : "Mínimo de 8 caracteres" }}
       </span>
 
     </div>
 
     <div class="field">
 
-      <label>Confirmar senha</label>
+      <label for="cad-confirmar">Confirmar senha</label>
 
       <div
         class="input-container"
@@ -108,13 +127,20 @@
         <Lock class="icon" :size="20"/>
 
         <input
+          id="cad-confirmar"
           v-model="confirmarSenha"
           :type="mostrarConfirmarSenha ? 'text' : 'password'"
+          name="confirmar-senha"
+          autocomplete="new-password"
+          maxlength="72"
           placeholder="Digite a senha novamente"
+          :disabled="enviando"
         >
 
         <button
+          type="button"
           class="eye-button"
+          :aria-label="mostrarConfirmarSenha ? 'Ocultar senha' : 'Mostrar senha'"
           @click="mostrarConfirmarSenha = !mostrarConfirmarSenha"
         >
           <Eye v-if="!mostrarConfirmarSenha" :size="18"/>
@@ -147,15 +173,26 @@
 
     </label>
 
-    <button
-      class="create-button"
-      :disabled="!formValido"
-      @click="criarConta"
+    <p
+      v-if="erro"
+      class="mensagem erro"
+      role="alert"
     >
-      Criar conta
-    </button>
+      {{ erro }}
+    </p>
 
     <button
+      type="submit"
+      class="create-button"
+      :disabled="!formValido || enviando"
+    >
+      {{ enviando ? "Criando conta..." : "Criar conta" }}
+    </button>
+
+    </form>
+
+    <button
+      type="button"
       class="back-button"
       @click="auth.login()"
     >
@@ -169,6 +206,8 @@
 
 import { ref, computed } from "vue"
 
+import { mensagemDeErro } from "@/services/api"
+
 import {
     User,
     Mail,
@@ -178,6 +217,7 @@ import {
 } from "lucide-vue-next"
 
 import { useAuthStore } from "@/store/auth"
+import { avancarComEnter } from "@/utils/teclado"
 
 const auth = useAuthStore()
 
@@ -189,15 +229,17 @@ const aceitaTermos = ref(false)
 
 const mostrarSenha = ref(false)
 const mostrarConfirmarSenha = ref(false)
+const enviando = ref(false)
+const erro = ref("")
 
-const nomeValido = computed(() => nome.value.length >= 3)
+const nomeValido = computed(() => nome.value.length >= 2 && nome.value.length <= 80 && !/[<>]/.test(nome.value))
 
 const emailValido = computed(() =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
 )
 
 const senhaValida = computed(() =>
-    senha.value.length >= 5
+    senha.value.length >= 8 && senha.value.length <= 72
 )
 
 const confirmacaoValida = computed(() =>
@@ -213,19 +255,45 @@ const formValido = computed(() =>
     aceitaTermos.value
 )
 
-function criarConta(){
+async function criarConta(){
 
-    if(!formValido.value) return
+    if(!formValido.value || enviando.value) return
 
-    auth.emailCadastro = email.value
+    erro.value = ""
 
-    auth.confirmar(email.value)
+    enviando.value = true
+
+    try {
+
+        const resposta = await auth.cadastrar(nome.value, email.value, senha.value)
+
+        auth.confirmar(email.value, resposta.emailEnviado)
+
+        senha.value = ""
+
+        confirmarSenha.value = ""
+
+    } catch (falha) {
+
+        erro.value = mensagemDeErro(falha, "Não foi possível criar a conta. Tente novamente.")
+
+    } finally {
+
+        enviando.value = false
+
+    }
 
 }
 
 </script>
 
 <style scoped>
+
+form{
+
+    display:contents;
+
+}
 
 .card{
 
@@ -579,6 +647,33 @@ input[type="password"]::-webkit-textfield-decoration-container{
 [data-tema="escuro"] .feedback.success,
 [data-tema="escuro"] .lgpd-field abbr{
     color:var(--cor-primaria-texto);
+}
+
+
+.mensagem{
+
+    margin:0 0 12px;
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.mensagem.erro{
+
+    color:var(--cor-erro);
+
+}
+
+.eye-button:focus-visible,
+.back-button:focus-visible,
+.create-button:focus-visible{
+
+    outline:2px solid var(--cor-primaria);
+
+    outline-offset:2px;
+
 }
 
 </style>

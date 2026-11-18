@@ -3,36 +3,48 @@
 
     <h2>Acessar a plataforma</h2>
 
+    <form novalidate @submit.prevent="entrar" @keydown.enter="avancarComEnter">
+
     <div class="field">
-      <label>E-mail</label>
+      <label for="login-email">E-mail</label>
 
       <div class="input-container">
-        <Mail class="icon" :size="20"/>
+        <Mail class="icon" :size="20" aria-hidden="true"/>
 
         <input
-          v-model="email"
+          id="login-email"
+          v-model.trim="email"
           type="email"
+          name="email"
+          autocomplete="email"
           placeholder="Digite seu e-mail"
+          :disabled="enviando"
         >
       </div>
     </div>
 
     <div class="field">
 
-      <label>Senha</label>
+      <label for="login-senha">Senha</label>
 
       <div class="input-container">
 
-        <Lock class="icon" :size="20"/>
+        <Lock class="icon" :size="20" aria-hidden="true"/>
 
         <input
+          id="login-senha"
           v-model="senha"
           :type="mostrarSenha ? 'text' : 'password'"
+          name="senha"
+          autocomplete="current-password"
           placeholder="Digite sua senha"
+          :disabled="enviando"
         >
 
         <button
+          type="button"
           class="eye-button"
+          :aria-label="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
           @click="mostrarSenha = !mostrarSenha"
         >
           <Eye
@@ -50,27 +62,50 @@
 
     </div>
 
-<button
-    type="button"
-    class="forgot-password"
-    @click="esqueciSenha"
->
-    Esqueci minha senha
-</button>
-
     <button
-      class="login-button"
-      @click="entrar"
+        type="button"
+        class="forgot-password"
+        @click="esqueciSenha"
     >
-      Entrar
+        Esqueci minha senha
     </button>
 
+    <p
+      v-if="erro"
+      class="mensagem erro"
+      role="alert"
+    >
+      {{ erro }}
+    </p>
+
+    <button
+      v-if="emailNaoConfirmado"
+      type="button"
+      class="link-confirmacao"
+      @click="auth.confirmar(email, false)"
+    >
+      Reenviar e-mail de confirmação
+    </button>
+
+    <button
+      type="submit"
+      class="login-button"
+      :disabled="enviando"
+    >
+      {{ enviando ? "Entrando..." : "Entrar" }}
+    </button>
+
+    </form>
+
     <div class="divider"></div>
+
+    <BotaoGoogle />
 
     <p class="register-text">
       Não possui uma conta?
 
       <button
+        type="button"
         class="register-button"
         @click="auth.cadastro()"
       >
@@ -84,15 +119,26 @@
 
 <script setup>
 
-import { ref } from "vue"
+import { ref, computed } from "vue"
+
+import { useRoute, useRouter } from "vue-router"
 
 import { Mail, Lock, Eye, EyeOff } from "lucide-vue-next"
 
 import { useAuthStore } from "@/store/auth"
+import { avancarComEnter } from "@/utils/teclado"
+
+import { codigoDeErro, mensagemDeErro } from "@/services/api"
+
+import { destinoSeguro } from "@/utils/destino"
+
+import BotaoGoogle from "@/features/Login/BotaoGoogle.vue"
 
 const auth = useAuthStore()
 
-import { computed } from "vue"
+const route = useRoute()
+
+const router = useRouter()
 
 const email = computed({
 
@@ -103,11 +149,58 @@ const email = computed({
 })
 const senha = ref("")
 const mostrarSenha = ref(false)
+const enviando = ref(false)
+const erro = ref("")
+const emailNaoConfirmado = ref(false)
 
-function entrar(){
+const emailValido = computed(() =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
+)
 
-   
-    // TODO (login): autenticar com e-mail e senha
+async function entrar(){
+
+    if (enviando.value) return
+
+    erro.value = ""
+    emailNaoConfirmado.value = false
+
+    if (!emailValido.value) {
+
+        erro.value = "Digite um e-mail válido."
+
+        return
+
+    }
+
+    if (!senha.value) {
+
+        erro.value = "Digite sua senha."
+
+        return
+
+    }
+
+    enviando.value = true
+
+    try {
+
+        await auth.entrar(email.value, senha.value)
+
+        senha.value = ""
+
+        await router.push(destinoSeguro(route.query.redirect))
+
+    } catch (falha) {
+
+        emailNaoConfirmado.value = codigoDeErro(falha) === "email_nao_confirmado"
+
+        erro.value = mensagemDeErro(falha, "Não foi possível entrar. Tente novamente.")
+
+    } finally {
+
+        enviando.value = false
+
+    }
 
 }
 
@@ -121,14 +214,20 @@ function esqueciSenha() {
 
 <style scoped>
 
+form{
+
+    display:contents;
+
+}
+
 .card{
     width:100%;
     max-width:430px;
-    height:450px;
+    min-height:450px;
     max-height:calc(100vh - 140px);
     overflow-y:auto;
 
-    padding:32px;
+    padding:25px 31px;
 
     background:var(--cor-fundo-card-vidro);
 
@@ -372,11 +471,63 @@ input::placeholder{
 
 }
 
+.mensagem{
+
+    margin:0 0 12px;
+
+    font-size:13px;
+
+    line-height:1.4;
+
+}
+
+.mensagem.erro{
+
+    color:var(--cor-erro);
+
+}
+
+.link-confirmacao{
+
+    align-self:flex-start;
+
+    margin:-4px 0 12px;
+
+    padding:0;
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    color:var(--cor-primaria);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    text-decoration:underline;
+
+}
+
+.eye-button:focus-visible,
+.forgot-password:focus-visible,
+.register-button:focus-visible,
+.link-confirmacao:focus-visible,
+.login-button:focus-visible{
+
+    outline:2px solid var(--cor-primaria);
+
+    outline-offset:2px;
+
+}
+
 .divider{
 
     height:1px;
 
-    margin:22px 0 18px;
+    margin:2px 0 18px;
 
     background:var(--cor-fundo-sutil);
 
@@ -416,14 +567,7 @@ input[type="password"]::-webkit-textfield-decoration-container{
     background:transparent;
 }
 
-.card::-webkit-scrollbar-thumb{
-    background:var(--cor-primaria-translucida);
-    border-radius:999px;
-}
 
-.card::-webkit-scrollbar-thumb:hover{
-    background:var(--cor-primaria-translucida-forte);
-}
 
 [data-tema="escuro"] .forgot-password,
 [data-tema="escuro"] .register-button{

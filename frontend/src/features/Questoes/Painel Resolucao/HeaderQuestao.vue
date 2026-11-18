@@ -1,14 +1,17 @@
 <script setup>
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Bookmark, Flag } from 'lucide-vue-next'
 
 import { useResolverStore } from '@/store/resolver/resolver'
 import { useUiStore } from '@/store/resolver/ui'
 import { usePerfilStore } from '@/store/perfil'
+import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
+const route = useRoute()
+const auth = useAuthStore()
 
 const resolver = useResolverStore()
 const ui = useUiStore()
@@ -33,9 +36,17 @@ const marcadaParaRevisar = computed(() =>
     perfil.estaMarcadaParaRevisar(questao.value.id)
 )
 
+function irParaLogin() {
+
+    router.push({ name: 'Login', query: { redirect: route.fullPath } })
+
+}
+
 function alternarSalvar() {
 
     if (!questao.value) return
+
+    if (!auth.autenticado) return irParaLogin()
 
     if (salvo.value) {
 
@@ -52,6 +63,8 @@ function alternarSalvar() {
 function alternarRevisar() {
 
     if (!questao.value) return
+
+    if (!auth.autenticado) return irParaLogin()
 
     if (marcadaParaRevisar.value) {
 
@@ -98,17 +111,19 @@ function irProxima() {
 
 
 
-      <span
+      <button
 
-        class="texto-info"
+        type="button"
+        class="texto-info texto-info--anterior"
         @click="irAnterior"
+        :disabled="!questaoAnterior"
         :class="{ disabled: !questaoAnterior}"
 
       >
 
         ← Anterior
 
-      </span>
+      </button>
 
 
 
@@ -127,10 +142,12 @@ function irProxima() {
 
 
 
-      <span
+      <button
 
-        class="texto-info"
+        type="button"
+        class="texto-info texto-info--proxima"
         @click="irProxima"
+        :disabled="!proximaQuestao"
         :class="{
           disabled: !proximaQuestao
         }"
@@ -139,7 +156,7 @@ function irProxima() {
 
         Próxima →
 
-      </span>
+      </button>
 
 
 
@@ -172,9 +189,11 @@ function irProxima() {
 
 
       <button
+          type="button"
           class="btn-salvar"
           :class="{ salvo }"
-          :title="salvo ? 'Remover dos salvos' : 'Salvar questão'"
+          :aria-pressed="salvo"
+          :title="!auth.autenticado ? 'Entre na sua conta para salvar questões' : (salvo ? 'Remover dos salvos' : 'Salvar questão')"
           @click="alternarSalvar"
       >
 
@@ -191,9 +210,11 @@ function irProxima() {
 
 
       <button
+          type="button"
           class="btn-revisar"
           :class="{ marcada: marcadaParaRevisar }"
-          :title="marcadaParaRevisar ? 'Remover da revisão' : 'Marcar para revisar'"
+          :aria-pressed="marcadaParaRevisar"
+          :title="!auth.autenticado ? 'Entre na sua conta para marcar questões' : (marcadaParaRevisar ? 'Remover da revisão' : 'Marcar para revisar')"
           @click="alternarRevisar"
       >
 
@@ -210,6 +231,7 @@ function irProxima() {
 
 
 <button
+    type="button"
     @click="ui.alternarBarra"
     class="details-btn"
     :class="{ aberto: !ui.aberto }"
@@ -229,7 +251,7 @@ function irProxima() {
         <polyline points="9 18 15 12 9 6" />
     </svg>
 
-    <span class="label">Ver detalhes</span>
+    <span class="label">{{ ui.aberto ? 'Ocultar' : 'Ver' }} detalhes</span>
 </button>
 
 
@@ -472,206 +494,187 @@ function irProxima() {
 }
 
 
-@container questao (max-width: 760px) {
+@container questao (max-width: 1150px) {
 
   .header-linha {
+    display: grid;
 
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    grid-template-areas:
+      "navegacao acoes"
+      "info info";
+
+    align-items: center;
+    column-gap: 12px;
     row-gap: 16px;
-
   }
 
   .navegacao {
+    grid-area: navegacao;
 
-    justify-content: center;
+    justify-content: flex-start;
+    justify-self: start;
 
-  }
-
-  .info-prova {
-
-    justify-content: center;
-
+    margin: 0;
   }
 
   .acoes {
+    grid-area: acoes;
 
-    margin-left: 0;
-    justify-content: space-between;
+    justify-content: flex-end;
+    justify-self: end;
 
+    gap: 10px;
+    margin: 0;
+  }
+
+  .info-prova {
+    grid-area: info;
+
+    justify-content: center;
+    justify-self: center;
+
+    gap: 30px;
+    margin: 0;
   }
 
 }
 
+
 @container questao (max-width: 760px) {
-
-  .header-linha {
-
-    flex-direction: column;
-    align-items: stretch;
-    row-gap: 16px;
-
-  }
-
-  .navegacao {
-
-    justify-content: center;
-
-  }
-
-  .info-prova {
-
-    justify-content: center;
-
-  }
-
-  .acoes {
-
-    margin-left: 0;
-    justify-content: space-between;
-
-  }
-
-}
-
-@container questao (max-width: 420px) {
-
   .header-questao {
+    padding: 8px 16px 12px;
+  }
 
-    padding: 16px 18px;
+  .header-linha {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "navegacao navegacao"
+      "info acoes";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 4px;
+  }
 
+  .navegacao {
+    grid-area: navegacao;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    justify-self: stretch;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cor-borda-suave);
   }
 
   .texto-info,
   .texto-info-static {
-
-    font-size: 13.5px;
-
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
   }
 
-  .navegacao {
+  .texto-info--anterior {
+    justify-self: start;
+  }
 
-    gap: 10px;
+  .texto-info--proxima {
+    justify-self: end;
+  }
 
+  .texto-info-static {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .info-prova {
+    grid-area: info;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    justify-self: start;
+    gap: 2px 12px;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .badge-ano {
+    padding: 0;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .codigo {
+    display: inline;
+    font-size: 13px;
+  }
+
+  .acoes {
+    grid-area: acoes;
+    gap: 4px;
+    margin: 0;
+    justify-content: flex-end;
+    justify-self: end;
+  }
+
+  .btn-salvar,
+  .btn-revisar {
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
   }
 
   .btn-salvar .label,
   .btn-revisar .label,
   .details-btn .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
 
-    display: none;
-
+@container questao (max-width: 340px) {
+  .header-questao {
+    padding-inline: 12px;
   }
 
-  .btn-salvar,
-  .btn-revisar,
+  .texto-info,
+  .texto-info-static {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
   .details-btn {
-
-    padding: 8px;
-
-  }
-
-}
-
-@media (max-width:900px){
-
-  .details-btn{
-
-    display:none;
-
-  }
-
-}
-
-@media (max-width:480px){
-
-  .header-questao{
-
-    padding:14px 12px;
-
-  }
-
-  .badge-ano{
-
-    font-size:14px;
-
-    padding:4px 8px;
-
-  }
-
-}
-
-@container questao (max-width: 760px) {
-
-  .header-linha {
-
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    column-gap: 10px;
-    row-gap: 12px;
-
-  }
-
-  .navegacao {
-
-    grid-column: 1 / -1;
-    grid-row: 1;
-    justify-content: center;
-
-  }
-
-  .info-prova {
-
-    grid-column: 1;
-    grid-row: 2;
-    margin-left: 0;
-    gap: 10px;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    min-width: 0;
-    margin-left: 45px;
-
-  }
-
-  .badge-ano {
-
-    padding: 0;
-    font-size: 14px;
-
-  }
-
-  .codigo {
-
     display: none;
-
   }
+}
 
-  .acoes {
+.texto-info:disabled {
+  cursor: not-allowed;
+}
 
-    grid-column: 2;
-    grid-row: 2;
-    margin-left: 0;
-    gap: 10px;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    margin-right: 35px;
+.texto-info:focus-visible,
+.btn-salvar:focus-visible,
+.btn-revisar:focus-visible,
+.details-btn:focus-visible {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-salvar.salvo .icone-acao,
+  .btn-revisar.marcada .icone-acao {
+    animation: none;
   }
-
-  .btn-salvar .label,
-  .btn-revisar .label {
-
-    display: none;
-
-  }
-
-  .btn-salvar,
-  .btn-revisar {
-
-    padding: 6px;
-
-  }
-
 }
 
 </style>
