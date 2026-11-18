@@ -128,7 +128,7 @@ function aplicarFormatacao(tipo) {
             class="aviso-login"
         >
             <router-link :to="{ name: 'Login', query: { redirect: $route.fullPath } }">Entre na sua conta</router-link>
-            para comentar. Ler os comentários continua liberado.
+            para comentar. 
         </p>
 
         <div class="nova-mensagem-rodape">

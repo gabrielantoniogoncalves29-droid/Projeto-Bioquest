@@ -172,7 +172,7 @@ const enunciado = computed(
 
 .texto-container p {
 
-  font-size:.95rem;
+  font-size:1.1rem;
 
   line-height:1.8;
 

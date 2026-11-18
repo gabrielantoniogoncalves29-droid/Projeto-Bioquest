@@ -133,8 +133,8 @@ function goback(){
 .auth-view{
 
     width:100vw;
-    height:100vh;
 
+    height: 100%;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -142,9 +142,7 @@ function goback(){
     background:
         linear-gradient(var(--filtro-fundo-login-1), var(--filtro-fundo-login-2)),
         url("@/assets/layout-espacamento-igual.png") bottom/cover no-repeat;
-
-    overflow:hidden;
-
+ 
 }
 
 .page-header{
@@ -190,6 +188,14 @@ function goback(){
     left:22px;
 
     top:0px;
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    font-family:inherit;
 
     color:var(--cor-primaria);
 
@@ -367,5 +373,26 @@ function goback(){
     .slider{
         transition:none;
     }
+}
+/* Tela larga porém baixa: mantém o Voltar no canto superior esquerdo */
+@media (min-width:769px) and (max-height:700px){
+
+    .auth-view{
+        position:relative;
+    }
+
+    .page-header{
+        position:static;
+        max-width:none;
+        padding:0;
+    }
+
+    .voltar{
+        position:absolute;
+        top:16px;
+        left:22px;
+        align-self:auto;
+    }
+
 }
 </style>

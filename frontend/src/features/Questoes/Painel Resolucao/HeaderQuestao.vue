@@ -294,6 +294,11 @@ function irProxima() {
 
 .texto-info {
 
+  background: none;
+  border: none;
+  padding: 0;
+  appearance: none;
+
   color: var(--cor-texto-principal);
   font-size: 15px;
   font-weight: 550;

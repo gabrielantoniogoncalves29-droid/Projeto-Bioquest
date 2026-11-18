@@ -96,9 +96,24 @@ function saibaMais() {
 
   <div class="acoes-direita">
 
-    <div class="grupo-esquerda">
+        <div class="grupo-esquerda">
 
+      <div class="botoes-info">
 
+        <button
+          v-if="ui.resultado?.comentario"
+          class="btn-saiba-mais"
+          @click="saibaMais"
+        >
+          Ver resolução comentada
+        </button>
+
+        <button class="btn-saiba-mais" @click="saibaMais">
+          <Info :size="15" />
+          Saiba mais sobre a questão
+        </button>
+
+      </div>
 
       <span
         v-if="ui.erro"
@@ -116,17 +131,6 @@ function saibaMais() {
         para guardar seu progresso.
       </span>
 
-      <button
-        v-if="ui.resultado?.comentario"
-        class="btn-saiba-mais"
-        @click="saibaMais"
-      >
-        Ver resolução comentada
-      </button>
-      <button class="btn-saiba-mais" @click="saibaMais">
-       <Info :size="15" />
-        Saiba mais sobre a questão
-      </button>
     </div>
 
     <div class="grupo-direita">
@@ -180,6 +184,16 @@ function saibaMais() {
 }
 
 .grupo-esquerda{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+}
+
+.botoes-info{
 
   display: flex;
   align-items: center;
